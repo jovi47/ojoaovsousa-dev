@@ -1,6 +1,23 @@
-export function inquiryDraft({name,email,project}){
- const fields=[name,email,project].map(value=>typeof value==='string'?value.trim():'');
- if(!fields[0]||fields[0].length>120||!/^\S+@\S+\.\S+$/.test(fields[1])||fields[1].length>254||!fields[2]||fields[2].length>3000)throw new Error('Invalid inquiry');
- const body=`Nome / Name: ${fields[0]}\nE-mail: ${fields[1]}\n\nProjeto / Project:\n${fields[2]}`;
+const controls=/[\u0000-\u001f\u007f-\u009f]/;
+export function normalizeEmail(value){
+ if(typeof value!=='string'||controls.test(value))throw new Error('email');
+ const email=value.trim(),parts=email.split('@'),[local,domain]=parts;
+ if(parts.length!==2||email.length>254||!local||local.length>64||!domain||!/^[-A-Za-z0-9!#$%&'*+/=?^_`{|}~.]+$/.test(local)||local.startsWith('.')||local.endsWith('.')||local.includes('..'))throw new Error('email');
+ const labels=domain.split('.');
+ if(labels.length<2||labels.some(label=>!/^[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?$/.test(label))||!/^(?:[A-Za-z]{2,63}|xn--[A-Za-z0-9-]{2,59})$/.test(labels.at(-1)))throw new Error('email');
+ return email;
+}
+export function normalizePhone(value,phoneCountry,parsePhoneNumberFromString){
+ if(typeof value!=='string'||value.length>64||controls.test(value)||!/^\+?[\d ().-]+$/.test(value.trim())||phoneCountry&&!/^[A-Z]{2}$/.test(phoneCountry))throw new Error('phone');
+ if(typeof parsePhoneNumberFromString!=='function')throw new Error('phone-unavailable');
+ let phone;try{phone=parsePhoneNumberFromString(value.trim(),{defaultCountry:phoneCountry||undefined,extract:false});}catch{throw new Error('phone');}
+ if(!phone||!phone.isValid()||phone.ext)throw new Error('phone');
+ return phone.number;
+}
+export function inquiryDraft({name,email,phone,phoneCountry,project},parsePhoneNumberFromString){
+ if(typeof name!=='string'||controls.test(name)||!name.trim()||name.trim().length>120)throw new Error('name');
+ if(typeof project!=='string'||/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f-\u009f]/.test(project)||!project.trim()||project.trim().length>3000)throw new Error('project');
+ const address=normalizeEmail(email),number=normalizePhone(phone,phoneCountry,parsePhoneNumberFromString);
+ const body=`Nome / Name: ${name.trim()}\nE-mail: ${address}\nTelefone / Phone: ${number}\n\nProjeto / Project:\n${project.trim()}`;
  return `mailto:jovi47profissional@gmail.com?subject=${encodeURIComponent('Novo projeto · João Victor')}&body=${encodeURIComponent(body)}`;
 }
