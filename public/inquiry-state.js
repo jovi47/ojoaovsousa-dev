@@ -9,11 +9,11 @@ export function normalizeEmail(value){
  if(labels.length<2||labels.some(label=>!/^[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?$/.test(label))||!/^(?:[A-Za-z]{2,63}|xn--[A-Za-z0-9-]{2,59})$/.test(labels.at(-1)))throw new Error('email');
  return email;
 }
-export function normalizePhone(value,phoneCountry,parsePhoneNumberFromString){
+export function normalizePhone(value,phoneCountry,library){
  if(typeof value!=='string'||value.length>64||controls.test(value)||!/^\+?[\d ().-]+$/.test(value.trim())||!isPhoneCountry(phoneCountry))throw new Error('phone');
- if(typeof parsePhoneNumberFromString!=='function')throw new Error('phone-unavailable');
- let phone;try{phone=parsePhoneNumberFromString(value.trim(),{defaultCountry:phoneCountry||undefined,extract:false});}catch{throw new Error('phone');}
- if(!phone||!phone.isValid()||phone.ext||phone.country!==phoneCountry)throw new Error('phone');
+ if(typeof library?.parsePhoneNumberFromString!=='function')throw new Error('phone-unavailable');
+ let phone;try{phone=library.parsePhoneNumberFromString(value.trim(),{defaultCountry:phoneCountry||undefined,extract:false});}catch{throw new Error('phone');}
+ if(!phone||!phone.isValid()||phone.ext||!isPhoneCountry(phone.country)||phone.countryCallingCode!==library.getCountryCallingCode(phoneCountry))throw new Error('phone');
  return phone.number;
 }
 export function formatPhoneInput(value,country,library,{countryChanged=false}={}){
@@ -30,10 +30,10 @@ export function formatPhoneInput(value,country,library,{countryChanged=false}={}
  const formatter=new library.AsYouType(country),formatted=formatter.input(national),number=formatter.getNumber();
  return {value:number?.isValid()?number.formatNational():formatted,country};
 }
-export function inquiryDraft({name,email,phone,phoneCountry,project},parsePhoneNumberFromString){
+export function inquiryDraft({name,email,phone,phoneCountry,project},library){
  if(typeof name!=='string'||controls.test(name)||!name.trim()||name.trim().length>120)throw new Error('name');
  if(typeof project!=='string'||/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f-\u009f]/.test(project)||!project.trim()||project.trim().length>3000)throw new Error('project');
- const address=normalizeEmail(email),number=normalizePhone(phone,phoneCountry,parsePhoneNumberFromString);
+ const address=normalizeEmail(email),number=normalizePhone(phone,phoneCountry,library);
  const body=`Nome / Name: ${name.trim()}\nE-mail: ${address}\nTelefone / Phone: ${number}\n\nProjeto / Project:\n${project.trim()}`;
  return `mailto:jovi47profissional@gmail.com?subject=${encodeURIComponent('Novo projeto · João Victor')}&body=${encodeURIComponent(body)}`;
 }

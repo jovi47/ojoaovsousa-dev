@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {parsePhoneNumberFromString} from 'libphonenumber-js/max';
+import * as phoneLibrary from 'libphonenumber-js/max';
 import {PHONE_COUNTRIES,phoneCountryFlag} from '../public/phone-countries.js';
 import {inquiryDraft} from '../public/inquiry-state.js';
 import {inquiry,document} from '../src/city-page.mjs';
 import {content} from '../src/content.mjs';
 
 const fields={name:' João Victor ',email:' owner+project@example.com ',phone:'(11) 98765-4321',phoneCountry:'BR',project:' Um projeto\ncom duas linhas. '};
-const draft=changes=>inquiryDraft({...fields,...changes},parsePhoneNumberFromString);
+const draft=changes=>inquiryDraft({...fields,...changes},phoneLibrary);
 
 test('the local draft validates supported national numbers and uses E.164 without guessing a country',()=>{
  for(const [phoneCountry,phone,canonical] of [['BR','(11) 98765-4321','+5511987654321'],['US','202 555 0123','+12025550123'],['ES','612 345 678','+34612345678'],['PT','912 345 678','+351912345678'],['US','+1 202 555 0123','+12025550123'],['ES','+34 612 345 678','+34612345678']]){

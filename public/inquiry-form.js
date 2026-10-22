@@ -34,8 +34,8 @@ export function initInquiryForm(form){
   }
   previousPhoneValue=fields.phone.value;
  }
- async function preparePhone(current,event){
-  try{library=await loadPhoneLibrary();if(current===revision){formatPhone(event);if(status.textContent===form.dataset.loadingValidation)status.textContent='';}}
+ async function preparePhone(current){
+  try{library=await loadPhoneLibrary();formatPhone({target:fields.phone});if(current===revision&&status.textContent===form.dataset.loadingValidation)status.textContent='';}
   catch{if(current===revision)status.textContent=form.dataset.validationUnavailable;}
  }
  form.noValidate=true;
@@ -46,13 +46,13 @@ export function initInquiryForm(form){
   errors[name].hidden=!invalid;errors[name].textContent=message;
  }
  function validateEmail(){try{fields.email.value=normalizeEmail(fields.email.value);fieldError('email',false);return true;}catch{fieldError('email',true);return false;}}
- function validatePhone(library){try{normalizePhone(fields.phone.value,fields.phoneCountry.value,library.parsePhoneNumberFromString);fieldError('phone',false);return true;}catch{fieldError('phone',true);return false;}}
+ function validatePhone(library){try{normalizePhone(fields.phone.value,fields.phoneCountry.value,library);fieldError('phone',false);return true;}catch{fieldError('phone',true);return false;}}
  function changed(event){
   clearDraft();
   if(event.target===fields.email)fieldError('email',false);
   if(event.target===fields.phone||event.target===fields.phoneCountry){
    fieldError('phone',false);countryChanged=event.target===fields.phoneCountry;updatePrefix();
-   if(library)formatPhone(event);else void preparePhone(revision,event);
+   if(library)formatPhone(event);else void preparePhone(revision);
   }
  }
  form.addEventListener('input',changed);form.addEventListener('change',changed);
@@ -65,7 +65,7 @@ export function initInquiryForm(form){
    library=await loadPhoneLibrary();if(current!==revision)return;formatPhone();
    const emailValid=validateEmail(),phoneValid=validatePhone(library);
    status.textContent='';if(!form.reportValidity()||!emailValid||!phoneValid)return;
-   link.href=inquiryDraft(Object.fromEntries(Object.entries(fields).map(([name,field])=>[name,field.value])),library.parsePhoneNumberFromString);
+   link.href=inquiryDraft(Object.fromEntries(Object.entries(fields).map(([name,field])=>[name,field.value])),library);
    text.value=new URL(link.href).searchParams.get('body');link.hidden=false;draft.hidden=false;status.textContent=status.dataset.success;
    link.focus({preventScroll:true});
   }catch(error){if(current===revision)status.textContent=error.message==='phone-unavailable'?form.dataset.validationUnavailable:form.dataset.invalidFields;}

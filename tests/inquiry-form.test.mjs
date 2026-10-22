@@ -15,8 +15,12 @@ test('the same-origin phone bundle loads on demand, shares an in-flight request 
   scripts[0].onerror();await assert.rejects(first);
   assert.equal(scripts[0].removed,true);
   const retry=loadPhoneLibrary();assert.equal(scripts.length,2);
+  const {initInquiryForm}=await import('../public/inquiry-form.js');
+  const f=fixture(),prepare=initInquiryForm(f.form)();
+  f.fields.project.value='Edited before the phone library finishes';f.change('project');
   globalThis.libphonenumber=phoneLibrary;scripts[1].onload();
-  assert.equal(await retry,phoneLibrary);
+  assert.equal(await retry,phoneLibrary);await prepare;
+  assert.equal(f.fields.phone.value,'(202) 555-0123');assert.equal(f.link.hidden,true);
   assert.equal(await loadPhoneLibrary(),phoneLibrary);assert.equal(scripts.length,2);
  }finally{globalThis.document=oldDocument;globalThis.libphonenumber=oldLibrary;}
 });
