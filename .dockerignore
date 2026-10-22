@@ -1,0 +1,9 @@
+.git
+.worktrees
+.private
+ACESSOS.local.md
+.env
+.env.*
+.vercel
+node_modules
+work

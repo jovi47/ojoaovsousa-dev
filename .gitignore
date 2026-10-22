@@ -1,0 +1,10 @@
+.worktrees/
+.private/
+ACESSOS.local.md
+.env
+.env.*
+.vercel/
+dist/
+node_modules/
+work/
+.DS_Store
