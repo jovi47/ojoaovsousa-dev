@@ -1,4 +1,10 @@
-# Animated portfolio implementation plan
+# Historical studio implementation plan
+
+Status: superseded by the [current mini-island scope](samurai-world-plan.md). The checklist below belongs to the earlier studio/optional-game concept and does not authorize restoring it or publishing the current revision. Retained only for original scope/provenance; actual current verification belongs to `verification.md`.
+
+## Original planning record
+
+### Animated portfolio implementation plan
 
 > Agentic workers: use subagent-driven-development for independent character/profile work, root implements integrated static experience. Owner explicitly requested no questions and recommended choices on 2026-10-22 UTC, overriding staged brainstorming approval gates.
 

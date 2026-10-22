@@ -10,7 +10,7 @@ test('three locales provide real HTML, language navigation, exact contact and pr
     assert.match(html,/https:\/\/wa\.me\/5579998230872/);
     assert.match(html,/name="robots" content="noindex, nofollow"/);
     assert.match(html,/id="main"/);
-    assert.match(html,/prefers-color-scheme|data-theme="dark"/);
+    assert.match(html,/prefers-color-scheme|data-theme="(?:dark|light)"/);
     for(const locale of ['pt-br','en','es']) assert.ok(html.includes(`href="/${locale}/"`));
     assert.ok(html.includes('https://www.linkedin.com/in/jovi47/'));
     assert.ok(html.includes('https://github.com/jovi47'));

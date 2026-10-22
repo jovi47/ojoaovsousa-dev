@@ -1,0 +1,35 @@
+{
+  "retrieved_utc": "2026-10-22T20:16:27.492Z",
+  "purpose": "Local brand marks for links to the owner’s existing contact channels. Artwork does not imply affiliation or endorsement.",
+  "notes": [
+    "The native outline envelope remains an interface symbol, not a Gmail logo.",
+    "GitHub reuses public/technology-icons/github.svg and its existing provenance/license.",
+    "Original WhatsApp green and LinkedIn blue/white are preserved in both interface themes."
+  ],
+  "assets": [
+    {
+      "id": "whatsapp",
+      "file": "public/contact-icons/whatsapp.svg",
+      "bytes": 1232,
+      "sha256": "6870171eea83ea80607e3a4e9b5de7ed724da07aa3af2de9c7b50e7408926a2b",
+      "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/c71c69e3a27e4436936b831c72643e6513b9f49b/icons/whatsapp.svg",
+      "metadata_source": "https://raw.githubusercontent.com/simple-icons/simple-icons/c71c69e3a27e4436936b831c72643e6513b9f49b/data/simple-icons.json",
+      "brand_source": "https://about.meta.com/brand/resources/whatsapp/whatsapp-brand",
+      "license": "CC0-1.0 (Simple Icons collection); underlying brand rights retained",
+      "derivation": "Brand color #25D366 applied to the single-color source glyph; all path geometry unchanged.",
+      "source_sha256": "8fb209a53a61618c3483594b3e070481a35575d6aaecbe00a6fe386670c8fb1c"
+    },
+    {
+      "id": "linkedin",
+      "file": "public/contact-icons/linkedin.svg",
+      "bytes": 490,
+      "sha256": "333e42d75070e6349bfa92f076b1cac6ce37e9eec9a45aee5fd480d9b2379ca0",
+      "source": "https://brand.linkedin.com/in-logo",
+      "brand_guidelines": "https://brand.linkedin.com/in-logo",
+      "official_download": "https://content.linkedin.com/content/dam/me/business/en-us/amp/xbu/linkedin-revised-brand-guidelines/logos/in-logo.zip",
+      "license": "LinkedIn brand artwork; used only as a social/profile hyperlink under the [in] brand guidance. Rights remain with LinkedIn.",
+      "derivation": "Extracted the three exact blue/white paths of the official linkedin-logo-icon inline symbol. Kept the [in] mark at its original 24×24 coordinates; omitted the adjacent small registration artwork outside the icon bounds. No path geometry or fill changed.",
+      "source_symbol_sha256": "2bca65c4939c2d5df15e2da1ca8bb04d18ce115a7599c34ddf1330837d85e31e"
+    }
+  ]
+}

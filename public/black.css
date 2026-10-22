@@ -1,0 +1,29 @@
+@import url('/viewer.css');
+
+html .viewer-page[data-world-variant="black"]{
+ --bg:#f7f5ee;--ink:#19191b;--soft:#555451;--panel:#e9e5dc;
+ --gold:#ff6b24;--button-ink:#19191b;--scene-background:#f7f5ee;
+ --viewer-sky:var(--scene-background);color-scheme:light;background:var(--bg);color:var(--ink);
+}
+html[data-theme=dark] .viewer-page[data-world-variant="black"]{
+ --bg:#0b0c0e;--ink:#f7f4ed;--soft:#c6c2ba;--panel:#202125;
+ --scene-background:#08090b;color-scheme:dark;
+}
+.viewer-page[data-world-variant="black"] .viewer-main,
+.viewer-page[data-world-variant="black"] .viewer-board,
+.viewer-page[data-world-variant="black"] .world-stage{background:var(--scene-background)}
+.viewer-page[data-world-variant="black"] .viewer-intro,
+.viewer-page[data-world-variant="black"] .viewer-camera,
+.viewer-page[data-world-variant="black"] .viewer-houses,
+.viewer-page[data-world-variant="black"] .viewer-status,
+.viewer-page[data-world-variant="black"] .viewer-replay,
+.viewer-page[data-world-variant="black"] .viewer-about-trigger{background:var(--bg)}
+.viewer-page[data-world-variant="black"] .viewer-help{color:var(--ink);background:var(--bg)}
+.viewer-page[data-world-variant="black"] .viewer-reading,
+.viewer-page[data-world-variant="black"] .viewer-noscript,
+.viewer-page[data-world-variant="black"] .viewer-recovery,
+.viewer-page[data-world-variant="black"] .site-footer{background:var(--bg);color:var(--ink)}
+.viewer-page[data-world-variant="black"] dialog{background:var(--bg);color:var(--ink)}
+.viewer-page[data-world-variant="black"] dialog::backdrop{background:#0009}
+.viewer-page[data-world-variant="black"] form input,
+.viewer-page[data-world-variant="black"] form textarea{background:var(--panel);color:var(--ink)}

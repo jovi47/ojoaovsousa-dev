@@ -1,0 +1,165 @@
+{
+  "recorded_at_utc": "2026-10-22T16:18:56.086960+00:00",
+  "state": "reviewed public captures; local runtime assets, no deployment claimed",
+  "capture": {
+    "browser": "Codex in-app browser",
+    "method": "CDP Page.captureScreenshot",
+    "scope": "public homepage viewport at page top",
+    "mobile": "emulated mobile viewport, not a physical-device capture",
+    "capture_time_basis": "capture_saved_at_utc is the PNG file-save instant immediately after the successful capture",
+    "ai_generated": false,
+    "layout_reconstructed": false
+  },
+  "total_source_bytes": 946729,
+  "total_runtime_bytes": 351328,
+  "assets": [
+    {
+      "id": "horagora-desktop",
+      "project": "horagora",
+      "variant": "desktop",
+      "source_url": "https://horagora.com.br/",
+      "final_url": "https://horagora.com.br/",
+      "locale": "pt-BR",
+      "capture_saved_at_utc": "2026-10-22T16:16:53.909991+00:00",
+      "viewport_css": {
+        "width": 1280,
+        "height": 700
+      },
+      "device_scale_factor": 2,
+      "source_path": "/Users/jovi47/Documents/Codex/2026-10-22/portfolio-world-plan/outputs/project-previews/horagora-desktop.png",
+      "archive_path": "/Users/jovi47/Documents/Obsidian Vault/portfolio/assets/project-previews/horagora-desktop.png",
+      "source_pixels": {
+        "width": 2560,
+        "height": 1400
+      },
+      "source_bytes": 445986,
+      "source_sha256": "16b9abd251148474896053bd6cb679e985c97d284a1f6cfd84174823aedf26d8",
+      "runtime_path": "public/horagora-desktop.webp",
+      "runtime_pixels": {
+        "width": 2560,
+        "height": 1400
+      },
+      "runtime_bytes": 99964,
+      "runtime_sha256": "f877ce0ed608d84a1b0fd8dafb0888b40b8d0bcced6875f7245b6fb70de0efa5",
+      "encoding": {
+        "format": "WebP",
+        "quality": 82,
+        "method": 6,
+        "resized": false,
+        "cropped": false
+      },
+      "review": "Public homepage header and hero inspected in each viewport; no login or form submission"
+    },
+    {
+      "id": "horagora-mobile",
+      "project": "horagora",
+      "variant": "mobile",
+      "source_url": "https://horagora.com.br/",
+      "final_url": "https://horagora.com.br/",
+      "locale": "pt-BR",
+      "capture_saved_at_utc": "2026-10-22T16:17:02.216280+00:00",
+      "viewport_css": {
+        "width": 390,
+        "height": 700
+      },
+      "device_scale_factor": 2,
+      "source_path": "/Users/jovi47/Documents/Codex/2026-10-22/portfolio-world-plan/outputs/project-previews/horagora-mobile.png",
+      "archive_path": "/Users/jovi47/Documents/Obsidian Vault/portfolio/assets/project-previews/horagora-mobile.png",
+      "source_pixels": {
+        "width": 780,
+        "height": 1400
+      },
+      "source_bytes": 132616,
+      "source_sha256": "739c3939265885d257d915db00739ea558d5c39a31285c090a274f9607f06dfa",
+      "runtime_path": "public/horagora-mobile.webp",
+      "runtime_pixels": {
+        "width": 780,
+        "height": 1400
+      },
+      "runtime_bytes": 56730,
+      "runtime_sha256": "63224a3e349236330b7daba212d4aff8c664abac106a7d659f18979144929a78",
+      "encoding": {
+        "format": "WebP",
+        "quality": 82,
+        "method": 6,
+        "resized": false,
+        "cropped": false
+      },
+      "review": "Public homepage header and hero inspected in each viewport; no login or form submission"
+    },
+    {
+      "id": "asc-desktop",
+      "project": "asc",
+      "variant": "desktop",
+      "source_url": "https://andreasousaconsultoria.com.br/",
+      "final_url": "https://andreasousaconsultoria.com.br/",
+      "locale": "pt-BR",
+      "capture_saved_at_utc": "2026-10-22T16:17:27.399221+00:00",
+      "viewport_css": {
+        "width": 1280,
+        "height": 700
+      },
+      "device_scale_factor": 2,
+      "source_path": "/Users/jovi47/Documents/Codex/2026-10-22/portfolio-world-plan/outputs/project-previews/asc-desktop.png",
+      "archive_path": "/Users/jovi47/Documents/Obsidian Vault/portfolio/assets/project-previews/asc-desktop.png",
+      "source_pixels": {
+        "width": 2560,
+        "height": 1400
+      },
+      "source_bytes": 238552,
+      "source_sha256": "6ab607d248ca5616d74a68e08888bbc51a51bf01143b5c46b4caf4c20755e83b",
+      "runtime_path": "public/asc-desktop.webp",
+      "runtime_pixels": {
+        "width": 2560,
+        "height": 1400
+      },
+      "runtime_bytes": 119500,
+      "runtime_sha256": "bfd7e290637d77650005d806fd88ef37d168fe77106af24f649b21682afa82dd",
+      "encoding": {
+        "format": "WebP",
+        "quality": 82,
+        "method": 6,
+        "resized": false,
+        "cropped": false
+      },
+      "review": "Public homepage header and hero inspected in each viewport; no login or form submission"
+    },
+    {
+      "id": "asc-mobile",
+      "project": "asc",
+      "variant": "mobile",
+      "source_url": "https://andreasousaconsultoria.com.br/",
+      "final_url": "https://andreasousaconsultoria.com.br/",
+      "locale": "pt-BR",
+      "capture_saved_at_utc": "2026-10-22T16:17:17.566108+00:00",
+      "viewport_css": {
+        "width": 390,
+        "height": 700
+      },
+      "device_scale_factor": 2,
+      "source_path": "/Users/jovi47/Documents/Codex/2026-10-22/portfolio-world-plan/outputs/project-previews/asc-mobile.png",
+      "archive_path": "/Users/jovi47/Documents/Obsidian Vault/portfolio/assets/project-previews/asc-mobile.png",
+      "source_pixels": {
+        "width": 780,
+        "height": 1400
+      },
+      "source_bytes": 129575,
+      "source_sha256": "f73fb477050c6a64f28a5e9bb98614763fdf4332dcc7f411862075eba8f43e96",
+      "runtime_path": "public/asc-mobile.webp",
+      "runtime_pixels": {
+        "width": 780,
+        "height": 1400
+      },
+      "runtime_bytes": 75134,
+      "runtime_sha256": "9e3285fbdffc891f4ba8acdd42cc5226e08d07eabe8d525ac1ff0fce49ac39a1",
+      "encoding": {
+        "format": "WebP",
+        "quality": 82,
+        "method": 6,
+        "resized": false,
+        "cropped": false
+      },
+      "review": "Public homepage header and hero inspected in each viewport; no login or form submission"
+    }
+  ]
+}

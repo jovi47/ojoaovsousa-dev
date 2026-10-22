@@ -1,0 +1,182 @@
+{
+  "generated_at_utc": "2026-10-22T18:13:52.334190+00:00",
+  "policy": {
+    "maximum_texture_edge": 512,
+    "jpeg_quality": 72,
+    "alpha_format": "PNG",
+    "geometry": "unchanged from source"
+  },
+  "source_bytes": 22549092,
+  "runtime_bytes": 3521000,
+  "assets": [
+    {
+      "runtime_path": "public/andrea-character.glb",
+      "source_path": "/Users/jovi47/Documents/Codex/2026-10-22/portfolio-world-plan/outputs/resident-waves/20261022_135359_andrea-native-wave_01a163d5/wave.glb",
+      "source_sha256": "1fcaec11322157f052400ebd1453587cbd27532f7e17a885f02d25fe27461087",
+      "source_bytes": 2625624,
+      "replaced_runtime_bytes": 256552,
+      "runtime_bytes": 536488,
+      "runtime_sha256": "09e1c3afd7addc27e6d98236b5d60fc723e2d1f8bf12a1ef6ea4384952a3de57",
+      "triangles": 5067,
+      "images": [
+        {
+          "name": "Image_0",
+          "before_size": [
+            2048,
+            2048
+          ],
+          "after_size": [
+            512,
+            512
+          ],
+          "before_bytes": 2132988,
+          "after_bytes": 43921,
+          "mime_type": "image/jpeg",
+          "alpha_preserved": false
+        }
+      ],
+      "geometry_animations_uv_materials_unchanged": true,
+      "skin_count": 1,
+      "joint_counts": [
+        24
+      ],
+      "animation_names": [
+        "Armature|Wave_One_Hand|baselayer"
+      ],
+      "mesh_count": 1,
+      "material_count": 1,
+      "draw_primitives": 1
+    },
+    {
+      "runtime_path": "public/hori-character.glb",
+      "source_path": "/Users/jovi47/Documents/Codex/2026-10-22/portfolio-world-plan/outputs/hori-native-runtime/hori-native.glb",
+      "source_sha256": "b75fefe60fbfe73eacb6e017f8667379c5db5582d6b40697d2b83b35d393f9d2",
+      "source_bytes": 17218136,
+      "replaced_runtime_bytes": 886748,
+      "runtime_bytes": 2416372,
+      "runtime_sha256": "1193c5ff0c78f67889dc8b7c20ceb78524acce2b7c5fcff1b7d1268c9919c0f2",
+      "triangles": 79649,
+      "images": [
+        {
+          "name": "hori-continuous-albedo",
+          "before_size": [
+            4096,
+            4096
+          ],
+          "after_size": [
+            512,
+            512
+          ],
+          "before_bytes": 7680417,
+          "after_bytes": 74581,
+          "mime_type": "image/jpeg",
+          "alpha_preserved": false
+        },
+        {
+          "name": "Image_2",
+          "before_size": [
+            4096,
+            4096
+          ],
+          "after_size": [
+            512,
+            512
+          ],
+          "before_bytes": 5615523,
+          "after_bytes": 7628,
+          "mime_type": "image/jpeg",
+          "alpha_preserved": false
+        },
+        {
+          "name": "Image_1",
+          "before_size": [
+            2048,
+            2048
+          ],
+          "after_size": [
+            512,
+            512
+          ],
+          "before_bytes": 1584552,
+          "after_bytes": 22453,
+          "mime_type": "image/jpeg",
+          "alpha_preserved": false
+        },
+        {
+          "name": "horagora-logo-blue",
+          "before_size": [
+            2268,
+            532
+          ],
+          "after_size": [
+            512,
+            120
+          ],
+          "before_bytes": 44895,
+          "after_bytes": 19026,
+          "mime_type": "image/png",
+          "alpha_preserved": true
+        }
+      ],
+      "geometry_animations_uv_materials_unchanged": true,
+      "skin_count": 0,
+      "joint_counts": [],
+      "animation_names": [],
+      "mesh_count": 1,
+      "material_count": 15,
+      "draw_primitives": 15,
+      "source_derivation": {
+        "provenance_path": "/Users/jovi47/Documents/Codex/2026-10-22/portfolio-world-plan/outputs/hori-native-runtime/hori-native.provenance.json",
+        "approved_master": "/Users/jovi47/Documents/Obsidian Vault/horagora/brand/mascot/model/hori.glb",
+        "approved_master_sha256": "fb5bf045ef4f9e110a311be95c99a9800931b936eebc82a2ed186cbb4c7409df",
+        "source_untouched": true,
+        "method": "Blender native component decimation, identity geometry unchanged, merged by material; no rig or animation",
+        "derived_triangles": 79649,
+        "approved_master_bytes": 34855732,
+        "pose": "Approved static neutral/happy pose; arms resting",
+        "source_triangles": 800773,
+        "identity_triangles_unchanged": 35876,
+        "merged_component_count": 169,
+        "derivation_script_sha256": "b55ab81f22346d90bff65d8cd912976d960032e96368d46039722b04230ee187"
+      }
+    },
+    {
+      "runtime_path": "public/jovi-character.glb",
+      "source_path": "/Users/jovi47/Documents/Codex/2026-10-22/portfolio-world-plan/outputs/resident-waves/20261022_135359_jovi-native-wave_01a163d6/wave.glb",
+      "source_sha256": "d279f19c3807817255045effa72871cd41dd8c033cc8715791719c331f600b6f",
+      "source_bytes": 2705332,
+      "replaced_runtime_bytes": 273980,
+      "runtime_bytes": 568140,
+      "runtime_sha256": "db47a829a3a5b3b2aa6ef23c7a44e50fb085e113ed6c378baf783aa75d07a66c",
+      "triangles": 5023,
+      "images": [
+        {
+          "name": "Image_0",
+          "before_size": [
+            2048,
+            2048
+          ],
+          "after_size": [
+            512,
+            512
+          ],
+          "before_bytes": 2186485,
+          "after_bytes": 49363,
+          "mime_type": "image/jpeg",
+          "alpha_preserved": false
+        }
+      ],
+      "geometry_animations_uv_materials_unchanged": true,
+      "skin_count": 1,
+      "joint_counts": [
+        24
+      ],
+      "animation_names": [
+        "Armature|Wave_One_Hand|baselayer"
+      ],
+      "mesh_count": 1,
+      "material_count": 1,
+      "draw_primitives": 1
+    }
+  ]
+}

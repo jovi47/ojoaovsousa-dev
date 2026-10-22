@@ -1,0 +1,14 @@
+Contact marks
+
+WhatsApp glyph: Simple Icons 16.35.0, revision c71c69e3a27e4436936b831c72643e6513b9f49b, CC0-1.0.
+https://github.com/simple-icons/simple-icons/blob/c71c69e3a27e4436936b831c72643e6513b9f49b/LICENSE.md
+https://creativecommons.org/publicdomain/zero/1.0/
+Underlying WhatsApp name/logo rights remain with their owner.
+
+LinkedIn [in] mark: original artwork extracted from LinkedIn’s brand website.
+https://brand.linkedin.com/in-logo
+https://brand.linkedin.com/downloads
+Used as a link to the owner’s LinkedIn profile; no affiliation or endorsement implied.
+LinkedIn retains all rights in its name and marks.
+
+Source URLs, derivations and hashes: /docs/contact-icon-sources.json in the source repository.

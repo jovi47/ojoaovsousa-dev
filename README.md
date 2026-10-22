@@ -1,54 +1,40 @@
-# João Victor · jovi47
+# João Victor · ojoaovsousa
 
-Multilingual freelance portfolio built with static HTML, CSS and native JavaScript. The toy studio and guide use DOM/CSS; there is no runtime framework, WebGL, remote font, analytics SDK or package dependency.
+A static portfolio in PT-BR, English and Spanish. The single **Montagem 3D** home has light/dark themes, three LEGO buildings (About me, HorAgora and Andréa Sousa Consultoria) and a question-mark challenge, each on a small individual base. Reading uses the same content without requiring 3D. The current implementation is available only in the integrated local preview; a private GitHub repository has been created, with code push/PR pending at this checkpoint, and this home has not been deployed.
 
-## Run
+## Current experience
 
-Requires Node 22 or newer. No install step.
+The scene starts empty until intentional scroll. Each chapter builds, reserves the card’s measured reading overflow, then advances to the next construction. Track height is `ceil(max(board height, viewport height − header DOM height) + sum(chapter lengths))`, so a height-capped scene still leaves enough scroll distance for the ending. Returning to the top before completion resets the empty opening; completion/skip latches the built state and selects the question mark.
 
-```sh
-node scripts/build.mjs
-node scripts/dev.mjs
-```
+The opening has a small arrow button. Once construction starts, the upper **Continuar / Pular** toolbar appears with icons and short localized labels. Continue advances by `min(600px, .7 × viewport height)`; Skip completes immediately. Finished landmarks can be selected with navigation/previous/next. Drag rotates the building/resident group while its transparent content panel remains visible; the panel has no close-X control. Local replay rebuilds only that landmark over 4.2 seconds. Build motion eases from −135° to front with a small zoom/elevation change; automatic rotation, flick coasting and soft front return are visibility/dialog/reduced-motion aware. Resident poses remain static.
 
-Preview defaults to `http://localhost:3000/pt-br/`. `PORT` selects an available local port. Source/assets watch and server-sent events reload the page. Stop with Ctrl-C. The server is loopback-only and returns real 404 responses.
+The About me castle contains 1,297 pieces: seven technology/logo floors and one real-photo profile floor. It opens biography, experience, technologies and method. The shared career disclosure states the owner-approved five-plus years, Stone/Sicredi experience, UFS in progress and IFS completed. Its compact reading form sits under the About biography. The repertoire marquee has 54 technology/practice names with local icons, without proficiency percentages or scores. Keyboard focus pauses it; hover does not. Eight native FAQ disclosures precede the process and contact.
 
-```sh
-node --test tests/*.test.mjs
-node scripts/audit.mjs
-```
+The four-stage process is **Sua ideia → Análise → Orçamento → Implementação**, with English/Spanish copy. At 25% visibility, 16 terminal lines advance in sequence, filling top-down and scrolling only when the output capacity is exceeded. It ends in a thumbs-up confirmation, “Seu site implementado” (localized), with an original decorative pixel dinosaur. Line fades, crossfade and decorative motion honor visibility/reduced motion. There is no extra scroll track or external demonstration website. Without JS, the descriptions and static confirmation remain readable.
 
-## Content and interaction
+Project cards use real desktop/mobile public-homepage captures. Andréa’s quotation is the owner-supplied testimonial; HorAgora’s quotation presents the product. Contact channels use local official WhatsApp/LinkedIn marks, the existing GitHub glyph and a native envelope. The separate telephone/tel display is removed; WhatsApp retains the existing number. The shared action reads **Fale comigo / Let’s talk / Hablemos**. Its floating form action is available after the 3D tour, immediately in direct/reading/graphics fallback, and remains available at the footer.
 
-- `src/content.mjs`: PT-BR, British English and Spanish copy, cases, policies and labels.
-- `src/page.mjs`: semantic static pages and localized metadata.
-- `src/character.mjs`, `public/character.css`, `public/guide.js`: reusable toy and section guide.
-- `public/app.js`: theme, motion preference, carousel, dialogs and studio replay.
-- `public/game-state.js`, `public/game.js`: optional exploration game, keyboard/touch movement, accessible coordinates, collection, exit and restart.
-- `public/style.css`: visual system, responsive studio, components and reserved tour rail.
+## Architecture and local operation
 
-All important portfolio content exists in generated HTML. Interactive controls require JavaScript. Themes and motion preferences use optional localStorage; game progress is not stored or transmitted. Motion respects the OS preference and can be paused. Native dialogs provide Escape and focus restoration.
+Requires Node22+. `scripts/build.mjs` generates static `dist/` from localized ES-module templates and regular public assets. Three.js and fonts are local. There is no framework runtime, database, production API, website-side mail service, Meshy request or analytics SDK. `scripts/dev.mjs` is a loopback file preview with SSE reload, not a contact backend.
 
-## Assets and provenance
+- `src/viewer-page.mjs`, `black-page.mjs`, `direct-page.mjs`, `city-page.mjs`: shared home/reading, policies, contact and metadata.
+- `public/city.js`, `city-story.js`, `city-motion.js`: measured scroll chapters, model transforms and pure build/coast math. `viewer-overflow` supplies a decorative unread-content hint without changing card height.
+- `src/project-process.mjs`, `faq.mjs`, `career.mjs`, `skills.mjs` and their public styles/scripts: shared localized reading components.
+- `public/city-residents.js` and `docs/runtime-assets.json`: three selected GLBs, **3,521,000 bytes / 89,739 triangles**. Hori is the approved native static derivative; archived paid waves/remeshes are provenance, without playback.
+- `docs/project-captures.json`: four real WebPs, **351,328 bytes**, shared by cards and reading. Source PNGs and character masters remain outside runtime.
+- Project, technology, career and contact source manifests record public artwork and hashes. No retired island/harbor/scenery model is loaded.
 
-`portrait.jpg` is the owner's current public GitHub avatar (user ID 52054783), retrieved on 2026-10-22 UTC; the separately mentioned photo was not attached. `horagora.jpg` and `andrea.jpg` are captured public homepages, not invented mockups. Hori's approved WebP is used only on the HorAgora case, as requested. The toy is an original CSS adaptation of the visual prompt shown in the owner's Meshy workspace. No generation credits were consumed and no high-polygon model is loaded.
+Use the single HMR preview at [localhost:3000/pt-br/](http://localhost:3000/pt-br/), with `/en/` and `/es/` equivalents. Relevant local commands are `node scripts/build.mjs`, `node --test tests/*.test.mjs`, `node scripts/audit.mjs` and `git diff --check`. These are instructions, not a claim of a fresh run. [Verification](docs/verification.md) preserves the integrator’s actual observations and limits; [implementation scope](docs/samurai-world-plan.md) describes current behavior. No remote test pipeline is authorized during development.
 
-Public references: LEGO Movie's main trailer, LEGO Play's creative building/stop-motion language and Habblaud's modular studio narrative. Source, trademarks and media were not copied. LEGO is a personal interest, with no brand affiliation.
+## Contact, costs and publication
 
-## Hosting, SEO and recovery
+The form currently validates name/email/project and prepares an encoded **mailto draft in browser memory**. The visitor separately opens their mail application, reviews and sends it. There is no SMTP/API delivery, CAPTCHA or server-side rate limiter. The public Gmail address is an existing contact destination; the owner also intends it as a future sender, but no mail provider/configuration is approved or implemented. Telephone input/validation and real delivery/security are a separate follow-up.
 
-`vercel.json` is ready for a static Vercel build (`node scripts/build.mjs`, output `dist`). The existing Vercel browser login reached a passkey requirement; no recovery codes, security changes or new credentials were used. A private owner-only Sites preview is configured by `.openai/hosting.json`.
+The owner has no selected domain or host and is considering Vercel or GitHub Pages. `vercel.json` is prepared configuration, not an active deployment. The private repository [jovi47/jovi47-portfolio](https://github.com/jovi47/jovi47-portfolio) has been created; code push/PR and release setup remain pending at this checkpoint. No versioned workflow was present in the inspected checkout. The GitHub profile README is a separate repository/objective. The older private Sites studio publication does not validate or publish this home.
 
-The default build is deliberately `noindex, nofollow`, has a blocked preview robots policy and an empty sitemap. `SITE_URL` accepts an HTTPS origin; it enables canonical, alternate languages, Open Graph and visible-fact Person JSON-LD. Only set `INDEXABLE=true` for a deliberately authorized public canonical release. Update the hosting privacy notice, verify real headers/404s/languages and submit the correct canonical property/sitemap to Search Console after that release. A temporary private preview is not submitted for indexing.
+Builds are **noindex by default**, with robots disallow and an empty sitemap. Public canonical/hreflang/Person metadata require a validated HTTPS `SITE_URL`; indexable release additionally requires `INDEXABLE=true` and publication authorization. Direct reading stays noindex/canonical-to-home; legacy `/{locale}/black/` redirects to its language home. There is no current `llms.txt`. Domain/host configuration, real HTTP checks and the correct Search Console property/indexing follow-up remain pending.
 
-Vercel security headers include MIME protection, referrer and permissions policies and CSP. The preview provider's actual HTTP policies must be verified separately. The portfolio has no forms, login, backend, database, customer data, secrets or transactional mutations. Privacy and Terms describe the actual preview and contact channels; they are not a compliance certification.
+Confirmed Meshy use is **535 credits**, last official balance **443**, authorized ceiling 1,000. Current native UI/process/contact art adds no paid generation/provider integration. The four reading components total 22,988 raw CSS/JS bytes; unique technology/career/contact icons total 95,289 bytes. These are scoped inventories, not full-visit payload, billing or performance measurements. Cache, visibility, optional license links, provider tariffs and traffic determine actual costs; canonical formulas remain in Obsidian `portfolio/costs.md`.
 
-Recovery: redeploy the previously saved verified Site version, or redeploy a previous eligible Git commit to Vercel. The static app has no database migration to undo. Keep source and the prior artifact available until the new URL is verified; publishing does not by itself prove availability or rollback behavior.
-
-## Validation and remaining limits
-
-Behavioral tests cover game bounds, collection uniqueness, win/restart state, all locale/contact/policy paths and preview robots. Actual-browser QA covers responsive geometry, dialogs, keyboard completion, carousel boundaries, theme, motion and translated pages. No physical-device, assistive-technology or field Core Web Vitals claim is made. See `docs/verification.md` for observed revision-specific evidence.
-
-Source/private-path review is mandatory before every push or deployment. Never include `.private`, `ACESSOS.local.md`, real envs, auth/session material or copies, even under another name. Remote tests are not part of development; this project has no GitHub workflow triggers.
-
-Business, decisions, public marketing copy, approved assets and delivery evidence are canonical in the existing Obsidian vault's `portfolio/` project. Code/tests remain in Git.
+Code/tests stay in Git; canonical decisions, costs and useful approved masters stay in the existing Obsidian `portfolio/` project. The task worktree is `.worktrees/samurai-world`, branch `codex/samurai-world`, based on `c5aa96f`. No push, PR, merge, deployment or indexing is claimed. `.private/`, envs, auth/sessions, `ACESSOS.local.md`, credentials, raw CV and protected copies never belong in an upload or public artifact.
