@@ -31,7 +31,7 @@ test('the portfolio viewer has five panels, four landmark selectors and a separa
   const question=houses.match(/<button\b[^>]*class="[^"]*viewer-house-question[^"]*"[^>]*>[\s\S]*?<\/button>/)?.[0];
   assert.ok(question);for(const attr of ['data-select-building="challenge"','aria-pressed="false"','aria-controls="viewer-card"','disabled'])assert.ok(question.includes(attr));
   assert.doesNotMatch(question,/data-inquiry|data-question/);
-  assert.match(question,/aria-label="[^"]+"/);
+  assert.doesNotMatch(question,/aria-label=/);
   const contact=html.match(/<button\b[^>]*class="[^"]*\bviewer-contact-fab\b[^"]*"[^>]*>/)?.[0];
   assert.ok(contact,`${key}: separate contact button`);
   for(const attribute of ['data-question','data-inquiry','disabled'])assert.match(contact,new RegExp(`\\s${attribute}(?:\\s|=|>)`));
