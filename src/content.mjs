@@ -29,7 +29,9 @@ export const content = {
         { title: 'Sistemas e sites', body: 'Aplicações e serviços com Elixir e Java, integrando regras de negócio, APIs e os fluxos que fazem a operação acontecer.', tags: ['Elixir', 'Java', 'APIs'] },
         { title: 'IA no trabalho real', body: 'RAG, agentes e harnesses que conectam modelos a fontes, ferramentas e verificações úteis para a tarefa.', tags: ['IA aplicada', 'RAG', 'Agentes'] },
         { title: 'Automações úteis', body: 'Conecto etapas e sistemas para reduzir trabalho repetitivo, com atenção a falhas, limites e acompanhamento.', tags: ['Automações', 'Integrações', 'Fluxos'] },
-        { title: 'Experiências web e 3D', body: 'Experiências web e 3D que tornam uma ideia visível e convidam à interação, sem perder de vista o uso real.', tags: ['Web', '3D', 'Interação'] }
+        { title: 'Experiências web e 3D', body: 'Experiências web e 3D que tornam uma ideia visível e convidam à interação, sem perder de vista o uso real.', tags: ['Web', '3D', 'Interação'] },
+        { title: 'Acessibilidade', body: 'Navegação por teclado, contraste, legibilidade e interfaces adaptadas a diferentes telas e formas de uso.', tags: ['Acessibilidade', 'Responsividade', 'Usabilidade'] },
+        { title: 'SEO e indexação', body: 'Conteúdo organizado, metadados e sitemap para ajudar os buscadores a encontrar e compreender seu site.', tags: ['SEO', 'Conteúdo', 'Indexação'] }
       ]
     },
     building: {
@@ -240,7 +242,9 @@ export const content = {
       { title: 'Software and websites', body: 'Applications and services with Elixir and Java, connecting business rules, APIs and the workflows that keep operations moving.', tags: ['Elixir', 'Java', 'APIs'] },
       { title: 'AI put to work', body: 'RAG, agents and harnesses connecting models to the sources, tools and checks that a task needs.', tags: ['Applied AI', 'RAG', 'Agents'] },
       { title: 'Useful automation', body: 'Connecting steps and systems to reduce repetitive work, with attention to failures, limits and visibility.', tags: ['Automation', 'Integrations', 'Workflows'] },
-      { title: 'Web and 3D experiences', body: 'Web and 3D experiences that make an idea visible and invite interaction, while keeping real use in focus.', tags: ['Web', '3D', 'Interaction'] }
+      { title: 'Web and 3D experiences', body: 'Web and 3D experiences that make an idea visible and invite interaction, while keeping real use in focus.', tags: ['Web', '3D', 'Interaction'] },
+      { title: 'Accessibility', body: 'Keyboard navigation, contrast, readability and interfaces adapted to different screens and ways of interacting.', tags: ['Accessibility', 'Responsive design', 'Usability'] },
+      { title: 'SEO and indexing', body: 'Organised content, metadata and sitemaps to help search engines find and understand your website.', tags: ['SEO', 'Content', 'Indexing'] }
     ] },
     building: {
       title: "What I’m building on",
@@ -446,7 +450,9 @@ export const content = {
       { title: 'Sistemas y sitios', body: 'Aplicaciones y servicios con Elixir y Java, conectando reglas de negocio, APIs y los flujos que hacen funcionar la operación.', tags: ['Elixir', 'Java', 'APIs'] },
       { title: 'IA en el trabajo real', body: 'RAG, agentes y harnesses que conectan modelos con las fuentes, herramientas y verificaciones que necesita cada tarea.', tags: ['IA aplicada', 'RAG', 'Agentes'] },
       { title: 'Automatizaciones útiles', body: 'Conecto pasos y sistemas para reducir el trabajo repetitivo, prestando atención a fallos, límites y seguimiento.', tags: ['Automatizaciones', 'Integraciones', 'Flujos'] },
-      { title: 'Experiencias web y 3D', body: 'Experiencias web y 3D que hacen visible una idea e invitan a interactuar, sin perder de vista el uso real.', tags: ['Web', '3D', 'Interacción'] }
+      { title: 'Experiencias web y 3D', body: 'Experiencias web y 3D que hacen visible una idea e invitan a interactuar, sin perder de vista el uso real.', tags: ['Web', '3D', 'Interacción'] },
+      { title: 'Accesibilidad', body: 'Navegación con teclado, contraste, legibilidad e interfaces adaptadas a distintas pantallas y formas de uso.', tags: ['Accesibilidad', 'Diseño adaptable', 'Usabilidad'] },
+      { title: 'SEO e indexación', body: 'Contenido organizado, metadatos y sitemap para ayudar a los buscadores a encontrar y comprender tu sitio.', tags: ['SEO', 'Contenido', 'Indexación'] }
     ] },
     building: {
       title: "Mi construcción",
