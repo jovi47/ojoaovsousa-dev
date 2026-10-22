@@ -14,8 +14,15 @@ async function fixture(t){
  await mkdir(path.join(root,'public'));
  await cp(new URL('../src/',import.meta.url),path.join(root,'src'),{recursive:true});
  for(const name of ['build.mjs','audit.mjs'])await cp(new URL(`../scripts/${name}`,import.meta.url),path.join(root,'scripts',name));
+ const dependencies=JSON.parse(await readFile(new URL('../package.json',import.meta.url),'utf8')).dependencies||{};
+ if(dependencies['libphonenumber-js']){
+  await mkdir(path.join(root,'node_modules'));
+  await cp(new URL('../node_modules/libphonenumber-js/',import.meta.url),path.join(root,'node_modules','libphonenumber-js'),{recursive:true});
+  await mkdir(path.join(root,'public','vendor'));
+  for(const name of ['libphonenumber-max.js','libphonenumber-max.js.map','libphonenumber-LICENSE.txt'])await cp(new URL(`../public/vendor/${name}`,import.meta.url),path.join(root,'public','vendor',name));
+ }
  await writeFile(path.join(root,'package.json'),'{"type":"module"}');
- await writeFile(path.join(root,'.gitignore'),'dist/\n');
+ await writeFile(path.join(root,'.gitignore'),'dist/\nnode_modules/\n');
  return {root,read:name=>readFile(path.join(root,'dist',name),'utf8'),build:(SITE_URL='',INDEXABLE='')=>execFileSync(process.execPath,['scripts/build.mjs'],{cwd:root,env:{PATH:process.env.PATH,SITE_URL,INDEXABLE},encoding:'utf8',stdio:'pipe'})};
 }
 
