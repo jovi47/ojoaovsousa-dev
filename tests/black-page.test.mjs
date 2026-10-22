@@ -11,7 +11,7 @@ test('the single 3D presentation reuses the viewer contracts and factual content
   assert.match(html,/<div[^>]+class="viewer-page"[^>]+data-world-variant="black"/);
   assert.equal((html.match(/class="viewer-tour"/g)||[]).length,1);
   assert.equal((html.match(/class="viewer-board"/g)||[]).length,1);
-  assert.equal((html.match(/data-select-building="/g)||[]).length,3);
+  assert.equal((html.match(/data-select-building="/g)||[]).length,4);
   assert.deepEqual([...html.matchAll(/data-viewer-card="([^"]+)"/g)].map(match=>match[1]).sort(),['about','andrea','challenge','horagora','stack']);
   assert.equal((html.match(/id="inquiry-dialog"/g)||[]).length,1);
   for(const item of c.work.cases){assert.ok(html.includes(item.name));assert.ok(html.includes(item.url));assert.ok(html.includes(item.description));}

@@ -6,15 +6,15 @@ import {renderDirectContent} from '../src/direct-page.mjs';
 import {escape as e} from '../src/city-page.mjs';
 import {cityCopy} from '../src/city-copy.mjs';
 
-test('the portfolio viewer has five panels, three building selectors and a separate contact control in every locale',()=>{
+test('the portfolio viewer has five panels, four landmark selectors and a separate contact control in every locale',()=>{
  for(const [key,c] of Object.entries(content)){
   const html=viewerHome(c,key);
   const houses=html.match(/<nav\b[^>]*class="[^"]*\bviewer-houses\b[^"]*"[^>]*>[\s\S]*?<\/nav>/)?.[0];
   assert.ok(houses,`${key}: building navigation`);
-  assert.deepEqual([...houses.matchAll(/data-select-building="([^"]+)"/g)].map(match=>match[1]).sort(),['andrea','horagora','stack']);
+  assert.deepEqual([...houses.matchAll(/data-select-building="([^"]+)"/g)].map(match=>match[1]).sort(),['andrea','challenge','horagora','stack']);
   const aboutSelector=houses.match(/<button\b[^>]*data-select-building="stack"[^>]*>[\s\S]*?<\/button>/)?.[0];
   assert.ok(aboutSelector?.includes(e({'pt-br':'Sobre mim',en:'About me',es:'Sobre mí'}[key])),`${key}: castle opens the personal profile`);
-  assert.equal((html.match(/data-select-building="/g)||[]).length,3);
+  assert.equal((html.match(/data-select-building="/g)||[]).length,4);
   const selectors=Object.fromEntries([...houses.matchAll(/<button\b[^>]*data-select-building="([^"]+)"[^>]*>[\s\S]*?<\/button>/g)].map(match=>[match[1],match[0]]));
   assert.match(selectors.stack,/<img[^>]+src="\/portrait\.jpg"/);
   assert.doesNotMatch(selectors.stack,/icons\/java|icons\/elixir/);
@@ -29,8 +29,9 @@ test('the portfolio viewer has five panels, three building selectors and a separ
   assert.ok(selectors.andrea.includes('>ASC</span>'));
 
   const question=houses.match(/<button\b[^>]*class="[^"]*viewer-house-question[^"]*"[^>]*>[\s\S]*?<\/button>/)?.[0];
-  assert.ok(question);for(const attr of ['data-question','data-inquiry','disabled'])assert.ok(question.includes(attr));
-  assert.match(question,/aria-label="[^"]+"/);
+  assert.ok(question);for(const attr of ['data-select-building="challenge"','aria-pressed="false"','aria-controls="viewer-card"','disabled'])assert.ok(question.includes(attr));
+  assert.doesNotMatch(question,/data-inquiry|data-question/);
+  assert.doesNotMatch(question,/aria-label=/);
   const contact=html.match(/<button\b[^>]*class="[^"]*\bviewer-contact-fab\b[^"]*"[^>]*>/)?.[0];
   assert.ok(contact,`${key}: separate contact button`);
   for(const attribute of ['data-question','data-inquiry','disabled'])assert.match(contact,new RegExp(`\\s${attribute}(?:\\s|=|>)`));
