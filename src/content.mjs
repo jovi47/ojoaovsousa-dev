@@ -26,7 +26,7 @@ export const content = {
     expertise: {
       kicker: 'O que construo', title: 'Tecnologia com um motivo', description: 'Escolho as peças pelo problema. O objetivo é entregar algo útil, compreensível e possível de evoluir.',
       items: [
-        { title: 'Sistemas e sites', body: 'Aplicações e serviços com Elixir e Java, integrando regras de negócio, APIs e os fluxos que fazem a operação acontecer.', tags: ['Elixir', 'Java', 'APIs'] },
+        { title: 'Sistemas e sites', body: 'Aplicações e serviços que integram regras de negócio, APIs e os fluxos da operação. A tecnologia acompanha a necessidade do projeto.', tags: ['Elixir', 'Java', 'APIs'] },
         { title: 'IA no trabalho real', body: 'RAG, agentes e harnesses que conectam modelos a fontes, ferramentas e verificações úteis para a tarefa.', tags: ['IA aplicada', 'RAG', 'Agentes'] },
         { title: 'Automações úteis', body: 'Conecto etapas e sistemas para reduzir trabalho repetitivo, com atenção a falhas, limites e acompanhamento.', tags: ['Automações', 'Integrações', 'Fluxos'] },
         { title: 'Experiências web e 3D', body: 'Experiências web e 3D que tornam uma ideia visível e convidam à interação, sem perder de vista o uso real.', tags: ['Web', '3D', 'Interação'] },
@@ -238,7 +238,7 @@ export const content = {
       ]
     },
     expertise: { kicker: 'What I build', title: 'Technology with a purpose', description: 'I choose the pieces to fit the problem. The aim is something useful, understandable and ready to evolve.', items: [
-      { title: 'Software and websites', body: 'Applications and services with Elixir and Java, connecting business rules, APIs and the workflows that keep operations moving.', tags: ['Elixir', 'Java', 'APIs'] },
+      { title: 'Software and websites', body: 'Applications and services connecting business rules, APIs and operational workflows. Technology follows the needs of the project.', tags: ['Elixir', 'Java', 'APIs'] },
       { title: 'AI put to work', body: 'RAG, agents and harnesses connecting models to the sources, tools and checks that a task needs.', tags: ['Applied AI', 'RAG', 'Agents'] },
       { title: 'Useful automation', body: 'Connecting steps and systems to reduce repetitive work, with attention to failures, limits and visibility.', tags: ['Automation', 'Integrations', 'Workflows'] },
       { title: 'Web and 3D experiences', body: 'Web and 3D experiences that make an idea visible and invite interaction, while keeping real use in focus.', tags: ['Web', '3D', 'Interaction'] },
@@ -445,7 +445,7 @@ export const content = {
       { id: 'andrea', quote: {"kind": "testimonial", "text": "Muy feliz con el resultado. Hoy he conseguido posicionarme con más autoridad en internet y gestionar a mis clientes con tranquilidad y seguridad, conforme a la LGPD.", "attribution": "Andréa Sousa"}, name: 'Andréa Sousa Consultoria', category: 'Sitio de servicios', headline: 'Claridad para dar el primer paso', description: 'Un sitio para explicar servicios de consultoría tributaria y orientar la solicitud de análisis de exención o devolución del impuesto sobre la renta.', url: 'https://andreasousaconsultoria.com.br', tags: ['Sitio corporativo', 'Servicios', 'Contacto'], role: 'Creación y desarrollo del sitio', delivery: 'Sitio público', detail: 'Desarrollé el sitio que reúne la presentación de la especialista, servicios, etapas de atención, preguntas frecuentes y formulario de solicitud. Organicé la información para explicar el servicio y orientar el primer contacto, con políticas accesibles y controles de preferencias de métricas.' }
     ] },
     expertise: { kicker: 'Qué construyo', title: 'Tecnología con un propósito', description: 'Elijo las piezas según el problema. El objetivo es entregar algo útil, comprensible y que pueda evolucionar.', items: [
-      { title: 'Sistemas y sitios', body: 'Aplicaciones y servicios con Elixir y Java, conectando reglas de negocio, APIs y los flujos que hacen funcionar la operación.', tags: ['Elixir', 'Java', 'APIs'] },
+      { title: 'Sistemas y sitios', body: 'Aplicaciones y servicios que conectan reglas de negocio, APIs y los flujos de la operación. La tecnología acompaña las necesidades del proyecto.', tags: ['Elixir', 'Java', 'APIs'] },
       { title: 'IA en el trabajo real', body: 'RAG, agentes y harnesses que conectan modelos con las fuentes, herramientas y verificaciones que necesita cada tarea.', tags: ['IA aplicada', 'RAG', 'Agentes'] },
       { title: 'Automatizaciones útiles', body: 'Conecto pasos y sistemas para reducir el trabajo repetitivo, prestando atención a fallos, límites y seguimiento.', tags: ['Automatizaciones', 'Integraciones', 'Flujos'] },
       { title: 'Experiencias web y 3D', body: 'Experiencias web y 3D que hacen visible una idea e invitan a interactuar, sin perder de vista el uso real.', tags: ['Web', '3D', 'Interacción'] },
