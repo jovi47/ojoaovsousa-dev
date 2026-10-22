@@ -27,18 +27,20 @@ class Field extends EventTarget{
  setAttribute(name,value){this.attrs[name]=value;}
  removeAttribute(name){delete this.attrs[name];if(name==='href')delete this.href;}
  focus(){this.focused=true;}
+ setSelectionRange(start,end){this.selectionStart=start;this.selectionEnd=end;}
 }
 const tick=()=>new Promise(resolve=>setImmediate(resolve));
 function fixture(){
  const form=new EventTarget();form.dataset={emailError:'Invalid email',phoneError:'Invalid phone; no extension',loadingValidation:'Loading',validationUnavailable:'Try again',invalidFields:'Review the fields'};form.setAttribute=()=>{};form.removeAttribute=()=>{};
  const fields={name:new Field('João'),email:new Field('owner@example.com'),phone:new Field('2025550123'),phoneCountry:new Field('US'),project:new Field('A project')};
- const link=new Field(),draft=new Field(),text=new Field(),status=new Field(),submit=new Field(),errors={email:new Field(),phone:new Field()};status.dataset.success='Draft ready';link.hidden=true;draft.hidden=true;
+ const phoneFlag=new Field(),phoneDial=new Field(),link=new Field(),draft=new Field(),text=new Field(),status=new Field(),submit=new Field(),errors={email:new Field(),phone:new Field()};status.dataset.success='Draft ready';link.hidden=true;draft.hidden=true;
+ Object.defineProperty(fields.phoneCountry,'selectedOptions',{get:()=>[{dataset:{dial:'+'+phoneLibrary.getCountryCallingCode(fields.phoneCountry.value)}}]});
  form.elements={namedItem:name=>fields[name]};
- form.querySelector=selector=>({'#inquiry-email':link,'[data-draft]':draft,'#draft-text':text,'#inquiry-status':status,'[type="submit"]':submit,'#inquiry-email-error':errors.email,'#inquiry-phone-error':errors.phone}[selector]);
+ form.querySelector=selector=>({'[data-phone-flag]':phoneFlag,'[data-phone-dial]':phoneDial,'#inquiry-email':link,'[data-draft]':draft,'#draft-text':text,'#inquiry-status':status,'[type="submit"]':submit,'#inquiry-email-error':errors.email,'#inquiry-phone-error':errors.phone}[selector]);
  form.reportValidity=()=>Object.values(fields).every(field=>!field.validationMessage);
- const change=field=>{const event=new Event('change');Object.defineProperty(event,'target',{value:fields[field]});form.dispatchEvent(event);};
+ const change=(field,type='change',inputType)=>{const event=new Event(type);Object.defineProperty(event,'target',{value:fields[field]});Object.defineProperty(event,'inputType',{value:inputType});form.dispatchEvent(event);};
  const send=async()=>{form.dispatchEvent(new Event('submit',{cancelable:true}));await tick();};
- return{form,fields,link,draft,text,status,errors,change,send};
+ return{form,fields,phoneFlag,phoneDial,link,draft,text,status,errors,change,send};
 }
 
 test('the form normalizes valid contacts and invalidates the old draft on country changes and errors',async()=>{
@@ -56,5 +58,28 @@ test('the form normalizes valid contacts and invalidates the old draft on countr
   assert.equal(f.link.hidden,false);assert.ok(f.text.value.includes('E-mail: valid@example.com'));assert.ok(f.text.value.includes('+34612345678'));
   const preparing=f.send();f.fields.project.value='Changed while awaiting validation';f.change('project');await preparing;
   assert.equal(f.link.hidden,true);assert.equal(f.text.value,'');
+ }finally{globalThis.libphonenumber=oldLibrary;}
+});
+
+test('live formatting preserves caret edits, deletion and supported international paste with its prefix',async()=>{
+ const {initInquiryForm}=await import('../public/inquiry-form.js');
+ const oldLibrary=globalThis.libphonenumber;globalThis.libphonenumber=phoneLibrary;
+ try{
+  const f=fixture(),prepare=initInquiryForm(f.form);await prepare();
+  assert.equal(f.fields.phone.value,'(202) 555-0123');assert.equal(f.phoneDial.textContent,'+1');
+  f.fields.phone.value='2025';f.fields.phone.selectionStart=4;f.change('phone','input','insertText');
+  assert.equal(f.fields.phone.value,'(202) 5');assert.equal(f.fields.phone.selectionStart,7);
+  f.fields.phone.value='(202) ';f.fields.phone.selectionStart=6;f.change('phone','input','deleteContentBackward');
+  assert.equal(f.fields.phone.value,'(202)');
+  f.fields.phone.value='(202';f.fields.phone.selectionStart=4;f.change('phone','input','deleteContentBackward');
+  assert.equal(f.fields.phone.value,'20');assert.equal(f.fields.phone.selectionStart,2);
+  f.fields.phone.value='(902) 5';f.fields.phone.selectionStart=2;f.change('phone','input','insertText');
+  assert.equal(f.fields.phone.value,'(902) 5');assert.equal(f.fields.phone.selectionStart,2);
+  f.fields.phone.value='+351912345678';f.fields.phone.selectionStart=13;f.change('phone','input','insertFromPaste');
+  assert.equal(f.fields.phoneCountry.value,'PT');assert.equal(f.fields.phone.value,'912 345 678');
+  assert.equal(f.phoneFlag.textContent,'🇵🇹');assert.equal(f.phoneDial.textContent,'+351');
+  await f.send();assert.ok(f.text.value.includes('+351912345678'));
+  f.fields.phoneCountry.value='US';f.change('phoneCountry');assert.equal(f.link.hidden,true);assert.equal(f.phoneDial.textContent,'+1');
+  assert.equal(f.fields.phone.value,'(912) 345-678');
  }finally{globalThis.libphonenumber=oldLibrary;}
 });
