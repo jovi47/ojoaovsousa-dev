@@ -1,0 +1,31 @@
+{
+  "approved_at_utc": "2026-10-22",
+  "source": "Photo attached by the owner in the portfolio conversation; expressly selected for the site.",
+  "source_master": "Obsidian portfolio/assets/portrait-original.png",
+  "source_sha256": "2a25e4d7838638f74a4882bff8a9c45fe19629db084074fbba3c1329c6536a16",
+  "source_bytes": 2030656,
+  "source_dimensions": {
+    "width": 1086,
+    "height": 1448
+  },
+  "runtime_path": "public/portrait.jpg",
+  "runtime_sha256": "b87fb892d268d64b4c6af27fe6246ea6aba086dd9e5db74ae12f822b68bfc387",
+  "runtime_bytes": 296862,
+  "runtime_dimensions": {
+    "width": 1086,
+    "height": 1448
+  },
+  "derivation": "macOS sips JPEG quality 85; no resizing, crop, retouch or generated pixels; EXIF/IPTC/comment segments removed from the runtime JPEG.",
+  "rendering": "Existing object-fit/object-position in 2D and center-square texture repeat in the 3D profile sign; source aspect ratio preserved.",
+  "replaces": {
+    "sha256": "4241aca7a2d293b44cef00d8393472d934f1ee1ed19b37a2de4afc77ec201293",
+    "bytes": 17817,
+    "dimensions": {
+      "width": 460,
+      "height": 460
+    },
+    "retrieval": "public/portrait.jpg in Git revision 303247a"
+  },
+  "publication": "Local implementation only; PR/preview delivery is separate from public deployment.",
+  "provider_generation_calls": 0
+}
