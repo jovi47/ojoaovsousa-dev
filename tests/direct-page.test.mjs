@@ -22,7 +22,7 @@ test('the direct portfolio has complete localised content without the world runt
   for(const kind of ['whatsapp','linkedin']){
    assert.match(socialIcon(kind),new RegExp(`src="/contact-icons/${kind}\\.svg"`));
    assert.match(socialIcon(kind),/alt="" aria-hidden="true" width="24" height="24"/);
-   assert.equal((html.split(socialIcon(kind)).length-1),2,`${key}: same local mark in contact and footer`);
+   assert.equal((html.split(socialIcon(kind)).length-1),3,`${key}: same local mark in contact, dialog and footer`);
   }
   assert.match(socialIcon('mail'),/^<svg\b/);
   for(const group of [c.work,c.expertise]){
@@ -30,7 +30,7 @@ test('the direct portfolio has complete localised content without the world runt
    assert.ok(!factual.includes(e(group.description)),`${key}: concise section introduction`);
   }
   assert.ok(factual.includes(`>${e(cityCopy[key].details)}</a>`),`${key}: live website action`);
-  for(const id of ['main','intro','about','experience','projects','contact','inquiry-dialog','inquiry-form'])assert.equal((html.match(new RegExp(`\\bid="${id}"`,'g'))||[]).length,1,`${key}: ${id}`);
+  for(const id of ['main','intro','about','experience','projects','contact','inquiry-dialog'])assert.equal((html.match(new RegExp(`\\bid="${id}"`,'g'))||[]).length,1,`${key}: ${id}`);
   for(const item of c.work.cases){
    for(const value of [item.name,item.url,item.description,item.detail])assert.ok(factual.includes(e(value)),`${key}: ${item.id} factual content`);
    const actions=projectActions(item,c,cityCopy[key]);

@@ -25,5 +25,3 @@ html[data-theme=dark] .viewer-page[data-world-variant="black"]{
 .viewer-page[data-world-variant="black"] .site-footer{background:var(--bg);color:var(--ink)}
 .viewer-page[data-world-variant="black"] dialog{background:var(--bg);color:var(--ink)}
 .viewer-page[data-world-variant="black"] dialog::backdrop{background:#0009}
-.viewer-page[data-world-variant="black"] form input,
-.viewer-page[data-world-variant="black"] form textarea{background:var(--panel);color:var(--ink)}

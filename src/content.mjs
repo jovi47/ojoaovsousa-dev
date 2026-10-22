@@ -136,29 +136,21 @@ export const content = {
       "questionGoal": "Explore a cidade e segure Construir para montar a interrogação. Ao completar, conte a ideia do seu projeto."
     },
     inquiry: {
-      "title": "O que você quer construir?",
-      "description": "Conte o que você quer construir. Vamos preparar um rascunho de e-mail para começar a conversa.",
-      "name": "Seu nome",
-      "email": "Seu e-mail",
-      "country": "País do número",
-      "phone": "Telefone",
-      "phoneHint": "Escolha o país. O número é formatado ao digitar; ao colar com +DDI, o país é reconhecido. Sem ramal.",
-      "emailError": "Informe um e-mail válido, como nome@dominio.com.",
-      "phoneError": "Informe um telefone válido para o país do número, sem ramal.",
-      "loadingValidation": "Carregando validação do telefone…",
-      "validationUnavailable": "Não foi possível validar o telefone agora. Tente preparar o e-mail novamente.",
-      "invalidFields": "Revise os campos antes de preparar o rascunho.",
-      "project": "Conte sobre seu projeto",
-      "submit": "Preparar e-mail",
-      "note": "Os campos ficam temporariamente no navegador, sem banco de dados ou envio por este site. Preparar e-mail gera o rascunho e mostra o link Abrir meu e-mail. Só esse link abre seu aplicativo; você revisa e decide se envia.",
-      "success": "Rascunho pronto. Use Abrir meu e-mail, revise e decida se envia.",
-      "back": "Voltar à cidade"
+          "title": "Vamos conversar",
+          "description": "Escolha como prefere conversar sobre seu projeto.",
+          "channels": "Canais de contato",
+          "email": "Enviar e-mail",
+          "copy": "Copiar",
+          "copyEmail": "Copiar e-mail",
+          "copied": "E-mail copiado.",
+          "copyFailed": "Não foi possível copiar. Selecione e copie o endereço de e-mail.",
+          "note": "Você inicia a conversa no aplicativo que escolher."
     },
     game: {
       "title": "Sua próxima construção",
       "description": "Caminhe pela cidade e construa uma grande interrogação com 32 peças. A próxima ideia pode ser a sua.",
       "start": "Entrar na cidade",
-      "instructions": "Explore com WASD, setas ou os controles na tela. Segure Construir, Espaço ou Enter para montar a interrogação; solte para parar. Você pode construir de qualquer ponto da cidade. Ao completar, prepare o rascunho do seu projeto. Sem cronômetro.",
+      "instructions": "Explore com WASD, setas ou os controles na tela. Segure Construir, Espaço ou Enter para montar a interrogação; solte para parar. Você pode construir de qualquer ponto da cidade. Ao completar, escolha um canal para conversar sobre seu projeto. Sem cronômetro.",
       "exit": "Sair da cidade",
       "initial": "A interrogação está por perto. Vamos construir?",
       "building": "Construindo a interrogação.",
@@ -187,12 +179,12 @@ export const content = {
           "body": "Esta versão é uma prévia privada do responsável, disponibilizada pelo Sites/OpenAI. A plataforma pode processar endereço IP, registros técnicos e dados de sessão, inclusive cookies necessários à autenticação, conforme suas próprias políticas. A configuração para uma futura publicação na Vercel está preparada, mas não significa que o site já esteja publicado nesse provedor. Os prazos dos registros da plataforma seguem as políticas aplicáveis do provedor."
         },
         {
-          "title": "Rascunho de projeto",
-          "body": "O formulário de briefing usa nome, e-mail, telefone e descrição do projeto apenas para preparar um rascunho local de contato. Os campos ficam temporariamente na página, sem banco de dados, gravação no localStorage ou envio a um backend. Nenhuma solicitação com esses campos é enviada enquanto você preenche. Preparar e-mail gera um rascunho e mostra o link Abrir meu e-mail, sem abrir o aplicativo ou transmitir os campos. Ao abrir esse link mailto, os dados são encaminhados ao aplicativo de e-mail; a partir daí, as políticas desse aplicativo se aplicam. Você revisa o rascunho e escolhe se envia. Não há envio automático nem inscrição em marketing."
+          "title": "Canais de contato",
+          "body": "O contato usa links para WhatsApp, e-mail e LinkedIn. Você escolhe o canal e inicia a conversa no aplicativo ou serviço correspondente. O site não apresenta formulário, recebe campos de contato, envia mensagens automaticamente ou salva rascunhos. Copiar e-mail usa a área de transferência do navegador somente quando você aciona o botão; se isso falhar, o endereço continua disponível para seleção manual. Ao abrir um canal externo, aplicam-se as políticas desse serviço. Não há inscrição automática em marketing."
         },
         {
           "title": "Contato e finalidade",
-          "body": "Ao escrever por e-mail ou WhatsApp, você compartilha dados de contato e o conteúdo da conversa. Essas informações são usadas para responder à solicitação e, quando cabível, realizar procedimentos preliminares a uma contratação a seu pedido. O contato não gera inscrição automática em marketing. Evite enviar dados sensíveis desnecessários."
+          "body": "Ao escrever por e-mail, WhatsApp ou LinkedIn, você compartilha dados de contato e o conteúdo da conversa. Essas informações são usadas para responder à solicitação e, quando cabível, realizar procedimentos preliminares a uma contratação a seu pedido. O contato não gera inscrição automática em marketing. Evite enviar dados sensíveis desnecessários."
         },
         {
           "title": "Conservação e direitos",
@@ -209,7 +201,7 @@ export const content = {
         { title: 'Serviços e propostas', body: 'Conteúdos e conversas iniciais não criam contratação automática. Escopo, preço, prazo, responsabilidades e condições de cada serviço dependem de proposta e acordo por escrito.' },
         { title: 'Projetos e materiais', body: 'Os projetos apresentados fazem parte do trabalho de João Victor. Marcas, imagens e materiais de terceiros pertencem a seus titulares. Sua presença identifica os projetos e não implica endosso ou transferência de direitos.' },
         { title: 'Inspiração pessoal', body: 'LEGO é mencionado como interesse pessoal de João Victor. Este portfólio é independente e não tem afiliação, patrocínio ou aprovação do LEGO Group.' },
-        { title: 'Playground e links', body: 'O miniworld é uma experiência recreativa, sem compras ou registro remoto de partidas. O briefing prepara um rascunho no seu aplicativo de e-mail e não envia uma solicitação por conta própria. Links externos levam a serviços com termos próprios. Conteúdo e disponibilidade dos sites vinculados podem mudar.' },
+        { title: 'Playground e links', body: 'O miniworld é uma experiência recreativa, sem compras ou registro remoto de partidas. Os canais de contato abrem WhatsApp, seu aplicativo de e-mail ou LinkedIn; você inicia a conversa e decide o que enviar. O site não envia mensagens por conta própria. Links externos levam a serviços com termos próprios. Conteúdo e disponibilidade dos sites vinculados podem mudar.' },
         { title: 'Contato', body: 'Para esclarecer o conteúdo ou comunicar um problema, escreva para jovi47profissional@gmail.com. Estas condições descrevem o projeto e não constituem parecer jurídico.' }
       ]
     }
@@ -347,29 +339,21 @@ export const content = {
       "questionGoal": "Explore the city and hold Build to assemble the question mark. Once complete, tell me about your project idea."
     },
     inquiry: {
-      "title": "What would you like to build?",
-      "description": "Tell me what you want to build. We’ll prepare an email draft to start the conversation.",
-      "name": "Your name",
-      "email": "Your email",
-      "country": "Phone number country",
-      "phone": "Phone number",
-      "phoneHint": "Choose the country. The number formats as you type; pasting an international +code selects its country. No extensions.",
-      "emailError": "Enter a valid email, such as name@example.com.",
-      "phoneError": "Enter a valid phone number for its country, without an extension.",
-      "loadingValidation": "Loading phone validation…",
-      "validationUnavailable": "Phone validation is unavailable. Try preparing the email again.",
-      "invalidFields": "Review the fields before preparing the draft.",
-      "project": "Tell me about your project",
-      "submit": "Prepare email",
-      "note": "Fields stay temporarily in your browser, with no database or submission by this website. Prepare email creates the draft and displays an Open my email link. Only that link opens your email app; you review it and decide whether to send.",
-      "success": "Draft ready. Select Open my email, review it and decide whether to send.",
-      "back": "Back to the city"
+          "title": "Let’s talk",
+          "description": "Choose how you would like to discuss your project.",
+          "channels": "Contact channels",
+          "email": "Send an email",
+          "copy": "Copy",
+          "copyEmail": "Copy email address",
+          "copied": "Email address copied.",
+          "copyFailed": "Could not copy. Select and copy the email address.",
+          "note": "Start the conversation in the app you choose."
     },
     game: {
       "title": "Your next build",
       "description": "Walk through the city and build a giant question mark with 32 pieces. The next idea could be yours.",
       "start": "Enter the city",
-      "instructions": "Explore with WASD, arrow keys or the on-screen controls. Hold Build, Space or Enter to assemble the question mark; release to stop. You can build from anywhere in the city. Once complete, prepare your project draft. No timer.",
+      "instructions": "Explore with WASD, arrow keys or the on-screen controls. Hold Build, Space or Enter to assemble the question mark; release to stop. You can build from anywhere in the city. Once complete, choose a channel to discuss your project. No timer.",
       "exit": "Leave the city",
       "initial": "The question mark is nearby. Shall we build?",
       "building": "Building the question mark.",
@@ -398,12 +382,12 @@ export const content = {
           "body": "This version is a private preview for the owner, provided through Sites/OpenAI. The platform may process IP addresses, technical logs and session data, including cookies required for authentication, under its own policies. Configuration for a future Vercel deployment is prepared; this does not mean the website is already published with that provider. Platform log retention follows the provider’s applicable policies."
         },
         {
-          "title": "Project draft",
-          "body": "The briefing form uses your name, email, phone number and project description only to prepare a local contact draft. Fields remain temporarily on the page, with no database, localStorage saving or backend submission. No request containing these fields is sent while you fill them in. Prepare email generates a draft and displays an Open my email link, without opening the app or transmitting the fields. Opening that mailto link passes the data to your email app; that app’s policies then apply. You review the draft and choose whether to send. There is no automatic sending or marketing subscription."
+          "title": "Contact channels",
+          "body": "Contact uses links to WhatsApp, email and LinkedIn. You choose a channel and start the conversation in its app or service. The site has no contact form, receives no contact fields, sends no automatic messages and saves no drafts. Copy email uses your browser clipboard only when you press the button; if copying fails, the address remains available for manual selection. Opening an external channel is subject to that service’s policies. There is no automatic marketing subscription."
         },
         {
           "title": "Contact and purpose",
-          "body": "When you write by email or WhatsApp, you share contact details and the conversation’s content. This information is used to respond and, where relevant, take steps towards a contract at your request. Contacting me does not automatically subscribe you to marketing. Please avoid sending unnecessary sensitive data."
+          "body": "When you write by email, WhatsApp or LinkedIn, you share contact details and the conversation’s content. This information is used to respond and, where relevant, take steps towards a contract at your request. Contacting me does not automatically subscribe you to marketing. Please avoid sending unnecessary sensitive data."
         },
         {
           "title": "Retention and rights",
@@ -419,7 +403,7 @@ export const content = {
       { title: 'Services and proposals', body: 'Website content and initial conversations do not automatically create a service contract. Scope, price, schedule, responsibilities and service conditions require a written proposal and agreement.' },
       { title: 'Projects and materials', body: 'The projects shown are part of João Victor’s work. Third-party brands, images and materials belong to their respective owners. Their presence identifies the projects and does not imply endorsement or transfer of rights.' },
       { title: 'Personal inspiration', body: 'LEGO is mentioned as a personal interest of João Victor. This independent portfolio is not affiliated with, sponsored by or approved by the LEGO Group.' },
-      { title: 'Playground and links', body: 'The miniworld is a recreational experience with no purchases or remote game-session records. The briefing prepares a draft in your email app and does not send an enquiry by itself. External links lead to services with their own terms. Linked websites’ content and availability may change.' },
+      { title: 'Playground and links', body: 'The miniworld is a recreational experience with no purchases or remote game-session records. Contact links open WhatsApp, your email app or LinkedIn; you start the conversation and decide what to send. The site does not send messages by itself. External links lead to services with their own terms. Linked websites’ content and availability may change.' },
       { title: 'Contact', body: 'For clarification or to report a problem, email jovi47profissional@gmail.com. These conditions describe the project and do not constitute legal advice.' }
     ] }
   },
@@ -554,29 +538,21 @@ export const content = {
       "questionGoal": "Explora la ciudad y mantén Construir pulsado para montar la interrogación. Cuando esté completa, cuéntame la idea de tu proyecto."
     },
     inquiry: {
-      "title": "¿Qué quieres construir?",
-      "description": "Cuéntame qué quieres construir. Prepararemos un borrador de correo para empezar la conversación.",
-      "name": "Tu nombre",
-      "email": "Tu correo",
-      "country": "País del número",
-      "phone": "Teléfono",
-      "phoneHint": "Elige el país. El número se formatea al escribir; al pegar un +código internacional se selecciona su país. Sin extensión.",
-      "emailError": "Introduce un correo válido, como nombre@dominio.com.",
-      "phoneError": "Introduce un teléfono válido para el país del número, sin extensión.",
-      "loadingValidation": "Cargando validación del teléfono…",
-      "validationUnavailable": "No se pudo validar el teléfono. Intenta preparar el correo de nuevo.",
-      "invalidFields": "Revisa los campos antes de preparar el borrador.",
-      "project": "Cuéntame tu proyecto",
-      "submit": "Preparar correo",
-      "note": "Los campos permanecen temporalmente en el navegador, sin base de datos ni envío desde este sitio. Preparar correo crea el borrador y muestra el enlace Abrir mi correo. Solo ese enlace abre tu aplicación; tú lo revisas y decides si lo envías.",
-      "success": "Borrador listo. Usa Abrir mi correo, revísalo y decide si lo envías.",
-      "back": "Volver a la ciudad"
+          "title": "Hablemos",
+          "description": "Elige cómo prefieres hablar sobre tu proyecto.",
+          "channels": "Canales de contacto",
+          "email": "Enviar correo",
+          "copy": "Copiar",
+          "copyEmail": "Copiar correo",
+          "copied": "Correo copiado.",
+          "copyFailed": "No se pudo copiar. Selecciona y copia el correo.",
+          "note": "Tú inicias la conversación en la aplicación que elijas."
     },
     game: {
       "title": "Tu próxima construcción",
       "description": "Camina por la ciudad y construye una gran interrogación con 32 piezas. La próxima idea puede ser la tuya.",
       "start": "Entrar en la ciudad",
-      "instructions": "Explora con WASD, las flechas o los controles en pantalla. Mantén Construir, Espacio o Enter para montar la interrogación; suelta para parar. Puedes construir desde cualquier punto de la ciudad. Al terminar, prepara el borrador de tu proyecto. Sin cronómetro.",
+      "instructions": "Explora con WASD, las flechas o los controles en pantalla. Mantén Construir, Espacio o Enter para montar la interrogación; suelta para parar. Puedes construir desde cualquier punto de la ciudad. Al terminar, elige un canal para hablar de tu proyecto. Sin cronómetro.",
       "exit": "Salir de la ciudad",
       "initial": "La interrogación está cerca. ¿Construimos?",
       "building": "Construyendo la interrogación.",
@@ -605,12 +581,12 @@ export const content = {
           "body": "Esta versión es una vista previa privada del responsable, ofrecida mediante Sites/OpenAI. La plataforma puede procesar direcciones IP, registros técnicos y datos de sesión, incluidas cookies necesarias para la autenticación, según sus propias políticas. La configuración para una futura publicación en Vercel está preparada; esto no significa que el sitio ya esté publicado en ese proveedor. La conservación de los registros de la plataforma sigue las políticas aplicables del proveedor."
         },
         {
-          "title": "Borrador de proyecto",
-          "body": "El formulario de briefing usa nombre, correo, teléfono y descripción del proyecto solo para preparar un borrador local de contacto. Los campos permanecen temporalmente en la página, sin base de datos, guardado en localStorage ni envío a un backend. No se envía ninguna solicitud con esos campos mientras los completas. Preparar correo genera un borrador y muestra el enlace Abrir mi correo, sin abrir la aplicación ni transmitir los campos. Al abrir ese enlace mailto, los datos se pasan a la aplicación de correo; desde entonces se aplican sus políticas. Tú revisas el borrador y decides si lo envías. No hay envío automático ni suscripción a marketing."
+          "title": "Canales de contacto",
+          "body": "El contacto usa enlaces a WhatsApp, correo y LinkedIn. Tú eliges el canal e inicias la conversación en su aplicación o servicio. El sitio no tiene formulario de contacto, no recibe campos de contacto, no envía mensajes automáticos ni guarda borradores. Copiar correo usa el portapapeles del navegador solo cuando pulsas el botón; si falla, el correo sigue disponible para selección manual. Al abrir un canal externo se aplican las políticas de ese servicio. No hay suscripción automática a marketing."
         },
         {
           "title": "Contacto y finalidad",
-          "body": "Al escribir por correo o WhatsApp, compartes tus datos de contacto y el contenido de la conversación. Esta información se utiliza para responder y, cuando corresponda, realizar gestiones previas a un contrato a petición tuya. El contacto no supone una suscripción automática a marketing. Evita enviar datos sensibles innecesarios."
+          "body": "Al escribir por correo, WhatsApp o LinkedIn, compartes tus datos de contacto y el contenido de la conversación. Esta información se utiliza para responder y, cuando corresponda, realizar gestiones previas a un contrato a petición tuya. El contacto no supone una suscripción automática a marketing. Evita enviar datos sensibles innecesarios."
         },
         {
           "title": "Conservación y derechos",
@@ -626,7 +602,7 @@ export const content = {
       { title: 'Servicios y propuestas', body: 'Los contenidos y las conversaciones iniciales no crean una contratación automática. El alcance, precio, plazo, responsabilidades y condiciones de cada servicio requieren una propuesta y un acuerdo por escrito.' },
       { title: 'Proyectos y materiales', body: 'Los proyectos presentados forman parte del trabajo de João Victor. Las marcas, imágenes y materiales de terceros pertenecen a sus titulares. Su presencia identifica los proyectos y no implica respaldo ni cesión de derechos.' },
       { title: 'Inspiración personal', body: 'LEGO se menciona como interés personal de João Victor. Este portafolio es independiente y no tiene afiliación, patrocinio ni aprobación del LEGO Group.' },
-      { title: 'Playground y enlaces', body: 'El minimundo es una experiencia recreativa, sin compras ni registro remoto de partidas. El briefing prepara un borrador en tu aplicación de correo y no envía una consulta por sí mismo. Los enlaces externos llevan a servicios con términos propios. El contenido y la disponibilidad de los sitios enlazados pueden cambiar.' },
+      { title: 'Playground y enlaces', body: 'El minimundo es una experiencia recreativa, sin compras ni registro remoto de partidas. Los enlaces de contacto abren WhatsApp, tu aplicación de correo o LinkedIn; tú inicias la conversación y decides qué enviar. El sitio no envía mensajes por su cuenta. Los enlaces externos llevan a servicios con términos propios. El contenido y la disponibilidad de los sitios enlazados pueden cambiar.' },
       { title: 'Contacto', body: 'Para aclaraciones o para comunicar un problema, escribe a jovi47profissional@gmail.com. Estas condiciones describen el proyecto y no constituyen asesoramiento jurídico.' }
     ] }
   }

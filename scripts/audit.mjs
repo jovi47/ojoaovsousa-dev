@@ -3,7 +3,7 @@ import {readFile,lstat,readdir} from 'node:fs/promises';
 import path from 'node:path';
 const root=process.cwd();
 const names=[...new Set(execFileSync('git',['ls-files','--cached','--others','--exclude-standard','-z'],{encoding:'utf8'}).split('\0').filter(Boolean))];
-const vendors=new Set(['BufferGeometryUtils.js','GLTFLoader.js','SkeletonUtils.js','three-LICENSE.txt','three.core.js','three.module.js','libphonenumber-max.js','libphonenumber-max.js.map','libphonenumber-LICENSE.txt']);
+const vendors=new Set(['BufferGeometryUtils.js','GLTFLoader.js','SkeletonUtils.js','three-LICENSE.txt','three.core.js','three.module.js']);
 const icons=new Set(['LICENSE.txt','elixir.svg','java.svg','javascript.svg','react.svg']);
 const careerIcons=new Set(['stone.png','sicredi.svg','ufs.svg','ifs.png']);
 const contactIcons=new Set(['whatsapp.svg','linkedin.svg','LICENSE.txt']);

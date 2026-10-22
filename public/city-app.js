@@ -1,4 +1,4 @@
-import {initInquiryForm} from './inquiry-form.js';
+import {initContactChannels} from './contact-channels.js';
 import {initProjectProcess} from './project-process.js';
 import {initTechnologyMarquee} from './technology-marquee.js';
 import {initViewerOverflow} from './viewer-overflow.js';
@@ -32,18 +32,14 @@ for(const details of document.querySelectorAll('.project-detail')){
  const sync=()=>{content.hidden=!details.open;summary.setAttribute('aria-expanded',String(details.open));};
  sync();details.addEventListener('toggle',sync);
 }
-const dialog=document.querySelector('#inquiry-dialog'),form=document.querySelector('#inquiry-form'),status=document.querySelector('#inquiry-status');
+const dialog=document.querySelector('#inquiry-dialog'),contactStatus=dialog?.querySelector('[data-contact-status]');
 const labels=JSON.parse(document.querySelector('#world-data')?.textContent||'{}');
-const loadInquiryValidation=initInquiryForm(form);
+initContactChannels(dialog);
 let focusBeforeDialog=null;
-function openInquiry(button){if(!dialog)return;document.dispatchEvent(new Event('citypause'));focusBeforeDialog=button;if(!dialog.open)dialog.showModal();loadInquiryValidation();}
+function openInquiry(button){if(!dialog)return;document.dispatchEvent(new Event('citypause'));focusBeforeDialog=button;if(contactStatus)contactStatus.textContent='';if(!dialog.open)dialog.showModal();}
 for(const button of document.querySelectorAll('[data-inquiry]'))button.addEventListener('click',()=>openInquiry(button));
 for(const button of document.querySelectorAll('[data-close]'))button.addEventListener('click',()=>button.closest('dialog')?.close());
 dialog?.addEventListener('close',()=>{document.dispatchEvent(new CustomEvent('citydialog',{detail:false}));const target=[focusBeforeDialog,...document.querySelectorAll('.viewer-contact-fab:not(:disabled),[data-skip-build],.chapter.active button,.direct-contact [data-inquiry]')].find(node=>node?.checkVisibility());target?.focus({preventScroll:true});});
-document.querySelector('[data-copy-draft]')?.addEventListener('click',async()=>{
- const draft=document.querySelector('#draft-text');
- try{await navigator.clipboard.writeText(draft.value);status.textContent=labels.copied;}catch{draft.focus();draft.select();status.textContent=labels.copyFailed;}
-});
 const connection=document.querySelector('#connection-status');
 function online(){if(connection)connection.hidden=navigator.onLine;}
 window.addEventListener('online',online);window.addEventListener('offline',online);online();

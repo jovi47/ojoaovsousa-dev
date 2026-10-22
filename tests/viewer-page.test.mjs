@@ -171,7 +171,7 @@ test('cards and the shared reading fallback retain factual projects, local mocku
   }
   assert.equal((html.match(/<header\b/g)||[]).length,1);
   assert.equal((html.match(/<footer\b/g)||[]).length,1);
-  assert.equal((html.match(/id="inquiry-form"/g)||[]).length,1);
+  assert.doesNotMatch(html,/<(?:form|input|textarea|select)\b/);
   assert.doesNotMatch(html,/skill-(?:gauge|ring|value)|skills-note|stroke-dasharray/);
   const ids=[...html.matchAll(/\sid="([^"]+)"/g)].map(match=>match[1]);
   assert.equal(new Set(ids).size,ids.length,`${key}: duplicated DOM id`);
