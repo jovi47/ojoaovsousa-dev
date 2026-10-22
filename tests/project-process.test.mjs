@@ -75,7 +75,8 @@ test('localised native markup has four illustrative stages, sixteen log lines an
   assert.equal((html.match(/\bdata-process-line(?:\s|=|>)/g)||[]).length,16);
   for(const label of labels)assert.ok(html.includes(label));
   assert.match(html,/ilustrativ|illustrative|ilustrativ/);assert.match(html,/Seu site implementado|Your website implemented|Tu sitio web implementado/);
-  assert.match(html,/class="project-process-delivery-mark" aria-hidden="true">👍/);
+  assert.match(html,/class="project-process-delivery-mark" aria-hidden="true"><svg/);
+  assert.doesNotMatch(html,/👍/);
   assert.match(html,/class="project-process-runner" aria-hidden="true"/);
   assert.doesNotMatch(html,/forma\.example|project-process-leaf|project-process-site-nav/);
   assert.match(html,/data-process-phase="4"/);assert.match(html,/data-process-panel="terminal" hidden/);

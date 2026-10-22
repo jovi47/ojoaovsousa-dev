@@ -66,7 +66,7 @@ html[data-theme=dark] .viewer-page{--bg:#111214;--ink:#f7f4ed;--soft:#c5c1b9;--p
 @media(max-width:700px){.viewer-house-button img.viewer-profile-icon{width:23px;height:23px}.viewer-brand-symbol{--symbol-size:23px}}
 
 .viewer-page{--gutter:24px}.viewer-board{max-width:100%}.viewer-card{max-height:calc(100% - 165px)}.viewer-intro{padding:24px}.viewer-intro-description{font-size:16px;line-height:1.5}.viewer-intro .panel-actions{margin-top:20px}.viewer-intro .button{font-size:15px;min-height:44px}.viewer-intro-hint{font-family:Bricolage,sans-serif;font-size:13px;color:var(--soft)}
-.viewer-project-title{display:flex;align-items:center;gap:14px;margin-bottom:24px}.viewer-project-number{font-family:Pixelify,Bricolage,sans-serif;font-size:23px;color:var(--ink);flex:none}.viewer-card .viewer-project-logo{width:100%;height:auto;max-width:300px;margin:0;background:none;padding:0}.viewer-card .project-actions .button{font-size:14px}.viewer-card .project-detail-content{font-size:15px}.viewer-card .contact-channel{font-size:14px}.viewer-card .contact-links{gap:9px}.viewer-card .contact-channel svg{width:21px;height:21px}
+.viewer-project-title{display:flex;align-items:center;gap:14px;margin-bottom:24px}.viewer-project-number{font-family:Pixelify,Bricolage,sans-serif;font-size:23px;color:var(--ink);flex:none}.viewer-card .viewer-project-logo{width:100%;height:auto;max-width:300px;margin:0;background:none;padding:0}.viewer-card .project-actions .button{font-size:14px}.viewer-card .project-detail-content{font-size:15px}.viewer-card .contact-channel{font-size:16px}.viewer-card .contact-links{gap:9px}.viewer-card .contact-channel svg{width:21px;height:21px}
 .viewer-brand-symbol{background:none;border-radius:0}.viewer-brand-symbol img{object-fit:contain}.viewer-horagora-symbol img{width:calc(var(--symbol-size) * 1134 / 208);height:calc(var(--symbol-size) * 266 / 208);left:calc(var(--symbol-size) * 5.5 / 208);top:0}.viewer-brand-symbol:not(.viewer-horagora-symbol) img{width:100%;height:100%;left:0;top:0}
 .viewer-houses{max-width:calc(100% - 340px)}.viewer-skip{top:auto;bottom:24px;right:var(--gutter)}
 @media(max-width:1080px) and (min-width:701px){.viewer-page{--gutter:24px}.viewer-houses{left:52%}}
@@ -139,3 +139,6 @@ body:not(.construction-started):not(.tour-complete):not(.reading):not(.graphics-
 .viewer-build-tools svg{flex:none}
 @media(min-width:1101px){.viewer-landmark-tools,.viewer-build-tools{top:45px}}
 @media(max-width:700px){.viewer-build-tools .viewer-skip,.viewer-build-tools .viewer-help{font-size:11px;padding:8px;gap:6px}.viewer-build-tools svg{width:18px;height:18px}}
+
+/* The invitation is the main title of its panel. */
+.viewer-card #viewer-title-challenge{font-size:clamp(34px,3.2vw,46px)}

@@ -25,7 +25,10 @@ test('the direct portfolio has complete localised content without the world runt
    assert.equal((html.split(socialIcon(kind)).length-1),2,`${key}: same local mark in contact and footer`);
   }
   assert.match(socialIcon('mail'),/^<svg\b/);
-  for(const value of [c.work.title,c.work.description])assert.ok(factual.includes(e(value)),`${key}: completed work introduction`);
+  for(const group of [c.work,c.expertise]){
+   assert.ok(factual.includes(e(group.title)),`${key}: section title`);
+   assert.ok(!factual.includes(e(group.description)),`${key}: concise section introduction`);
+  }
   assert.ok(factual.includes(`>${e(cityCopy[key].details)}</a>`),`${key}: live website action`);
   for(const id of ['main','intro','about','experience','projects','contact','inquiry-dialog','inquiry-form'])assert.equal((html.match(new RegExp(`\\bid="${id}"`,'g'))||[]).length,1,`${key}: ${id}`);
   for(const item of c.work.cases){
