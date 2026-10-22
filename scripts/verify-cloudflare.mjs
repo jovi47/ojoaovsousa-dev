@@ -53,7 +53,7 @@ export async function verifyDeployment(origin,{preview=false,canonicalOrigin=ori
   const {response}=await exact(`/${key}/index.md`);
   assert.match(response.headers.get('content-type')||'',/^text\/markdown\b/);
  }
- for(const pathname of ['/llms.txt','/black.css','/city-app.js','/city.js','/portrait.jpg','/bricolage.woff2','/pixelify.woff2','/jovi-character.glb','/hori-character.glb','/andrea-character.glb','/vendor/three.module.js','/vendor/libphonenumber-max.js'])await exact(pathname);
+ for(const pathname of ['/llms.txt','/black.css','/city-app.js','/city.js','/portrait.jpg','/bricolage.woff2','/pixelify.woff2','/jovi-character.glb','/hori-character.glb','/andrea-character.glb','/vendor/three.module.js'])await exact(pathname);
  const missing=await request('/__portfolio-release-missing__/',404);
  assert.ok(Buffer.from(await missing.arrayBuffer()).equals(Buffer.from(await readArtifact('/404.html'))),'Unknown route must serve the custom404 artifact');
  return checks;

@@ -1,6 +1,6 @@
 # Cloudflare Pages: manual release
 
-Updated 2026-10-22 UTC. The owner selected Cloudflare Pages and requested the preferred name **ojoaovsousa.pages.dev**. Availability, account ownership, project creation and the actual resulting hostname must be confirmed before release. This document describes prepared code, not a completed deployment.
+Updated 2026-10-22 UTC. The owner selected Cloudflare Pages and requested the preferred name **ojoaovsousa.pages.dev**. The deployment coordinator confirmed an authenticated Cloudflare session; project creation is in progress. Name availability and the actual resulting hostname remain pending. This document describes prepared code, not a completed deployment.
 
 ## Scope and architecture
 
@@ -8,7 +8,7 @@ One Direct Upload project serves the existing static `dist/` artifact. GitHub re
 
 The deployment branch was prepared from local integration `6dd40b5`. It adds only `public/_headers`, `public/_redirects`, artifact-audit support, a read-only release verifier and focused tests. No CLI package, account, resource, credential, API mutation or public deployment was created by this preparation.
 
-The current contact UI prepares an e-mail draft. Hosting does not implement delivery, anti-spam, CAPTCHA or request quotas. A separately implemented endpoint must carry its own validation, protection, privacy/cost documentation and response headers; static `_headers`/`_redirects` do not govern Pages Functions responses.
+The owner replaced the form with a shared contact window listing WhatsApp, e-mail (`mailto:`), LinkedIn and a copy action. Include that contact follow-up in the release revision before publication; the deployment branch's original integration base still contains the prior form. The approved contact flow has no input submission or sending endpoint: the visitor chooses a channel and decides whether to contact João in the external provider/app. Copying a contact value is local. There is no CAPTCHA, backend delivery or phone-validation library in the release scope, and no third-party script/frame is required by these links.
 
 ## Routing, security and cache
 
@@ -19,7 +19,7 @@ The current contact UI prepares an e-mail draft. Hosting does not implement deli
 - Markdown receives `text/markdown`; root GLBs receive `model/gltf-binary`. Deployment/branch subdomains under `pages.dev` receive `X-Robots-Tag:noindex,nofollow`; direct reading and404 remain noindex.
 - Leave native Pages caching in place. Its default browser revalidation suits the current stable, unversioned asset names. Do not add immutable/year-long browser caching or custom cache rules without fingerprinted filenames and release checks.
 
-No header is claimed effective until inspected on the deployed responses. CSP runtime checks must cover the three resident GLBs, portrait sign, local phone library, menu/theme, inquiry dialog and no-JavaScript fallback. Do not loosen the policy merely to silence an unrelated extension’s console errors.
+No header is claimed effective until inspected on the deployed responses. CSP runtime checks must cover the three resident GLBs, portrait sign, menu/theme, contact window, external channel links/copy action and no-JavaScript fallback. Do not loosen the policy merely to silence an unrelated extension’s console errors.
 
 ## Account and access
 
@@ -71,9 +71,9 @@ rtk proxy wrangler pages deploy dist --project-name ojoaovsousa --branch main
 rtk proxy node scripts/verify-cloudflare.mjs https://ojoaovsousa.pages.dev production
 ```
 
-Do not rely on Wrangler’s inferred local branch. Record the reviewed commit and deployment ID/URL from the actual result. The verifier checks status codes,301 destinations, HTML canonical/indexability, security headers, robots/sitemap, Markdown MIME and exact local bytes for the affected pages and critical 3D/font/phone assets. It uses GET requests with a 15-second timeout per request and performs no mutation, email send or load test.
+Do not rely on Wrangler’s inferred local branch. Record the reviewed commit and deployment ID/URL from the actual result. The verifier checks status codes,301 destinations, HTML canonical/indexability, security headers, robots/sitemap, Markdown MIME and exact local bytes for the affected pages and critical 3D/font assets. It uses GET requests with a 15-second timeout per request and performs no mutation, email send or load test.
 
-An accepted upload is not healthy publication. Stop on a failed status/header/hash/canonical check; inspect the actual deployment rather than retrying an unknown result. Verify the public 3D/form journey, localized homes/policies and404 in a browser, then maintain Search Console for the confirmed property: sitemap, URL inspection and indexing requests where available. Record accepted actions separately from confirmed indexing; never promise ranking or immediate indexation.
+An accepted upload is not healthy publication. Stop on a failed status/header/hash/canonical check; inspect the actual deployment rather than retrying an unknown result. Verify the public 3D/contact-channel journey, localized homes/policies and404 in a browser, then maintain Search Console for the confirmed property: sitemap, URL inspection and indexing requests where available. Record accepted actions separately from confirmed indexing; never promise ranking or immediate indexation.
 
 ## Recovery and publication evidence
 
@@ -87,7 +87,7 @@ After exact successful publication, reconcile GitHub/code and canonical project 
 
 As verified in official docs on 2026-10-22 UTC, static asset requests that do not invoke Functions are free and unlimited on Free/Paid. Free Pages allows 20,000 files and 25 MiB per asset; dashboard drag/drop allows 1,000 files. Hosted builds have a 500/month Free quota, but this flow performs builds locally and does not connect automatic Git builds. The artifact audit reports the actual file count; inspect the largest asset before upload.
 
-Hosting scenario: static-only Pages Free, no custom domain purchase, no paid plan or add-on. Estimated provider charge for the stated static hosting scope is US$0/month within current terms/limits; actual traffic, account charges and local CPU/energy remain unmeasured. Formula if scope changes: hosting plan + billable Functions/other services + domain + authorized add-ons. Future contact Functions/CAPTCHA/email need their own quotas, provider and privacy analysis; static free hosting does not make every future service unlimited or free.
+Hosting scenario: static-only Pages Free, no custom domain purchase, no paid plan or add-on. Estimated provider charge for the stated static hosting scope is US$0/month within current terms/limits; actual traffic, account charges and local CPU/energy remain unmeasured. Formula if scope changes: hosting plan + billable Functions/other services + domain + authorized add-ons. The approved external-channel contact window adds no server sending/CAPTCHA service. Static free hosting does not make unrelated future services unlimited or free.
 
 ## Evidence and primary sources
 
