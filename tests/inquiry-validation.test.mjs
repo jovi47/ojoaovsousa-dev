@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {parsePhoneNumberFromString,getCountries} from 'libphonenumber-js/max';
+import {parsePhoneNumberFromString} from 'libphonenumber-js/max';
+import {PHONE_COUNTRIES,phoneCountryFlag} from '../public/phone-countries.js';
 import {inquiryDraft} from '../public/inquiry-state.js';
 import {inquiry,document} from '../src/city-page.mjs';
 import {content} from '../src/content.mjs';
@@ -9,7 +10,7 @@ const fields={name:' João Victor ',email:' owner+project@example.com ',phone:'(
 const draft=changes=>inquiryDraft({...fields,...changes},parsePhoneNumberFromString);
 
 test('the local draft validates supported national numbers and uses E.164 without guessing a country',()=>{
- for(const [phoneCountry,phone,canonical] of [['BR','(11) 98765-4321','+5511987654321'],['US','202 555 0123','+12025550123'],['ES','612 345 678','+34612345678'],['PT','912 345 678','+351912345678'],['','+1 202 555 0123','+12025550123'],['BR','+34 612 345 678','+34612345678']]){
+ for(const [phoneCountry,phone,canonical] of [['BR','(11) 98765-4321','+5511987654321'],['US','202 555 0123','+12025550123'],['ES','612 345 678','+34612345678'],['PT','912 345 678','+351912345678'],['US','+1 202 555 0123','+12025550123'],['ES','+34 612 345 678','+34612345678']]){
   const url=new URL(draft({phoneCountry,phone}));
   assert.equal(url.pathname,'jovi47profissional@gmail.com');
   assert.equal(url.searchParams.get('subject'),'Novo projeto · João Victor');
@@ -17,7 +18,7 @@ test('the local draft validates supported national numbers and uses E.164 withou
   assert.ok(url.searchParams.get('body').includes('E-mail: owner+project@example.com'));
   assert.ok(url.searchParams.get('body').includes('Nome / Name: João Victor'));
  }
- for(const changes of [{phone:''},{phone:'123'},{phone:'Ligue +55 11 98765-4321'},{phone:'202 555 0123',phoneCountry:''},{phoneCountry:'XX'},{phone:'+1 202 555 0123 ext. 5'},{phone:'+1\n2025550123'}])assert.throws(()=>draft(changes),/phone/i);
+ for(const changes of [{phone:''},{phone:'123'},{phone:'Ligue +55 11 98765-4321'},{phone:'202 555 0123',phoneCountry:''},{phone:'+1 202 555 0123',phoneCountry:''},{phoneCountry:'XX'},{phoneCountry:'DE',phone:'+49 1512 3456789'},{phoneCountry:'BR',phone:'+34 612 345 678'},{phone:'+1 202 555 0123 ext. 5'},{phone:'+1\n2025550123'}])assert.throws(()=>draft(changes),/phone/i);
 });
 
 test('email checks common address syntax and rejects controls and header-injection input',()=>{
@@ -34,12 +35,15 @@ test('all locales have required accessible phone/email controls and no eager val
   const html=inquiry(c,key),page=document(c,key,html);
   assert.match(html,/<label for="inquiry-phone">[^<]+<\/label>/);
   assert.match(html,/<input[^>]*id="inquiry-phone"[^>]*name="phone"[^>]*type="tel"[^>]*inputmode="tel"[^>]*autocomplete="tel"[^>]*required/);
-  assert.match(html,/<label for="inquiry-country">[^<]+<\/label>/);
-  assert.match(html,/<select[^>]*id="inquiry-country"[^>]*name="phoneCountry"/);
-  const options=[...html.matchAll(/<option value="([A-Z]{2})">/g)].map(match=>match[1]);
-  assert.deepEqual(new Set(options),new Set(getCountries()));
-  assert.match(html,/<option value="">[^<]+<\/option>/);
-  assert.doesNotMatch(html,/<option[^>]*\bselected/);
+  assert.match(html,/<label for="inquiry-country" class="sr-only">[^<]+<\/label>/);
+  assert.match(html,/<select[^>]*id="inquiry-country"[^>]*name="phoneCountry"[^>]*required/);
+  assert.match(html,/<div class="inquiry-phone-field"><div class="inquiry-phone-country">[\s\S]+<\/select><\/div><input id="inquiry-phone"/);
+  const options=[...html.matchAll(/<option value="([A-Z]{2})"(?: selected)? data-dial="\+\d+">/g)].map(match=>match[1]);
+  assert.deepEqual(new Set(options),new Set(PHONE_COUNTRIES));
+  assert.doesNotMatch(html,/<option value="">/);
+  const country=key==='pt-br'?'BR':key==='en'?'US':'ES';
+  assert.match(html,new RegExp(`<option value="${country}" selected data-dial="\\+\\d+">${phoneCountryFlag(country)} `));
+  assert.ok(html.includes(`data-phone-flag>${phoneCountryFlag(country)}</span>`));
   for(const field of ['email','phone'])assert.ok(html.includes(`id="inquiry-${field}-error"`));
   assert.doesNotMatch(page,/<script[^>]*libphonenumber|<link[^>]*libphonenumber/);
   assert.ok(c.privacy.sections.some(section=>/telefone|phone|teléfono/i.test(section.body)),`${key}: phone disclosed in local-form privacy copy`);

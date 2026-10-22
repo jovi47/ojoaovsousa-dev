@@ -1,3 +1,5 @@
+import {isPhoneCountry} from './phone-countries.js';
+
 const controls=/[\u0000-\u001f\u007f-\u009f]/;
 export function normalizeEmail(value){
  if(typeof value!=='string'||controls.test(value))throw new Error('email');
@@ -8,11 +10,25 @@ export function normalizeEmail(value){
  return email;
 }
 export function normalizePhone(value,phoneCountry,parsePhoneNumberFromString){
- if(typeof value!=='string'||value.length>64||controls.test(value)||!/^\+?[\d ().-]+$/.test(value.trim())||phoneCountry&&!/^[A-Z]{2}$/.test(phoneCountry))throw new Error('phone');
+ if(typeof value!=='string'||value.length>64||controls.test(value)||!/^\+?[\d ().-]+$/.test(value.trim())||!isPhoneCountry(phoneCountry))throw new Error('phone');
  if(typeof parsePhoneNumberFromString!=='function')throw new Error('phone-unavailable');
  let phone;try{phone=parsePhoneNumberFromString(value.trim(),{defaultCountry:phoneCountry||undefined,extract:false});}catch{throw new Error('phone');}
- if(!phone||!phone.isValid()||phone.ext)throw new Error('phone');
+ if(!phone||!phone.isValid()||phone.ext||phone.country!==phoneCountry)throw new Error('phone');
  return phone.number;
+}
+export function formatPhoneInput(value,country,library,{countryChanged=false}={}){
+ if(!isPhoneCountry(country)||!/^\+?[\d ().-]*$/.test(value.trim()))return {value,country};
+ let national=value.trim();
+ if(national.startsWith('+')){
+  const international=new library.AsYouType();international.input(national);
+  const detected=international.getCountry();
+  if(!detected||!isPhoneCountry(detected))return {value,country};
+  if(!countryChanged)country=detected;
+  const number=international.getNumber();
+  national=number&&!countryChanged?number.formatNational():international.getNationalNumber();
+ }
+ const formatter=new library.AsYouType(country),formatted=formatter.input(national),number=formatter.getNumber();
+ return {value:number?.isValid()?number.formatNational():formatted,country};
 }
 export function inquiryDraft({name,email,phone,phoneCountry,project},parsePhoneNumberFromString){
  if(typeof name!=='string'||controls.test(name)||!name.trim()||name.trim().length>120)throw new Error('name');
