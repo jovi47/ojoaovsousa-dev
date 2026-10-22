@@ -1,40 +1,23 @@
-# Local contact validation
+# Contact channels
 
-State: implemented locally on `codex/contact-validation`, based on the visual delivery through `303247a`. No server sending, provider integration, account, environment change or deployment is included. The editable implementation and tests remain in Git; canonical copy reconciliation is coordinated by the integrator.
+Owner decision2026-10-22 UTC: replace the briefing fields/local draft with direct contact channels; CAPTCHA is unnecessary because the site does not accept or send messages. Implemented locally on `codex/contact-channels`, based on integration`6dd40b5`. Browser QA and publication are separate integrator steps.
 
-## Form behaviour
+## Current behavior
 
-- The existing shared briefing form now requires a phone number as well as name, email and project description, in PT/EN/ES.
-- A required native selector sits inside the phone field on the left, over a visible Unicode flag/calling code/chevron. It lists115 supported countries/territories with English, Portuguese or Spanish as an official or national de-facto language in pinned Unicode CLDR48; regional-only status is excluded. `Intl.DisplayNames` and `Intl.Collator` localize/order names. BR/US/ES are editable initial suggestions for PT-BR/EN/ES pages, without geolocation or browser-country inference. The source revision, SHA and exact matches are in [phone-country-sources.json](phone-country-sources.json); the small shared allowlist is used by both markup and validation.
-- `AsYouType` from the installed package formats the selected national numbering plan during typing and country changes. Supported international paste selects the detected allowed country and shows national formatting without duplicating the calling code. Unknown/disallowed destinations remain visible but cannot prepare a draft. Both selected and parsed destinations must be allowed and share the calling code, preserving shared national numbering plans (e.g. Australia/Christmas Island/Cocos and UK/Isle of Man). Spaces, parentheses, hyphens and periods are accepted; extensions/embedded text remain rejected. Caret edits and deleting separators preserve digit edits rather than trapping Backspace.
-- `parsePhoneNumberFromString(input, {defaultCountry, extract:false})` from `/max` and `.isValid()` check the numbering-plan format. The local draft receives E.164. This does not prove allocation, reachability, ownership or a WhatsApp account.
-- Email validation trims ordinary outer spaces, limits the address to254 characters/local part to64, checks common ASCII address/domain syntax and rejects control characters, whitespace inside an address, repeated local-part dots and malformed domain labels. Common plus-addressing and apostrophes remain valid. Quoted local parts, SMTPUTF8 addresses and address literals are outside this small form’s supported syntax. No DNS/MX, SMTP, delivery or ownership verification is performed.
-- Email/phone errors are localized, associated with their fields and use native validity/focus. Name/project limits remain120/3000. Changing any field or the country hides the old mailto link, clears the old draft and cancels an outdated asynchronous preparation result.
-- The library starts loading only when the existing dialog opens (or a phone validation is explicitly requested). A shared in-flight promise prevents duplicate script requests. Loading failure/10-second timeout leaves no draft, shows a retry message and allows another preparation attempt; the other contact links remain available.
+- Every existing contact CTA opens the same native dialog in PT-BR/EN/ES. Dialog titles: Vamos conversar / Let’s talk / Hablemos.
+- WhatsApp is the primary action. Email opens the visitor’s mail app through a native mailto link. Copy writes only the existing public email address to the browser clipboard; denial/unavailable clipboard selects that visible address for manual copying. LinkedIn opens its existing profile.
+- Local official WhatsApp/LinkedIn SVGs and the native email envelope are reused through `contactLinks`/`socialIcon`, including the contact section and footer. External web links retain `noopener noreferrer`; the real public email address is unchanged.
+- Native dialog close/Escape and trigger focus restoration remain. Contact works through the existing visible reading/footer links without relying on the modal’s JavaScript.
+- No name/email/phone/project fields, country picker, draft, contact submission, remote validation, automatic message, database, CAPTCHA or Gmail authorization remains. The visitor decides which external app to open and what to send. External service policies apply after opening those links; the local privacy/terms copy describes that behavior.
 
-## Data boundary
+## Removal and scope
 
-The form still prepares a local `mailto:jovi47profissional@gmail.com` draft. It does not submit a request, persist contact fields, call a provider, send email or subscribe a visitor to marketing. Only the explicit “Open my email” link passes the prepared data to the visitor’s email app; the visitor reviews and decides whether to send. Recipient/subject remain fixed, and the body is URL-encoded. Local privacy copy in all three languages now identifies the phone field.
+Imports/callers/build/audit/fixtures were checked before removal. The former inquiry-form/state, phone loader/country module,115-country CLDR policy, pinned libphonenumber dependency and its three vendor artifacts served only the removed form; their form/numbering tests and CSS/build integrity hooks were removed together. The new dialog and clipboard tests cover the remaining product risks, rather than retaining tests for fields that no longer exist. Earlier phone implementation/source history remains in Git; it is not the current interface or an approved backend plan.
 
-The recipient address still appears in the public contact/draft source; masking only visible text would not hide it. Moving it to a server environment belongs to the real-delivery integration. Server delivery, abuse prevention and provider authentication require a separate approved scope. Browser validation is a usability check and is not a server-side security boundary.
+No Gmail SMTP/API, secret, account, endpoint or CAPTCHA was created. The Cloudflare website hosting delivery has its own scope/docs and is not implemented by this contact change.
 
-## Dependency and provenance
+## Local proof and costs
 
-- Approved package: [`libphonenumber-js`1.13.15](https://www.npmjs.com/package/libphonenumber-js/v/1.13.15), MIT, pinned without a version range in `package.json`/`package-lock.json`.
-- Registry archive: `https://registry.npmjs.org/libphonenumber-js/-/libphonenumber-js-1.13.15.tgz`.
-- npm integrity: `sha512-AHdhEQeDFEJ4GKDAQ9AwxChy+v2kUILUB3TGQRpkXMkWePjXTU/WQEzWVQoIx/Gz8fE73Wr5SEuZCy2vk8jrMQ==`.
-- Official upstream UMD and source map are copied unchanged into `public/vendor/`, with the original license. `npm run build` compares their bytes to the installed pinned package and fails if they differ; it does not write into watched `public/`, avoiding an HMR rebuild loop.
+`npm run build`, `npm test` and `node scripts/audit.mjs` passed locally:82 tests, including3 contact-channel tests. These check localized destinations/labels, no form controls, copied address, one pending copy and selectable fallback on clipboard denial. The artifact auditor checks effective eligible paths/content; it performs no upload. Integrated browser/mobile/dark-mode and deployed-domain proof remain with the main task.
 
-| Public file | Bytes | SHA-256 |
-| --- | ---: | --- |
-| `vendor/libphonenumber-max.js` |252,237|`49963114d3f93de9fc618d37b0faca897235baf314ede30ee8c0a511029d8508`|
-| `vendor/libphonenumber-max.js.map` |743,901|`5311b9522686b65bafd2b565e57a98290eb2a59d5740a43a1e5201a2dde4a8d9`|
-| `vendor/libphonenumber-LICENSE.txt` |1,108|`ea6fc5fe0f905c5fdedd8f160f1dd73ce739004fc5f35656b35258aea126dbde`|
-
-## Cost and verification limits
-
-There is no new generation, paid API, provider subscription or message charge. The initial HTML includes the country options and small local form modules; the252,237-byte phone UMD is deferred until the dialog is opened. Current inquiry form/state/country modules total9,439 raw bytes (the loader adds906 bytes); no dependency was added for the flag/select/format refinement. The source map is a debugger resource, not part of normal form execution. Transfer depends on cache/compression and actual requests: `initial requests × transferred initial bytes + uncached dialog opens × transferred UMD bytes`, plus a source-map request only if developer tools request it. File sizes above are uncompressed source measurements, not a measured network or performance result. Existing hosting rates still apply; unknown traffic/rates are not assumed zero.
-
-Local verification: all85 tests passed, including9 focused validation/form/formatting checks; the three-locale noindex build and artifact audit passed (162 regular source files,128 outputs). A separate read-only reviewer found no concrete issue in normalization, stale drafts, lazy loading or retry behaviour. Reproduce with `npm ci --ignore-scripts --no-audit --no-fund`, `npm run build`, `npm test`, and `node scripts/audit.mjs`. Coverage includes BR/US/ES/PT, explicit international codes, malformed numbers/extensions/email/control injection, stale draft invalidation, lazy loading/retry and all localized form/privacy contracts. Browser/mobile/dark-mode QA and integration remain with the main task; no new server or preview port was started here.
-
-Current composite-field browser/mobile/dark-mode evidence will be recorded after integrated QA. Earlier mailto checks used fictional data only; no mail link was opened or message sent.
+The retired phone files total1,007,571B (10,325B modules +252,237B library +743,901B debug source map +1,108B license). The current contact module is measured from `public/contact-channels.js`; actual transfer depends on browser cache/compression and requests. There is no new provider/generation/message charge or API. Email links remain public; direct links do not promise prevention of unsolicited messages sent through those external services.
