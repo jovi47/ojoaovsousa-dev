@@ -1,0 +1,152 @@
+/* One molded figure, scaled at the wrapper so the same geometry works in the tour. */
+.brick-person {
+  --person-scale: 1;
+  --plastic-dark: #20242c;
+  --skin: #e8b386;
+  display: inline-block;
+  position: relative;
+  width: calc(180px * var(--person-scale));
+  height: calc(260px * var(--person-scale));
+  flex: 0 0 auto;
+  vertical-align: bottom;
+  isolation: isolate;
+  pointer-events: none;
+}
+.brick-person.hero-person { --person-scale: .83; }
+.brick-person.guide-person { --person-scale: .31; }
+.brick-person.island-figure { --person-scale: .5; }
+@media (max-width: 800px) { .brick-person.guide-person { --person-scale: .27; } }
+@media (max-width: 550px) { .brick-person.guide-person { --person-scale: .25; } }
+.brick-person *, .brick-person *::before, .brick-person *::after { box-sizing: border-box; }
+.brick-person__rig {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 180px;
+  height: 260px;
+  transform: scale(var(--person-scale));
+  transform-origin: top left;
+}
+.brick-person__rig span { position: absolute; display: block; }
+.brick-person__shadow {
+  left: 22px; bottom: 0; width: 144px; height: 17px;
+  border-radius: 50%; background: #14151b24; filter: blur(5px);
+  transform: rotate(-8deg);
+}
+.brick-person__neck {
+  z-index: 3; left: 76px; top: 82px; width: 35px; height: 28px;
+  border-radius: 5px; background: linear-gradient(90deg, #bd815d, var(--skin) 40%, #d39a71);
+  box-shadow: inset 0 -5px 5px #98613a38;
+}
+.brick-person__head {
+  z-index: 7; left: 56px; top: 17px; width: 76px; height: 76px;
+  border-radius: 24% 26% 29% 28% / 17% 18% 18% 19%;
+  background: linear-gradient(105deg, #f5cda6 2%, #edbc91 31%, #e3ab7e 76%, #bc7e58 100%);
+  box-shadow: inset 3px 0 1px #ffe6c766, inset -4px -4px 2px #7c42271a, 2px 5px 4px #11151f2e;
+  transform-origin: 50% 95%; transform: rotate(-6deg);
+  animation: person-look 7s ease-in-out infinite;
+}
+.brick-person__head::before {
+  content: ''; position: absolute; left: 11px; right: 10px; bottom: 3px; height: 5px;
+  border-radius: 50%; background: #f6d3ae66;
+}
+.brick-person__hair {
+  z-index: 2; top: -7px; left: -4px; width: 82px; height: 36px;
+  border-radius: 37% 44% 19% 9%;
+  background: linear-gradient(140deg, #75513e, #4f3329 36%, #39251f 85%);
+  box-shadow: inset 2px 4px 2px #a579504d, inset -4px -3px 0 #291b1640, 0 2px 1px #39251f33;
+  transform: rotate(-5deg);
+}
+.brick-person__hair::before {
+  content: ''; position: absolute; top: 12px; left: 10px; width: 55px; height: 15px;
+  border-radius: 80% 0 70% 0; background: #4b3026;
+  transform: rotate(-13deg); box-shadow: 0 -2px 1px #a4795140;
+}
+.brick-person__hair::after {
+  content: ''; position: absolute; right: 0; top: 22px; width: 10px; height: 23px;
+  background: #3d2821; border-radius: 0 0 6px 2px;
+}
+.brick-person__face { inset: 32px 10px 10px 19px; transform: rotate(2deg); }
+.brick-person__eye { top: 4px; width: 5px; height: 7px; background: #252126; border-radius: 50%; }
+.brick-person__eye--left { left: 5px; }
+.brick-person__eye--right { right: 7px; }
+.brick-person__eye::after { content: ''; position: absolute; top: 1px; left: 1px; width: 1.5px; height: 1.5px; background: #fff9; border-radius: 50%; }
+.brick-person__smile {
+  left: 14px; top: 16px; width: 20px; height: 10px;
+  border: 2.5px solid #51352d; border-top: 0; border-radius: 0 0 15px 15px;
+  transform: rotate(-4deg);
+}
+.brick-person__body {
+  z-index: 4; left: 43px; top: 98px; width: 100px; height: 85px;
+  background: linear-gradient(105deg, #50535b 0, #292d35 10%, #242830 65%, #12161c 100%);
+  clip-path: polygon(15% 0, 83% 0, 100% 94%, 94% 100%, 3% 100%, 0 94%);
+  border-radius: 10px 10px 6px 6px;
+  box-shadow: inset 0 3px 1px #ffffff24, inset 0 -5px 0 #11151c66;
+}
+.brick-person__shirt {
+  left: 32px; top: 0; width: 36px; height: 70px;
+  background: linear-gradient(90deg, #171b23, #333843); clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.brick-person__tie {
+  left: 47px; top: 10px; width: 12px; height: 44px;
+  background: linear-gradient(90deg, #a53236, #e35c54 60%, #a52e34);
+  clip-path: polygon(12% 0, 88% 0, 68% 17%, 100% 86%, 52% 100%, 8% 86%, 32% 17%);
+}
+.brick-person__lapel { top: 1px; height: 66px; width: 29px; background: #353a44; }
+.brick-person__lapel--left { left: 14px; clip-path: polygon(35% 0, 65% 0, 100% 100%, 0 45%, 21% 36%, 0 28%); }
+.brick-person__lapel--right { right: 14px; background: #41454e; clip-path: polygon(35% 0, 65% 0, 100% 28%, 80% 36%, 100% 45%, 0 100%); }
+.brick-person__pocket { right: 17px; top: 42px; width: 16px; height: 3px; border-top: 1px solid #080c13; box-shadow: 0 1px #ffffff12; transform: rotate(-2deg); }
+.brick-person__arm {
+  top: 100px; width: 31px; height: 99px; transform-origin: 50% 13px;
+}
+.brick-person__arm--back { z-index: 2; left: 30px; transform: rotate(16deg); }
+.brick-person__arm--front { z-index: 5; left: 128px; transform: rotate(-12deg); }
+.brick-person__sleeve {
+  top: 0; left: 0; width: 31px; height: 68px; border-radius: 17px 17px 9px 9px;
+  background: linear-gradient(100deg, #4c5059, #272b33 37%, #171b23 93%);
+  box-shadow: inset 3px 2px 1px #ffffff12, inset -3px -4px 1px #0003, 2px 2px 2px #12162026;
+}
+.brick-person__sleeve::after { content: ''; position: absolute; bottom: 3px; left: 4px; right: 4px; height: 3px; border-radius: 4px; background: #11151c80; }
+.brick-person__hand {
+  top: 65px; left: 2px; width: 29px; height: 29px;
+  border: 8px solid var(--skin); border-right-color: transparent; border-radius: 50%;
+  transform: rotate(-24deg); box-shadow: inset 2px 1px #fbd6b6;
+  filter: drop-shadow(1px 2px 0 #b078554d);
+}
+.brick-person__arm--back .brick-person__hand { transform: rotate(188deg); }
+.brick-person__hips {
+  z-index: 4; left: 47px; top: 177px; width: 91px; height: 23px;
+  background: linear-gradient(90deg, #373b44, #22262e 40%, #151922);
+  border-radius: 3px 4px 6px 6px; box-shadow: inset 0 3px #ffffff09, inset 0 -4px #10141d66;
+}
+.brick-person__leg {
+  z-index: 3; top: 192px; width: 39px; height: 59px;
+  background: linear-gradient(100deg, #444851, #272b34 32%, #171b24);
+  border-radius: 4px 4px 2px 3px; box-shadow: inset 3px 0 #ffffff0b, inset -3px 0 #0002;
+  transform-origin: 50% 0;
+}
+.brick-person__leg--back { left: 97px; transform: rotate(-3deg); }
+.brick-person__leg--front { left: 49px; transform: rotate(4deg); }
+.brick-person__shoe {
+  bottom: -5px; left: -2px; width: 45px; height: 20px; border-radius: 5px 7px 5px 4px;
+  background: linear-gradient(160deg, #fffdf4 10%, #e0e1de 70%, #b6b9ba);
+  box-shadow: inset 2px 2px #fff, inset 0 -5px #c9cbcc, 2px 2px 1px #12172026;
+}
+.brick-person__shoe::after { content: ''; position: absolute; left: 8px; right: 10px; top: 5px; height: 2px; background: #b9bcbc; box-shadow: 0 3px #d5d7d6; transform: rotate(-5deg); }
+.brick-person[data-pose="wave"] .brick-person__arm--front { animation: person-wave 1.5s ease-in-out 2; }
+.brick-person[data-pose="point"] .brick-person__arm--front { transform: rotate(-104deg); }
+.brick-person[data-pose="point"] .brick-person__head { transform: rotate(5deg); animation: none; }
+.brick-person[data-pose="celebrate"] .brick-person__arm--front { transform: rotate(-145deg); }
+.brick-person[data-pose="celebrate"] .brick-person__arm--back { transform: rotate(145deg); }
+.brick-person[data-pose="celebrate"] .brick-person__head { transform: rotate(-10deg); }
+.brick-person[data-pose="walk"] .brick-person__leg--front { animation: person-step .42s steps(4, end) infinite alternate; }
+.brick-person[data-pose="walk"] .brick-person__leg--back { animation: person-step .42s steps(4, end) infinite alternate-reverse; }
+.brick-person[data-pose="walk"] .brick-person__arm--front { animation: person-swing .42s steps(4, end) infinite alternate-reverse; }
+.brick-person[data-pose="walk"] .brick-person__arm--back { animation: person-swing .42s steps(4, end) infinite alternate; }
+.brick-person[data-pose="walk"] .brick-person__head { animation: person-nod .42s steps(4, end) infinite alternate; }
+@keyframes person-look { 0%, 38%, 100% { transform: rotate(-6deg); } 48%, 70% { transform: rotate(-1deg); } }
+@keyframes person-wave { 0%, 100% { transform: rotate(-12deg); } 20%, 60% { transform: rotate(-142deg); } 40%, 80% { transform: rotate(-117deg); } }
+@keyframes person-step { from { transform: rotate(-13deg); } to { transform: rotate(13deg); } }
+@keyframes person-swing { from { transform: rotate(-24deg); } to { transform: rotate(24deg); } }
+@keyframes person-nod { from { transform: translateY(0) rotate(-5deg); } to { transform: translateY(2px) rotate(-3deg); } }
+html[data-motion="paused"] .brick-person *, .brick-person.is-paused * { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) { .brick-person * { animation: none !important; transition: none !important; } }
