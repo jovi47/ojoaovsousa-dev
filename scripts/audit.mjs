@@ -19,17 +19,17 @@ for(const name of names){
  if(/\.(?:js|mjs|json|md|css|svg|txt)$/.test(name)&&secret.test(await readFile(path.join(root,name),'utf8')))throw new Error(`Possible protected value in ${name}`);
  if(name.startsWith('public/'))publicNames.add(name.slice(7));sources++;
 }
-const generated=new Set(['index.html','404.html','robots.txt','sitemap.xml']);let outputs=0;
+const generated=new Set(['index.html','404.html','robots.txt','sitemap.xml','llms.txt']);let outputs=0;
 async function auditOutput(directory,prefix=''){
  for(const entry of await readdir(directory,{withFileTypes:true})){
   const name=prefix+entry.name,full=path.join(directory,entry.name);
   if(prohibited.test(name))throw new Error(`Protected output path: ${name}`);
   if(entry.isDirectory()&&(/^(pt-br|en|es)(\/(privacy|terms|direct|black))?$/.test(name)||['icons','technology-icons','career-icons','contact-icons','vendor'].includes(name)))await auditOutput(full,name+'/');
-  else if(!entry.isFile()||(!publicNames.has(name)&&!generated.has(name)&&!/^(pt-br|en|es)\/(?:(privacy|terms|direct|black)\/)?index\.html$/.test(name)))throw new Error(`Unapproved artifact path: ${name}`);
+  else if(!entry.isFile()||(!publicNames.has(name)&&!generated.has(name)&&!/^(pt-br|en|es)\/(?:(privacy|terms|direct|black)\/)?index\.html$/.test(name)&&!/^(pt-br|en|es)\/index\.md$/.test(name)))throw new Error(`Unapproved artifact path: ${name}`);
   else{
    const bytes=await readFile(full);
    if(publicNames.has(name)&&!bytes.equals(await readFile(path.join(root,'public',name))))throw new Error(`Stale copied asset: ${name}`);
-   if(/\.(?:html|js|json|css|svg|txt|xml)$/.test(name)&&secret.test(bytes.toString('utf8')))throw new Error(`Possible protected output value: ${name}`);
+   if(/\.(?:html|js|json|md|css|svg|txt|xml)$/.test(name)&&secret.test(bytes.toString('utf8')))throw new Error(`Possible protected output value: ${name}`);
    outputs++;
   }
  }
