@@ -22,6 +22,8 @@ a,button{touch-action:manipulation}button,a{outline-offset:4px}:focus-visible{ou
 .contact-email-address{display:block;font-size:14px;font-weight:450;color:var(--soft);overflow-wrap:anywhere;user-select:text}
 .contact-copy{min-height:44px;padding:9px 11px;border:1px solid #767169;border-radius:5px;color:var(--ink);font-size:14px;line-height:1.3;white-space:nowrap}
 .contact-copy:hover{background:var(--bg)}.contact-copy-status{min-height:1.5em;margin:14px 0 0}.contact-dialog-note{margin:8px 0 0;color:var(--soft)}.contact-dialog-note a{display:inline-flex;align-items:center;min-height:44px}
+.contact-copy-status:empty{display:none}
+@media(max-width:430px){.contact-email-row{grid-template-columns:minmax(0,1fr);padding:0}.contact-email-row>.contact-channel{padding-bottom:6px}.contact-email-row>.contact-copy{justify-self:start;margin:0 16px 12px}}
 .site-header{height:var(--header-height);padding:0 var(--gutter);gap:28px;background:var(--bg);color:var(--ink)}
 .wordmark{font-family:Pixelify,Bricolage,sans-serif;font-size:32px;letter-spacing:-1px;white-space:nowrap}.wordmark span{color:var(--gold)}
 .main-nav{gap:23px}.main-nav a{font-size:15px;min-height:44px;display:flex;align-items:center;padding:8px 0}
