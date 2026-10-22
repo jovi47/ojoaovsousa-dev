@@ -1,0 +1,13 @@
+# The root has a fixed, explicit PT-BR default; languages stay user-selectable.
+/ /pt-br/ 301
+/pt-br /pt-br/ 301
+/en /en/ 301
+/es /es/ 301
+
+# Retired equivalent URLs retain their own language; no catch-all rewrite.
+/pt-br/black /pt-br/ 301
+/pt-br/black/ /pt-br/ 301
+/en/black /en/ 301
+/en/black/ /en/ 301
+/es/black /es/ 301
+/es/black/ /es/ 301

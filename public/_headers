@@ -1,0 +1,23 @@
+# Pages defaults revalidate unversioned files; do not mark these assets immutable.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'sha256-dZlj+ZAnbfiXXvajD3lIouM1IlH83htuxjAiWMUjWPo='; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'
+
+/:locale/index.md
+  Content-Type: text/markdown; charset=utf-8
+
+/*.glb
+  Content-Type: model/gltf-binary
+
+# A production pages.dev origin may be indexable; deployment/branch aliases may not.
+https://:deployment.:project.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
+
+/:locale/direct/*
+  X-Robots-Tag: noindex, nofollow
+
+/404.html
+  X-Robots-Tag: noindex, nofollow
