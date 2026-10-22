@@ -45,3 +45,9 @@ The integrator created the private repository [jovi47/jovi47-portfolio](https://
 ## Limits
 
 Viewport emulation is not a physical-phone test. No actual screen-reader session, accessibility certification, real-user Core Web Vitals, frame-time benchmark, published-domain indexing or Search Console submission is claimed. Model triangle/draw counts and file sizes are inventory observations, not proof of real-device performance or measured monthly billing.
+
+## GitHub checkpoint
+
+The owner authorized code publication. The private repository `jovi47/jovi47-portfolio` and draft PR1 (`codex/samurai-world` → `main`) contain commit `ab7c922`. No workflows exist on either pushed branch; no remote test pipeline, merge or deploy was triggered. Reachable history (29 blobs before the new visual commit) and effective eligible sources were checked for protected paths/key material before upload. Raw CV, envs and private files were excluded.
+
+The final review of newly staged files found whitespace in untouched upstream Three.js/font-license text and one extra EOF line in owned `city-app.js`. The owned EOF was corrected. The full change passes `git diff main --check` when excluding those preserved third-party sources; their upstream bytes were not reformatted.

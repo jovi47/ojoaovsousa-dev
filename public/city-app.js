@@ -124,4 +124,3 @@ async function start(){
 document.querySelector('[data-retry]')?.addEventListener('click',()=>{reading(false);start();});
 if(canvas){if(reduced.matches){reading(true);worldStatus.textContent=labels.reduced;}else start();}
 window.addEventListener('pagehide',event=>{if(!event.persisted){world?.dispose();disposeProjectProcess();disposeTechnologyMarquee();disposeViewerOverflow();}});
-
