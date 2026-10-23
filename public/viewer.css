@@ -142,3 +142,12 @@ body:not(.construction-started):not(.tour-complete):not(.reading):not(.graphics-
 
 /* The invitation is the main title of its panel. */
 .viewer-card #viewer-title-challenge{font-size:clamp(34px,3.2vw,46px)}
+
+/* Completed tablet scenes follow their content instead of reserving a full viewport. */
+@media(min-width:701px) and (max-width:1100px){
+ body.tour-complete:not(.reading):not(.graphics-failed) .viewer-board{display:grid;grid-template-areas:"scene" "navigation" "details";gap:12px;height:auto}
+ body.tour-complete:not(.reading):not(.graphics-failed) .world-stage{grid-area:scene;position:relative;inset:auto;height:calc(var(--viewer-scene-size) - var(--header-height))}
+ body.tour-complete:not(.reading):not(.graphics-failed) .viewer-houses{grid-area:navigation;position:static;inset:auto;transform:none;margin-inline:auto}
+ body.tour-complete:not(.reading):not(.graphics-failed) .viewer-card{grid-area:details;position:relative;inset:auto;margin:0 12px;max-height:calc(100svh - var(--header-height) - 2 * var(--gutter))}
+ body.tour-complete:not(.reading):not(.graphics-failed) .viewer-reading .direct-hero{padding-top:var(--direct-space)}
+}
