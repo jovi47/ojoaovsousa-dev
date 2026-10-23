@@ -6,6 +6,24 @@ import {renderDirectContent} from '../src/direct-page.mjs';
 import {escape as e} from '../src/city-page.mjs';
 import {cityCopy} from '../src/city-copy.mjs';
 
+test('the introduction precedes the optional 3D canvas in keyboard order and replay has localized visible text',()=>{
+ for(const [key,c] of Object.entries(content)){
+  const html=viewerHome(c,key);
+  const intro=html.indexOf('<section class="viewer-intro"');
+  const canvas=html.indexOf('<canvas ');
+  assert.ok(intro>=0&&intro<canvas,`${key}: identity and actions come before the demonstration`);
+  assert.ok(html.indexOf('class="panel-actions"',intro)<canvas,`${key}: primary actions precede the canvas`);
+  assert.equal((html.match(/<h1\b/g)||[]).length,1,`${key}: one primary heading`);
+  const replay=html.match(/<button[^>]*\bdata-replay-landmark\b[^>]*>[\s\S]*?<\/button>/)?.[0];
+  const replayLabel={'pt-br':'Montar novamente',en:'Build again',es:'Montar de nuevo'}[key];
+  assert.ok(replay?.includes(`<span class="viewer-replay-label">${replayLabel}</span>`));
+  assert.ok(replay.includes(`aria-label="${replayLabel}"`),`${key}: accessible replay name matches its visible text`);
+  assert.ok(html.includes(`class="footer-name" href="/${key}/#main"`),`${key}: home anchor remains visible with or without 3D`);
+  assert.match(html,/<p class="viewer-touch-hint" id="viewer-mobile-help">[^<]+<\/p>/);
+  assert.doesNotMatch(html,/\$\{e\(v\./,`${key}: no template expression leaks into button text`);
+ }
+});
+
 test('the portfolio viewer has five panels, four landmark selectors and a separate contact control in every locale',()=>{
  for(const [key,c] of Object.entries(content)){
   const html=viewerHome(c,key);

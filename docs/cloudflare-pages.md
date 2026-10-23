@@ -79,7 +79,7 @@ An accepted upload is not healthy publication. Stop on a failed status/header/ha
 
 Before replacing an existing production, record its deployment ID/commit and verify it is a valid recovery target. Native recovery: project **Deployments → All deployments → target production → … → Rollback to this deployment**, confirm, then repeat read-only health and browser checks. Only successful production deployments are native rollback targets; previews cannot be promoted via rollback.
 
-The **first production has no previous deployment** to restore. A failed upload or unknown state requires inspecting the dashboard before any repetition. A failure discovered after first publication requires a corrected audited artifact; do not claim an earlier healthy version exists. The release controls supply a failing health gate and native recovery procedure, but no unattended rollback controller or tested account-level rollback. This first release had no earlier successful production to restore; no rollback rehearsal was performed. Record a real recovery rehearsal when a later valid recovery target exists. No database/migration rollback applies to this static artifact.
+The **first production has no previous deployment** to restore. A failed upload or unknown state requires inspecting the dashboard before any repetition. A failure discovered after first publication requires a corrected audited artifact; do not claim an earlier healthy version exists. The release controls supply a failing health gate and native recovery procedure, but no unattended rollback controller or tested account-level rollback. The first `9f2dbb5` release had no earlier successful production to restore. Current `488d3e3` has healthy previous deployment `3a6c6e40-cd54-45aa-b755-b62357288bf0`/source `fd9f177` as its verified recovery target; no actual rollback rehearsal has been performed. No database/migration rollback applies to this static artifact.
 
 After exact successful publication, reconcile GitHub/code and canonical project notes, then retire delivered inactive worktrees using the owner’s safe cleanup procedure. Preserve the one integrated preview and any pending/unpublished work. Do not treat account setup, upload initiation or an old deployment as proof of this revision’s publication.
 
@@ -91,25 +91,27 @@ Hosting scenario: static-only Pages Free, no custom domain purchase, no paid pla
 
 ## Confirmed production release
 
-Receipt reconciled 2026-10-23 UTC from the integrator; this documentation update did not upload or rerun public requests:
+Successful Direct Upload on 2026-10-23 UTC; receipt reconciled from the integrator; this documentation update did not upload or rerun public requests:
 
 | Item | Confirmed evidence |
 | --- | --- |
-| Source commit | `9f2dbb5544c525dcdea94f81620fcaf731f59126` |
+| Source commit | `488d3e3184c74bc82706c7c0b0c42ee6617601ec` ([PR8](https://github.com/jovi47/ojoaovsousa-dev/pull/8), including 99f479d; integration 43af65e) |
 | Project/plan/mode | `ojoaovsousa`, Pages Free, Direct Upload; static only, no paid add-on/Worker/CAPTCHA/Gmail integration |
 | Production | [https://ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/), localized homes/direct/policies |
-| Deployment | `e89fff77-f23d-4716-ad40-090027f1fddf` |
-| Deployment alias | [https://e89fff77.ojoaovsousa.pages.dev](https://e89fff77.ojoaovsousa.pages.dev) |
-| Exact artifact | 128 files, 9,946,606B; ZIP 5,916,629B |
-| ZIP SHA-256 | `6c2bd1a50ccbcd8ff2f7dfe491d50c8a0d46ba846b327ed8424b148e5dcb0e97` |
-| Local/public gates | 86 local tests, audit 162 eligible sources/128 outputs and 36 exact-artifact HTTP checks passed |
-| Native public QA | Scene and resident GLBs, new approved portrait/sign and three contact destinations; zero forms and no console errors |
+| Deployment | `34340e9f-8a71-4ee8-8384-78f709f5be8a` |
+| Deployment alias | [https://34340e9f.ojoaovsousa.pages.dev](https://34340e9f.ojoaovsousa.pages.dev) |
+| Exact artifact | 128 files, 9,966,622B; ZIP 5,921,711B; +1142 rawB versus fd9, only city.js/viewer.css changed, not transfer per visitor |
+| ZIP SHA-256 | `b957eacc45d26f93e72a1ea227a2411ab73fb40135452781c1ecb2045759890f` |
+| Local/public gates |96 local tests; audit 164 sources/128 outputs ; 36 exact-artifact + 3 critical-CSS checks passed. Three outgoing commits/170 historical blobs audited without protected paths/detected keys |
+| Native public QA |440px all four selected-model titles/descriptions, arrows/ASC preserved after scroll, stack restoration and hidden phone secondary action passed; zero forms/overflow/warnings/errors. Physical touch remains untested |
+
+Three critical production CSS GETs matched the frozen artifact. Three previous-target GETs at the 3a6 alias (`/pt-br/`, `city.js`, `viewer.css`) returned 200 and matched exact frozen fd9 bytes. Evidence totals 36 release +3CSS +3recovery-target reads; native rollback was not exercised.
 
 The HTTP verifier covers actual statuses/301/404, canonical/indexability, security headers, robots/sitemap, Markdown MIME and exact local artifact bytes. The earlier four focused control/verifier tests covered routing/CSP contracts, mismatch rejection, fake200 missing routes, preview noindex, invalid targets and control-file audit bytes. This is not a load test, physical-device certification, rollback rehearsal or proof of Google indexing.
 
 The Search Console URL-prefix property `https://ojoaovsousa.pages.dev/` was added in the owner-identified account `jovi47personal` but **ownership is not verified**. The verification-file download failed: no file was downloaded into Downloads and no verification file/metatag was installed. UI automation became unstable while the owner used the computer. Next: obtain/install the official verification mechanism in a reviewed release, confirm ownership, submit the actual sitemap and inspect/request indexing where appropriate. **No sitemap submission or indexing request was made; indexing is not confirmed.** Do not store verification/auth secrets or infer success from property creation.
 
-The public repository rename/visibility/homepage was confirmed by REST/API at 2026-10-23 00:30 UTC: [jovi47/ojoaovsousa-dev](https://github.com/jovi47/ojoaovsousa-dev), `private:false`, homepage `https://ojoaovsousa.pages.dev`; the local filesystem root remains `jovi47-portfolio`. No PR merge is confirmed. A tablet/foldable layout report is being investigated in `codex/fold-layout`; no fix or newer release is confirmed by this receipt. Preserve the published artifact identity until a new reviewed release is actually deployed.
+The public repository rename/visibility/homepage was confirmed by REST/API at 2026-10-23 00:30 UTC: [jovi47/ojoaovsousa-dev](https://github.com/jovi47/ojoaovsousa-dev), `private:false`, homepage `https://ojoaovsousa.pages.dev`; the local filesystem root remains `jovi47-portfolio`. No PR merge is confirmed. PR7/PR8 are not merged; the default repository release/docs checkpoint remains `1c6e6d7`, rather than the new deployed source. Later documentation-only commits do not change the `488d3e3` artifact. Previous healthy deployment `3a6c6e40`/source `fd9f177` is retained as the verified recovery target; no rollback rehearsal was performed. The exact HTTP receipt is `work/cloudflare-release-488d3e3/http-verification.json`.
 
 ## Primary sources
 
