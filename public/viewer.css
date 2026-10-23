@@ -142,17 +142,8 @@ body:not(.construction-started):not(.tour-complete):not(.reading):not(.graphics-
 /* The invitation is the main title of its panel. */
 .viewer-card #viewer-title-challenge{font-size:clamp(34px,3.2vw,46px)}
 
-/* Completed tablet scenes follow their content instead of reserving a full viewport. */
-@media(min-width:701px) and (max-width:1100px){
- body.tour-complete:not(.reading):not(.graphics-failed) .viewer-board{display:grid;grid-template-areas:"scene" "navigation" "details";gap:12px;height:auto}
- body.tour-complete:not(.reading):not(.graphics-failed) .world-stage{grid-area:scene;position:relative;inset:auto;height:calc(var(--viewer-scene-size) - var(--header-height))}
- body.tour-complete:not(.reading):not(.graphics-failed) .viewer-houses{grid-area:navigation;position:static;inset:auto;transform:none;margin-inline:auto}
- body.tour-complete:not(.reading):not(.graphics-failed) .viewer-card{grid-area:details;position:relative;inset:auto;margin:0 12px;max-height:calc(100svh - var(--header-height) - 2 * var(--gutter))}
- body.tour-complete:not(.reading):not(.graphics-failed) .viewer-reading .direct-hero{padding-top:var(--direct-space)}
-}
-
 .viewer-replay-label,.viewer-touch-hint{display:none}
-@media(max-width:700px){
+@media(max-width:1100px){
  body:not(.reading):not(.graphics-failed) .viewer-tour{height:auto;min-height:0}
  body.world-loaded:not(.reading):not(.graphics-failed) .viewer-board{position:relative;top:auto;display:grid;grid-template-areas:"intro" "scene" "navigation" "controls" "hint";height:auto;overflow:visible;gap:12px;background:transparent}
  body:not(.reading):not(.graphics-failed) .viewer-page .viewer-board .viewer-intro{grid-area:intro;position:relative;inset:auto;transform:none;width:auto;max-height:none;overflow:visible;overscroll-behavior:auto;margin:0;padding:28px 20px 12px;text-align:left;background:transparent;transition:none}
@@ -176,4 +167,18 @@ body:not(.construction-started):not(.tour-complete):not(.reading):not(.graphics-
  .viewer-page #viewer-card{display:none}
  .viewer-page .viewer-reading{display:block}
  .world-loaded:not(.reading):not(.graphics-failed) .viewer-reading>.direct-hero{display:none}
+}
+
+@media(min-width:701px) and (max-width:1100px){
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-board .viewer-intro{width:min(760px,100%);justify-self:center;padding:32px 24px 12px}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-identity>img{width:52px;height:64px}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-identity h1{font-size:clamp(34px,4.5vw,44px)}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-role{font-size:13px}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-offer{font-size:26px;max-width:32ch}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-intro-description{font-size:16px;max-width:50ch}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-intro .button{font-size:14px;min-height:46px}
+ body:not(.reading):not(.graphics-failed) .viewer-page .world-stage{height:clamp(300px,36svh,380px)}
+ body:not(.reading):not(.graphics-failed) .viewer-houses{width:min(640px,calc(100% - 48px));justify-self:center;margin:0}
+ body:not(.reading):not(.graphics-failed) .viewer-house-button{font-size:13px;min-height:54px;gap:8px}
+ body:not(.reading):not(.graphics-failed) .viewer-house-question>span:last-child{font-size:12px}
 }
