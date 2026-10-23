@@ -97,7 +97,6 @@ body:not(.construction-started):not(.tour-complete):not(.reading):not(.graphics-
 @media(max-width:1100px){.viewer-houses{bottom:max(42px,calc(env(safe-area-inset-bottom) + 34px))}.viewer-landmark-tools{top:12px;right:12px}.viewer-house-button{font-size:12px}.viewer-house-question>span:last-child{font-size:11px}.viewer-intro,.viewer-card{max-height:calc(100svh - var(--viewer-scene-size) - 114px)}}
 @media(max-width:700px){.viewer-house-button{font-size:10px}.viewer-house-question>span:last-child{font-size:10px}}
 
-@media(min-width:701px) and (max-width:1100px){.tour-complete .viewer-houses{top:calc(var(--viewer-scene-size) - var(--header-height) + 12px);bottom:auto}.tour-complete .viewer-intro,.tour-complete .viewer-card{top:calc(var(--viewer-scene-size) - var(--header-height) + 88px);max-height:calc(100svh - var(--viewer-scene-size) - 174px)}}
 @media(max-width:700px){.tour-complete .viewer-houses{top:calc(var(--viewer-scene-size) - var(--header-height) + 12px);bottom:auto}.tour-complete .viewer-intro,.tour-complete .viewer-card{top:calc(var(--viewer-scene-size) - var(--header-height) + 88px);max-height:calc(100svh - var(--viewer-scene-size) - 174px)}}
 @media(max-width:360px){.viewer-house-question .viewer-question-mark{font-size:23px}.viewer-house-question>span:last-child{font-size:9px;white-space:nowrap}}
 @media(max-width:1100px){.tour-complete .viewer-card-top{display:none}.tour-complete .viewer-project-title{margin-bottom:14px}}
