@@ -1,0 +1,35 @@
+export const cityCopy={
+ 'pt-br':{
+ role:'Engenheiro de software',offer:'Software feito para o seu negócio',experience:'Experiência',projects:'Projetos',faq:'FAQ',contact:'Contato',city:'Sua próxima construção',
+ intro:'Curiosidade para explorar. Cuidado para entregar.',experienceTitle:'As peças se conectam',experienceBody:'Elixir e Java na base. IA aplicada, RAG, agentes e harnesses conectando fontes, ferramentas e verificação. Automações e 3D para experimentar possibilidades.',
+ projectTitle:'O que já ganhou forma',contactTitle:'Vamos construir sua ideia',cityTitle:'Agora, a cidade é sua',cityBody:'Gire a construção, caminhe com João ou entre no mecha samurai. A próxima ideia pode ser a sua.',
+ build:'Construir ?',auto:'Montar automaticamente',quest:'Segure para montar a interrogação. Solte para pausar.',questDone:'Interrogação pronta. Conte sua ideia.',
+ orbit:'Explorar em 3D',continue:'Continuar construção',read:'Ler sem animações',immersive:'Voltar ao mundo',left:'Girar à esquerda',right:'Girar à direita',up:'Olhar de cima',down:'Baixar a câmera',zoomIn:'Aproximar',zoomOut:'Afastar',reset:'Restaurar enquadramento',inside:'Ver por dentro',
+ walk:'Passear com João',board:'Entrar no robô',exit:'Sair do robô',back:'Voltar ao portfólio',skip:'Pular animação',boarding:'Entrando na cabine…',pilot:'Pilotando o mecha',foot:'Passeando com João',exiting:'Saindo da cabine…',
+ move:'Mover',forward:'Andar para frente',backward:'Andar para trás',moveLeft:'Andar à esquerda',moveRight:'Andar à direita',gameHint:'WASD ou setas para andar. Arraste para olhar. Escape volta ao portfólio.',touchHint:'Use o direcional para andar e arraste a cena para olhar.',
+ pieces:'peças no prédio',loading:'Montando o mundo 3D…',ready:'Mundo pronto. Role para construir; arraste para girar.',fallback:'O 3D não ficou disponível. A apresentação, os projetos e o contato continuam aqui.',retry:'Tentar abrir o 3D',reduced:'Movimento reduzido: leitura completa e cenas estáticas.',
+ chapter:'Capítulos',next:'Continuar',brief:'Conte seu projeto',details:'Ir para o site',skills:'Familiaridade prática',statNote:'500 peças é o mínimo. A contagem abaixo vem da construção desta prévia.',copy:'Copiar rascunho',copied:'Rascunho copiado.',copyFailed:'Não foi possível copiar. Selecione o texto do rascunho.',draft:'Rascunho do projeto',
+ },
+ en:{
+ role:'Software engineer',offer:'Software built for your business',experience:'Experience',projects:'Projects',faq:'FAQ',contact:'Contact',city:'Your next build',
+ intro:'Curiosity to explore. Care to deliver.',experienceTitle:'The pieces connect',experienceBody:'Elixir and Java at the foundation. Applied AI, RAG, agents and harnesses connecting sources, tools and verification. Automation and 3D to explore possibilities.',
+ projectTitle:'Ideas made tangible',contactTitle:'Let’s build your idea',cityTitle:'The city is yours',cityBody:'Rotate the build, walk with João or step into the samurai mech. The next idea could be yours.',
+ build:'Build ?',auto:'Build automatically',quest:'Hold to build the question mark. Release to pause.',questDone:'Question mark ready. Tell me your idea.',
+ orbit:'Explore in 3D',continue:'Continue building',read:'Read without animation',immersive:'Return to the world',left:'Rotate left',right:'Rotate right',up:'Look from above',down:'Lower the camera',zoomIn:'Zoom in',zoomOut:'Zoom out',reset:'Reset framing',inside:'Look inside',
+ walk:'Walk with João',board:'Enter the mech',exit:'Exit the mech',back:'Return to portfolio',skip:'Skip animation',boarding:'Entering the cockpit…',pilot:'Piloting the mech',foot:'Walking with João',exiting:'Leaving the cockpit…',
+ move:'Move',forward:'Walk forward',backward:'Walk backwards',moveLeft:'Walk left',moveRight:'Walk right',gameHint:'WASD or arrows to walk. Drag to look. Escape returns to the portfolio.',touchHint:'Use the directional control to walk and drag the scene to look.',
+ pieces:'pieces in the building',loading:'Assembling the 3D world…',ready:'World ready. Scroll to build; drag to rotate.',fallback:'3D is unavailable. The introduction, projects and contact remain accessible.',retry:'Try opening 3D',reduced:'Reduced motion: complete reading and static scenes.',
+ chapter:'Chapters',next:'Continue',brief:'Tell me your idea',details:'Visit the website',skills:'Practical familiarity',statNote:'500 pieces is the minimum. The count comes from this preview’s construction.',copy:'Copy draft',copied:'Draft copied.',copyFailed:'Could not copy. Select the draft text instead.',draft:'Project draft',
+ },
+ es:{
+ role:'Ingeniero de software',offer:'Software hecho para tu negocio',experience:'Experiencia',projects:'Proyectos',faq:'FAQ',contact:'Contacto',city:'Tu próxima construcción',
+ intro:'Curiosidad para explorar. Cuidado para entregar.',experienceTitle:'Las piezas se conectan',experienceBody:'Elixir y Java en la base. IA aplicada, RAG, agentes y harnesses conectando fuentes, herramientas y verificación. Automatizaciones y 3D para explorar posibilidades.',
+ projectTitle:'Ideas que toman forma',contactTitle:'Construyamos tu idea',cityTitle:'La ciudad es tuya',cityBody:'Gira la construcción, pasea con João o entra en el mecha samurái. La próxima idea puede ser la tuya.',
+ build:'Construir ?',auto:'Montar automáticamente',quest:'Mantén pulsado para construir la interrogación. Suelta para pausar.',questDone:'Interrogación lista. Cuéntame tu idea.',
+ orbit:'Explorar en 3D',continue:'Continuar construcción',read:'Leer sin animaciones',immersive:'Volver al mundo',left:'Girar a la izquierda',right:'Girar a la derecha',up:'Mirar desde arriba',down:'Bajar la cámara',zoomIn:'Acercar',zoomOut:'Alejar',reset:'Restaurar encuadre',inside:'Ver por dentro',
+ walk:'Pasear con João',board:'Entrar en el robot',exit:'Salir del robot',back:'Volver al portafolio',skip:'Saltar animación',boarding:'Entrando en la cabina…',pilot:'Pilotando el mecha',foot:'Paseando con João',exiting:'Saliendo de la cabina…',
+ move:'Mover',forward:'Avanzar',backward:'Retroceder',moveLeft:'Caminar a la izquierda',moveRight:'Caminar a la derecha',gameHint:'WASD o flechas para caminar. Arrastra para mirar. Escape vuelve al portafolio.',touchHint:'Usa el control direccional para caminar y arrastra la escena para mirar.',
+ pieces:'piezas en el edificio',loading:'Montando el mundo 3D…',ready:'Mundo listo. Desplázate para construir; arrastra para girar.',fallback:'El 3D no está disponible. La presentación, los proyectos y el contacto siguen aquí.',retry:'Intentar abrir el 3D',reduced:'Movimiento reducido: lectura completa y escenas estáticas.',
+ chapter:'Capítulos',next:'Continuar',brief:'Cuéntame tu proyecto',details:'Ir al sitio',skills:'Familiaridad práctica',statNote:'500 piezas es el mínimo. La cifra corresponde a esta construcción.',copy:'Copiar borrador',copied:'Borrador copiado.',copyFailed:'No se pudo copiar. Selecciona el texto del borrador.',draft:'Borrador del proyecto',
+ }
+};

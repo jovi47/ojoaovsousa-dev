@@ -1,0 +1,47 @@
+{
+  "buildCommand": "node scripts/build.mjs",
+  "outputDirectory": "dist",
+  "framework": null,
+  "cleanUrls": true,
+  "trailingSlash": true,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/pt-br/black/",
+      "destination": "/pt-br/",
+      "permanent": true
+    },
+    {
+      "source": "/en/black/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/es/black/",
+      "destination": "/es/",
+      "permanent": true
+    }
+  ]
+}

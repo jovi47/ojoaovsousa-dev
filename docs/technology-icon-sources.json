@@ -1,0 +1,295 @@
+{
+  "retrieved_utc": "2026-10-22",
+  "icons": [
+    {
+      "file": "phoenix.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/phoenix/phoenix-original.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "4b4b6d7c7a3ec87781a25f8f059f66f35baa15641dd6fd80e42b6ccb78f14c89",
+      "bytes": 3360,
+      "brand_source": "https://github.com/phoenixframework/phoenix/blob/e9f1975d5aa15bee22bab6a4acae8f543886b17a/installer/templates/phx_assets/logo.svg"
+    },
+    {
+      "file": "postgresql.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/postgresql/postgresql-original.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "f220a436258ed014c512ba4f9c0de6b9e5c2c4b55331a0a29f8c7a1a12c36443",
+      "bytes": 9178,
+      "brand_source": "https://wiki.postgresql.org/wiki/Logo"
+    },
+    {
+      "file": "fly.svg",
+      "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/c71c69e3a27e4436936b831c72643e6513b9f49b/icons/flydotio.svg",
+      "license": "CC0-1.0 (Simple Icons collection)",
+      "sha256": "c7cfc96ff24e08ccd665bd3fe441abab0c9c067549ec688f0315ddf41df8f22d",
+      "bytes": 843,
+      "brand_source": "https://fly.io/docs/about/brand",
+      "transformation": "Brand color #24175B applied to the single-color glyph; geometry unchanged"
+    },
+    {
+      "file": "docker.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/docker/docker-original.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "3fd830ea69431ed7a0b8d068cd5b34ad3f00a1a78195d50f13ff56713f2462e1",
+      "bytes": 4452,
+      "brand_source": "https://www.docker.com/company/newsroom/media-resources"
+    },
+    {
+      "file": "github.svg",
+      "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/c71c69e3a27e4436936b831c72643e6513b9f49b/icons/github.svg",
+      "license": "CC0-1.0 (Simple Icons collection)",
+      "sha256": "3bf8cceead820aec50d4ee825a3fd02c5a1cd6665cc9cf4cbf3d9c8861a204bb",
+      "bytes": 822,
+      "brand_source": "https://github.com/logos"
+    },
+    {
+      "file": "git.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/git/git-original.svg",
+      "license": "MIT (Devicon collection); Git artwork CC-BY-3.0 by Jason Long",
+      "sha256": "717a57ea97bf7e86de721dab3e68afac66332a10676d5c9abce4ae6a5a9c9983",
+      "bytes": 778,
+      "brand_source": "https://git-scm.com/community/logos"
+    },
+    {
+      "file": "html.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/html5/html5-original.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "34826e5b3315daadf4fa15f723a3c1d5ba4a89277bfd94e22ac4d7d3d54338c5",
+      "bytes": 607,
+      "brand_source": "https://www.w3.org/html/logo/"
+    },
+    {
+      "file": "css.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/css3/css3-original.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "36b7d94b657d571d3f94042acbf6a4c86a5301a222f83f4b4583ad2acf6e297d",
+      "bytes": 778,
+      "brand_source": "https://github.com/CSS-Next/logo.css/blob/bacc20878227204b283c68a6b935f8279e06b0cd/css.svg"
+    },
+    {
+      "file": "python.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/python/python-original.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "71493b4a732f0532b3a03a7a95da3ee11a65766367c8303b901ffbe7bf91a3a2",
+      "bytes": 2300,
+      "brand_source": "https://www.python.org/community/logos/"
+    },
+    {
+      "file": "spring-boot.svg",
+      "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/c71c69e3a27e4436936b831c72643e6513b9f49b/icons/springboot.svg",
+      "license": "CC0-1.0 (Simple Icons collection)",
+      "sha256": "3f2c5ea434f1c770883ed26e393dbeade25c2cc4ae9f62aaa1fd682b2a00d331",
+      "bytes": 1001,
+      "brand_source": "https://spring.io/projects",
+      "transformation": "Brand color #6DB33F applied to the single-color glyph; geometry unchanged"
+    },
+    {
+      "file": "mysql.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/mysql/mysql-original.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "f73fa5d6b9da33fbf540ff96f5360c24b6d29d883ecfe6fcaecf89a8d3456067",
+      "bytes": 2765,
+      "brand_source": "https://www.mysql.com/about/legal/logos.html"
+    },
+    {
+      "file": "aws.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "5b4d8371d79a5c0d3a27ea4e929f772e68d47f7d267496bf9211d5f60fcf8084",
+      "bytes": 3743,
+      "brand_source": "https://aws.amazon.com/trademark-guidelines/"
+    },
+    {
+      "file": "openai-black.svg",
+      "source": "https://cdn.openai.com/brand/OpenAI-Logos-2025.zip",
+      "license": "OpenAI brand usage terms; unmodified official asset",
+      "sha256": "7be72f1fea831d3ba81a545cee79b7e0ae69449d5d7837c9571ccbfb4aa1e00b",
+      "bytes": 2969,
+      "brand_source": "https://openai.com/brand/",
+      "archive_member": "OpenAI-logos(new)/SVGs/OpenAI-black-monoblossom.svg"
+    },
+    {
+      "file": "openai-white.svg",
+      "source": "https://cdn.openai.com/brand/OpenAI-Logos-2025.zip",
+      "license": "OpenAI brand usage terms; unmodified official asset",
+      "sha256": "b94ea61d860fae6f82f43571f36f17111fcf5d348e8e9cc22ae4b441c7560011",
+      "bytes": 2961,
+      "brand_source": "https://openai.com/brand/",
+      "archive_member": "OpenAI-logos(new)/SVGs/OpenAI-white-monoblossom.svg"
+    },
+    {
+      "file": "domains.svg",
+      "source": "Original project interface symbol; not an official brand mark",
+      "license": "Project-owned original vector",
+      "sha256": "e9a904f0a4c3903d6ae57f3de37dcac86a6bd233870dac1db3dfe2f01e918956",
+      "bytes": 270
+    },
+    {
+      "file": "infrastructure.svg",
+      "source": "Original project interface symbol; not an official brand mark",
+      "license": "Project-owned original vector",
+      "sha256": "355d114ccd545af893ad279ba4d7167779e2678ab25f51d6285413c5cc711092",
+      "bytes": 319
+    },
+    {
+      "file": "ci-cd.svg",
+      "source": "Original project interface symbol; not an official brand mark",
+      "license": "Project-owned original vector",
+      "sha256": "fb9f1181d7225ebe5e5804e12419359934f0f11e88f42733acf8a4b326720861",
+      "bytes": 259
+    },
+    {
+      "file": "harnesses.svg",
+      "source": "Original project interface symbol; not an official brand mark",
+      "license": "Project-owned original vector",
+      "sha256": "d90a0be1fab1735723813283d156f1665a2603c9000cb55e771e93c12edc6130",
+      "bytes": 257
+    },
+    {
+      "file": "agents.svg",
+      "source": "Original project interface symbol; not an official brand mark",
+      "license": "Project-owned original vector",
+      "sha256": "30a779b2a28db1ce7b71097424cf5e13254c512b37abc027d7896b536d02a00d",
+      "bytes": 304
+    },
+    {
+      "file": "3d.svg",
+      "source": "Original project interface symbol; not an official brand mark",
+      "license": "Project-owned original vector",
+      "sha256": "a4e26a0ecd51c5b9baf78c040a1c304cda6ba20e3d617cc3a6617a434e7aed4d",
+      "bytes": 240
+    },
+    {
+      "file": "rag.svg",
+      "source": "Original project interface symbol; not an official brand mark",
+      "license": "Project-owned original vector",
+      "sha256": "393dfe7804be08f2eb4a27bb19716738511046fb00d968e3abcdd8c387dda169",
+      "bytes": 310
+    },
+    {
+      "file": "xml.svg",
+      "source": "Original project interface symbol; not an official brand mark",
+      "license": "Project-owned original vector",
+      "sha256": "1f58c3289c3a748d0170654d6b4f2449905bab6c5a8062d1b7cff25854dbbc79",
+      "bytes": 240
+    },
+    {
+      "file": "pl-sql.svg",
+      "source": "Original project interface symbol; not an official brand mark",
+      "license": "Project-owned original vector",
+      "sha256": "0db8fc28b5b38bb6bb1b4a30828b420fa097d1a72e15e4650e27da244ac67afd",
+      "bytes": 286
+    },
+    {
+      "file": "ecto.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/ecto/ecto-original.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "f74138718e068865eedd4ed86e8bb592247cc2600cccd92d0a765e034661b7b8",
+      "bytes": 1194
+    },
+    {
+      "file": "nextjs.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/nextjs/nextjs-original.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "d9435c4ede7133b376c0173a80226bb3856729366707cd96e9a66e39448d0288",
+      "bytes": 749
+    },
+    {
+      "file": "typescript.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/typescript/typescript-original.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "c9191199f4049920c2fc19035b8a6664f37f4689fcd9e8434e786097e78863f0",
+      "bytes": 943
+    },
+    {
+      "file": "graphql.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/graphql/graphql-plain.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "1fafe03a1f77be5a1c25c20db6e52f292ed8ae5a9b2536f807ee2a3d2e78d3d3",
+      "bytes": 1550
+    },
+    {
+      "file": "kafka.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/apachekafka/apachekafka-original.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "2505c5b688c18c8fd5dd8e888561eb7b23a56a75d291ff17e8ee18770193f3e8",
+      "bytes": 1711
+    },
+    {
+      "file": "rabbitmq.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/rabbitmq/rabbitmq-original.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "3aad30605375d85bd2fc293880be7e1b07def3f7191c8f063feb775cca5b7006",
+      "bytes": 634
+    },
+    {
+      "file": "mongodb.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/mongodb/mongodb-original.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "d9f2bf7041264f4747e9969fb82ede0199c0ac97dfa8632aa0687d702ec05f7b",
+      "bytes": 5611
+    },
+    {
+      "file": "kubernetes.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/kubernetes/kubernetes-original.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "fb31e4163238978201cfde0601728ee5168b74e476c32c37739bed626fa281ae",
+      "bytes": 8951
+    },
+    {
+      "file": "junit.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/junit/junit-original.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "547001df5fceec5b31bd15c9c9909abcfd42fe9daef9c2dc38d12beb8310a44a",
+      "bytes": 1061
+    },
+    {
+      "file": "tomcat.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/tomcat/tomcat-original.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "ccd95fcd7834c78b5310a2df9368ed22ed17d30707258ca406fd1b197498fe2a",
+      "bytes": 4382
+    },
+    {
+      "file": "bootstrap.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/bootstrap/bootstrap-original.svg",
+      "license": "MIT (Devicon collection); underlying brand rights retained",
+      "sha256": "016c324b3743e9be8dc2ca3a89bb5bd169d417f4f29fe5e731b16644abeb12cf",
+      "bytes": 2075
+    },
+    {
+      "file": "metabase.svg",
+      "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/c71c69e3a27e4436936b831c72643e6513b9f49b/icons/metabase.svg",
+      "license": "CC0-1.0 (Simple Icons collection); underlying brand rights retained",
+      "brand_source": "https://www.metabase.com",
+      "transformation": "Brand color #509EE3 applied to single-color glyph; geometry unchanged",
+      "sha256": "9f58c7bea90e655b1326e0aba3e50e6c79d411881b35366e248e62de82b7224c",
+      "bytes": 3717
+    },
+    {
+      "file": "oban.svg",
+      "source": "https://oban.pro/images/brand/oban-oss-logo-1a17667ab8c2830e04ad04ee55b42fa0.svg?vsn=d",
+      "license": "Official Oban OSS brand asset; underlying brand rights retained",
+      "brand_source": "https://oban.pro/brand-assets",
+      "sha256": "08360e5ac4661115eaf9e0eb9b44991b14eb92ddfb11c58fac77d6753d092f98",
+      "bytes": 4030
+    }
+  ],
+  "reused_symbols": {
+    "LiveView": "phoenix.svg: Phoenix ecosystem mark, not a separate LiveView logo",
+    "ExUnit": "/icons/elixir.svg: Elixir ecosystem mark, not a separate ExUnit logo",
+    "REST APIs": "domains.svg: generic interface symbol",
+    "Mockito": "harnesses.svg: generic testing symbol, not the Mockito logo",
+    "WireMock": "harnesses.svg: generic testing symbol, not the WireMock logo",
+    "TDD": "ci-cd.svg: generic testing-cycle symbol",
+    "Unit tests": "harnesses.svg: generic testing symbol",
+    "Integration tests": "ci-cd.svg: generic testing-cycle symbol",
+    "DDD": "3d.svg: generic modelling symbol",
+    "SOLID": "3d.svg: generic structural symbol",
+    "Microservices": "infrastructure.svg: generic infrastructure symbol",
+    "Scrum": "agents.svg: generic collaboration symbol",
+    "Kanban": "harnesses.svg: generic board symbol",
+    "AJAX": "xml.svg: generic markup symbol",
+    "SQL": "pl-sql.svg: generic query symbol"
+  }
+}
