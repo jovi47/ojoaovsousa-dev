@@ -97,7 +97,6 @@ body:not(.construction-started):not(.tour-complete):not(.reading):not(.graphics-
 @media(max-width:1100px){.viewer-houses{bottom:max(42px,calc(env(safe-area-inset-bottom) + 34px))}.viewer-landmark-tools{top:12px;right:12px}.viewer-house-button{font-size:12px}.viewer-house-question>span:last-child{font-size:11px}.viewer-intro,.viewer-card{max-height:calc(100svh - var(--viewer-scene-size) - 114px)}}
 @media(max-width:700px){.viewer-house-button{font-size:10px}.viewer-house-question>span:last-child{font-size:10px}}
 
-@media(min-width:701px) and (max-width:1100px){.tour-complete .viewer-houses{top:calc(var(--viewer-scene-size) - var(--header-height) + 12px);bottom:auto}.tour-complete .viewer-intro,.tour-complete .viewer-card{top:calc(var(--viewer-scene-size) - var(--header-height) + 88px);max-height:calc(100svh - var(--viewer-scene-size) - 174px)}}
 @media(max-width:700px){.tour-complete .viewer-houses{top:calc(var(--viewer-scene-size) - var(--header-height) + 12px);bottom:auto}.tour-complete .viewer-intro,.tour-complete .viewer-card{top:calc(var(--viewer-scene-size) - var(--header-height) + 88px);max-height:calc(100svh - var(--viewer-scene-size) - 174px)}}
 @media(max-width:360px){.viewer-house-question .viewer-question-mark{font-size:23px}.viewer-house-question>span:last-child{font-size:9px;white-space:nowrap}}
 @media(max-width:1100px){.tour-complete .viewer-card-top{display:none}.tour-complete .viewer-project-title{margin-bottom:14px}}
@@ -142,3 +141,12 @@ body:not(.construction-started):not(.tour-complete):not(.reading):not(.graphics-
 
 /* The invitation is the main title of its panel. */
 .viewer-card #viewer-title-challenge{font-size:clamp(34px,3.2vw,46px)}
+
+/* Completed tablet scenes follow their content instead of reserving a full viewport. */
+@media(min-width:701px) and (max-width:1100px){
+ body.tour-complete:not(.reading):not(.graphics-failed) .viewer-board{display:grid;grid-template-areas:"scene" "navigation" "details";gap:12px;height:auto}
+ body.tour-complete:not(.reading):not(.graphics-failed) .world-stage{grid-area:scene;position:relative;inset:auto;height:calc(var(--viewer-scene-size) - var(--header-height))}
+ body.tour-complete:not(.reading):not(.graphics-failed) .viewer-houses{grid-area:navigation;position:static;inset:auto;transform:none;margin-inline:auto}
+ body.tour-complete:not(.reading):not(.graphics-failed) .viewer-card{grid-area:details;position:relative;inset:auto;margin:0 12px;max-height:calc(100svh - var(--header-height) - 2 * var(--gutter))}
+ body.tour-complete:not(.reading):not(.graphics-failed) .viewer-reading .direct-hero{padding-top:var(--direct-space)}
+}
