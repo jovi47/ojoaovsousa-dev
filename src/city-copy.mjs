@@ -8,7 +8,7 @@ export const cityCopy={
  walk:'Passear com João',board:'Entrar no robô',exit:'Sair do robô',back:'Voltar ao portfólio',skip:'Pular animação',boarding:'Entrando na cabine…',pilot:'Pilotando o mecha',foot:'Passeando com João',exiting:'Saindo da cabine…',
  move:'Mover',forward:'Andar para frente',backward:'Andar para trás',moveLeft:'Andar à esquerda',moveRight:'Andar à direita',gameHint:'WASD ou setas para andar. Arraste para olhar. Escape volta ao portfólio.',touchHint:'Use o direcional para andar e arraste a cena para olhar.',
  pieces:'peças no prédio',loading:'Montando o mundo 3D…',ready:'Mundo pronto. Role para construir; arraste para girar.',fallback:'O 3D não ficou disponível. A apresentação, os projetos e o contato continuam aqui.',retry:'Tentar abrir o 3D',reduced:'Movimento reduzido: leitura completa e cenas estáticas.',
- chapter:'Capítulos',next:'Continuar',brief:'Conte seu projeto',details:'Ir para o site',skills:'Familiaridade prática',statNote:'500 peças é o mínimo. A contagem abaixo vem da construção desta prévia.',copy:'Copiar rascunho',copied:'Rascunho copiado.',copyFailed:'Não foi possível copiar. Selecione o texto do rascunho.',draft:'Rascunho do projeto',
+ chapter:'Capítulos',next:'Continuar',brief:'Conte seu projeto',details:'Ir para o site',skills:'Familiaridade prática',statNote:'500 peças é o mínimo. A contagem abaixo vem da construção desta prévia.',
  },
  en:{
  role:'Software engineer',offer:'Software built for your business',experience:'Experience',projects:'Projects',faq:'FAQ',contact:'Contact',city:'Your next build',
@@ -19,7 +19,7 @@ export const cityCopy={
  walk:'Walk with João',board:'Enter the mech',exit:'Exit the mech',back:'Return to portfolio',skip:'Skip animation',boarding:'Entering the cockpit…',pilot:'Piloting the mech',foot:'Walking with João',exiting:'Leaving the cockpit…',
  move:'Move',forward:'Walk forward',backward:'Walk backwards',moveLeft:'Walk left',moveRight:'Walk right',gameHint:'WASD or arrows to walk. Drag to look. Escape returns to the portfolio.',touchHint:'Use the directional control to walk and drag the scene to look.',
  pieces:'pieces in the building',loading:'Assembling the 3D world…',ready:'World ready. Scroll to build; drag to rotate.',fallback:'3D is unavailable. The introduction, projects and contact remain accessible.',retry:'Try opening 3D',reduced:'Reduced motion: complete reading and static scenes.',
- chapter:'Chapters',next:'Continue',brief:'Tell me your idea',details:'Visit the website',skills:'Practical familiarity',statNote:'500 pieces is the minimum. The count comes from this preview’s construction.',copy:'Copy draft',copied:'Draft copied.',copyFailed:'Could not copy. Select the draft text instead.',draft:'Project draft',
+ chapter:'Chapters',next:'Continue',brief:'Tell me your idea',details:'Visit the website',skills:'Practical familiarity',statNote:'500 pieces is the minimum. The count comes from this preview’s construction.',
  },
  es:{
  role:'Ingeniero de software',offer:'Software hecho para tu negocio',experience:'Experiencia',projects:'Proyectos',faq:'FAQ',contact:'Contacto',city:'Tu próxima construcción',
@@ -30,6 +30,6 @@ export const cityCopy={
  walk:'Pasear con João',board:'Entrar en el robot',exit:'Salir del robot',back:'Volver al portafolio',skip:'Saltar animación',boarding:'Entrando en la cabina…',pilot:'Pilotando el mecha',foot:'Paseando con João',exiting:'Saliendo de la cabina…',
  move:'Mover',forward:'Avanzar',backward:'Retroceder',moveLeft:'Caminar a la izquierda',moveRight:'Caminar a la derecha',gameHint:'WASD o flechas para caminar. Arrastra para mirar. Escape vuelve al portafolio.',touchHint:'Usa el control direccional para caminar y arrastra la escena para mirar.',
  pieces:'piezas en el edificio',loading:'Montando el mundo 3D…',ready:'Mundo listo. Desplázate para construir; arrastra para girar.',fallback:'El 3D no está disponible. La presentación, los proyectos y el contacto siguen aquí.',retry:'Intentar abrir el 3D',reduced:'Movimiento reducido: lectura completa y escenas estáticas.',
- chapter:'Capítulos',next:'Continuar',brief:'Cuéntame tu proyecto',details:'Ir al sitio',skills:'Familiaridad práctica',statNote:'500 piezas es el mínimo. La cifra corresponde a esta construcción.',copy:'Copiar borrador',copied:'Borrador copiado.',copyFailed:'No se pudo copiar. Selecciona el texto del borrador.',draft:'Borrador del proyecto',
+ chapter:'Capítulos',next:'Continuar',brief:'Cuéntame tu proyecto',details:'Ir al sitio',skills:'Familiaridad práctica',statNote:'500 piezas es el mínimo. La cifra corresponde a esta construcción.',
  }
 };
