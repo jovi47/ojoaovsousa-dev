@@ -1,6 +1,6 @@
 # Historical studio implementation plan
 
-Status: superseded by the [current mini-island scope](samurai-world-plan.md). The checklist below belongs to the earlier studio/optional-game concept and does not authorize restoring it or publishing the current revision. Retained only for original scope/provenance; actual current verification belongs to `verification.md`.
+Status: superseded by the [current Montagem 3D scope](samurai-world-plan.md). The checklist below belongs to the earlier studio/optional-game concept and does not authorize restoring it or publishing the current revision. Retained only for original scope/provenance; actual current verification belongs to `verification.md`.
 
 ## Original planning record
 

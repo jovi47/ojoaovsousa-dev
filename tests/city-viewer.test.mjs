@@ -2,7 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {runInNewContext} from 'node:vm';
-import {VIEWER_BUILDINGS,selectionForHash,buildProgress,buildingAt,constructionFrame,landmarkIdleYaw,touchDragAxis} from '../public/city.js';
+import {VIEWER_BUILDINGS,selectionForHash,buildProgress,buildingAt,constructionFrame,landmarkIdleYaw,touchDragAxis,usesViewerFlow} from '../public/city.js';
+
+test('mobile and stacked tablet widths share the free-flow entry through 1100 pixels, with the guided desktop tour above it',()=>{
+ for(const width of [320,430,700,701,853,1024,1100])assert.equal(usesViewerFlow(width),true);
+ for(const width of [1101,1280,1920])assert.equal(usesViewerFlow(width),false);
+});
 
 test('touch rotation waits for an intentional horizontal gesture and leaves vertical or diagonal pans to the page',()=>{
  for(const [x,y] of [[0,0],[3,4],[-4,3]])assert.equal(touchDragAxis(x,y),null);
@@ -14,13 +19,14 @@ test('renderer startup preserves mobile scroll without a fragment while honoring
  const source=await readFile(new URL('../public/city-app.js',import.meta.url),'utf8');
  const start=source.slice(source.indexOf('async function start(){'),source.indexOf("document.querySelector('[data-retry]')?.addEventListener"));
  // Exercise the real startup glue with only the WebGL module replaced.
- for(const [mobile,hash,want] of [[true,'',[]],[true,'#main',['main']],[true,'#intro',['intro']],[false,'',['intro']],[false,'#projects',['projects']]]){
+ for(const [width,hash,want] of [[700,'',[]],[701,'',[]],[1100,'',[]],[1101,'',['intro']],[853,'#main',['main']],[853,'#intro',['intro']],[1280,'#projects',['projects']]]){
+  const mobile=usesViewerFlow(width);
   const calls=[],classes=new Set(mobile?['mobile-entry']:[]),world={setReading(){},goTo(id){calls.push(id);}};
   const context={canvas:{dataset:{}},starting:false,world:null,location:{hash},labels:{},reduced:{matches:false},worldStatus:{},applySeason(){},openInquiry(){},openResident(){},
    body:{classList:{contains:name=>classes.has(name),add:(...names)=>names.forEach(name=>classes.add(name)),remove:name=>classes.delete(name)}},
    document:{querySelector:()=>({hidden:false})},console:{error(error){throw error;}},loadCity:async()=>({createCity:async()=>world})};
   await runInNewContext(`(${start.replace("await import('./city.js')","await loadCity()")})`,context)();
-  assert.deepEqual(calls,want,`${mobile?'mobile':'desktop'} ${hash||'without fragment'}`);
+  assert.deepEqual(calls,want,`${width}px ${hash||'without fragment'}`);
   assert.equal(context.starting,false);
  }
 });

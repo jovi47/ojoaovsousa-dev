@@ -1,5 +1,7 @@
 # Completed viewer at intermediate widths
 
+Historical intermediate fix: the current mobile/tablet follow-up replaces this completed-only grid with introduction → scene → reading flow from entry through 1100px. The cause and measurements below retain useful baseline evidence; they do not describe the current final layout. See [mobile experience](mobile-experience.md) and [current verification](verification.md).
+
 This follow-up starts from published revision `9f2dbb5544c525dcdea94f81620fcaf731f59126`. It changes only the completed viewer layout between 701 and 1100 CSS pixels. No new device model is inferred from the ambiguous device name supplied by the owner.
 
 ## Cause and change
