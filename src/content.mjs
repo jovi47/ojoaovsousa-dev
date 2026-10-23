@@ -168,15 +168,15 @@ export const content = {
     guide: { hero: 'Pode chegar. A bancada tem espaço para mais uma boa ideia.', work: 'Pode olhar de perto. Essas peças já viraram projetos de verdade.', expertise: 'A caixa de ferramentas é variada. A escolha tem motivo.', method: 'Antes de encaixar, vale conferir se a peça resolve o problema.', about: 'Por trás do código tem alguém que ainda gosta de montar coisas.', play: 'Segure a ideia. Eu ajudo com as peças.', contact: 'A próxima construção pode começar com um simples olá.' },
     privacy: {
       "title": "Privacidade",
-      "intro": "João Victor (ojoaovsousa) é o responsável pelo tratamento de dados neste portfólio. Contato: jovi47profissional@gmail.com. Última atualização: 2026-10-22 UTC.",
+      "intro": "João Victor (ojoaovsousa) é o responsável pelo tratamento de dados neste portfólio. Contato: jovi47profissional@gmail.com. Última atualização: 2026-10-23 UTC.",
       "sections": [
         {
           "title": "Navegação e preferências",
           "body": "O site não usa publicidade, analytics ou scripts de rastreamento. Preferências de tema e movimento podem ser salvas no localStorage do navegador e removidas pelos seus controles de armazenamento. O miniworld não registra partidas nem envia a posição do personagem a um servidor."
         },
         {
-          "title": "Hospedagem e prévia",
-          "body": "Esta versão é uma prévia privada do responsável, disponibilizada pelo Sites/OpenAI. A plataforma pode processar endereço IP, registros técnicos e dados de sessão, inclusive cookies necessários à autenticação, conforme suas próprias políticas. A configuração para uma futura publicação na Vercel está preparada, mas não significa que o site já esteja publicado nesse provedor. Os prazos dos registros da plataforma seguem as políticas aplicáveis do provedor."
+          "title": "Hospedagem",
+          "body": "O site público é hospedado no Cloudflare Pages. A Cloudflare pode processar endereço IP, informações das requisições e registros técnicos para entregar os arquivos, manter o serviço e proteger os acessos. Esse processamento pode ocorrer na rede global do provedor e segue seus termos e políticas aplicáveis, inclusive quanto à conservação dos registros. O portfólio não exige login nem habilita analytics de visitantes. Política do provedor: https://www.cloudflare.com/privacypolicy/."
         },
         {
           "title": "Canais de contato",
@@ -371,15 +371,15 @@ export const content = {
     guide: { hero: 'Come on in. There’s room on the workbench for another good idea.', work: 'Take a closer look. These pieces became real projects.', expertise: 'Plenty of tools in the box. Each choice has a reason.', method: 'Before it clicks into place, let’s check it solves the problem.', about: 'Behind the code is someone who still loves building things.', play: 'Hold that idea. I’ll help with the pieces.', contact: 'The next build could start with a simple hello.' },
     privacy: {
       "title": "Privacy",
-      "intro": "João Victor (ojoaovsousa) is the controller responsible for personal data on this portfolio. Contact: jovi47profissional@gmail.com. Last updated: 2026-10-22 UTC.",
+      "intro": "João Victor (ojoaovsousa) is the controller responsible for personal data on this portfolio. Contact: jovi47profissional@gmail.com. Last updated: 2026-10-23 UTC.",
       "sections": [
         {
           "title": "Browsing and preferences",
           "body": "The website uses no advertising, analytics or tracking scripts. Theme and motion preferences may be saved in your browser’s localStorage and removed through its storage controls. The miniworld does not record game sessions or send the character’s position to a server."
         },
         {
-          "title": "Hosting and preview",
-          "body": "This version is a private preview for the owner, provided through Sites/OpenAI. The platform may process IP addresses, technical logs and session data, including cookies required for authentication, under its own policies. Configuration for a future Vercel deployment is prepared; this does not mean the website is already published with that provider. Platform log retention follows the provider’s applicable policies."
+          "title": "Hosting",
+          "body": "The public website is hosted on Cloudflare Pages. Cloudflare may process IP addresses, request information and technical logs to deliver files, operate the service and protect access. Processing may occur across the provider’s global network and follows its applicable terms and policies, including log retention. This portfolio requires no login and enables no visitor analytics. Provider policy: https://www.cloudflare.com/privacypolicy/."
         },
         {
           "title": "Contact channels",
@@ -570,15 +570,15 @@ export const content = {
     guide: { hero: 'Adelante. En la mesa de trabajo cabe otra buena idea.', work: 'Mira de cerca. Estas piezas ya se convirtieron en proyectos reales.', expertise: 'Hay muchas herramientas. Cada elección tiene su motivo.', method: 'Antes de encajar la pieza, veamos si resuelve el problema.', about: 'Detrás del código hay alguien que aún disfruta construyendo cosas.', play: 'Mantén esa idea. Yo ayudo con las piezas.', contact: 'La próxima construcción puede empezar con un simple hola.' },
     privacy: {
       "title": "Privacidad",
-      "intro": "João Victor (ojoaovsousa) es el responsable del tratamiento de datos personales en este portafolio. Contacto: jovi47profissional@gmail.com. Última actualización: 2026-10-22 UTC.",
+      "intro": "João Victor (ojoaovsousa) es el responsable del tratamiento de datos personales en este portafolio. Contacto: jovi47profissional@gmail.com. Última actualización: 2026-10-23 UTC.",
       "sections": [
         {
           "title": "Navegación y preferencias",
           "body": "El sitio no utiliza publicidad, analytics ni scripts de seguimiento. Las preferencias de tema y movimiento pueden guardarse en el localStorage del navegador y eliminarse desde sus controles de almacenamiento. El minimundo no registra partidas ni envía la posición del personaje a un servidor."
         },
         {
-          "title": "Alojamiento y vista previa",
-          "body": "Esta versión es una vista previa privada del responsable, ofrecida mediante Sites/OpenAI. La plataforma puede procesar direcciones IP, registros técnicos y datos de sesión, incluidas cookies necesarias para la autenticación, según sus propias políticas. La configuración para una futura publicación en Vercel está preparada; esto no significa que el sitio ya esté publicado en ese proveedor. La conservación de los registros de la plataforma sigue las políticas aplicables del proveedor."
+          "title": "Alojamiento",
+          "body": "El sitio público se aloja en Cloudflare Pages. Cloudflare puede procesar direcciones IP, información de las solicitudes y registros técnicos para entregar archivos, mantener el servicio y proteger los accesos. El procesamiento puede ocurrir en la red global del proveedor y sigue sus términos y políticas aplicables, incluida la conservación de registros. Este portafolio no exige iniciar sesión ni habilita analytics de visitantes. Política del proveedor: https://www.cloudflare.com/privacypolicy/."
         },
         {
           "title": "Canales de contacto",
