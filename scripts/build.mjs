@@ -1,4 +1,4 @@
-import {mkdir,writeFile,cp,rm} from 'node:fs/promises';
+import {mkdir,writeFile,cp,rm,readFile} from 'node:fs/promises';
 import {directHome} from '../src/direct-page.mjs';
 import {content} from '../src/content.mjs';
 import {policy,document,escape} from '../src/city-page.mjs';
@@ -7,6 +7,10 @@ const root=new URL('../',import.meta.url),out=new URL('dist/',root);
 const base=(process.env.SITE_URL||'').replace(/\/$/,'');
 if(base&&!/^https:\/\/[a-zA-Z0-9.-]+(?::\d+)?$/.test(base)) throw new Error('SITE_URL must be an HTTPS origin');
 const indexable=process.env.INDEXABLE==='true'&&!!base;
+for(const [source,target] of [['bundle/libphonenumber-max.js','libphonenumber-max.js'],['bundle/libphonenumber-max.js.map','libphonenumber-max.js.map'],['LICENSE','libphonenumber-LICENSE.txt']]){
+ const upstream=await readFile(new URL(`node_modules/libphonenumber-js/${source}`,root)),vendor=await readFile(new URL(`public/vendor/${target}`,root));
+ if(!upstream.equals(vendor))throw new Error(`Vendored phone validation differs from the pinned package: ${target}`);
+}
 await rm(out,{recursive:true,force:true});
 await mkdir(out,{recursive:true});
 await cp(new URL('public/',root),out,{recursive:true});

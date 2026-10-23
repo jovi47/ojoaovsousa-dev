@@ -1,4 +1,4 @@
-import {inquiryDraft} from './inquiry-state.js';
+import {initInquiryForm} from './inquiry-form.js';
 import {initProjectProcess} from './project-process.js';
 import {initTechnologyMarquee} from './technology-marquee.js';
 import {initViewerOverflow} from './viewer-overflow.js';
@@ -32,25 +32,14 @@ for(const details of document.querySelectorAll('.project-detail')){
  const sync=()=>{content.hidden=!details.open;summary.setAttribute('aria-expanded',String(details.open));};
  sync();details.addEventListener('toggle',sync);
 }
-const dialog=document.querySelector('#inquiry-dialog'),form=document.querySelector('#inquiry-form'),status=document.querySelector('#inquiry-status'),email=document.querySelector('#inquiry-email');
+const dialog=document.querySelector('#inquiry-dialog'),form=document.querySelector('#inquiry-form'),status=document.querySelector('#inquiry-status');
 const labels=JSON.parse(document.querySelector('#world-data')?.textContent||'{}');
+const loadInquiryValidation=initInquiryForm(form);
 let focusBeforeDialog=null;
-function openInquiry(button){if(!dialog)return;document.dispatchEvent(new Event('citypause'));focusBeforeDialog=button;if(!dialog.open)dialog.showModal();}
+function openInquiry(button){if(!dialog)return;document.dispatchEvent(new Event('citypause'));focusBeforeDialog=button;if(!dialog.open)dialog.showModal();loadInquiryValidation();}
 for(const button of document.querySelectorAll('[data-inquiry]'))button.addEventListener('click',()=>openInquiry(button));
 for(const button of document.querySelectorAll('[data-close]'))button.addEventListener('click',()=>button.closest('dialog')?.close());
 dialog?.addEventListener('close',()=>{document.dispatchEvent(new CustomEvent('citydialog',{detail:false}));const target=[focusBeforeDialog,...document.querySelectorAll('.viewer-contact-fab:not(:disabled),[data-skip-build],.chapter.active button,.direct-contact [data-inquiry]')].find(node=>node?.checkVisibility());target?.focus({preventScroll:true});});
-form?.addEventListener('input',()=>{email.hidden=true;email.removeAttribute('href');form.querySelector('[data-draft]').hidden=true;status.textContent='';});
-form?.addEventListener('submit',event=>{
- event.preventDefault();if(!form.reportValidity())return;
- const data=new FormData(form);
- try{
-  email.href=inquiryDraft({name:data.get('name'),email:data.get('email'),project:data.get('project')});
-  email.hidden=false;status.textContent=status.dataset.success;
-  form.querySelector('[data-draft]').hidden=false;
-  form.querySelector('#draft-text').value=decodeURIComponent(email.href.split('body=')[1]);
-  email.focus({preventScroll:true});
- }catch{status.textContent=status.dataset.error;}
-});
 document.querySelector('[data-copy-draft]')?.addEventListener('click',async()=>{
  const draft=document.querySelector('#draft-text');
  try{await navigator.clipboard.writeText(draft.value);status.textContent=labels.copied;}catch{draft.focus();draft.select();status.textContent=labels.copyFailed;}

@@ -140,6 +140,14 @@ export const content = {
       "description": "Conte o que você quer construir. Vamos preparar um rascunho de e-mail para começar a conversa.",
       "name": "Seu nome",
       "email": "Seu e-mail",
+      "country": "País do número",
+      "phone": "Telefone",
+      "phoneHint": "Escolha o país. O número é formatado ao digitar; ao colar com +DDI, o país é reconhecido. Sem ramal.",
+      "emailError": "Informe um e-mail válido, como nome@dominio.com.",
+      "phoneError": "Informe um telefone válido para o país do número, sem ramal.",
+      "loadingValidation": "Carregando validação do telefone…",
+      "validationUnavailable": "Não foi possível validar o telefone agora. Tente preparar o e-mail novamente.",
+      "invalidFields": "Revise os campos antes de preparar o rascunho.",
       "project": "Conte sobre seu projeto",
       "submit": "Preparar e-mail",
       "note": "Os campos ficam temporariamente no navegador, sem banco de dados ou envio por este site. Preparar e-mail gera o rascunho e mostra o link Abrir meu e-mail. Só esse link abre seu aplicativo; você revisa e decide se envia.",
@@ -180,7 +188,7 @@ export const content = {
         },
         {
           "title": "Rascunho de projeto",
-          "body": "O formulário de briefing usa nome, e-mail e descrição do projeto apenas para preparar um rascunho local de contato. Os campos ficam temporariamente na página, sem banco de dados, gravação no localStorage ou envio a um backend. Nenhuma solicitação com esses campos é enviada enquanto você preenche. Preparar e-mail gera um rascunho e mostra o link Abrir meu e-mail, sem abrir o aplicativo ou transmitir os campos. Ao abrir esse link mailto, os dados são encaminhados ao aplicativo de e-mail; a partir daí, as políticas desse aplicativo se aplicam. Você revisa o rascunho e escolhe se envia. Não há envio automático nem inscrição em marketing."
+          "body": "O formulário de briefing usa nome, e-mail, telefone e descrição do projeto apenas para preparar um rascunho local de contato. Os campos ficam temporariamente na página, sem banco de dados, gravação no localStorage ou envio a um backend. Nenhuma solicitação com esses campos é enviada enquanto você preenche. Preparar e-mail gera um rascunho e mostra o link Abrir meu e-mail, sem abrir o aplicativo ou transmitir os campos. Ao abrir esse link mailto, os dados são encaminhados ao aplicativo de e-mail; a partir daí, as políticas desse aplicativo se aplicam. Você revisa o rascunho e escolhe se envia. Não há envio automático nem inscrição em marketing."
         },
         {
           "title": "Contato e finalidade",
@@ -343,6 +351,14 @@ export const content = {
       "description": "Tell me what you want to build. We’ll prepare an email draft to start the conversation.",
       "name": "Your name",
       "email": "Your email",
+      "country": "Phone number country",
+      "phone": "Phone number",
+      "phoneHint": "Choose the country. The number formats as you type; pasting an international +code selects its country. No extensions.",
+      "emailError": "Enter a valid email, such as name@example.com.",
+      "phoneError": "Enter a valid phone number for its country, without an extension.",
+      "loadingValidation": "Loading phone validation…",
+      "validationUnavailable": "Phone validation is unavailable. Try preparing the email again.",
+      "invalidFields": "Review the fields before preparing the draft.",
       "project": "Tell me about your project",
       "submit": "Prepare email",
       "note": "Fields stay temporarily in your browser, with no database or submission by this website. Prepare email creates the draft and displays an Open my email link. Only that link opens your email app; you review it and decide whether to send.",
@@ -383,7 +399,7 @@ export const content = {
         },
         {
           "title": "Project draft",
-          "body": "The briefing form uses your name, email and project description only to prepare a local contact draft. Fields remain temporarily on the page, with no database, localStorage saving or backend submission. No request containing these fields is sent while you fill them in. Prepare email generates a draft and displays an Open my email link, without opening the app or transmitting the fields. Opening that mailto link passes the data to your email app; that app’s policies then apply. You review the draft and choose whether to send. There is no automatic sending or marketing subscription."
+          "body": "The briefing form uses your name, email, phone number and project description only to prepare a local contact draft. Fields remain temporarily on the page, with no database, localStorage saving or backend submission. No request containing these fields is sent while you fill them in. Prepare email generates a draft and displays an Open my email link, without opening the app or transmitting the fields. Opening that mailto link passes the data to your email app; that app’s policies then apply. You review the draft and choose whether to send. There is no automatic sending or marketing subscription."
         },
         {
           "title": "Contact and purpose",
@@ -542,6 +558,14 @@ export const content = {
       "description": "Cuéntame qué quieres construir. Prepararemos un borrador de correo para empezar la conversación.",
       "name": "Tu nombre",
       "email": "Tu correo",
+      "country": "País del número",
+      "phone": "Teléfono",
+      "phoneHint": "Elige el país. El número se formatea al escribir; al pegar un +código internacional se selecciona su país. Sin extensión.",
+      "emailError": "Introduce un correo válido, como nombre@dominio.com.",
+      "phoneError": "Introduce un teléfono válido para el país del número, sin extensión.",
+      "loadingValidation": "Cargando validación del teléfono…",
+      "validationUnavailable": "No se pudo validar el teléfono. Intenta preparar el correo de nuevo.",
+      "invalidFields": "Revisa los campos antes de preparar el borrador.",
       "project": "Cuéntame tu proyecto",
       "submit": "Preparar correo",
       "note": "Los campos permanecen temporalmente en el navegador, sin base de datos ni envío desde este sitio. Preparar correo crea el borrador y muestra el enlace Abrir mi correo. Solo ese enlace abre tu aplicación; tú lo revisas y decides si lo envías.",
@@ -582,7 +606,7 @@ export const content = {
         },
         {
           "title": "Borrador de proyecto",
-          "body": "El formulario de briefing usa nombre, correo y descripción del proyecto solo para preparar un borrador local de contacto. Los campos permanecen temporalmente en la página, sin base de datos, guardado en localStorage ni envío a un backend. No se envía ninguna solicitud con esos campos mientras los completas. Preparar correo genera un borrador y muestra el enlace Abrir mi correo, sin abrir la aplicación ni transmitir los campos. Al abrir ese enlace mailto, los datos se pasan a la aplicación de correo; desde entonces se aplican sus políticas. Tú revisas el borrador y decides si lo envías. No hay envío automático ni suscripción a marketing."
+          "body": "El formulario de briefing usa nombre, correo, teléfono y descripción del proyecto solo para preparar un borrador local de contacto. Los campos permanecen temporalmente en la página, sin base de datos, guardado en localStorage ni envío a un backend. No se envía ninguna solicitud con esos campos mientras los completas. Preparar correo genera un borrador y muestra el enlace Abrir mi correo, sin abrir la aplicación ni transmitir los campos. Al abrir ese enlace mailto, los datos se pasan a la aplicación de correo; desde entonces se aplican sus políticas. Tú revisas el borrador y decides si lo envías. No hay envío automático ni suscripción a marketing."
         },
         {
           "title": "Contacto y finalidad",
