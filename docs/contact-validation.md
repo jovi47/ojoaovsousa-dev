@@ -1,6 +1,6 @@
 # Contact channels
 
-Owner decision2026-10-22 UTC: replace the briefing fields/local draft with direct contact channels; CAPTCHA is unnecessary because the site does not accept or send messages. Implemented locally on `codex/contact-channels`, based on integration`6dd40b5`. Browser QA and publication are separate integrator steps.
+Owner decision2026-10-22 UTC: replace the briefing fields/local draft with direct contact channels; CAPTCHA is unnecessary because the site does not accept or send messages. Originated on `codex/contact-channels`, based on integration`6dd40b5`, and is included in published source `9f2dbb5544c525dcdea94f81620fcaf731f59126`. The [release receipt](cloudflare-pages.md#confirmed-production-release) records the actual deployment and integrated proof.
 
 ## Current behavior
 
@@ -14,10 +14,12 @@ Owner decision2026-10-22 UTC: replace the briefing fields/local draft with direc
 
 Imports/callers/build/audit/fixtures were checked before removal. The former inquiry-form/state, phone loader/country module,115-country CLDR policy, pinned libphonenumber dependency and its three vendor artifacts served only the removed form; their form/numbering tests and CSS/build integrity hooks were removed together. The new dialog and clipboard tests cover the remaining product risks, rather than retaining tests for fields that no longer exist. Earlier phone implementation/source history remains in Git; it is not the current interface or an approved backend plan.
 
-No Gmail SMTP/API, secret, account, endpoint or CAPTCHA was created. The Cloudflare website hosting delivery has its own scope/docs and is not implemented by this contact change.
+No Gmail SMTP/API, secret, account, endpoint or CAPTCHA was created. Cloudflare Pages Free hosts the published static site; that hosting receipt does not add a Gmail/Worker/CAPTCHA contact integration.
 
 ## Local proof and costs
 
-`npm run build`, `npm test` and `node scripts/audit.mjs` passed locally:82 tests, including3 contact-channel tests. These check localized destinations/labels, no form controls, copied address, one pending copy and selectable fallback on clipboard denial. The artifact auditor checks effective eligible paths/content; it performs no upload. Integrated browser/mobile/dark-mode and deployed-domain proof remain with the main task.
+The integrated published source passed **86 local tests**, including the remaining dialog/clipboard contracts, and audit **162 eligible sources/128 outputs**; 36 exact-artifact HTTP checks passed after release. Contact tests check localized destinations/labels, no form controls, copied address, one pending copy and selectable fallback on clipboard denial. The auditor checks effective eligible paths/content and performs no upload.
+
+Native QA covered 320/390/430/800/1280px, 390px dark, English 800px and Spanish 430px. The email/copy row stacks below 430px after a real 320px capture exposed excessive wrapping; no horizontal overflow remained in those observed states. Copy announced success; Escape restored focus. Public native QA confirmed the three destinations, zero forms and no console errors. No mail/WhatsApp/LinkedIn message was sent. The new tablet/foldable layout report is under separate investigation, not resolved or published by these earlier contact checks.
 
 The retired phone files total1,007,571B (10,325B modules +252,237B library +743,901B debug source map +1,108B license). The current contact module is measured from `public/contact-channels.js`; actual transfer depends on browser cache/compression and requests. There is no new provider/generation/message charge or API. Email links remain public; direct links do not promise prevention of unsolicited messages sent through those external services.

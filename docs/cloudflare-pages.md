@@ -1,31 +1,31 @@
 # Cloudflare Pages: manual release
 
-Updated 2026-10-22 UTC. The owner selected Cloudflare Pages and requested the preferred name **ojoaovsousa.pages.dev**. The deployment coordinator confirmed an authenticated Cloudflare session; project creation is in progress. Name availability and the actual resulting hostname remain pending. This document describes prepared code, not a completed deployment.
+Updated 2026-10-23 UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). The owner-authorized source `9f2dbb5544c525dcdea94f81620fcaf731f59126` was published and verified as recorded below. No custom domain was purchased. This runbook separates the confirmed release from instructions for future releases and unresolved Search Console/recovery work.
 
 ## Scope and architecture
 
 One Direct Upload project serves the existing static `dist/` artifact. GitHub remains the code source; no Git integration, push-triggered build, deploy hook or remote test workflow is added. A future change from Direct Upload to Git integration requires a new Pages project. No Kubernetes, database, container or VPS is needed for these static files.
 
-The deployment branch was prepared from local integration `6dd40b5`. It adds only `public/_headers`, `public/_redirects`, artifact-audit support, a read-only release verifier and focused tests. No CLI package, account, resource, credential, API mutation or public deployment was created by this preparation.
+Deployment controls originated from local integration `6dd40b5`: `public/_headers`, `public/_redirects`, artifact-audit support, a read-only release verifier and focused tests. The later integrated source `9f2dbb5` includes the contact follow-up, portrait and search configuration and is the confirmed production source. The release used the authorized dashboard session; no CLI package or credential was added to the artifact.
 
-The owner replaced the form with a shared contact window listing WhatsApp, e-mail (`mailto:`), LinkedIn and a copy action. Include that contact follow-up in the release revision before publication; the deployment branch's original integration base still contains the prior form. The approved contact flow has no input submission or sending endpoint: the visitor chooses a channel and decides whether to contact João in the external provider/app. Copying a contact value is local. There is no CAPTCHA, backend delivery or phone-validation library in the release scope, and no third-party script/frame is required by these links.
+The owner replaced the form with a shared contact window listing WhatsApp, e-mail (`mailto:`), LinkedIn and a copy action. The confirmed production source includes that contact follow-up; the form from the original preparation base is retired. The approved contact flow has no input submission or sending endpoint: the visitor chooses a channel and decides whether to contact João in the external provider/app. Copying a contact value is local. There is no CAPTCHA, backend delivery or phone-validation library in the release scope, and no third-party script/frame is required by these links.
 
 ## Routing, security and cache
 
 - `/` permanently redirects to `/pt-br/`; `/pt-br`, `/en` and `/es` normalize to their trailing-slash homes. The language switch remains explicit, without IP/language inference.
 - Each localized `/black` and `/black/` URL permanently redirects 301 to its same-language home. There is no wildcard rewrite to the home.
-- The generator retains root `404.html`. Pages uses that custom 404 for missing paths and does not enable its implicit SPA fallback. Verify the real HTTP404 after deployment.
+- The generator retains root `404.html`. Pages uses that custom 404 for missing paths and does not enable its implicit SPA fallback. The confirmed release passed the real HTTP404 check; repeat it for each later release.
 - Static responses receive MIME-sniffing, framing, referrer and permissions protections. The CSP permits local scripts/fonts/styles and local/data/blob images; `connect-src blob:` is needed by Three’s embedded GLB texture loading. Only the existing noscript style hash is permitted inline. New third-party scripts/frames/networking require a reviewed policy change and browser verification.
 - Markdown receives `text/markdown`; root GLBs receive `model/gltf-binary`. Deployment/branch subdomains under `pages.dev` receive `X-Robots-Tag:noindex,nofollow`; direct reading and404 remain noindex.
 - Leave native Pages caching in place. Its default browser revalidation suits the current stable, unversioned asset names. Do not add immutable/year-long browser caching or custom cache rules without fingerprinted filenames and release checks.
 
-No header is claimed effective until inspected on the deployed responses. CSP runtime checks must cover the three resident GLBs, portrait sign, menu/theme, contact window, external channel links/copy action and no-JavaScript fallback. Do not loosen the policy merely to silence an unrelated extension’s console errors.
+The confirmed release passed the 36 read-only checks, including required deployed headers; native QA showed no console errors with the scene/GLBs, portrait sign and three contact destinations. For every later release, inspect actual responses before claiming headers effective. CSP runtime checks must cover the three resident GLBs, portrait sign, menu/theme, contact window, external channel links/copy action and no-JavaScript fallback. Do not loosen the policy merely to silence an unrelated extension’s console errors.
 
 ## Account and access
 
 The owner controls the Cloudflare account and GitHub repository. Use the existing authorized dashboard/OAuth session or an appropriately scoped Pages deployment credential through its authorized secret mechanism. Do not place credentials in commands, files committed to Git, uploads, logs or this runbook. A token/account ID is not required inside the static artifact.
 
-Native dashboard entry: [Workers & Pages](https://dash.cloudflare.com/?to=/:account/workers-and-pages). Select/create a **Direct Upload** Pages project deliberately; confirm the project name, actual hostname and production branch `main`. Creation may return a different hostname if the preferred name is unavailable; do not enable indexing with a guessed origin. Do not connect Git or enable Web Analytics by inference.
+Native dashboard entry: [Workers & Pages](https://dash.cloudflare.com/?to=/:account/workers-and-pages). The existing project is **ojoaovsousa**, **Direct Upload**, production branch `main`, hostname `ojoaovsousa.pages.dev`. Select that confirmed project for subsequent authorized releases. A different project/hostname requires its own origin validation; do not enable indexing with a guessed origin. Do not connect Git or enable Web Analytics by inference. The code repository is public [jovi47/ojoaovsousa-dev](https://github.com/jovi47/ojoaovsousa-dev); no Git build integration or PR merge follows from that visibility.
 
 ## Local gates and artifact
 
@@ -40,7 +40,7 @@ rtk proxy node scripts/audit.mjs
 rtk git diff --check
 ```
 
-Replace the example origin if account creation confirms a different hostname. Upload **only the audited contents of `dist/`**, including `_headers`, `_redirects` and `404.html`. Never upload the checkout, Git history, Obsidian acervo, originals, `.private/`, real envs, `ACESSOS.local.md`, auth/session state or temporary files. The audit checks allowlisted paths, copied asset bytes and detected key material; additionally review the effective upload paths and content.
+The shown origin is the confirmed production hostname. Replace it only after a separately authorized hostname change and validation. Upload **only the audited contents of `dist/`**, including `_headers`, `_redirects` and `404.html`. Never upload the checkout, Git history, Obsidian acervo, originals, `.private/`, real envs, `ACESSOS.local.md`, auth/session state or temporary files. The audit checks allowlisted paths, copied asset bytes and detected key material; additionally review the effective upload paths and content.
 
 Build flags are local inputs: `SITE_URL` is the confirmed HTTPS production origin; exact `INDEXABLE=true` enables the nine canonical home/policy URLs. Unset/false keeps HTML noindex, robots disallow and sitemap empty. No origin or a local/IP origin cannot enable indexing. Direct remains noindex/canonical-to-home. Never reuse an indexable production artifact as a preview build.
 
@@ -79,7 +79,7 @@ An accepted upload is not healthy publication. Stop on a failed status/header/ha
 
 Before replacing an existing production, record its deployment ID/commit and verify it is a valid recovery target. Native recovery: project **Deployments → All deployments → target production → … → Rollback to this deployment**, confirm, then repeat read-only health and browser checks. Only successful production deployments are native rollback targets; previews cannot be promoted via rollback.
 
-The **first production has no previous deployment** to restore. A failed upload or unknown state requires inspecting the dashboard before any repetition. A failure discovered after first publication requires a corrected audited artifact; do not claim an earlier healthy version exists. This preparation supplies a failing health gate and native recovery procedure, but no unattended rollback controller or tested account-level rollback. Record the actual recovery rehearsal and any first-release limitation when account access is available. No database/migration rollback applies to this static artifact.
+The **first production has no previous deployment** to restore. A failed upload or unknown state requires inspecting the dashboard before any repetition. A failure discovered after first publication requires a corrected audited artifact; do not claim an earlier healthy version exists. The release controls supply a failing health gate and native recovery procedure, but no unattended rollback controller or tested account-level rollback. This first release had no earlier successful production to restore; no rollback rehearsal was performed. Record a real recovery rehearsal when a later valid recovery target exists. No database/migration rollback applies to this static artifact.
 
 After exact successful publication, reconcile GitHub/code and canonical project notes, then retire delivered inactive worktrees using the owner’s safe cleanup procedure. Preserve the one integrated preview and any pending/unpublished work. Do not treat account setup, upload initiation or an old deployment as proof of this revision’s publication.
 
@@ -89,9 +89,29 @@ As verified in official docs on 2026-10-22 UTC, static asset requests that do no
 
 Hosting scenario: static-only Pages Free, no custom domain purchase, no paid plan or add-on. Estimated provider charge for the stated static hosting scope is US$0/month within current terms/limits; actual traffic, account charges and local CPU/energy remain unmeasured. Formula if scope changes: hosting plan + billable Functions/other services + domain + authorized add-ons. The approved external-channel contact window adds no server sending/CAPTCHA service. Static free hosting does not make unrelated future services unlimited or free.
 
-## Evidence and primary sources
+## Confirmed production release
 
-Local preparation: four focused tests pass, covering routing/CSP compatibility contracts, exact artifact mismatch, fake 200 missing routes, required preview noindex, invalid target rejection and control-file audit contents/bytes. No public HTTP check, upload, native header/CSP confirmation, account-level rollback or Search Console action was performed by this preparation.
+Receipt reconciled 2026-10-23 UTC from the integrator; this documentation update did not upload or rerun public requests:
+
+| Item | Confirmed evidence |
+| --- | --- |
+| Source commit | `9f2dbb5544c525dcdea94f81620fcaf731f59126` |
+| Project/plan/mode | `ojoaovsousa`, Pages Free, Direct Upload; static only, no paid add-on/Worker/CAPTCHA/Gmail integration |
+| Production | [https://ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/), localized homes/direct/policies |
+| Deployment | `e89fff77-f23d-4716-ad40-090027f1fddf` |
+| Deployment alias | [https://e89fff77.ojoaovsousa.pages.dev](https://e89fff77.ojoaovsousa.pages.dev) |
+| Exact artifact | 128 files, 9,946,606B; ZIP 5,916,629B |
+| ZIP SHA-256 | `6c2bd1a50ccbcd8ff2f7dfe491d50c8a0d46ba846b327ed8424b148e5dcb0e97` |
+| Local/public gates | 86 local tests, audit 162 eligible sources/128 outputs and 36 exact-artifact HTTP checks passed |
+| Native public QA | Scene and resident GLBs, new approved portrait/sign and three contact destinations; zero forms and no console errors |
+
+The HTTP verifier covers actual statuses/301/404, canonical/indexability, security headers, robots/sitemap, Markdown MIME and exact local artifact bytes. The earlier four focused control/verifier tests covered routing/CSP contracts, mismatch rejection, fake200 missing routes, preview noindex, invalid targets and control-file audit bytes. This is not a load test, physical-device certification, rollback rehearsal or proof of Google indexing.
+
+The Search Console URL-prefix property `https://ojoaovsousa.pages.dev/` was added in the owner-identified account `jovi47personal` but **ownership is not verified**. The verification-file download failed: no file was downloaded into Downloads and no verification file/metatag was installed. UI automation became unstable while the owner used the computer. Next: obtain/install the official verification mechanism in a reviewed release, confirm ownership, submit the actual sitemap and inspect/request indexing where appropriate. **No sitemap submission or indexing request was made; indexing is not confirmed.** Do not store verification/auth secrets or infer success from property creation.
+
+The public repository rename/visibility/homepage was confirmed by REST/API at 2026-10-23 00:30 UTC: [jovi47/ojoaovsousa-dev](https://github.com/jovi47/ojoaovsousa-dev), `private:false`, homepage `https://ojoaovsousa.pages.dev`; the local filesystem root remains `jovi47-portfolio`. No PR merge is confirmed. A tablet/foldable layout report is being investigated in `codex/fold-layout`; no fix or newer release is confirmed by this receipt. Preserve the published artifact identity until a new reviewed release is actually deployed.
+
+## Primary sources
 
 Current official documentation was consulted with Context7 and browser access:
 

@@ -1,6 +1,6 @@
 # Search discovery
 
-Implemented locally on `codex/search-discovery`, based on the visual checkpoint `ab7c922` and its follow-up `1e903d8`, on 2026-10-22 UTC. This delivery prepares static discovery files; it does not select a domain/host, publish the home, contact Google or guarantee ranking, rich results or LLM inclusion.
+Updated 2026-10-23 UTC. Static discovery originated on `codex/search-discovery` and is included in published source `9f2dbb5544c525dcdea94f81620fcaf731f59126` at [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/), Cloudflare Pages Free Direct Upload. [Release receipt](cloudflare-pages.md#confirmed-production-release) identifies the exact artifact. Public source is [jovi47/ojoaovsousa-dev](https://github.com/jovi47/ojoaovsousa-dev); repository visibility does not imply PR merge. Technical crawlability does not guarantee ranking, Google indexing, rich results or LLM inclusion.
 
 ## Content and generation
 
@@ -12,7 +12,7 @@ Implemented locally on `codex/search-discovery`, based on the visual checkpoint 
 - `pt-br/index.md`, `en/index.md`, `es/index.md`: concise localized introduction, existing service descriptions and the two real project links. No raw CV, form data, recipient e-mail or telephone is exported.
 - JSON-LD `Person` and `Service`: João Victor/ojoaovsousa, existing public profiles, localized role/service descriptions and a linked provider. Only the home and its direct reading equivalent emit this graph when an origin is configured. No address, awards, ratings, education or offers/prices are inferred.
 
-Home/direct HTML advertises the localized Markdown alternative and `/llms.txt` using standard link relations. Markdown is generated in the build, not maintained as another copy. The local preview assigns it `text/markdown; charset=utf-8`. Host response types must still be checked after hosting is selected.
+Home/direct HTML advertises the localized Markdown alternative and `/llms.txt` using standard link relations. Markdown is generated in the build, not maintained as another copy. The local preview assigns it `text/markdown; charset=utf-8`. The published artifact passed the 36 HTTP verifier checks, including Markdown MIME; repeat actual host checks for later releases.
 
 ## Build modes
 
@@ -34,18 +34,22 @@ Robots disallow is a crawler directive, not access control or a guaranteed remov
 
 `tests/search-discovery.test.mjs` builds isolated temporary fixtures, preserving the integrated preview. It checks preview/local-origin guards, invalid configuration, opted-in fake-domain metadata, reciprocal language URLs, direct canonical/noindex, nine sitemap URLs, linked factual schema, generated Markdown omissions and exact artifact allowlisting. A fourth Markdown filename is rejected by the audit. Fixture directories are removed after the tests.
 
-The **79-test local suite** passed before incorporating the visual follow-up. After that merge and the policy-description refinement, the three focused discovery tests, default preview build, artifact audit and `git diff --check` passed again. These are source/build checks, not browser acceptance or live HTTP/Search Console evidence. The artifact audit permits exactly `/llms.txt` and the three localized `index.md` outputs and scans them for the existing protected-value patterns.
+The integrated source passed the **86-test local suite**, including discovery fixtures; build and audit passed 162 eligible sources/128 outputs. After publication, the integrator confirmed 36 HTTP checks against the exact frozen artifact and native scene/photo/contact QA. These proofs do not establish Search Console ownership or Google indexing. This documentation update did not rerun those checks. The artifact audit permits exactly `/llms.txt` and the three localized `index.md` outputs and scans them for the existing protected-value patterns.
 
 New text files total **5,585 bytes** in the default preview. At the 25-byte fake origin `https://portfolio.example`, the total is **5,735 bytes**: llms 1,309; PT 1,497; EN 1,382; ES 1,547. Against the same base with that origin, home HTML increases by 935/709/915 bytes in PT/EN/ES, and direct by 810/674/800 bytes; all generated HTML combined increases 4,433 bytes. These are raw, uncompressed build measurements. Real origin length, caching and compression change transfer; Markdown is fetched only when requested. No client dependency, analytics SDK, provider call, paid generation or remote test is added. Monthly marginal transfer is `Σ(requests per artifact × actual transferred bytes)`, with hosting tariffs and traffic still unknown.
 
-## Release and Search Console pending
+## Published release and Search Console pending
 
-1. Owner selects domain/host and authorizes the specific release. Configure its HTTPS origin in `SITE_URL`; do not copy the fixture domain. Keep `INDEXABLE` unset for previews. Current absolute assets/links target an origin root; a GitHub Pages project subpath such as `/jovi47-portfolio/` requires a separate path adaptation. User-root/custom-domain Pages and hosts serving at `/` still need their own actual checks.
-2. Before enabling indexing, verify deployed HTTPS, response codes/404, legacy redirects, canonical/hreflang, policies, sitemap, robots, Markdown MIME and metadata against the exact release. Check real canonical URLs and JSON-LD with the available public validators, without implying a supported rich-result type.
-3. In the correct verified Search Console property, submit the actual sitemap once, inspect the affected canonical URLs and request indexing/new crawl when appropriate. Record accepted requests and later indexing results separately. Do not index direct, previews, APIs/private routes or retired pages.
-4. If a public URL changes later, preserve equivalent pages with permanent redirects where applicable; remove genuinely retired URLs from current links/sitemaps and handle their HTTP/removal evidence explicitly.
+The authorized release uses `SITE_URL=https://ojoaovsousa.pages.dev` and `INDEXABLE=true`; default/local previews retain noindex. No custom domain was purchased. The exact source/deployment/ZIP receipt and 36 public HTTP checks are in [Cloudflare Pages](cloudflare-pages.md#confirmed-production-release). The published sitemap contains the nine canonical home/policy URLs, with direct/legacy/404/Markdown omitted as described above. The source-root configuration does not make a GitHub Pages project subpath compatible without a separately reviewed path adaptation.
 
-No domain, hosting, Search Console property verification, sitemap submission, crawl/indexing request or confirmation has been performed by this delivery. Contact backend/antispam remains a separate objective.
+A URL-prefix property for `https://ojoaovsousa.pages.dev/` was added in the account identified as `jovi47personal`, but **ownership remains unverified**. The verification-file download failed; no verification file was downloaded into Downloads or installed in the site, and no metatag was installed. UI automation became unstable while the owner used the computer. Property creation alone proves neither ownership nor indexing.
+
+1. Obtain the official verification mechanism, install it in a reviewed authorized release and confirm ownership in the correct property; do not store auth/session secrets in Git or docs.
+2. Submit the real [sitemap.xml](https://ojoaovsousa.pages.dev/sitemap.xml) once and confirm its reading, avoiding redundant submissions.
+3. Inspect canonical PT-BR/en/es homes and request indexing/new crawl when appropriate. Record accepted requests separately from later indexing results. Do not request direct, previews, private/retired pages or hypothetical APIs.
+4. For future URL changes, preserve equivalents with permanent redirects when applicable, or remove retired URLs from current links/sitemaps and handle HTTP/removal evidence explicitly.
+
+**No sitemap submission or crawl/indexing request has been made; Google indexing is not confirmed.** Contact uses visitor-chosen WhatsApp/mailto/Copy/LinkedIn, with no form, backend, Gmail SMTP/API or CAPTCHA. That owner decision replaced the earlier contact-backend proposal; it is not a pending integration requirement. No remote CI, new provider or Search Console operation was performed by this documentation reconciliation.
 
 ## Primary references
 
