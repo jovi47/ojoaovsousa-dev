@@ -100,7 +100,7 @@ async function start(){
   body.classList.add('immersive','world-loaded');body.classList.remove('graphics-failed');
   worldStatus.textContent=reduced.matches?labels.reduced:canvas.dataset.exploreReady==='false'?labels.constructionStack:(labels.readySea||labels.ready);
   document.querySelector('[data-retry]').hidden=true;
-  applySeason();world.setReading(body.classList.contains('reading'));world.goTo(location.hash.slice(1)||'intro');
+  applySeason();world.setReading(body.classList.contains('reading'));const hash=location.hash.slice(1);if(hash||!body.classList.contains('mobile-entry'))world.goTo(hash||'intro');
  }catch(error){
   console.error('World initialization failed:',error);body.classList.add('graphics-failed');body.classList.remove('immersive','world-loaded');
   worldStatus.textContent=labels.fallback;document.querySelector('[data-retry]').hidden=false;reading(true);

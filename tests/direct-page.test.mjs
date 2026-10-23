@@ -88,3 +88,41 @@ test('the skills API renders 54 named technologies with local icons and no score
   assert.doesNotMatch(html,/aria-(?:label|description)="[^"]*(?:familiaridade|familiarity|familiaridad)/i);
  }
 });
+
+
+test('reading case order explains each project before its visual and actions',()=>{
+ for(const [key,c] of Object.entries(content)){
+  const html=renderDirectContent(c,key);
+  for(const item of c.work.cases){
+   const article=html.match(new RegExp(`<article id="case-${item.id}"[^>]*>([\\s\\S]*?)</article>`))?.[1];
+   assert.ok(article,`${key}: ${item.id} article`);
+   const description=article.indexOf(e(item.description)),mockup=article.indexOf('data-project-mockup'),actions=article.indexOf('class="project-actions"');
+   assert.ok(article.indexOf('class="brand-image project-logo"')<description,`${key}: logo precedes explanation`);
+   assert.ok(description<mockup&&mockup<actions,`${key}: explanation, preview, then actions`);
+   assert.equal((article.match(/\bdata-project-mockup(?:\s|=|>)/g)||[]).length,1);
+   assert.ok(actions<article.indexOf('class="project-quote"'),`${key}: attribution follows actions`);
+  }
+ }
+});
+
+test('reading biography introduces the portrait beside its first paragraph without duplicating it',()=>{
+ for(const [key,c] of Object.entries(content)){
+  const html=renderDirectContent(c,key),about=html.match(/<section id="about"[^>]*>([\s\S]*?)<\/section>/)?.[1];
+  assert.ok(about);
+  assert.ok(about.indexOf('id="about-title"')<about.indexOf('class="direct-about-portrait"'),`${key}: heading introduces biography`);
+  assert.ok(about.indexOf('class="direct-about-portrait"')<about.indexOf(e(c.about.paragraphs[0])),`${key}: portrait meets first paragraph`);
+  assert.equal((about.match(/src="\/portrait.jpg"/g)||[]).length,1);
+  for(const paragraph of c.about.paragraphs)assert.ok(about.includes(e(paragraph)));
+ }
+});
+
+test('reading services retain their complete copy with decorative existing local icons',()=>{
+ for(const [key,c] of Object.entries(content)){
+  const html=renderDirectContent(c,key),services=html.match(/<dl class="direct-expertise">([\s\S]*?)<\/dl>/)?.[1];
+  assert.ok(services);
+  const icons=[...services.matchAll(/<img class="direct-service-icon"[^>]*>/g)].map(match=>match[0]);
+  assert.equal(icons.length,c.expertise.items.length);
+  for(const icon of icons){assert.match(icon,/src="\/technology-icons\/[a-z0-9-]+\.svg"/);assert.match(icon,/alt="" aria-hidden="true"/);}
+  for(const item of c.expertise.items){assert.ok(services.includes(e(item.title)));assert.ok(services.includes(e(item.body)));}
+ }
+});

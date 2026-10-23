@@ -150,3 +150,30 @@ body:not(.construction-started):not(.tour-complete):not(.reading):not(.graphics-
  body.tour-complete:not(.reading):not(.graphics-failed) .viewer-card{grid-area:details;position:relative;inset:auto;margin:0 12px;max-height:calc(100svh - var(--header-height) - 2 * var(--gutter))}
  body.tour-complete:not(.reading):not(.graphics-failed) .viewer-reading .direct-hero{padding-top:var(--direct-space)}
 }
+
+.viewer-replay-label,.viewer-touch-hint{display:none}
+@media(max-width:700px){
+ body:not(.reading):not(.graphics-failed) .viewer-tour{height:auto;min-height:0}
+ body.world-loaded:not(.reading):not(.graphics-failed) .viewer-board{position:relative;top:auto;display:grid;grid-template-areas:"intro" "scene" "navigation" "controls" "hint";height:auto;overflow:visible;gap:12px;background:transparent}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-board .viewer-intro{grid-area:intro;position:relative;inset:auto;transform:none;width:auto;max-height:none;overflow:visible;overscroll-behavior:auto;margin:0;padding:28px 20px 12px;text-align:left;background:transparent;transition:none}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-identity{justify-content:flex-start;gap:12px}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-identity>img{width:48px;height:60px}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-identity h1{font-size:clamp(30px,9vw,38px);max-width:none}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-role{font-size:12px;margin-bottom:5px}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-offer{font-size:22px;line-height:1.2;max-width:25ch;margin:18px 0 0}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-intro-description{display:block;font-size:14px;line-height:1.5;margin:12px 0 0;max-width:40ch}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-intro .panel-actions{justify-content:flex-start;gap:10px;margin-top:18px}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-intro .button{font-size:13px;min-height:44px;padding:11px 14px}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-board .viewer-start-cue{display:none}
+ body:not(.reading):not(.graphics-failed) .viewer-page .world-stage{grid-area:scene;position:relative;inset:auto;height:clamp(220px,36svh,300px);width:100%}
+ body:not(.reading):not(.graphics-failed) .viewer-houses{grid-area:navigation;position:static;inset:auto;transform:none;width:auto;max-width:none;margin:0 12px;padding:0;background:transparent;gap:4px}
+ body:not(.reading):not(.graphics-failed) .viewer-house-button{min-height:58px;font-size:11px;padding:7px 4px;gap:5px}
+ body:not(.reading):not(.graphics-failed) .viewer-house-question>span:last-child{font-size:10px;white-space:normal}
+ body:not(.reading):not(.graphics-failed) .viewer-landmark-tools{grid-area:controls;position:static;inset:auto;justify-content:center;gap:8px;padding:0 12px;background:transparent}
+ body:not(.reading):not(.graphics-failed) .viewer-landmark-tools [data-replay-landmark]{display:inline-flex;align-items:center;justify-content:center;width:auto;gap:8px;padding-inline:12px;font-size:12px}
+ .viewer-replay-label{display:inline}
+ .viewer-touch-hint{grid-area:hint;display:block;margin:0 18px 18px;text-align:center;font-size:11px;line-height:1.5;color:var(--soft)}
+ .viewer-page #viewer-card{display:none}
+ .viewer-page .viewer-reading{display:block}
+ .world-loaded:not(.reading):not(.graphics-failed) .viewer-reading>.direct-hero{display:none}
+}

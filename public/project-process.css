@@ -48,3 +48,14 @@
  @keyframes process-dino-run{from{transform:translateX(-96px)}to{transform:translateX(100%)}}
  @keyframes process-dino-step{50%{transform:translateY(-4px)}}
 }
+
+
+/* Compact stages remain native buttons; the live preview keeps its own scroll. */
+@media(max-width:799px){
+ .project-process{margin-top:24px}.project-process-pin{gap:16px}.project-process-steps ol{gap:8px}.project-process-steps li{border:0}.project-process-steps button,.project-process[data-process-enhanced] .project-process-steps button{min-height:64px;padding:12px;gap:8px;border:1px solid color-mix(in srgb,var(--ink) 17%,transparent);border-radius:5px;background:color-mix(in srgb,var(--panel) 45%,var(--bg))}.project-process-steps button[aria-current=step]{border-color:var(--gold)}.project-process-steps strong{font-size:17px;line-height:1.2;overflow-wrap:anywhere}.project-process-number{line-height:22px}.project-process-description{font-size:12px}.project-process[data-process-enhanced] .project-process-active-description:not([hidden]){font-size:14px;line-height:1.45;min-height:0;margin:12px 0 0}.project-process-note{font-size:11px;line-height:1.45;margin-top:12px}
+}
+@media(max-width:700px){
+ .project-process-screen{height:clamp(220px,55vw,270px)}.project-process-panel{padding:16px}.project-process-toolbar{padding:10px 12px}.project-process-terminal-heading{padding-bottom:10px}.project-process-output{margin-top:12px}.project-process-status{font-size:12px;line-height:1.4;min-height:0;margin-top:11px}.project-process-preview figcaption{font-size:10px;line-height:1.4}
+ .project-process-delivery{padding:12px 18px 40px}.project-process-delivery-mark{width:56px;height:56px;margin-bottom:8px}.project-process-delivery h3{font-size:clamp(24px,6vw,30px);line-height:1.08;max-width:16ch}.project-process-delivery p{font-size:12px;line-height:1.4;max-width:28ch;margin-top:9px}.project-process-runner{bottom:12px;height:40px}.project-process-runner svg{width:70px;height:40px}.project-process-ground{bottom:14px}
+}
+@media(max-width:360px){.project-process-steps button,.project-process[data-process-enhanced] .project-process-steps button{padding:10px 9px;gap:6px}.project-process-steps strong{font-size:15px}}
