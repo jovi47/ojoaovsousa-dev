@@ -2,6 +2,15 @@
 
 Updated 2026-10-23 UTC. Current published source `488d3e3184c74bc82706c7c0b0c42ee6617601ec` ([PR8](https://github.com/jovi47/ojoaovsousa-dev/pull/8), integration `43af65e`) includes synchronized compact context and `99f479d`. The source passed 96/96 local tests (zero failures/skips, 1.20885s Node), default build, whitespace check and audit 164 sources/128 outputs. Direct Upload succeeded on 2026-10-23 UTC, deployment `34340e9f-8a71-4ee8-8384-78f709f5be8a` ([alias](https://34340e9f.ojoaovsousa.pages.dev)), with 36 exact-artifact + 3 critical-CSS checks passed. Local/public observed browser QA is recorded below; physical touch/pinch remains untested. Previous healthy source fd9/3a6 is the verified recovery target, without an actual rollback rehearsal. Later docs commits are not another deployed source.
 
+## Search Console verification-only preparation · 2026-10-27 UTC
+
+Branch `codex/gsc-verification` starts at exact published `488d3e3184c74bc82706c7c0b0c42ee6617601ec`. Its only runtime change is the provider-supplied public HTML metatag in the root/three production home heads. No404, Safari resolution or optional analytics change is included. Root301 and all visible behavior remain unchanged. Historical receipts below belong to their stated sources; the current published baseline is488/34340e9f.
+
+The real shared renderer regression first failed because the tag was absent (0 instead of1), then passed1/1 after the minimal conditional head addition. The test checks exactly one head tag in all three languages and absence from body, direct/policy paths and a different origin. Syntax and whitespace checks passed; this is not external Search Console verification. Full tests/build/audit, source freeze and a comparison with the original488 artifact will run in one admitted Jovi job before upload. Comparison must allow only the four exact tag insertions; all remaining files/bytes must match. No SDK or provider network call is part of these gates. No publication, ownership verification, sitemap submission or indexing is claimed here.
+
+Cost impact: no paid resource or recurring service added. The tag is static metadata without a browser request; measured package delta will be recorded in the frozen artifact receipt, while real monthly transfer and request volume remain N/D. Preserve the tag in future releases after verification.
+
+
 ## Current selector correction
 
 Published immutable source `488d3e3184c74bc82706c7c0b0c42ee6617601ec` on `codex/mobile-entry`, integration `43af65e`, including `99f479d`: compact selectors through 1100px now synchronize the visible introduction’s offer/description with the model, reusing the selected hidden rich card’s title/first direct paragraph. About me restores the original copy; the identity H1, primary contact action and full reading remain. Scroll/resize retain the selected context, controls identify the visible introduction plus canvas, and the existing status announces the title. The same delivery includes `99f479d`, hiding only the successfully loaded phone opening’s secondary reading action through 700px; footer/recovery and wider layouts remain.
