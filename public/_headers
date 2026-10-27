@@ -4,7 +4,7 @@
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'sha256-dZlj+ZAnbfiXXvajD3lIouM1IlH83htuxjAiWMUjWPo='; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://www.clarity.ms https://scripts.clarity.ms; style-src 'self' 'sha256-dZlj+ZAnbfiXXvajD3lIouM1IlH83htuxjAiWMUjWPo='; img-src 'self' data: blob: https://*.clarity.ms https://c.bing.com; connect-src 'self' blob: https://*.clarity.ms; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'
 
 /:locale/index.md
   Content-Type: text/markdown; charset=utf-8
