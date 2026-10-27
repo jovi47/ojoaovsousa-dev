@@ -1,7 +1,7 @@
 import {mkdir,writeFile,cp,rm} from 'node:fs/promises';
 import {directHome} from '../src/direct-page.mjs';
 import {content} from '../src/content.mjs';
-import {policy,document,escape} from '../src/city-page.mjs';
+import {policy,notFound,document,escape} from '../src/city-page.mjs';
 import {blackHome as home} from '../src/black-page.mjs';
 import {searchConfig,localizedMarkdown,llmsIndex} from '../src/search-discovery.mjs';
 const root=new URL('../',import.meta.url),out=new URL('dist/',root);
@@ -23,7 +23,7 @@ for(const [key,c] of Object.entries(content)){
  }
 }
 await writeFile(new URL('index.html',out),document(content['pt-br'],'pt-br',home(content['pt-br'],'pt-br'),{base,indexable:false,viewer:true,variant:'black'}));
-await writeFile(new URL('404.html',out),document(content['pt-br'],'pt-br',`<main id="main" class="not-found section-wrap"><a class="wordmark" href="/pt-br/">jovi47.</a><p class="eyebrow">404 / PEÇA NÃO ENCONTRADA</p><h1>Essa peça ainda<br>não se encaixa.</h1><p>O endereço pode ter mudado. Volte à cidade e encontre os projetos e contatos.</p><a class="button" href="/pt-br/">Voltar à cidade ↗</a><div lang="en"><p>Page not found. Return to the city.</p><a href="/en/">English →</a></div><div lang="es"><p>Página no encontrada. Vuelve a la ciudad.</p><a href="/es/">Español →</a></div></main>`,{indexable:false,title:'404 · João Victor'}));
+await writeFile(new URL('404.html',out),document(content['pt-br'],'pt-br',notFound(),{indexable:false,title:'404 · João Victor'}));
 await writeFile(new URL('robots.txt',out),`User-agent: *\n${indexable?'Allow: /':'Disallow: /'}\n${indexable?`Sitemap: ${base}/sitemap.xml\n`:''}`);
 await writeFile(new URL('llms.txt',out),llmsIndex(content,base));
 const urls=indexable?Object.keys(content).flatMap(key=>['','privacy/','terms/'].map(path=>`<url><loc>${escape(`${base}/${key}/${path}`)}</loc></url>`)).join(''):'';

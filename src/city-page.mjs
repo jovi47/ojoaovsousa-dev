@@ -49,6 +49,15 @@ export function inquiry(c,key){
  const q=c.inquiry;
  return `<dialog id="inquiry-dialog" class="contact-dialog" aria-labelledby="inquiry-title"><div class="dialog-top"><span>João Victor</span>${btn('data-close aria-label="'+e(c.ui.close)+'"','×','icon-button')}</div><h2 id="inquiry-title">${e(q.title)}</h2><p>${e(q.description)}</p><nav aria-label="${e(q.channels)}">${contactLinks(c,{dialog:true})}</nav><p class="contact-copy-status small" data-contact-status role="status"></p><p class="small contact-dialog-note">${e(q.note)} <a href="/${key}/privacy/">${e(c.ui.privacy)}</a></p></dialog>`;
 }
+export function notFound(){
+ return `<main id="main" class="not-found section-wrap" aria-labelledby="not-found-title">
+ <a class="wordmark text-link" href="/pt-br/" aria-label="João Victor · ojoaovsousa">ojoaovsousa</a>
+ <p class="eyebrow">404 / PÁGINA NÃO ENCONTRADA</p><h1 id="not-found-title">Página não encontrada.</h1>
+ <p>Confira o endereço ou volte ao portfólio. Você também pode continuar sem o 3D.</p>
+ <div class="panel-actions"><a class="button" href="/pt-br/">Voltar ao portfólio ↗</a><a class="text-link" href="/pt-br/direct/">Ler sem 3D</a></div>
+ <div lang="en"><p>Page not found. Return to the portfolio.</p><a class="text-link" href="/en/">English →</a></div>
+ <div lang="es"><p>Página no encontrada. Vuelve al portafolio.</p><a class="text-link" href="/es/">Español →</a></div></main>`;
+}
 export function policy(c,key,type){const p=c[type];return `${header(c,key)}<main id="main" class="policy" tabindex="-1"><a class="text-link" href="/${key}/">${e(c.ui.back)}</a><h1>${e(p.title)}</h1><p>${e(p.intro)}</p>${p.sections.map(s=>`<section><h2>${e(s.title)}</h2><p>${e(s.body)}</p></section>`).join('')}</main>${footer(c,key)}`;}
 export function document(c,key,body,{base='',indexable=false,title=c.title,description=c.description,path='',canonicalPath=path,direct=false,viewer=false,variant='island'}={}){
  const url=base?`${base}/${key}/${canonicalPath}`:'';
