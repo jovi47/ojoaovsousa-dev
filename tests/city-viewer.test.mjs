@@ -17,6 +17,34 @@ test('touch rotation waits for an intentional horizontal gesture and leaves vert
  for(const [x,y] of [[0,6],[2,-12],[20,20],[-8,20]])assert.equal(touchDragAxis(x,y),'vertical');
 });
 
+test('renderer resize preserves Retina detail for fine hover pointers and keeps existing touch limits',async()=>{
+ const cases=[
+  ...[390,1084,1100,1101,1280].map(width=>({width,dpr:2,fine:true,hover:true,want:2})),
+  {width:1084,dpr:3,fine:true,hover:true,want:2},
+  {width:1084,dpr:1.25,fine:true,hover:true,want:1.25},
+  {width:1280,dpr:1,fine:true,hover:true,want:1},
+  {width:1084,dpr:2,fine:true,hover:false,want:1.15},
+  {width:1084,dpr:2,fine:false,hover:true,want:1.15},
+  {width:390,dpr:2,fine:false,hover:false,want:1.15},
+  {width:1100,dpr:2,fine:false,hover:false,want:1.15},
+  {width:1101,dpr:2,fine:false,hover:false,want:1.4},
+  {width:1280,dpr:1,fine:false,hover:false,want:1},
+ ];
+ for(const {width,dpr,fine,hover,want} of cases){
+  const f=await selectionContextFixture(),ratios=[],sizes=[],cssWidth=width===1084?1012:width,height=339.109375;
+  Object.assign(f.context,{innerWidth:width,devicePixelRatio:dpr,matchMedia:query=>{
+   const features={'(pointer: fine)':fine,'(hover: hover)':hover,'(pointer: fine) and (hover: hover)':fine&&hover};
+   assert.ok(Object.hasOwn(features,query));return {matches:features[query]};
+  }});
+  f.context.canvas.getBoundingClientRect=()=>({width:cssWidth,height});
+  f.context.renderer={setPixelRatio:value=>ratios.push(value),setSize:(...args)=>sizes.push(args)};
+  f.resize();
+  assert.deepEqual(ratios,[want],`${width}px, DPR${dpr}, fine=${fine}, hover=${hover}`);
+  assert.deepEqual(sizes,[[cssWidth,height,false]],'CSS geometry stays unchanged');
+  assert.equal(f.context.camera.aspect,cssWidth/height);
+ }
+});
+
 test('renderer startup preserves mobile scroll without a fragment while honoring explicit anchors and the desktop introduction',async()=>{
  const source=await readFile(new URL('../public/city-app.js',import.meta.url),'utf8');
  const start=source.slice(source.indexOf('async function start(){'),source.indexOf("document.querySelector('[data-retry]')?.addEventListener"));
@@ -102,6 +130,7 @@ async function selectionContextFixture(key='pt-br'){
  const nodes={'#viewer-card':card,'.viewer-intro':intro,'.viewer-offer':offer,'.viewer-intro-description':description,'#world-status':status,'.viewer-board':board,'.viewer-tour':tour};
  const document={body:{classList:{toggle(){},add(){},remove(){}}},querySelector:selector=>nodes[selector]||null,querySelectorAll:selector=>selector==='[data-viewer-card]'?panels:selector==='[data-select-building],[data-building-step]'?buttons:[]};
  const context={document,mobileEntry:true,introOffer:u.offer,introDescription:c.hero.description,enter:node=>animations.push(node),reading:false,disposed:false,construction:1,assembled:true,reduced:false,selected:'stack',storyProgress:1,chapter:null,constructionStarted:false,scrollY:100,storyLengths:[],storyTop:()=>0,storyScrollFrame:()=>({}),constructionFrame:()=>({progress:1,building:null,phase:'complete'}),copy:{...u,ready:'Ready',projectTitle:'Desktop completed introduction'},invalidate(){},usesViewerFlow,innerWidth:430,innerHeight:740,devicePixelRatio:1,measureStory(){},renderer:{setPixelRatio(){},setSize(){}},camera:{updateProjectionMatrix(){}},canvas:{dataset:{},style:{},getBoundingClientRect:()=>({width:430,height:270}),setAttribute:(name,value)=>attributes.set(name,value)}};
+ context.matchMedia=()=>({matches:false});
  const functionSource=(start,end)=>source.slice(source.indexOf(start),source.indexOf(end));
  const functions=runInNewContext(`${functionSource('function showPanel(', 'function setSelection(')}
 ${functionSource('function syncConstruction(){','function storyScroll(){')}
