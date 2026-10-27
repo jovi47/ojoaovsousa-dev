@@ -233,7 +233,9 @@ export async function createCity(canvas,copy,openInquiry){
   if(mobileEntry){assembled=true;construction=1;document.body.classList.add('tour-complete');document.body.classList.remove('construction-started');}
   canvas.setAttribute('aria-describedby',mobileEntry?'viewer-mobile-help':'viewer-help');
   for(const button of document.querySelectorAll('[data-select-building],[data-building-step]'))button.setAttribute('aria-controls',mobileEntry?'viewer-intro city-canvas':'viewer-card');
-  const mobile=usesViewerFlow(innerWidth),rect=canvas.getBoundingClientRect(),width=rect.width||innerWidth,height=rect.height||innerHeight;renderer.setPixelRatio(Math.min(devicePixelRatio||1,mobile?1.15:1.4));renderer.setSize(width,height,false);camera.aspect=width/height;camera.fov=mobile?54:38;camera.updateProjectionMatrix();measureStory(true);syncConstruction();if(construction>=1)setSelection(selected||(mobileEntry?'stack':'challenge'),false);invalidate();
+  const mobile=usesViewerFlow(innerWidth),rect=canvas.getBoundingClientRect(),width=rect.width||innerWidth,height=rect.height||innerHeight;
+  const pixelRatioLimit=matchMedia('(pointer: fine) and (hover: hover)').matches?2:(mobile?1.15:1.4);
+  renderer.setPixelRatio(Math.min(devicePixelRatio||1,pixelRatioLimit));renderer.setSize(width,height,false);camera.aspect=width/height;camera.fov=mobile?54:38;camera.updateProjectionMatrix();measureStory(true);syncConstruction();if(construction>=1)setSelection(selected||(mobileEntry?'stack':'challenge'),false);invalidate();
  }
  function release(){if(drag?.active&&construction>=1&&(drag.moved>=5||drag.interrupted))resumeAfterGesture(drag.moved>=5&&performance.now()-drag.lastMove<100?drag.velocity:0);for(const id of pointers.keys())if(canvas.hasPointerCapture(id))canvas.releasePointerCapture(id);drag=null;pointers.clear();pinch=0;canvas.classList.remove('dragging');invalidate();}
  function stepBuilding(direction){
