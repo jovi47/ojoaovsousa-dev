@@ -8,6 +8,7 @@
 .inquiry-cta .inquiry-cta-icon{width:20px;height:20px}
 
 @media(max-width:700px){
+ .site-header .header-actions>.language-picker>summary,.site-header .header-actions>.theme-toggle{display:grid;place-items:center;flex:none;width:44px;height:44px;min-width:44px;min-height:44px;padding:0}
  .site-header .header-actions>.menu-toggle{display:grid;place-items:center;width:44px;height:44px;min-width:44px;padding:0;font-size:0;line-height:1}
  .site-header .header-actions>.header-contact{display:none}
  body:not(.reading):not(.graphics-failed) .viewer-page .viewer-house-button{min-height:48px;padding:6px 4px;gap:3px;font-size:11px}
