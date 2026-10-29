@@ -85,6 +85,15 @@ test('artifact audit accepts Pages controls and checks their contents and copied
  execFileSync('git',['init','--quiet'],{cwd:directory});
  const audit=()=>execFileSync(process.execPath,['scripts/audit.mjs'],{cwd:directory,encoding:'utf8',stdio:'pipe'});
  assert.match(audit(),/audit passed/);
+ await mkdir(path.join(directory,'.github','workflows'),{recursive:true});
+ await writeFile(path.join(directory,'.github','workflows','deploy-pages.yml'),'name: reviewed deployment\n');
+ assert.match(audit(),/audit passed/);
+ await writeFile(path.join(directory,'.github','workflows','unreviewed.yml'),'name: unreviewed\n');
+ assert.throws(audit,/Unapproved source path: \.github\/workflows\/unreviewed.yml/);
+ await rm(path.join(directory,'.github','workflows','unreviewed.yml'));
+ await writeFile(path.join(directory,'.github','workflows','deploy-pages.yml'),'value: -----BEGIN '+'PRIVATE KEY-----');
+ assert.throws(audit,/Possible protected value in \.github\/workflows\/deploy-pages.yml/);
+ await writeFile(path.join(directory,'.github','workflows','deploy-pages.yml'),'name: reviewed deployment\n');
  await writeFile(path.join(directory,'dist','_headers'),'stale');
  assert.throws(audit,/Stale copied asset: _headers/);
  await writeFile(path.join(directory,'public','_headers'),'-----BEGIN '+'PRIVATE KEY-----');

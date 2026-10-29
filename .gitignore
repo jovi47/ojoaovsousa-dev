@@ -4,6 +4,7 @@ ACESSOS.local.md
 .env
 .env.*
 .vercel/
+.wrangler/
 dist/
 node_modules/
 work/

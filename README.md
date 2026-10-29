@@ -23,6 +23,8 @@ Technology artwork attribution remains available through the footer Licenses lin
 
 ## Architecture and local operation
 
+The repository includes a [deploy-only Actions pipeline](docs/automatic-production.md) for the owner's authorized main-merge production flow and manual Production/Sandbox runs. It preserves local development checks, audited static-only upload, exact post-publication health checks and guarded recovery. Required GitHub secret/variables and a live hosted-run/rollback proof remain external setup/validation; adding these files does not deploy or merge this branch.
+
 Requires Node22+. `scripts/build.mjs` generates static `dist/` from localized ES-module templates and regular public assets. Three.js and fonts are local. There is no framework runtime, database, production API, website-side mail service or Meshy request. Optional Microsoft Clarity starts only after analytics consent in the production build; ordinary local previews keep its SDK disabled. `scripts/dev.mjs` is a loopback file preview with SSE reload, not a contact backend.
 
 - `src/viewer-page.mjs`, `black-page.mjs`, `direct-page.mjs`, `city-page.mjs`: shared home/reading, policies, contact and metadata.
