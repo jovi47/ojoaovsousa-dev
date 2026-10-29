@@ -90,6 +90,7 @@ test('localised stages preserve sixteen log lines and a clearly fictional static
   assert.doesNotMatch(html,/data-process-replay/);
   assert.match(html,/aria-live="polite"/);assert.equal((html.match(/type="button"/g)||[]).length,4);
   assert.doesNotMatch(html,/\bid=|<(?:iframe|img|video|form)\b|https?:\/\/|↗/);
+  assert.doesNotMatch(html,/\bstyle=/, 'preview remains compatible with production CSP');
  }
 });
 
