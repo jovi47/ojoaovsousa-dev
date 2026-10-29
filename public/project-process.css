@@ -1,5 +1,6 @@
+@import url('./process-flight.css');
 .project-process{margin:var(--direct-space,44px) 0;color:var(--ink);min-width:0;position:relative}
-.project-process-title{width:100%;max-width:1040px;margin:0 auto 24px;font-size:clamp(30px,4vw,40px);line-height:1.08;letter-spacing:-.04em;text-wrap:balance}
+:is(.viewer-reading,.direct-main) .project-process-title{width:100%;max-width:none;margin:0 0 24px;text-align:center;font-size:clamp(30px,4vw,40px);line-height:1.08;letter-spacing:-.04em;text-wrap:balance}
 .project-process-pin{display:grid;gap:26px;align-items:start;min-width:0}
 .project-process-steps{min-width:0}.project-process-steps ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:0}
 .project-process-steps li{position:relative;border:0}.project-process-steps li:not(:last-child)::before{content:'';position:absolute;left:14px;top:40px;bottom:-10px;width:1px;background:color-mix(in srgb,var(--ink) 18%,transparent)}
@@ -18,6 +19,7 @@
 .project-process-terminal-heading{display:flex;gap:12px;align-items:center;justify-content:space-between;padding-bottom:15px;border-bottom:1px solid #d1e5d029;font-size:10px;line-height:1.4;color:#9cad9e}
 .project-process-terminal-heading i{width:6px;height:6px;flex:none;background:#ffac6a;border-radius:50%}
 .project-process-output{margin-top:19px;overflow-x:hidden;overflow-y:auto;scrollbar-width:thin;overscroll-behavior:contain;overflow-anchor:none;display:flex;flex-direction:column;justify-content:flex-start;flex:1;min-height:0;font-size:11px;line-height:1.55}
+@media(max-width:959px){.project-process-output{overflow-y:hidden;overscroll-behavior:auto}}
 .project-process-output>div{flex:none;margin-top:14px}.project-process-output p{margin:5px 0;overflow-wrap:anywhere}.project-process-output p>span{color:#b9d7a5;margin-right:9px}
 .project-process-output .project-process-command{color:#ffad71;margin-bottom:9px}.project-process-output .project-process-cursor{color:#b9d7a5;margin-bottom:0;flex:none}
 
@@ -109,20 +111,22 @@
 }
 
 
-/* The desktop demonstration builds beside its terminal; compact screens alternate windows. */
+/* Construction stays visible in both windows: stacked by default, side by side on desktop. */
 .project-process-windows{display:grid;gap:22px;min-width:0}
 .project-process-browser{min-width:0}
 .project-process-browser[hidden],.project-process-building{display:none}
 @media(min-width:960px){
  .project-process[data-process-enhanced] .project-process-windows{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
  .project-process[data-process-enhanced] .project-process-panel{padding:24px}
+}
  .project-process[data-process-enhanced]:not([data-process-phase="4"]) .project-process-window-title{display:none}
  .project-process[data-process-enhanced]:not([data-process-phase="4"]) .project-process-building{display:inline}
  .project-process[data-process-enhanced][data-process-built="0"] .project-process-site-header,
  .project-process[data-process-enhanced]:is([data-process-built="0"],[data-process-built="1"]) :is(.project-process-site-hero>div,.project-process-management-main>:is(span,h3,p)),
  .project-process[data-process-enhanced]:is([data-process-built="0"],[data-process-built="1"],[data-process-built="2"]) :is(.project-process-site-art,.project-process-metrics,.project-process-chart),
  .project-process[data-process-enhanced]:not([data-process-built="4"]) .project-process-site-services{opacity:0;visibility:hidden;translate:0 10px}
-}
-@media(min-width:960px) and (prefers-reduced-motion:no-preference){
+@media(prefers-reduced-motion:no-preference){
  .project-process[data-process-enhanced] :is(.project-process-site-header,.project-process-site-hero>div,.project-process-site-art,.project-process-management-main>:is(span,h3,p),.project-process-metrics,.project-process-chart,.project-process-site-services){transition:opacity .35s ease,translate .35s ease,visibility .35s}
 }
+
+.project-process-shop .project-process-site-hero h3{color:#68527d}.project-process-restaurant .project-process-site-hero h3{color:#8c422d}

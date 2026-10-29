@@ -1,4 +1,5 @@
 import {createProjectExamples} from './project-examples.js';
+import {createProcessFlight} from './process-flight.js';
 const instances=new WeakMap();
 
 export function initProjectProcess(root=document){
@@ -9,19 +10,19 @@ export function initProjectProcess(root=document){
   const terminal=block.querySelector('[data-process-panel="terminal"]'),site=block.querySelector('[data-process-panel="site"]'),status=block.querySelector('[data-process-status]'),description=block.querySelector('[data-process-description]'),output=block.querySelector('.project-process-output');
   const terminalWindow=block.querySelector('[data-process-window="terminal"]'),siteWindow=block.querySelector('[data-process-window="site"]');
   if(buttons.length!==4||logs.length!==4||lines.length!==16||!terminal||!site||!status||!description||!output||!terminalWindow||!siteWindow)continue;
-  const doc=block.ownerDocument,view=doc.defaultView,reduced=view.matchMedia('(prefers-reduced-motion: reduce)'),desktop=view.matchMedia('(min-width: 960px)'),listeners=[];
+  const doc=block.ownerDocument,view=doc.defaultView,reduced=view.matchMedia('(prefers-reduced-motion: reduce)'),listeners=[];
   const examples=createProjectExamples(block);
+  const flight=createProcessFlight(block);
   let timer=null,near=!view.IntersectionObserver,manual=false,disposed=false,count=0,phase=0;
   function listen(target,event,callback){target.addEventListener(event,callback);listeners.push(()=>target.removeEventListener(event,callback));}
   function stop(){if(timer!==null){view.clearTimeout(timer);timer=null;}}
-  function syncMotion(){const active=!disposed&&phase===4&&near&&!doc.hidden&&!reduced.matches;block.dataset.processRunning=String(active);examples.setActive(active);}
+  function syncMotion(){const visible=!disposed&&near&&!doc.hidden&&!reduced.matches,active=visible&&phase===4;block.dataset.processRunning=String(active);examples.setActive(active);flight.sync({count,active:visible&&!manual&&phase<4,reduced:reduced.matches});}
   function finish(){
    if(block.dataset.processFinished==='true')return;
    block.dataset.processFinished='true';doc.body.classList.add('project-process-complete');doc.dispatchEvent(new Event('projectprocesscomplete'));
   }
   function syncPanels(){
-   const split=desktop.matches&&!disposed,finished=phase===4;
-   terminal.hidden=terminalWindow.hidden=!split&&finished;site.hidden=siteWindow.hidden=!split&&!finished;
+   terminal.hidden=terminalWindow.hidden=disposed;site.hidden=siteWindow.hidden=false;
    terminal.setAttribute('aria-hidden',String(terminal.hidden));site.setAttribute('aria-hidden',String(site.hidden));
   }
   function render(next,focus=false){
@@ -48,12 +49,12 @@ export function initProjectProcess(root=document){
    listen(button,'click',()=>choose(index));
    listen(button,'keydown',event=>{const next=event.key==='Home'?0:event.key==='End'?3:['ArrowDown','ArrowRight'].includes(event.key)?(index+1)%4:['ArrowUp','ArrowLeft'].includes(event.key)?(index+3)%4:null;if(next===null)return;event.preventDefault();choose(next,true);});
   });
-  listen(desktop,'change',syncPanels);
   listen(doc,'visibilitychange',()=>{if(doc.hidden)stop();else schedule();syncMotion();});
+  listen(view,'resize',()=>flight.resize());
   listen(reduced,'change',()=>{if(reduced.matches){stop();count=lines.length;render(4);if(near)finish();}else schedule();syncMotion();});
   const observer=view.IntersectionObserver?new view.IntersectionObserver(entries=>{for(const entry of entries){near=entry.isIntersecting&&entry.intersectionRatio>=.25;if(near){if(reduced.matches&&phase===4)finish();schedule(count?420:400);}else{stop();if(!entry.isIntersecting&&!reduced.matches){manual=false;count=0;render(0);}}syncMotion();}},{threshold:[0,.25]}):null;
-  observer?.observe(block);if(reduced.matches)count=lines.length;render(reduced.matches?4:0);block.dataset.processEnhanced='true';if(reduced.matches){if(near)finish();}else schedule(400);
-  const cleanup=()=>{if(disposed)return;disposed=true;stop();examples.destroy();observer?.disconnect();for(const remove of listeners)remove();count=lines.length;render(4);description.hidden=true;delete block.dataset.processEnhanced;delete block.dataset.processFinished;delete block.dataset.processRunning;doc.body.classList.remove('project-process-complete');instances.delete(block);};
+  observer?.observe(block);if(reduced.matches)count=lines.length;render(reduced.matches?4:0);block.dataset.processEnhanced='true';flight.resize();if(reduced.matches){if(near)finish();}else schedule(400);
+  const cleanup=()=>{if(disposed)return;disposed=true;stop();examples.destroy();flight.destroy();observer?.disconnect();for(const remove of listeners)remove();count=lines.length;render(4);description.hidden=true;delete block.dataset.processEnhanced;delete block.dataset.processFinished;delete block.dataset.processRunning;doc.body.classList.remove('project-process-complete');instances.delete(block);};
   instances.set(block,cleanup);dispose.push(cleanup);
  }
  return ()=>{for(const cleanup of dispose)cleanup();};

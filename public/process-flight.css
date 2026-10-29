@@ -1,0 +1,6 @@
+.project-process{isolation:isolate}
+.process-flight{position:absolute;top:0;left:0;z-index:0;width:var(--flight-width,100%);margin-left:var(--flight-left,0px);height:var(--flight-height,100%);overflow:clip;pointer-events:none;user-select:none;contain:paint}
+.process-flight[hidden]{display:none}
+.project-process>.project-process-title,.project-process>.project-process-pin{position:relative;z-index:1}
+.process-flight-plane{position:absolute;left:-30px;top:-26px;display:block;width:60px;height:52px;transform-origin:50% 50%;will-change:transform}
+@media(prefers-reduced-motion:reduce){.process-flight{display:none!important}}
