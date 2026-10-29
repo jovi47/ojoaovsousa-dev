@@ -5,6 +5,7 @@ ACESSOS.local.md
 .env
 .env.*
 .vercel
+.wrangler
 node_modules
 work
 .wrangler/

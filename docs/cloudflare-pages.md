@@ -1,6 +1,10 @@
-# Cloudflare Pages: manual release
+# Cloudflare Pages: release and recovery
 
 Updated 2026-10-23 UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). The owner-authorized source `9f2dbb5544c525dcdea94f81620fcaf731f59126` was published and verified as recorded below. No custom domain was purchased. This runbook separates the confirmed release from instructions for future releases and unresolved Search Console/recovery work.
+
+## Repository deployment automation
+
+The owner's2026-10-29 request adds a reviewed GitHub Actions workflow: relevant merges/pushes to main deploy production; manual Production/Sandbox entries run checks only as part of deployment. Exact-byte health failure after confirmed publication can roll back to the captured previous deployment, guarded against known supersession. Direct Upload remains the hosting model; no Cloudflare Git integration or new project is created. See [automatic production](automatic-production.md) for required secret/variables, ordering, unknown-result reconciliation, recovery tests and limits. Configuration in this branch is not proof that GitHub credentials/environments are installed or that any hosted run/rollback has occurred.
 
 ## Prepared release · 2026-10-29 UTC
 
