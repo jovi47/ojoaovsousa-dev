@@ -12,7 +12,7 @@ class Target extends EventTarget{
  get listenerCount(){return [...this.listeners.values()].reduce((count,listeners)=>count+listeners.size,0);}
 }
 
-function fixture({home=true,reduced=false,exampleCount=0}={}){
+function fixture({home=true,reduced=false,exampleCount=0,flight=false}={}){
  const observers=[],timers=new Map(),scrolls=[],classes=new Set(),style=new Map();
  let now=0,timerId=0,completions=0;
  const reducedMedia=Object.assign(new Target(),{matches:reduced});
@@ -24,7 +24,7 @@ function fixture({home=true,reduced=false,exampleCount=0}={}){
   observe(node){this.targets.push(node);}
   disconnect(){this.disconnected=true;}
  };
- const doc=Object.assign(new Target(),{defaultView:view,hidden:false,body:{classList:{contains:name=>classes.has(name),add:(...names)=>names.forEach(name=>classes.add(name)),remove:(...names)=>names.forEach(name=>classes.delete(name))}}});
+ const doc=Object.assign(new Target(),{defaultView:view,documentElement:{clientWidth:430},hidden:false,body:{classList:{contains:name=>classes.has(name),add:(...names)=>names.forEach(name=>classes.add(name)),remove:(...names)=>names.forEach(name=>classes.delete(name))}}});
  doc.addEventListener('projectprocesscomplete',()=>completions++);
  class Button extends Target{
   constructor(index){super();this.dataset={processStep:String(index),processStatusText:'Stage '+(index+1)};this.attributes=new Map();this.description={textContent:'Description '+(index+1),innerHTML:'Description '+(index+1)};this.focused=false;this.tabIndex=0;}
@@ -44,12 +44,14 @@ function fixture({home=true,reduced=false,exampleCount=0}={}){
  const output={clientHeight:200,position:0,writes:[],get scrollHeight(){return visibleLines()*22+20;},get scrollTop(){return this.position;},set scrollTop(value){this.position=value;this.writes.push(value);}};
  const terminalWindow={hidden:true},siteWindow={hidden:false};
  const nodes={'[data-process-window="terminal"]':terminalWindow,'[data-process-window="site"]':siteWindow,'[data-process-pin]':pin,'[data-process-panel="terminal"]':terminal,'[data-process-panel="site"]':site,'[data-process-status]':status,'[data-process-description]':description,'.project-process-output':output};
+ const animation={currentTime:0,playState:'paused',pause(){this.playState='paused';},play(){this.playState='running';},cancel(){this.playState='idle';},effect:{setKeyframes(){}}},flightLane={hidden:true,style:{setProperty(){}}};
+ if(flight){nodes['[data-process-flight]']=flightLane;nodes['[data-process-plane]']={animate:()=>animation};}
  const examples=Array.from({length:exampleCount},(_,i)=>({hidden:i!==0}));
  const block={dataset:{processCurrent:'3',processPhase:'4'},ownerDocument:doc,
   style:{setProperty:(key,value)=>style.set(key,value),getPropertyValue:key=>style.get(key)||'',removeProperty:key=>style.delete(key)},
   matches:selector=>selector==='[data-project-process]',closest:selector=>selector==='.viewer-reading'&&home?{}:selector==='.direct-page'&&!home?{}:null,
   querySelector:selector=>nodes[selector]||null,querySelectorAll:selector=>selector==='[data-process-example]'?examples:selector==='[data-process-step]'?buttons:selector==='[data-process-log]'?logs:selector==='[data-process-line]'?logs.flatMap(log=>log.lines):[],
-  getClientRects:()=>[{}]};
+  getClientRects:()=>[{}],getBoundingClientRect:()=>({left:24})};
  const root={querySelectorAll:selector=>selector==='[data-project-process]'?[block]:[]};
  function tick(ms){
   const end=now+ms;
@@ -64,8 +66,20 @@ function fixture({home=true,reduced=false,exampleCount=0}={}){
  function visibility(hidden){doc.hidden=hidden;doc.dispatchEvent(new Event('visibilitychange'));}
  function motion(matches){reducedMedia.matches=matches;reducedMedia.dispatchEvent(new Event('change'));}
  function visibleLines(){return logs.reduce((count,log)=>count+(log.hidden?0:log.lines.filter(line=>!line.hidden).length),0);}
- return {root,block,examples,buttons,logs,status,description,terminal,site,terminalWindow,siteWindow,output,view,doc,reducedMedia,observers,timers,classes,style,scrolls,tick,intersect,visibility,motion,visibleLines,get completions(){return completions;}};
+ return {root,block,examples,buttons,logs,status,description,terminal,site,terminalWindow,siteWindow,output,view,doc,reducedMedia,observers,timers,classes,style,scrolls,tick,intersect,visibility,motion,visibleLines,animation,flightLane,get completions(){return completions;}};
 }
+
+test('airplane uses the sixteen-line clock and existing visibility lifecycle without another timer',()=>{
+ const f=fixture({flight:true}),cleanup=initProjectProcess(f.root);
+ assert.equal(f.flightLane.hidden,true);f.intersect(true);assert.equal(f.animation.playState,'running');assert.equal(f.timers.size,1);
+ f.tick(400+3*420);assert.equal(f.animation.currentTime,4*420);
+ f.visibility(true);assert.equal(f.animation.playState,'paused');assert.equal(f.flightLane.hidden,true);assert.equal(f.timers.size,0);
+ f.visibility(false);assert.equal(f.animation.playState,'running');assert.equal(f.timers.size,1);
+ f.buttons[1].click();assert.equal(f.flightLane.hidden,true);assert.equal(f.animation.playState,'paused');assert.equal(f.timers.size,0);
+ f.intersect(false);f.intersect(true);assert.equal(f.animation.currentTime,0);assert.equal(f.animation.playState,'running');
+ f.motion(true);assert.equal(f.flightLane.hidden,true);assert.equal(f.animation.playState,'paused');assert.equal(f.timers.size,0);
+ cleanup();assert.equal(f.animation.playState,'idle');assert.equal(f.view.listenerCount,0);
+});
 
 test('localised stages preserve sixteen log lines and a clearly fictional static website without JS',()=>{
  for(const [key,labels] of Object.entries({'pt-br':['Sua ideia','Análise','Orçamento','Implementação'],en:['Your idea','Analysis','Proposal','Implementation'],es:['Tu idea','Análisis','Presupuesto','Implementación']})){

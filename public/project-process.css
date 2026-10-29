@@ -1,3 +1,4 @@
+@import url('./process-flight.css');
 .project-process{margin:var(--direct-space,44px) 0;color:var(--ink);min-width:0;position:relative}
 :is(.viewer-reading,.direct-main) .project-process-title{width:100%;max-width:none;margin:0 0 24px;text-align:center;font-size:clamp(30px,4vw,40px);line-height:1.08;letter-spacing:-.04em;text-wrap:balance}
 .project-process-pin{display:grid;gap:26px;align-items:start;min-width:0}

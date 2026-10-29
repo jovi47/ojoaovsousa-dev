@@ -1,0 +1,9 @@
+# Process headline flight
+
+The process demonstration includes a decorative orange brick airplane with the header's existing `/jovi-poster.webp` character in its cockpit. The original inline SVG uses no generated or third-party asset and is hidden from assistive technology. The static/no-JavaScript process keeps it hidden.
+
+One native Web Animation crosses a clipped viewport-wide,150px-high lane above the headline. Four complete vertical loops have straight connecting segments. The60px airplane and loop radius remain physical sizes on phones and desktop; resizing recalculates the horizontal route without changing its current clock position. The lane uses the document's client width rather than100vw to exclude scrollbar width.
+
+The existing sixteen-line clock seeks the animation to `count ×420ms`; native playback interpolates between those ticks. No flight timer, requestAnimationFrame loop, dependency or second rendering context is added. Existing visibility and reduced-motion state pause and hide it. Completion places it beyond the opposite edge and hides it; full viewport exit resets the construction and flight together. Manual step inspection hides the paused airplane. Reduced motion removes the decorative lane's reserved space. Cleanup cancels the native animation and removes the resize listener with the existing lifecycle.
+
+Validation: focused process and flight tests cover clock progress, replay, visibility, manual selection, reduced motion, cleanup, resize and unavailable Web Animations support. Native visual QA of the integrated preview remains with the parent task; no server, build, hosted check, push or deployment was started in this worktree. Runtime cost is one compositor animation while the existing construction runs; CPU/energy have not been measured. No recurring service or provider cost is introduced.
