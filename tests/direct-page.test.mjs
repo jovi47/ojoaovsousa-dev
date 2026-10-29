@@ -59,6 +59,7 @@ test('the direct portfolio has complete localised content without the world runt
   assert.equal((factual.match(/class="project-actions"/g)||[]).length,2);
   assert.equal((factual.match(/\bdata-project-process(?:\s|=|>)/g)||[]).length,1);
   assert.ok(factual.indexOf('data-project-process')<factual.indexOf('id="contact"'));
+  assert.ok(factual.indexOf('data-project-process')<factual.indexOf('id="faq"'),`${key}: process precedes common questions`);
   assert.match(factual,/<h3[^>]*class="sr-only"/);
   assert.ok(html.includes(`href="/${key}/"`));
   assert.match(html,/data-inquiry/);
