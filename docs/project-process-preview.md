@@ -31,3 +31,5 @@ The related desktop identity, section rhythm, heading and breakpoint decisions a
 ## Cost and data impact
 
 Two small local HTML/SVG samples and their translations increase generated markup; the shuffle adds four random draws and array swaps per initialization. Existing5000ms timing is reused, with no extra timer, network request, dependency, provider, collected data or storage. Full-page compression, client energy and monthly billing effects have not been measured; no savings or billing claim is made. Canonical context and marketing-source records are reconciled by the parent in the existing portfolio notes, without private material.
+
+Owner refinement after alignment diagnosis: the headline is deliberately centered, like the technology-strip heading. It keeps the full reading width and the scoped specificity fix, so its center is the section center rather than the center of a narrow inherited13ch block.

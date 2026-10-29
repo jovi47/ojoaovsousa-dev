@@ -1,5 +1,5 @@
 .project-process{margin:var(--direct-space,44px) 0;color:var(--ink);min-width:0;position:relative}
-:is(.viewer-reading,.direct-main) .project-process-title{width:100%;max-width:none;margin:0 0 24px;text-align:left;font-size:clamp(30px,4vw,40px);line-height:1.08;letter-spacing:-.04em;text-wrap:balance}
+:is(.viewer-reading,.direct-main) .project-process-title{width:100%;max-width:none;margin:0 0 24px;text-align:center;font-size:clamp(30px,4vw,40px);line-height:1.08;letter-spacing:-.04em;text-wrap:balance}
 .project-process-pin{display:grid;gap:26px;align-items:start;min-width:0}
 .project-process-steps{min-width:0}.project-process-steps ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:0}
 .project-process-steps li{position:relative;border:0}.project-process-steps li:not(:last-child)::before{content:'';position:absolute;left:14px;top:40px;bottom:-10px;width:1px;background:color-mix(in srgb,var(--ink) 18%,transparent)}
