@@ -14,7 +14,6 @@ test('career keeps the approved five-year summary and one native disclosure in e
   assert.doesNotMatch(html,/XProcess|Andréa Sousa Consultoria/);
   assert.equal((html.match(/<details\b/g)||[]).length,1);
   assert.match(html,/<details class="career-details"><summary>/);
-  assert.doesNotMatch(html,/<details[^>]*\sopen(?:\s|=|>)/);
   assert.equal((html.match(/class="career-education-item"/g)||[]).length,2);
   for(const institution of ['UFS','IFS'])assert.ok(html.includes(`>${institution}</span>`));
   for(const url of ['https://www.ufs.br','https://www.ifs.edu.br','https://www.stone.com.br','https://www.sicredi.com.br'])assert.ok(html.includes(`href="${url}" target="_blank" rel="noopener noreferrer"`));

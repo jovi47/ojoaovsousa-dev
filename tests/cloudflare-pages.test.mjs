@@ -15,7 +15,10 @@ test('Pages rules preserve real404 handling and allow only the required inline n
  assert.match(rules,/^\/ \/pt-br\/ 301$/m);
  for(const key of ['pt-br','en','es'])for(const ending of ['','/'])assert.ok(rules.includes(`/${key}/black${ending} /${key}/ 301`));
  assert.doesNotMatch(rules,/^\/\* /m);
- assert.doesNotMatch(csp,/unsafe-inline|unsafe-eval|https?:/);
+ assert.doesNotMatch(csp,/unsafe-inline|unsafe-eval/);
+ assert.match(csp,/^default-src 'self';/);
+ assert.deepEqual(csp.match(/https:\/\/[^ ;]+/g),['https://www.clarity.ms','https://scripts.clarity.ms','https://*.clarity.ms','https://c.bing.com','https://*.clarity.ms']);
+ assert.match(csp,/script-src 'self' https:\/\/www\.clarity\.ms https:\/\/scripts\.clarity\.ms;/);
  assert.match(csp,/connect-src 'self' blob:/);
  const source=await readFile(new URL('src/viewer-page.mjs',root),'utf8');
  for(const [,style] of source.matchAll(/<style>(.*?)<\/style>/g))assert.ok(csp.includes(`'sha256-${createHash('sha256').update(style).digest('base64')}'`));

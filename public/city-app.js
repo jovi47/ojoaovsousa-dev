@@ -25,6 +25,9 @@ const menu=document.querySelector('#mobile-menu'),menuToggle=document.querySelec
 menuToggle?.addEventListener('click',()=>{menu.hidden=!menu.hidden;menuToggle.setAttribute('aria-expanded',String(!menu.hidden));});
 for(const a of menu?.querySelectorAll('a')||[])a.addEventListener('click',()=>{menu.hidden=true;menuToggle.setAttribute('aria-expanded','false');});
 // Keep native disclosure state while its text spans below both stable actions.
+function openExperience(){if(location.hash==='#experience')document.querySelector('#experience .career-details')?.setAttribute('open','');}
+for(const link of document.querySelectorAll('a[href$="#experience"]'))link.addEventListener('click',()=>{if(new URL(link.href,location.href).pathname===location.pathname)document.querySelector('#experience .career-details')?.setAttribute('open','');});
+window.addEventListener('hashchange',openExperience);openExperience();
 for(const details of document.querySelectorAll('.project-detail')){
  const content=details.querySelector('.project-detail-content'),actions=details.closest('.project-actions'),summary=details.querySelector('summary');
  if(!content||!actions||!summary)continue;
@@ -64,12 +67,14 @@ function openResident(id,button){
 for(const button of document.querySelectorAll('[data-resident],[data-place]'))button.addEventListener('click',()=>openResident(button.dataset.resident||button.dataset.place,button));
 residentDialog?.addEventListener('close',()=>{document.dispatchEvent(new CustomEvent('citydialog',{detail:false}));residentFocus?.focus({preventScroll:true});});
 if('IntersectionObserver' in window){
+ const revealTargets=[...document.querySelectorAll('.viewer-intro,.direct-section-intro,.direct-expertise>div,.technology-marquee,.direct-case-copy,[data-project-mockup],.direct-case-end,.direct-about>h2,.direct-about-portrait,.direct-about-copy>p,.career-intro,.career-details,.faq-intro,.faq-item,.project-process-steps,.project-process-preview,.direct-contact-content>div,.site-footer')];
+ revealTargets.forEach((node,i)=>{node.dataset.scrollReveal=['up','left','down','right'][i%4];});
  const observer=new IntersectionObserver(entries=>{for(const entry of entries){
+  if(entry.target.dataset.scrollReveal){if(entry.isIntersecting&&entry.intersectionRatio>=.08)entry.target.classList.add('is-revealed');else if(!entry.isIntersecting)entry.target.classList.remove('is-revealed');}
   if(entry.target.id==='contact')body.classList.toggle('contact-visible',entry.isIntersecting);
   else if(entry.target.matches('[data-project-mockup],[data-inquiry-cta]'))entry.target.classList.toggle('is-visible',entry.isIntersecting);
-  else if(entry.isIntersecting){entry.target.classList.add('revealed');observer.unobserve(entry.target);}
- }},{threshold:.1});
- for(const block of document.querySelectorAll('[data-reveal],[data-project-mockup],[data-inquiry-cta],#contact'))observer.observe(block);
+ }},{threshold:[0,.08,.1]});
+ for(const block of new Set([...revealTargets,...document.querySelectorAll('[data-project-mockup],[data-inquiry-cta],#contact')]))observer.observe(block);
  window.addEventListener('pagehide',event=>{if(!event.persisted)observer.disconnect();});
 }
 document.addEventListener('visibilitychange',()=>body.classList.toggle('page-hidden',document.hidden));

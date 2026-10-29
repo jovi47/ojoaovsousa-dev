@@ -1,3 +1,4 @@
+import {createProjectExamples} from '../public/project-examples.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -26,7 +27,7 @@ function fixture({home=true,reduced=false}={}){
  const doc=Object.assign(new Target(),{defaultView:view,hidden:false,body:{classList:{contains:name=>classes.has(name),add:(...names)=>names.forEach(name=>classes.add(name)),remove:(...names)=>names.forEach(name=>classes.delete(name))}}});
  doc.addEventListener('projectprocesscomplete',()=>completions++);
  class Button extends Target{
-  constructor(index){super();this.dataset={processStep:String(index),processStatusText:'Stage '+(index+1)};this.attributes=new Map();this.description={textContent:'Description '+(index+1)};this.focused=false;this.tabIndex=0;}
+  constructor(index){super();this.dataset={processStep:String(index),processStatusText:'Stage '+(index+1)};this.attributes=new Map();this.description={textContent:'Description '+(index+1),innerHTML:'Description '+(index+1)};this.focused=false;this.tabIndex=0;}
   setAttribute(name,value){this.attributes.set(name,value);}
   removeAttribute(name){this.attributes.delete(name);}
   querySelector(selector){return selector==='.project-process-description'?this.description:null;}
@@ -39,7 +40,7 @@ function fixture({home=true,reduced=false}={}){
   const lines=Array.from({length:4},(_,index)=>({hidden:false,dataset:{processLine:String(index)},textContent:'Stage '+stage+' line '+index}));
   return {hidden:true,dataset:{processLog:String(stage)},lines,querySelectorAll:selector=>selector==='[data-process-line]'?lines:[]};
  });
- const status={textContent:'Online example'},description={hidden:true,textContent:'Description 4'},terminal={hidden:true,setAttribute(name,value){this[name]=value;}},site={hidden:false,dataset:{processComplete:'Online example'},setAttribute(name,value){this[name]=value;}},pin={};
+ const status={textContent:'Online example'},description={hidden:true,textContent:'Description 4',set innerHTML(value){this.textContent=value.replace(/<[^>]*>/g,'');this.html=value;}},terminal={hidden:true,setAttribute(name,value){this[name]=value;}},site={hidden:false,dataset:{processComplete:'Online example'},setAttribute(name,value){this[name]=value;}},pin={};
  const output={clientHeight:200,position:0,writes:[],get scrollHeight(){return visibleLines()*22+20;},get scrollTop(){return this.position;},set scrollTop(value){this.position=value;this.writes.push(value);}};
  const nodes={'[data-process-pin]':pin,'[data-process-panel="terminal"]':terminal,'[data-process-panel="site"]':site,'[data-process-status]':status,'[data-process-description]':description,'.project-process-output':output};
  const block={dataset:{processCurrent:'3',processPhase:'4'},ownerDocument:doc,
@@ -64,7 +65,7 @@ function fixture({home=true,reduced=false}={}){
  return {root,block,buttons,logs,status,description,terminal,site,output,view,doc,reducedMedia,observers,timers,classes,style,scrolls,tick,intersect,visibility,motion,visibleLines,get completions(){return completions;}};
 }
 
-test('localised native markup has four illustrative stages, sixteen log lines and a static delivery without JS',()=>{
+test('localised stages preserve sixteen log lines and a clearly fictional static website without JS',()=>{
  for(const [key,labels] of Object.entries({'pt-br':['Sua ideia','Análise','Orçamento','Implementação'],en:['Your idea','Analysis','Proposal','Implementation'],es:['Tu idea','Análisis','Presupuesto','Implementación']})){
   const html=renderProjectProcess(key);
   assert.equal((html.match(/data-process-step=/g)||[]).length,4);
@@ -74,11 +75,16 @@ test('localised native markup has four illustrative stages, sixteen log lines an
   for(const log of logs)assert.equal((log[2].match(/\bdata-process-line(?:\s|=|>)/g)||[]).length,4);
   assert.equal((html.match(/\bdata-process-line(?:\s|=|>)/g)||[]).length,16);
   for(const label of labels)assert.ok(html.includes(label));
-  assert.match(html,/ilustrativ|illustrative|ilustrativ/);assert.match(html,/Seu site implementado|Your website implemented|Tu sitio web implementado/);
-  assert.match(html,/class="project-process-delivery-mark" aria-hidden="true"><svg/);
-  assert.doesNotMatch(html,/👍/);
-  assert.match(html,/class="project-process-runner" aria-hidden="true"/);
-  assert.doesNotMatch(html,/forma\.example|project-process-leaf|project-process-site-nav/);
+  assert.match(html,/ilustrativ|illustrative/i);
+  assert.match(html,/Estúdio fictício|Fictional studio|Estudio ficticio/);
+  assert.match(html,/class="project-process-site-brand">forma<\/span>/);
+  assert.match(html,/Espaços com intenção|Spaces with intention|Espacios con intención/);
+  assert.match(html,/class="project-process-site-art"[^>]*aria-hidden="true"/);
+  assert.match(html,/class="project-process-site-services"/);
+  const example=html.slice(html.indexOf('data-process-panel="site"'));
+  assert.match(example,/<span class="project-process-site-cta">/);
+  assert.doesNotMatch(example,/<(?:a|button|input|form)\b|href=|onclick=|tabindex=/);
+  assert.doesNotMatch(html,/project-process-delivery-mark|project-process-runner|process-dino|Seu site implementado|Your website implemented|Tu sitio web implementado/);
   assert.match(html,/data-process-phase="4"/);assert.match(html,/data-process-panel="terminal" hidden/);
   assert.doesNotMatch(html,/data-process-panel="site"[^>]*\bhidden/);
   assert.doesNotMatch(html,/data-process-replay/);
@@ -95,7 +101,7 @@ test('logs grow down from the top and only scroll after the fixed output area is
  f.intersect(false);assert.equal(f.output.scrollTop,0);cleanup();
 });
 
-test('the original dinosaur loop runs only on the visible completed preview and cleans up its state',()=>{
+test('completed-preview motion eligibility follows visibility and preference and cleans up its state',()=>{
  const f=fixture(),cleanup=initProjectProcess(f.root);f.intersect(true);assert.equal(f.block.dataset.processRunning,'false');
  f.buttons[3].click();assert.equal(f.block.dataset.processRunning,'true');assert.equal(f.terminal['aria-hidden'],'true');assert.equal(f.site['aria-hidden'],'false');
  f.intersect(true,.24);assert.equal(f.block.dataset.processRunning,'false');f.intersect(true,.25);assert.equal(f.block.dataset.processRunning,'true');
@@ -109,7 +115,7 @@ test('the preview keeps a fixed viewport, top-aligned output and opacity-only li
  assert.doesNotMatch(css,/justify-content:flex-end/);
  assert.match(css,/@keyframes process-line-in\{from\{opacity:0\}to\{opacity:1\}\}/);
  assert.match(css,/transition:opacity \.25s/);
- assert.match(css,/body:has\(dialog\[open\]\)[^{]*\{animation-play-state:paused/);
+ assert.doesNotMatch(css,/process-dino|project-process-runner/);
 });
 
 test('home and direct start only at 25% visibility and reveal sixteen timed lines before the final site',()=>{
@@ -178,6 +184,7 @@ test('reduced motion starts at the final site and never restarts on visibility c
  for(const home of [true,false]){
   const f=fixture({home,reduced:true}),cleanup=initProjectProcess(f.root);
   assert.equal(f.block.dataset.processPhase,'4');assert.equal(f.site.hidden,false);assert.equal(f.terminal.hidden,true);assert.equal(f.timers.size,0);
+  assert.ok(f.buttons.every(button=>button.dataset.processComplete==='true'));assert.equal(f.style.get('--process-link-0'),'1');
   assert.equal(f.block.dataset.processFinished,undefined);assert.equal(f.classes.has('project-process-complete'),false);
   assert.equal(f.completions,0);f.intersect(true,.24);assert.equal(f.completions,0);f.intersect(true,.25);assert.equal(f.completions,1);assert.equal(f.block.dataset.processFinished,'true');assert.ok(f.classes.has('project-process-complete'));f.tick(10000);assert.equal(f.timers.size,0);
   f.buttons[1].click();assert.equal(f.block.dataset.processPhase,'1');assert.equal(f.visibleLines(),8);assert.equal(f.timers.size,0);
@@ -204,4 +211,40 @@ test('initialization is single-instance and cleanup removes timers, observers an
  assert.equal(f.block.dataset.processPhase,'4');assert.equal(f.site.hidden,false);assert.equal(f.terminal.hidden,true);assert.equal(f.description.hidden,true);assert.equal(f.completions,completions);
  f.buttons[2].click();f.visibility(false);f.motion(false);f.tick(10000);assert.equal(f.block.dataset.processPhase,'4');assert.equal(f.timers.size,0);
  const again=initProjectProcess(f.block);assert.equal(f.observers.length,2);assert.equal(f.block.dataset.processPhase,'0');again();
+});
+
+test('connector progress follows the existing stage clock and completed steps stay filled',()=>{
+ const f=fixture(),cleanup=initProjectProcess(f.root);
+ f.intersect(true);assert.equal(f.style.get('--process-link-0'),'0');
+ f.tick(400);assert.equal(f.style.get('--process-link-0'),'0.25');
+ f.tick(3*420);assert.equal(f.style.get('--process-link-0'),'1');assert.equal(f.buttons[0].dataset.processComplete,'true');
+ f.tick(420);assert.equal(f.style.get('--process-link-1'),'0.25');assert.equal(f.buttons[0].dataset.processComplete,'true');
+ f.buttons[3].click();assert.ok(f.buttons.every(button=>button.dataset.processComplete==='true'));
+ cleanup();
+});
+
+test('stage descriptions highlight keywords without leaving markdown or the removed scope note',()=>{
+ for(const key of ['pt-br','en','es']){
+  const html=renderProjectProcess(key);
+  assert.match(html,/<strong>(?:requisitos|requirements)<\/strong>/);
+  assert.doesNotMatch(html,/\*\*|project-process-note|<figcaption|project-process-status/);
+  assert.match(html,/class="sr-only" data-process-status/);
+ }
+ const f=fixture(),cleanup=initProjectProcess(f.root);
+ f.buttons[1].description.innerHTML='Clear <strong>scope</strong>';f.buttons[1].click();
+ assert.equal(f.description.html,'Clear <strong>scope</strong>');
+ cleanup();
+});
+
+test('example carousel cycles at five seconds, pauses and releases its timer',()=>{
+ const examples=[{hidden:false},{hidden:true},{hidden:true}],timers=new Map();let id=0;
+ const block={querySelectorAll:()=>examples,ownerDocument:{defaultView:{setTimeout(fn,ms){assert.equal(ms,5000);timers.set(++id,fn);return id;},clearTimeout(key){timers.delete(key);}}}};
+ const carousel=createProjectExamples(block);
+ const tick=()=>{const [key,fn]=timers.entries().next().value;timers.delete(key);fn();};
+ carousel.setActive(true);carousel.setActive(true);assert.equal(timers.size,1);
+ tick();assert.deepEqual(examples.map(e=>e.hidden),[true,false,true]);
+ tick();assert.deepEqual(examples.map(e=>e.hidden),[true,true,false]);
+ tick();assert.deepEqual(examples.map(e=>e.hidden),[false,true,true]);
+ carousel.setActive(false);assert.equal(timers.size,0);
+ carousel.setActive(true);assert.equal(timers.size,1);carousel.destroy();assert.equal(timers.size,0);
 });

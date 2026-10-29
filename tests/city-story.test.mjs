@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {STORY_BANDS,storyScrollFrame,chapterTrackLengths,readingOffset,storyTrackHeight} from '../public/city-story.js';
+import {STORY_BANDS,storyScrollFrame,chapterTrackLengths,readingOffset,storyTrackHeight,storyScrollOffset} from '../public/city-story.js';
 
 test('a height-capped scene still reserves enough page scroll to finish the last construction on tall screens',()=>{
  const lengths=chapterTrackLengths(1323),span=lengths.reduce((sum,n)=>sum+n,0);
@@ -23,30 +23,43 @@ test('pixel distances map continuously to the existing story bands and exact bou
  assert.equal(storyScrollFrame(2800,lengths).progress,STORY_BANDS.at(-1));
 });
 
-test('track lengths reserve viewport-based building distances and measured text overflow plus its reading buffers',()=>{
- assert.deepEqual(chapterTrackLengths(600,{stack:900,horagora:0,andrea:200}),[850,1300,600,400,600,600,550]);
- assert.deepEqual(chapterTrackLengths(1000),[1200,400,900,400,900,400,800]);
+test('building distances no longer add a separate reading interval for overflowing panels',()=>{
+ assert.deepEqual(chapterTrackLengths(600,{stack:900,horagora:0,andrea:200}),[850,0,600,0,600,0,550]);
+ assert.deepEqual(chapterTrackLengths(1000),[1200,0,900,0,900,0,800]);
+ assert.equal(chapterTrackLengths(600).reduce((sum,n)=>sum+n,0),2600);
 });
 
-test('each text reaches its last line with 240 pixels remaining before the next construction segment',()=>{
- const lengths=chapterTrackLengths(600,{stack:900,horagora:0,andrea:200});
- for(const {start,overflow,end,segment} of [
-  {start:850,overflow:900,end:2150,segment:1},
-  {start:2750,overflow:0,end:3150,segment:3},
-  {start:3750,overflow:200,end:4350,segment:5},
- ]){
-  const lastLine=storyScrollFrame(start+160+overflow,lengths);
-  assert.equal(lastLine.segment,segment);
-  assert.equal(readingOffset(lastLine.within,overflow),overflow);
-  assert.equal(storyScrollFrame(end-1,lengths).segment,segment);
-  assert.equal(storyScrollFrame(end,lengths).segment,segment+1);
+test('each panel scrolls proportionally while its building advances and finishes at the same segment end',()=>{
+ const lengths=chapterTrackLengths(600),overflows=[900,0,200];let start=0;
+ for(const [index,overflow] of overflows.entries()){
+  const segment=index*2,length=lengths[segment];
+  for(const fraction of [0,.25,.5,.75,.999]){
+   const frame=storyScrollFrame(start+fraction*length,lengths);
+   assert.equal(frame.segment,segment);
+   assert.ok(Math.abs(readingOffset(frame.within,overflow,frame.length)-fraction*overflow)<1e-8);
+  }
+  assert.equal(readingOffset(length,overflow,length),overflow);
+  assert.equal(storyScrollFrame(start+length,lengths).segment,segment+2);
+  start+=length;
  }
 });
 
-test('reading starts after its initial hold and never scrolls beyond the measured overflow',()=>{
- for(const [within,overflow,want] of [[0,900,0],[159,900,0],[160,900,0],[161,900,1],[610,900,450],[1060,900,900],[1300,900,900],[400,0,0],[-20,50,0]]){
-  assert.equal(readingOffset(within,overflow),want);
+test('reading follows the same normalized span in either scroll direction and clamps at both edges',()=>{
+ for(const [within,overflow,length,want] of [[0,900,850,0],[425,900,850,450],[850,900,850,900],[1000,900,850,900],[212.5,900,850,225],[400,0,600,0],[-20,50,600,0],[100,50,0,0]]){
+  assert.equal(readingOffset(within,overflow,length),want);
  }
+});
+
+test('hash navigation into a removed reading interval stays on that building instead of skipping ahead',()=>{
+ const lengths=chapterTrackLengths(600);
+ for(const [progress,segment] of [[.12,0],[.28,0],[.4,2],[.47,2],[.62,4],[.8,4],[.93,6]]){
+  assert.equal(storyScrollFrame(storyScrollOffset(progress,lengths),lengths).segment,segment);
+ }
+ assert.equal(storyScrollOffset(-1,lengths),0);
+ assert.equal(storyScrollOffset(1,lengths),2600);
+ assert.equal(storyScrollOffset(10,lengths),2600);
+ assert.equal(storyScrollOffset(NaN,lengths),0);
+ assert.equal(storyScrollOffset(.5,[]),0);
 });
 
 test('negative offsets clamp to the beginning and past-end offsets settle at the final segment',()=>{
@@ -60,13 +73,13 @@ test('zero or invalid dimensions stay finite without DOM access, including track
  assert.equal(typeof document,'undefined');
  const invalid=[undefined,null,NaN,Infinity,-Infinity,-1,'600'];
  for(const value of invalid){
-  assert.deepEqual(chapterTrackLengths(value,{stack:value,horagora:value,andrea:value}),[850,400,600,400,600,400,550]);
-  assert.equal(readingOffset(value,900),0);
-  assert.equal(readingOffset(900,value),0);
+  assert.deepEqual(chapterTrackLengths(value,{stack:value,horagora:value,andrea:value}),[850,0,600,0,600,0,550]);
+  assert.equal(readingOffset(value,900,600),0);
+  assert.equal(readingOffset(900,value,600),0);
   assert.deepEqual(storyScrollFrame(value,[100,200,300,400,500,600,700]),{progress:0,segment:0,within:0,length:100});
  }
  for(const lengths of [undefined,null,{},[],[0,0,0,0,0,0,0],[NaN,-1,Infinity,null,undefined,'2',-Infinity]]){
   assert.deepEqual(storyScrollFrame(400,lengths),{progress:1,segment:6,within:0,length:0});
  }
- assert.deepEqual(chapterTrackLengths(0,null),[850,400,600,400,600,400,550]);
+ assert.deepEqual(chapterTrackLengths(0,null),[850,0,600,0,600,0,550]);
 });

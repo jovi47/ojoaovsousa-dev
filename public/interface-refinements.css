@@ -1,0 +1,31 @@
+/* Shared contact controls keep the same icon and alignment in every layout. */
+.site-header .header-actions{align-items:center}
+.site-header .header-contact{align-items:center;justify-content:center;line-height:1;gap:8px;box-shadow:0 2px 0 var(--ink)}
+.site-header .header-contact-icon{display:block;width:20px;height:20px;flex:none}
+.inquiry-cta{width:auto;height:auto;min-width:0;min-height:46px;padding:10px 14px;gap:8px;border-radius:7px;box-shadow:0 2px 0 var(--button-ink);animation:none}
+.inquiry-cta::before,.inquiry-cta::after{content:none}
+.inquiry-cta .viewer-contact-label{display:block;font-size:14px}
+.inquiry-cta .inquiry-cta-icon{width:20px;height:20px}
+
+@media(max-width:700px){
+ .site-header .header-actions>.menu-toggle{display:grid;place-items:center;width:44px;height:44px;min-width:44px;padding:0;font-size:0;line-height:1}
+ .site-header .header-actions>.header-contact{display:none}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-house-button{min-height:48px;padding:6px 4px;gap:3px;font-size:11px}
+ .viewer-page .viewer-house-button .viewer-brand-symbol{--symbol-size:21px}
+ .viewer-page .viewer-house-button img.viewer-profile-icon{width:21px;height:21px}
+ .viewer-page .viewer-house-question .viewer-question-mark{font-size:23px}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-landmark-tools{grid-area:scene;position:relative;inset:auto;align-self:start;justify-self:end;justify-content:flex-end;gap:3px;width:max-content;padding:3px;margin:4px 8px 0 0;border-radius:6px;background:color-mix(in srgb,var(--bg) 92%,transparent)}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-landmark-tools .icon-button{display:grid;place-items:center;width:44px;height:44px;min-width:44px;min-height:44px;padding:10px}
+ .viewer-page .viewer-landmark-tools svg{width:20px;height:20px}
+ .viewer-page .viewer-landmark-tools .viewer-replay-label{display:none}
+ .inquiry-cta{right:calc(var(--layout-edge) + 6px);bottom:max(14px,env(safe-area-inset-bottom));min-height:46px;padding:10px 13px}
+ .inquiry-cta .viewer-contact-label{font-size:13px}
+}
+
+@media(prefers-reduced-motion:no-preference){
+ .site-header .header-character{transform-origin:50% 80%;animation:header-character-sway 7s ease-in-out infinite}
+ .page-hidden .header-character,.annotation-active .header-character,body:has(dialog[open]) .header-character,.site-header .wordmark:is(:hover,:focus-visible) .header-character{animation-play-state:paused}
+ @keyframes header-character-sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+}
+
+.site-header .menu-toggle svg{display:block;flex:none;width:28px;height:28px}

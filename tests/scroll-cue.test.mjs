@@ -1,0 +1,20 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {runInNewContext} from 'node:vm';
+test('the opening scroll cue dismisses after half a viewport of descent and stays dismissed at the top',()=>{
+ const source=readFileSync(new URL('../public/city.js',import.meta.url),'utf8');
+ const start=source.indexOf(" const more=document.querySelector('[data-more-content]');");
+ const end=source.indexOf('syncMore();',start)+'syncMore();'.length;
+ assert.ok(start>=0&&end>start);
+ const more={},events={};
+ const context={document:{querySelector:()=>more,documentElement:{scrollHeight:4000}},window:{scrollBy(){}},innerHeight:897,scrollY:0,reduced:false,on:(_target,name,handler)=>{events[name]=handler;}};
+ runInNewContext(source.slice(start,end),context);
+ assert.equal(more.hidden,false);
+ context.scrollY=40;events.scroll();assert.equal(more.hidden,false);
+ context.scrollY=0;events.scroll();assert.equal(more.hidden,false);
+ context.scrollY=400;events.scroll();assert.equal(more.hidden,false);
+ context.scrollY=500;events.scroll();assert.equal(more.hidden,true);
+ context.scrollY=0;events.scroll();assert.equal(more.hidden,true);
+ events.resize();assert.equal(more.hidden,true);
+});

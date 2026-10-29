@@ -1,5 +1,9 @@
 # João Victor · ojoaovsousa
 
+Local process refinement: the shared four-stage sequence is horizontal and its terminal completes into a clearly fictional Forma landing-page sample. [Implementation and focused QA](docs/project-process-preview.md) record the local-only state; the published artifact below is unchanged.
+
+Local review follow-up: phone autoplay/enlarged inspection now ends at700px; medium screens use scroll construction. Scene controls are replay plus the four selectors; the labeled FAB is the sole phone header-independent contact shortcut. [Current local implementation and QA limits](docs/mobile-experience.md#local-refinement-awaiting-owner-testing) distinguish this work from the published artifact below. No new deployment is recorded.
+
 A static portfolio in PT-BR, English and Spanish. The single **Montagem 3D** home has light/dark themes, three LEGO buildings (About me, HorAgora and Andréa Sousa Consultoria) and a question-mark challenge, each on a small individual base. Reading uses the same content without requiring 3D. The owner-authorized source `488d3e3184c74bc82706c7c0b0c42ee6617601ec` is published at [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/) through Cloudflare Pages Free Direct Upload. The public repository is [jovi47/ojoaovsousa-dev](https://github.com/jovi47/ojoaovsousa-dev); repository visibility does not imply merge of its independently scoped PRs. [Release evidence](docs/cloudflare-pages.md#confirmed-production-release) records the exact artifact, HTTP checks and remaining Search Console work.
 
 ## Current experience

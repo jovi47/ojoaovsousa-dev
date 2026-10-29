@@ -1,0 +1,5 @@
+# Bottom privacy banner
+
+The privacy choices panel is fixed12px above the viewport bottom with safe-area padding, bounded height and internal overflow for small/landscape screens. It is rendered as a body child, outside the isolated main stacking context. The content and consent panel keep their analytics masks. Floating contact/scroll cues hide while the banner is visible. Choices retain equal44px targets and are centered; header18px/body13px reduce height. An original decorative block-lock SVG reflects the site language. Reopening preferences focuses Recusar without scrolling the document.
+
+Consent,90day expiry, privacy signals, SDK eligibility and provider scopes are unchanged. No acceptance, storage clearing or external tracker request was made during visual QA. Native528px:166.18px panelheight, bottom12px, action-center0px, FABhidden, parentBODY; screenshot saved.5 local analytics tests passed, including no scrollIntoView and preservation of mask/placement. No new dependency, provider, data treatment or cost; metadata/canonical/sitemap unchanged. Local preview only. Deploy remains explicitly paused by the owner.

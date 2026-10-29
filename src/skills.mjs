@@ -17,9 +17,9 @@ const technologies=[
 ];
 const symbols={liveview:'phoenix',rest:'domains',exunit:'elixir',mockito:'harnesses',wiremock:'harnesses',tdd:'ci-cd','unit-tests':'harnesses','integration-tests':'ci-cd',ddd:'3d',solid:'3d',microservices:'infrastructure',scrum:'agents',kanban:'harnesses',ajax:'xml',sql:'pl-sql'};
 const copy={
- 'pt-br':{title:'Tecnologias aplicadas em projetos',list:'Tecnologias',hint:'Tecnologias. Foque esta faixa com o teclado para pausar o movimento.',credits:'Créditos dos ícones',domains:'Domínios',infrastructure:'Infraestrutura',ai:'IA',agents:'Agentes','3d':'Modelagem 3D',rest:'APIs REST','unit-tests':'Testes unitários','integration-tests':'Testes de integração',microservices:'Microsserviços'},
- en:{title:'Technologies applied in projects',list:'Technologies',hint:'Technologies. Focus this strip with the keyboard to pause motion.',credits:'Icon credits',domains:'Domains',infrastructure:'Infrastructure',ai:'AI',agents:'Agents','3d':'3D modelling',rest:'REST APIs','unit-tests':'Unit tests','integration-tests':'Integration tests',microservices:'Microservices'},
- es:{title:'Tecnologías aplicadas en proyectos',list:'Tecnologías',hint:'Tecnologías. Enfoca esta franja con el teclado para pausar el movimiento.',credits:'Créditos de los iconos',domains:'Dominios',infrastructure:'Infraestructura',ai:'IA',agents:'Agentes','3d':'Modelado 3D',rest:'API REST','unit-tests':'Pruebas unitarias','integration-tests':'Pruebas de integración',microservices:'Microservicios'},
+ 'pt-br':{title:'Tecnologias aplicadas em projetos',list:'Tecnologias',hint:'Tecnologias. Foque esta faixa com o teclado para pausar o movimento.',domains:'Domínios',infrastructure:'Infraestrutura',ai:'IA',agents:'Agentes','3d':'Modelagem 3D',rest:'APIs REST','unit-tests':'Testes unitários','integration-tests':'Testes de integração',microservices:'Microsserviços'},
+ en:{title:'Technologies applied in projects',list:'Technologies',hint:'Technologies. Focus this strip with the keyboard to pause motion.',domains:'Domains',infrastructure:'Infrastructure',ai:'AI',agents:'Agents','3d':'3D modelling',rest:'REST APIs','unit-tests':'Unit tests','integration-tests':'Integration tests',microservices:'Microservices'},
+ es:{title:'Tecnologías aplicadas en proyectos',list:'Tecnologías',hint:'Tecnologías. Enfoca esta franja con el teclado para pausar el movimiento.',domains:'Dominios',infrastructure:'Infraestructura',ai:'IA',agents:'Agentes','3d':'Modelado 3D',rest:'API REST','unit-tests':'Pruebas unitarias','integration-tests':'Pruebas de integración',microservices:'Microservicios'},
 };
 const reused=new Set(['elixir','java','javascript','react']);
 function icon(id){
@@ -35,5 +35,5 @@ export function renderSkills(_skills,key){
   return `<div class="technology-row"><div class="technology-belt"><ul class="technology-set" data-tech-primary aria-label="${e(c.list)}">${content}</ul><ul class="technology-set" data-tech-copy aria-hidden="true" inert>${content}</ul></div></div>`;
  };
  const half=Math.ceil(technologies.length/2);
- return `<section class="skills-section technology-marquee" data-technology-marquee tabindex="0" aria-label="${e(c.hint)}"><div class="technology-marquee-header"><h3 id="skills-title">${e(c.title)}</h3></div>${row(technologies.slice(0,half))}${row(technologies.slice(half))}<a class="technology-credits" href="/technology-icons/LICENSE.txt">${e(c.credits)}</a></section>`;
+ return `<section class="skills-section technology-marquee" data-technology-marquee tabindex="0" aria-label="${e(c.hint)}"><div class="technology-marquee-header"><h3 id="skills-title">${e(c.title)}</h3></div>${row(technologies.slice(0,half))}${row(technologies.slice(half))}</section>`;
 }

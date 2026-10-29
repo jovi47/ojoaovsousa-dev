@@ -4,11 +4,12 @@ import {readFile} from 'node:fs/promises';
 import {runInNewContext} from 'node:vm';
 import {content} from '../src/content.mjs';
 import {cityCopy} from '../src/city-copy.mjs';
+import {storyScrollFrame,chapterTrackLengths,readingOffset} from '../public/city-story.js';
 import {VIEWER_BUILDINGS,selectionForHash,buildProgress,buildingAt,constructionFrame,landmarkIdleYaw,touchDragAxis,usesViewerFlow} from '../public/city.js';
 
-test('mobile and stacked tablet widths share the free-flow entry through 1100 pixels, with the guided desktop tour above it',()=>{
- for(const width of [320,430,700,701,853,1024,1100])assert.equal(usesViewerFlow(width),true);
- for(const width of [1101,1280,1920])assert.equal(usesViewerFlow(width),false);
+test('only phone widths use autoplay flow; medium and large screens remain guided by scroll',()=>{
+ for(const width of [320,430,700])assert.equal(usesViewerFlow(width),true);
+ for(const width of [701,768,853,1024,1100,1101,1280,1920])assert.equal(usesViewerFlow(width),false);
 });
 
 test('touch rotation waits for an intentional horizontal gesture and leaves vertical or diagonal pans to the page',()=>{
@@ -17,11 +18,39 @@ test('touch rotation waits for an intentional horizontal gesture and leaves vert
  for(const [x,y] of [[0,6],[2,-12],[20,20],[-8,20]])assert.equal(touchDragAxis(x,y),'vertical');
 });
 
+test('renderer resize preserves Retina detail for fine hover pointers and keeps existing touch limits',async()=>{
+ const cases=[
+  ...[390,1084,1100,1101,1280].map(width=>({width,dpr:2,fine:true,hover:true,want:2})),
+  {width:1084,dpr:3,fine:true,hover:true,want:2},
+  {width:1084,dpr:1.25,fine:true,hover:true,want:1.25},
+  {width:1280,dpr:1,fine:true,hover:true,want:1},
+  {width:1084,dpr:2,fine:true,hover:false,want:1.15},
+  {width:1084,dpr:2,fine:false,hover:true,want:1.15},
+  {width:390,dpr:2,fine:false,hover:false,want:1.15},
+  {width:1100,dpr:2,fine:false,hover:false,want:1.15},
+  {width:1101,dpr:2,fine:false,hover:false,want:1.4},
+  {width:1280,dpr:1,fine:false,hover:false,want:1},
+ ];
+ for(const {width,dpr,fine,hover,want} of cases){
+  const f=await selectionContextFixture(),ratios=[],sizes=[],cssWidth=width===1084?1012:width,height=339.109375;
+  Object.assign(f.context,{innerWidth:width,devicePixelRatio:dpr,matchMedia:query=>{
+   const features={'(pointer: fine)':fine,'(hover: hover)':hover,'(pointer: fine) and (hover: hover)':fine&&hover};
+   assert.ok(Object.hasOwn(features,query));return {matches:features[query]};
+  }});
+  f.context.canvas.getBoundingClientRect=()=>({width:cssWidth,height});
+  f.context.renderer={setPixelRatio:value=>ratios.push(value),setSize:(...args)=>sizes.push(args)};
+  f.resize();
+  assert.deepEqual(ratios,[want],`${width}px, DPR${dpr}, fine=${fine}, hover=${hover}`);
+  assert.deepEqual(sizes,[[cssWidth,height,false]],'CSS geometry stays unchanged');
+  assert.equal(f.context.camera.aspect,cssWidth/height);
+ }
+});
+
 test('renderer startup preserves mobile scroll without a fragment while honoring explicit anchors and the desktop introduction',async()=>{
  const source=await readFile(new URL('../public/city-app.js',import.meta.url),'utf8');
  const start=source.slice(source.indexOf('async function start(){'),source.indexOf("document.querySelector('[data-retry]')?.addEventListener"));
  // Exercise the real startup glue with only the WebGL module replaced.
- for(const [width,hash,want] of [[700,'',[]],[701,'',[]],[1100,'',[]],[1101,'',['intro']],[853,'#main',['main']],[853,'#intro',['intro']],[1280,'#projects',['projects']]]){
+ for(const [width,hash,want] of [[700,'',[]],[701,'',['intro']],[1100,'',['intro']],[1101,'',['intro']],[853,'#main',['main']],[853,'#intro',['intro']],[1280,'#projects',['projects']]]){
   const mobile=usesViewerFlow(width);
   const calls=[],classes=new Set(mobile?['mobile-entry']:[]),world={setReading(){},goTo(id){calls.push(id);}};
   const context={canvas:{dataset:{}},starting:false,world:null,location:{hash},labels:{},reduced:{matches:false},worldStatus:{},applySeason(){},openInquiry(){},openResident(){},
@@ -80,14 +109,17 @@ test('the active viewer does not import or instantiate the removed robot and dri
 
 test('the guided explanation follows each building before the final overview',()=>{assert.equal(buildingAt(0),'stack');assert.equal(buildingAt(.39),'stack');assert.equal(buildingAt(.4),'horagora');assert.equal(buildingAt(.55),'andrea');assert.equal(buildingAt(.74),null);assert.equal(buildingAt(1),null);});
 
-test('each complete landmark keeps its explanation through a separate scroll reading interval',()=>{
- for(const [start,end,building,progress] of [[.22,.34,'stack',.4],[.46,.6,'horagora',.55],[.72,.86,'andrea',.74]]){
-  for(const raw of [start,(start+end)/2,end-.0001])assert.deepEqual(constructionFrame(raw),{progress,building,phase:'reading'});
-  const next=constructionFrame(end+.0001);assert.equal(next.phase,end===.86?'challenge':'building');assert.ok(next.progress>progress);
+test('physical scroll advances directly between construction chapters without separate reading holds',()=>{
+ const lengths=chapterTrackLengths(600),total=lengths.reduce((sum,n)=>sum+n,0);
+ let previous=0;
+ for(let offset=0;offset<=total;offset++){
+  const frame=constructionFrame(storyScrollFrame(offset,lengths).progress);
+  assert.notEqual(frame.phase,'reading');assert.ok(frame.progress>=previous);previous=frame.progress;
  }
- assert.equal(constructionFrame(0).progress,0);assert.equal(constructionFrame(1).progress,1);
- const samples=Array.from({length:101},(_,i)=>constructionFrame(i/100).progress);
- for(let i=1;i<samples.length;i++)assert.ok(samples[i]>=samples[i-1]);
+ assert.equal(previous,1);
+ for(const [offset,building] of [[0,'stack'],[849,'stack'],[850,'horagora'],[1449,'horagora'],[1450,'andrea'],[2049,'andrea'],[2050,null]]){
+  assert.equal(constructionFrame(storyScrollFrame(offset,lengths).progress).building,building);
+ }
 });
 
 
@@ -101,7 +133,8 @@ async function selectionContextFixture(key='pt-br'){
  const board={dataset:{},classList:{toggle(){}}},tour={style:{removeProperty(){}}};
  const nodes={'#viewer-card':card,'.viewer-intro':intro,'.viewer-offer':offer,'.viewer-intro-description':description,'#world-status':status,'.viewer-board':board,'.viewer-tour':tour};
  const document={body:{classList:{toggle(){},add(){},remove(){}}},querySelector:selector=>nodes[selector]||null,querySelectorAll:selector=>selector==='[data-viewer-card]'?panels:selector==='[data-select-building],[data-building-step]'?buttons:[]};
- const context={document,mobileEntry:true,introOffer:u.offer,introDescription:c.hero.description,enter:node=>animations.push(node),reading:false,disposed:false,construction:1,assembled:true,reduced:false,selected:'stack',storyProgress:1,chapter:null,constructionStarted:false,scrollY:100,storyLengths:[],storyTop:()=>0,storyScrollFrame:()=>({}),constructionFrame:()=>({progress:1,building:null,phase:'complete'}),copy:{...u,ready:'Ready',projectTitle:'Desktop completed introduction'},invalidate(){},usesViewerFlow,innerWidth:430,innerHeight:740,devicePixelRatio:1,measureStory(){},renderer:{setPixelRatio(){},setSize(){}},camera:{updateProjectionMatrix(){}},canvas:{dataset:{},style:{},getBoundingClientRect:()=>({width:430,height:270}),setAttribute:(name,value)=>attributes.set(name,value)}};
+ const context={document,inspection:null,mobileEntry:true,introOffer:u.offer,introDescription:c.hero.description,enter:node=>animations.push(node),reading:false,disposed:false,lastPaint:0,construction:1,assembled:true,reduced:false,selected:'stack',storyProgress:1,chapter:null,constructionStarted:false,scrollY:100,storyLengths:[],storyTop:()=>0,storyScrollFrame:()=>({}),constructionFrame:()=>({progress:1,building:null,phase:'complete'}),copy:{...u,ready:'Ready',projectTitle:'Desktop completed introduction'},invalidate(){},usesViewerFlow,innerWidth:430,innerHeight:740,devicePixelRatio:1,measureStory(){},renderer:{setPixelRatio(){},setSize(){}},camera:{updateProjectionMatrix(){}},canvas:{dataset:{},style:{},getBoundingClientRect:()=>({width:430,height:270}),setAttribute:(name,value)=>attributes.set(name,value)}};
+ context.matchMedia=()=>({matches:false});
  const functionSource=(start,end)=>source.slice(source.indexOf(start),source.indexOf(end));
  const functions=runInNewContext(`${functionSource('function showPanel(', 'function setSelection(')}
 ${functionSource('function syncConstruction(){','function storyScroll(){')}
@@ -131,6 +164,19 @@ test('scroll and mobile-desktop-mobile resize preserve selection while desktop k
  const writes=f.statusWrites.length;f.syncConstruction();assert.equal(f.offer.textContent,item.name);assert.equal(f.description.textContent,item.description);assert.equal(f.statusWrites.length,writes,'scroll does not replace selection announcement with generic ready text');
  f.resize();assert.equal(f.attributes.get('aria-describedby'),'viewer-mobile-help');for(const button of f.buttons)assert.equal(button.attributes.get('aria-controls'),'viewer-intro city-canvas');
  f.context.innerWidth=1280;f.resize();assert.equal(f.offer.textContent,f.u.offer);assert.equal(f.description.textContent,'Desktop completed introduction');assert.equal(f.intro.hidden,true);assert.equal(f.card.hidden,false);assert.equal(f.panels.find(panel=>panel.dataset.viewerCard===item.id).hidden,false);for(const button of f.buttons)assert.equal(button.attributes.get('aria-controls'),'viewer-card');
- f.context.innerWidth=853;f.resize();assert.equal(f.context.selected,item.id);assert.equal(f.offer.textContent,item.name);assert.equal(f.description.textContent,item.description);assert.equal(f.intro.hidden,false);assert.equal(f.card.hidden,true);assert.ok(f.panels.every(panel=>panel.hidden));
+ f.context.innerWidth=430;f.resize();assert.equal(f.context.selected,item.id);assert.equal(f.offer.textContent,item.name);assert.equal(f.description.textContent,item.description);assert.equal(f.intro.hidden,false);assert.equal(f.card.hidden,true);assert.ok(f.panels.every(panel=>panel.hidden));
  f.context.selected='stack';f.showPanel('stack');f.syncConstruction();assert.equal(f.offer.textContent,f.u.offer);assert.equal(f.description.textContent,f.c.hero.description);
+});
+
+
+test('the runtime scrolls the visible desktop card during construction and resets when a new building starts',async()=>{
+ const f=await selectionContextFixture();
+ Object.assign(f.context,{mobileEntry:false,innerWidth:1280,assembled:false,constructionStarted:true,selected:null,construction:0,
+  storyLengths:chapterTrackLengths(600),storyOverflows:{stack:900,horagora:300,andrea:200},storyScrollFrame,constructionFrame,readingOffset,
+  release(){},guidedView(progress){return {progress};}});
+ for(const [scroll,chapter,offset] of [[85,'stack',90],[425,'stack',450],[765,'stack',810],[425,'stack',450],[850,'horagora',0],[1150,'horagora',150],[1450,'andrea',0],[1750,'andrea',100]]){
+  f.context.scrollY=scroll;f.syncConstruction();
+  assert.equal(f.context.chapter,chapter);assert.equal(f.card.scrollTop,offset);assert.equal(f.card.hidden,false);
+  assert.equal(f.context.canvas.dataset.chapterPhase,'building');
+ }
 });

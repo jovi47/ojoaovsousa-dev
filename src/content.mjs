@@ -24,14 +24,12 @@ export const content = {
       ]
     },
     expertise: {
-      kicker: 'O que construo', title: 'Tecnologia com um motivo', description: 'Escolho as peças pelo problema. O objetivo é entregar algo útil, compreensível e possível de evoluir.',
+      kicker: 'O que construo', title: 'Soluções para o seu negócio', description: 'Escolho as peças pelo problema. O objetivo é entregar algo útil, compreensível e possível de evoluir.',
       items: [
-        { title: 'Sistemas e sites', body: 'Aplicações e serviços que integram regras de negócio, APIs e os fluxos da operação. A tecnologia acompanha a necessidade do projeto.', tags: ['Elixir', 'Java', 'APIs'] },
-        { title: 'IA no trabalho real', body: 'RAG, agentes e harnesses que conectam modelos a fontes, ferramentas e verificações úteis para a tarefa.', tags: ['IA aplicada', 'RAG', 'Agentes'] },
-        { title: 'Automações úteis', body: 'Conecto etapas e sistemas para reduzir trabalho repetitivo, com atenção a falhas, limites e acompanhamento.', tags: ['Automações', 'Integrações', 'Fluxos'] },
-        { title: 'Experiências web e 3D', body: 'Experiências web e 3D que tornam uma ideia visível e convidam à interação, sem perder de vista o uso real.', tags: ['Web', '3D', 'Interação'] },
-        { title: 'Acessibilidade', body: 'Navegação por teclado, contraste, legibilidade e interfaces adaptadas a diferentes telas e formas de uso.', tags: ['Acessibilidade', 'Responsividade', 'Usabilidade'] },
-        { title: 'SEO e indexação', body: 'Conteúdo organizado, metadados e sitemap para ajudar os buscadores a encontrar e compreender seu site.', tags: ['SEO', 'Conteúdo', 'Indexação'] }
+        { title: 'Sistemas e automações', body: 'Sistemas, sites e APIs que conectam o negócio e reduzem tarefas repetitivas.', tags: ['Elixir', 'Java', 'APIs'] },
+        { title: 'Inteligência artificial', body: 'RAG, agentes e ferramentas de IA aplicados às tarefas do projeto.', tags: ['IA aplicada', 'RAG', 'Agentes'] },
+        { title: 'Modelagem 3D', body: 'Ideias que ganham forma em experiências web e 3D interativas.', tags: ['Web', '3D', 'Interação'] },
+        { title: 'Acessibilidade e SEO', body: 'Conteúdo fácil de encontrar e usar, com SEO, contraste e navegação por teclado.', tags: ['SEO', 'Conteúdo', 'Indexação'] }
       ]
     },
     building: {
@@ -109,9 +107,9 @@ export const content = {
       "kicker": "Quem está por aqui",
       "title": "Prazer, João Victor",
       "paragraphs": [
-        "Gosto de entender como as coisas funcionam e de montar algo novo com esse aprendizado. LEGO faz parte desse prazer pessoal: experimentar uma peça, mudar a combinação e descobrir uma construção que antes era só uma ideia.",
-        "Levo essa curiosidade para o software. Trabalho com Elixir, Java, IA aplicada e automações, e me entusiasmo com 3D e experiências interativas. O que me move é conectar técnica e imaginação a um problema que merece solução."
-      ],
+        "Antes de escrever código, quero entender seu negócio: o que toma tempo, o que trava a rotina e onde a tecnologia pode ajudar. Meu trabalho é transformar esse contexto em uma solução útil, com clareza do início à entrega.",
+        "Trabalho com Elixir, Java, inteligência artificial e automações. Gosto de conectar técnica e criatividade para simplificar problemas reais. Fora do código, essa curiosidade também aparece no LEGO: experimentar, ajustar e dar forma a uma ideia."
+],
       "signature": "Curiosidade para explorar. Cuidado para entregar."
     },
     world: {
@@ -163,20 +161,22 @@ export const content = {
       "build": "Construir",
       "reset": "Reiniciar"
     },
-    contact: { kicker: 'Vamos conversar', title: 'O que você quer construir?', description: 'Conte o que você quer construir, melhorar ou automatizar. A conversa começa pelo seu contexto.', whatsapp: 'Conversar no WhatsApp', email: 'Enviar um e-mail', availability: 'Projetos e colaborações · escopo e disponibilidade sob consulta' },
+    contact: { kicker: 'Vamos conversar', title: 'Fale comigo', description: 'Conte o que você quer construir, melhorar ou automatizar. A conversa começa pelo seu contexto.', whatsapp: 'Conversar no WhatsApp', email: 'Enviar um e-mail', availability: 'Projetos e colaborações · escopo e disponibilidade sob consulta' },
     footer: { line: 'João Victor · ojoaovsousa · engenheiro de software', credit: 'Construído com curiosidade, peça por peça.' },
     guide: { hero: 'Pode chegar. A bancada tem espaço para mais uma boa ideia.', work: 'Pode olhar de perto. Essas peças já viraram projetos de verdade.', expertise: 'A caixa de ferramentas é variada. A escolha tem motivo.', method: 'Antes de encaixar, vale conferir se a peça resolve o problema.', about: 'Por trás do código tem alguém que ainda gosta de montar coisas.', play: 'Segure a ideia. Eu ajudo com as peças.', contact: 'A próxima construção pode começar com um simples olá.' },
     privacy: {
       "title": "Privacidade",
-      "intro": "João Victor (ojoaovsousa) é o responsável pelo tratamento de dados neste portfólio. Contato: jovi47profissional@gmail.com. Última atualização: 2026-10-23 UTC.",
+      "intro": "João Victor (ojoaovsousa) é o responsável pelo tratamento de dados neste portfólio. Contato: jovi47profissional@gmail.com. Última atualização: 2026-10-27 UTC.",
       "sections": [
+        {"title": "Métricas opcionais e consentimento", "body": "Somente após seu aceite, o Microsoft Clarity pode usar cookies e identificadores pseudônimos, informações técnicas do navegador e interações como cliques e rolagem para analisar usabilidade por gravações de sessão e mapas de calor. A base é seu consentimento. O conteúdo da página é mascarado, com modo Strict no projeto; isso não é promessa de anonimato. A coleta fica limitada às três homes canônicas, sem parâmetros ou fragmentos; páginas de leitura, políticas e erro não carregam o Clarity. Não enviamos identificadores ou eventos personalizados e negamos armazenamento de publicidade. Do Not Track e Global Privacy Control desativam as métricas mesmo com aceite anterior. Revogar no rodapé limpa os cookies próprios do Clarity e recarrega a página para encerrar o SDK. A Microsoft pode processar dados fora do Brasil: https://privacy.microsoft.com/privacystatement."},
+        {"title": "Conservação das métricas", "body": "Segundo a documentação atual do Clarity, reproduções de sessão ficam por 30 dias; sessões favoritas ou rotuladas, mapas de calor e dados de cliques ficam por 9 meses. Esses prazos do provedor são distintos dos 90 dias da sua escolha local. A revogação interrompe novas coletas nesta navegação; não apaga retroativamente registros já recebidos. Para exercer direitos aplicáveis, use o contato desta política. Fonte: https://learn.microsoft.com/en-us/clarity/setup-and-installation/data-retention."},
         {
           "title": "Navegação e preferências",
-          "body": "O site não usa publicidade, analytics ou scripts de rastreamento. Preferências de tema e movimento podem ser salvas no localStorage do navegador e removidas pelos seus controles de armazenamento. O miniworld não registra partidas nem envia a posição do personagem a um servidor."
+          "body": "O site não usa publicidade. Preferências de tema, movimento e métricas opcionais podem ser salvas no localStorage do navegador. A escolha de métricas vale por 90 dias e pode ser revista em Preferências de privacidade no rodapé. Recusar mantém todas as funções do portfólio. O miniworld não registra partidas nem envia a posição do personagem a um servidor."
         },
         {
           "title": "Hospedagem",
-          "body": "O site público é hospedado no Cloudflare Pages. A Cloudflare pode processar endereço IP, informações das requisições e registros técnicos para entregar os arquivos, manter o serviço e proteger os acessos. Esse processamento pode ocorrer na rede global do provedor e segue seus termos e políticas aplicáveis, inclusive quanto à conservação dos registros. O portfólio não exige login nem habilita analytics de visitantes. Política do provedor: https://www.cloudflare.com/privacypolicy/."
+          "body": "O site público é hospedado no Cloudflare Pages. A Cloudflare pode processar endereço IP, informações das requisições e registros técnicos para entregar os arquivos, manter o serviço e proteger os acessos. Esse processamento pode ocorrer na rede global do provedor e segue seus termos e políticas aplicáveis, inclusive quanto à conservação dos registros. O portfólio não exige login. As métricas opcionais são descritas nesta política. Política do provedor: https://www.cloudflare.com/privacypolicy/."
         },
         {
           "title": "Canais de contato",
@@ -229,13 +229,11 @@ export const content = {
         { id: 'andrea', quote: {"kind": "testimonial", "text": "I’m very happy with the result. Today I can present myself with more authority online and manage my clients calmly and securely, in line with the LGPD.", "attribution": "Andréa Sousa"}, name: 'Andréa Sousa Consultoria', category: 'Services website', headline: 'Clarity for the first step', description: 'A website explaining tax consultancy services and guiding visitors towards an assessment for income-tax exemption or refunds.', url: 'https://andreasousaconsultoria.com.br', tags: ['Business website', 'Services', 'Contact'], role: 'Website creation and development', delivery: 'Public website', detail: 'I developed the website bringing together the specialist’s introduction, services, process, FAQs and an enquiry form. I organised the content to explain the service and guide the first contact, with accessible policies and analytics preference controls.' }
       ]
     },
-    expertise: { kicker: 'What I build', title: 'Technology with a purpose', description: 'I choose the pieces to fit the problem. The aim is something useful, understandable and ready to evolve.', items: [
-      { title: 'Software and websites', body: 'Applications and services connecting business rules, APIs and operational workflows. Technology follows the needs of the project.', tags: ['Elixir', 'Java', 'APIs'] },
-      { title: 'AI put to work', body: 'RAG, agents and harnesses connecting models to the sources, tools and checks that a task needs.', tags: ['Applied AI', 'RAG', 'Agents'] },
-      { title: 'Useful automation', body: 'Connecting steps and systems to reduce repetitive work, with attention to failures, limits and visibility.', tags: ['Automation', 'Integrations', 'Workflows'] },
-      { title: 'Web and 3D experiences', body: 'Web and 3D experiences that make an idea visible and invite interaction, while keeping real use in focus.', tags: ['Web', '3D', 'Interaction'] },
-      { title: 'Accessibility', body: 'Keyboard navigation, contrast, readability and interfaces adapted to different screens and ways of interacting.', tags: ['Accessibility', 'Responsive design', 'Usability'] },
-      { title: 'SEO and indexing', body: 'Organised content, metadata and sitemaps to help search engines find and understand your website.', tags: ['SEO', 'Content', 'Indexing'] }
+    expertise: { kicker: 'What I build', title: 'Solutions for your business', description: 'I choose the pieces to fit the problem. The aim is something useful, understandable and ready to evolve.', items: [
+      { title: 'Software and automation', body: 'Systems, websites and APIs that connect business workflows and reduce repetitive tasks.', tags: ['Elixir', 'Java', 'APIs'] },
+        { title: 'Artificial intelligence', body: 'RAG, agents and AI tools applied to project tasks.', tags: ['Applied AI', 'RAG', 'Agents'] },
+        { title: '3D modelling', body: 'Ideas brought to life through interactive web and 3D experiences.', tags: ['Web', '3D', 'Interaction'] },
+        { title: 'Accessibility and SEO', body: 'Content that is easy to find and use, with SEO, contrast and keyboard navigation.', tags: ['SEO', 'Content', 'Indexing'] }
     ] },
     building: {
       title: "What I’m building on",
@@ -312,9 +310,9 @@ export const content = {
       "kicker": "Who’s behind this",
       "title": "Hello, I’m João Victor",
       "paragraphs": [
-        "I enjoy understanding how things work and building something new with what I learn. LEGO is part of that personal enjoyment: trying a piece, changing the combination and discovering a build that was once just an idea.",
-        "I bring that curiosity to software. I work with Elixir, Java, applied AI and automation, and I’m excited by 3D and interactive experiences. What drives me is connecting craft and imagination to a problem worth solving."
-      ],
+        "Before writing code, I want to understand your business: what takes time, what slows daily work and where technology can help. My job is to turn that context into a useful solution, with clarity from start to delivery.",
+        "I work with Elixir, Java, artificial intelligence and automation. I enjoy connecting technical craft and creativity to simplify real problems. Away from code, that curiosity also shows up in LEGO: experimenting, adjusting and giving an idea its shape."
+],
       "signature": "Curiosity to explore. Care to deliver."
     },
     world: {
@@ -366,20 +364,22 @@ export const content = {
       "build": "Build",
       "reset": "Restart"
     },
-    contact: { kicker: 'Let’s talk', title: 'What would you like to build?', description: 'Tell me what you want to build, improve or automate. Your context is where the conversation starts.', whatsapp: 'Chat on WhatsApp', email: 'Send an email', availability: 'Projects and collaborations · scope and availability on enquiry' },
+    contact: { kicker: 'Let’s talk', title: 'Let’s talk', description: 'Tell me what you want to build, improve or automate. Your context is where the conversation starts.', whatsapp: 'Chat on WhatsApp', email: 'Send an email', availability: 'Projects and collaborations · scope and availability on enquiry' },
     footer: { line: 'João Victor · ojoaovsousa · software engineer', credit: 'Built with curiosity, piece by piece.' },
     guide: { hero: 'Come on in. There’s room on the workbench for another good idea.', work: 'Take a closer look. These pieces became real projects.', expertise: 'Plenty of tools in the box. Each choice has a reason.', method: 'Before it clicks into place, let’s check it solves the problem.', about: 'Behind the code is someone who still loves building things.', play: 'Hold that idea. I’ll help with the pieces.', contact: 'The next build could start with a simple hello.' },
     privacy: {
       "title": "Privacy",
-      "intro": "João Victor (ojoaovsousa) is the controller responsible for personal data on this portfolio. Contact: jovi47profissional@gmail.com. Last updated: 2026-10-23 UTC.",
+      "intro": "João Victor (ojoaovsousa) is the controller responsible for personal data on this portfolio. Contact: jovi47profissional@gmail.com. Last updated: 2026-10-27 UTC.",
       "sections": [
+        {"title": "Optional analytics and consent", "body": "Only after you agree, Microsoft Clarity may use cookies and pseudonymous identifiers, browser technical information and interactions such as clicks and scrolling to assess usability through session recordings and heatmaps. The legal basis is your consent. Page content is masked, with Strict mode enabled for the project; this does not promise anonymity. Collection is limited to the three canonical home pages without query parameters or fragments; reading, policy and error pages do not load Clarity. We send no custom identifiers or events and deny advertising storage. Do Not Track and Global Privacy Control disable analytics even after earlier consent. Revoking through the footer clears Clarity first-party cookies and reloads the page to end the SDK. Microsoft may process data outside Brazil: https://privacy.microsoft.com/privacystatement."},
+        {"title": "Analytics retention", "body": "According to current Clarity documentation, session playback is kept for 30 days; favorited or labeled sessions, heatmaps and click data are kept for 9 months. Provider retention is separate from your 90-day local choice. Revocation stops new collection in this browsing context; it does not retroactively delete data already received. To exercise applicable rights, use the contact in this policy. Source: https://learn.microsoft.com/en-us/clarity/setup-and-installation/data-retention."},
         {
           "title": "Browsing and preferences",
-          "body": "The website uses no advertising, analytics or tracking scripts. Theme and motion preferences may be saved in your browser’s localStorage and removed through its storage controls. The miniworld does not record game sessions or send the character’s position to a server."
+          "body": "The website uses no advertising. Theme, motion and optional analytics preferences may be saved in your browser’s localStorage. The analytics choice lasts 90 days and can be changed through Privacy preferences in the footer. Declining keeps every portfolio feature available. The miniworld does not record game sessions or send the character’s position to a server."
         },
         {
           "title": "Hosting",
-          "body": "The public website is hosted on Cloudflare Pages. Cloudflare may process IP addresses, request information and technical logs to deliver files, operate the service and protect access. Processing may occur across the provider’s global network and follows its applicable terms and policies, including log retention. This portfolio requires no login and enables no visitor analytics. Provider policy: https://www.cloudflare.com/privacypolicy/."
+          "body": "The public website is hosted on Cloudflare Pages. Cloudflare may process IP addresses, request information and technical logs to deliver files, operate the service and protect access. Processing may occur across the provider’s global network and follows its applicable terms and policies, including log retention. This portfolio requires no login. Optional analytics is described in this policy. Provider policy: https://www.cloudflare.com/privacypolicy/."
         },
         {
           "title": "Contact channels",
@@ -428,13 +428,11 @@ export const content = {
       { id: 'horagora', quote: {"kind": "product", "text": "Sistema de reservas online para barberías, salones de belleza y profesionales autónomos. Tu agenda organizada, sin dolores de cabeza con la gestión.", "attribution": "HorAgora · Sobre el producto"}, name: 'HorAgora', category: 'SaaS de reservas', headline: 'De la agenda del negocio a la elección del cliente', description: 'Reservas online para barberías, salones y estudios: el negocio organiza su agenda y comparte un enlace para que el cliente elija servicio y horario.', url: 'https://horagora.com.br', tags: ['SaaS', 'Agenda', 'Reservas online'], role: 'Creación y desarrollo', delivery: 'Producto y experiencia de reserva', detail: 'Desarrollé las experiencias del negocio y del cliente. El negocio configura servicios, duración, precios y disponibilidad; el cliente accede al enlace, elige un servicio y confirma un horario disponible. El sitio público presenta el producto y demuestra ambos recorridos.' },
       { id: 'andrea', quote: {"kind": "testimonial", "text": "Muy feliz con el resultado. Hoy he conseguido posicionarme con más autoridad en internet y gestionar a mis clientes con tranquilidad y seguridad, conforme a la LGPD.", "attribution": "Andréa Sousa"}, name: 'Andréa Sousa Consultoria', category: 'Sitio de servicios', headline: 'Claridad para dar el primer paso', description: 'Un sitio para explicar servicios de consultoría tributaria y orientar la solicitud de análisis de exención o devolución del impuesto sobre la renta.', url: 'https://andreasousaconsultoria.com.br', tags: ['Sitio corporativo', 'Servicios', 'Contacto'], role: 'Creación y desarrollo del sitio', delivery: 'Sitio público', detail: 'Desarrollé el sitio que reúne la presentación de la especialista, servicios, etapas de atención, preguntas frecuentes y formulario de solicitud. Organicé la información para explicar el servicio y orientar el primer contacto, con políticas accesibles y controles de preferencias de métricas.' }
     ] },
-    expertise: { kicker: 'Qué construyo', title: 'Tecnología con un propósito', description: 'Elijo las piezas según el problema. El objetivo es entregar algo útil, comprensible y que pueda evolucionar.', items: [
-      { title: 'Sistemas y sitios', body: 'Aplicaciones y servicios que conectan reglas de negocio, APIs y los flujos de la operación. La tecnología acompaña las necesidades del proyecto.', tags: ['Elixir', 'Java', 'APIs'] },
-      { title: 'IA en el trabajo real', body: 'RAG, agentes y harnesses que conectan modelos con las fuentes, herramientas y verificaciones que necesita cada tarea.', tags: ['IA aplicada', 'RAG', 'Agentes'] },
-      { title: 'Automatizaciones útiles', body: 'Conecto pasos y sistemas para reducir el trabajo repetitivo, prestando atención a fallos, límites y seguimiento.', tags: ['Automatizaciones', 'Integraciones', 'Flujos'] },
-      { title: 'Experiencias web y 3D', body: 'Experiencias web y 3D que hacen visible una idea e invitan a interactuar, sin perder de vista el uso real.', tags: ['Web', '3D', 'Interacción'] },
-      { title: 'Accesibilidad', body: 'Navegación con teclado, contraste, legibilidad e interfaces adaptadas a distintas pantallas y formas de uso.', tags: ['Accesibilidad', 'Diseño adaptable', 'Usabilidad'] },
-      { title: 'SEO e indexación', body: 'Contenido organizado, metadatos y sitemap para ayudar a los buscadores a encontrar y comprender tu sitio.', tags: ['SEO', 'Contenido', 'Indexación'] }
+    expertise: { kicker: 'Qué construyo', title: 'Soluciones para tu negocio', description: 'Elijo las piezas según el problema. El objetivo es entregar algo útil, comprensible y que pueda evolucionar.', items: [
+      { title: 'Sistemas y automatización', body: 'Sistemas, sitios y APIs que conectan el negocio y reducen tareas repetitivas.', tags: ['Elixir', 'Java', 'APIs'] },
+        { title: 'Inteligencia artificial', body: 'RAG, agentes y herramientas de IA aplicados a las tareas del proyecto.', tags: ['IA aplicada', 'RAG', 'Agentes'] },
+        { title: 'Modelado 3D', body: 'Ideas que toman forma en experiencias web y 3D interactivas.', tags: ['Web', '3D', 'Interacción'] },
+        { title: 'Accesibilidad y SEO', body: 'Contenido fácil de encontrar y usar, con SEO, contraste y navegación con teclado.', tags: ['SEO', 'Contenido', 'Indexación'] }
     ] },
     building: {
       title: "Mi construcción",
@@ -511,9 +509,9 @@ export const content = {
       "kicker": "Quién está detrás",
       "title": "Encantado, soy João Victor",
       "paragraphs": [
-        "Me gusta entender cómo funcionan las cosas y construir algo nuevo con lo que aprendo. LEGO forma parte de ese disfrute personal: probar una pieza, cambiar la combinación y descubrir una construcción que antes era solo una idea.",
-        "Llevo esa curiosidad al software. Trabajo con Elixir, Java, IA aplicada y automatizaciones, y me entusiasman el 3D y las experiencias interactivas. Me mueve conectar técnica e imaginación con un problema que merece solución."
-      ],
+        "Antes de escribir código, quiero entender tu negocio: qué consume tiempo, qué frena la rutina y dónde puede ayudar la tecnología. Mi trabajo es convertir ese contexto en una solución útil, con claridad desde el inicio hasta la entrega.",
+        "Trabajo con Elixir, Java, inteligencia artificial y automatizaciones. Me gusta conectar técnica y creatividad para simplificar problemas reales. Fuera del código, esa curiosidad también aparece en LEGO: experimentar, ajustar y dar forma a una idea."
+],
       "signature": "Curiosidad para explorar. Cuidado para entregar."
     },
     world: {
@@ -565,20 +563,22 @@ export const content = {
       "build": "Construir",
       "reset": "Reiniciar"
     },
-    contact: { kicker: 'Hablemos', title: '¿Qué quieres construir?', description: 'Cuéntame qué quieres construir, mejorar o automatizar. La conversación empieza por tu contexto.', whatsapp: 'Hablar por WhatsApp', email: 'Enviar un correo', availability: 'Proyectos y colaboraciones · alcance y disponibilidad previa consulta' },
+    contact: { kicker: 'Hablemos', title: 'Hablemos', description: 'Cuéntame qué quieres construir, mejorar o automatizar. La conversación empieza por tu contexto.', whatsapp: 'Hablar por WhatsApp', email: 'Enviar un correo', availability: 'Proyectos y colaboraciones · alcance y disponibilidad previa consulta' },
     footer: { line: 'João Victor · ojoaovsousa · ingeniero de software', credit: 'Construido con curiosidad, pieza a pieza.' },
     guide: { hero: 'Adelante. En la mesa de trabajo cabe otra buena idea.', work: 'Mira de cerca. Estas piezas ya se convirtieron en proyectos reales.', expertise: 'Hay muchas herramientas. Cada elección tiene su motivo.', method: 'Antes de encajar la pieza, veamos si resuelve el problema.', about: 'Detrás del código hay alguien que aún disfruta construyendo cosas.', play: 'Mantén esa idea. Yo ayudo con las piezas.', contact: 'La próxima construcción puede empezar con un simple hola.' },
     privacy: {
       "title": "Privacidad",
-      "intro": "João Victor (ojoaovsousa) es el responsable del tratamiento de datos personales en este portafolio. Contacto: jovi47profissional@gmail.com. Última actualización: 2026-10-23 UTC.",
+      "intro": "João Victor (ojoaovsousa) es el responsable del tratamiento de datos personales en este portafolio. Contacto: jovi47profissional@gmail.com. Última actualización: 2026-10-27 UTC.",
       "sections": [
+        {"title": "Métricas opcionales y consentimiento", "body": "Solo después de que aceptes, Microsoft Clarity puede usar cookies e identificadores seudónimos, información técnica del navegador e interacciones como clics y desplazamiento para analizar la usabilidad mediante grabaciones de sesión y mapas de calor. La base es tu consentimiento. El contenido de la página se enmascara, con el modo Strict activado en el proyecto; esto no promete anonimato. La recopilación se limita a las tres páginas de inicio canónicas sin parámetros ni fragmentos; las páginas de lectura, políticas y error no cargan Clarity. No enviamos identificadores ni eventos personalizados y denegamos el almacenamiento publicitario. Do Not Track y Global Privacy Control desactivan las métricas incluso con consentimiento anterior. Revocar desde el pie de página borra las cookies propias de Clarity y recarga la página para finalizar el SDK. Microsoft puede procesar datos fuera de Brasil: https://privacy.microsoft.com/privacystatement."},
+        {"title": "Conservación de las métricas", "body": "Según la documentación actual de Clarity, las reproducciones de sesión se conservan 30 días; las sesiones favoritas o etiquetadas, los mapas de calor y los datos de clics, 9 meses. Estos plazos del proveedor son distintos de los 90 días de tu elección local. Revocar detiene nuevas recopilaciones en esta navegación; no elimina retroactivamente datos ya recibidos. Para ejercer los derechos aplicables, usa el contacto de esta política. Fuente: https://learn.microsoft.com/en-us/clarity/setup-and-installation/data-retention."},
         {
           "title": "Navegación y preferencias",
-          "body": "El sitio no utiliza publicidad, analytics ni scripts de seguimiento. Las preferencias de tema y movimiento pueden guardarse en el localStorage del navegador y eliminarse desde sus controles de almacenamiento. El minimundo no registra partidas ni envía la posición del personaje a un servidor."
+          "body": "El sitio no utiliza publicidad. Las preferencias de tema, movimiento y métricas opcionales pueden guardarse en el localStorage del navegador. La elección de métricas dura 90 días y puede cambiarse en Preferencias de privacidad en el pie de página. Rechazar mantiene todas las funciones del portafolio. El minimundo no registra partidas ni envía la posición del personaje a un servidor."
         },
         {
           "title": "Alojamiento",
-          "body": "El sitio público se aloja en Cloudflare Pages. Cloudflare puede procesar direcciones IP, información de las solicitudes y registros técnicos para entregar archivos, mantener el servicio y proteger los accesos. El procesamiento puede ocurrir en la red global del proveedor y sigue sus términos y políticas aplicables, incluida la conservación de registros. Este portafolio no exige iniciar sesión ni habilita analytics de visitantes. Política del proveedor: https://www.cloudflare.com/privacypolicy/."
+          "body": "El sitio público se aloja en Cloudflare Pages. Cloudflare puede procesar direcciones IP, información de las solicitudes y registros técnicos para entregar archivos, mantener el servicio y proteger los accesos. El procesamiento puede ocurrir en la red global del proveedor y sigue sus términos y políticas aplicables, incluida la conservación de registros. Este portafolio no exige iniciar sesión. Las métricas opcionales se describen en esta política. Política del proveedor: https://www.cloudflare.com/privacypolicy/."
         },
         {
           "title": "Canales de contacto",

@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
+import {footer} from '../src/city-page.mjs';
 import {renderSkills} from '../src/skills.mjs';
 import {initTechnologyMarquee} from '../public/technology-marquee.js';
 
@@ -96,4 +97,11 @@ test('without a visibility observer the content keeps its static, dependency-fre
  const f=fixture({observer:false}),cleanup=initTechnologyMarquee(f.block);
  assert.equal(f.block.dataset.techEnhanced,undefined);assert.equal(f.classes.has('is-running'),false);
  cleanup();
+});
+
+ test('icon attribution stays accessible in the shared footer, outside the technology strip',()=>{
+ for(const [key,label] of [['pt-br','Licenças'],['en','Licenses'],['es','Licencias']]){
+  assert.doesNotMatch(renderSkills({},key),/technology-credits|LICENSE\.txt/);
+  assert.ok(footer({ui:{}},key).includes(`<a href="/technology-icons/LICENSE.txt">${label}</a>`));
+ }
 });

@@ -19,7 +19,7 @@ test('the introduction precedes the optional 3D canvas in keyboard order and rep
   assert.ok(replay?.includes(`<span class="viewer-replay-label">${replayLabel}</span>`));
   assert.ok(replay.includes(`aria-label="${replayLabel}"`),`${key}: accessible replay name matches its visible text`);
   assert.ok(html.includes(`class="footer-name" href="/${key}/#main"`),`${key}: home anchor remains visible with or without 3D`);
-  assert.match(html,/<p class="viewer-touch-hint" id="viewer-mobile-help">[^<]+<\/p>/);
+  assert.match(html,/<p class="viewer-touch-hint sr-only" id="viewer-mobile-help">[^<]+<\/p>/);
   assert.doesNotMatch(html,/\$\{e\(v\./,`${key}: no template expression leaks into button text`);
  }
 });
@@ -99,10 +99,7 @@ test('the portfolio viewer has five panels, four landmark selectors and a separa
   assert.doesNotMatch(html,/viewer-camera|data-scene-tools|data-replay-build|data-view-reset|data-view-zoom|data-view-rotate/);
   assert.ok(!html.includes('data-view-landmark'),`${key}: explicit 3D mode is absent`);
   assert.doesNotMatch(html,/class="viewer-status"/);
-  const steppers=[...html.matchAll(/<button\b[^>]*data-building-step="(-?1)"[^>]*>[\s\S]*?<\/button>/g)];
-  assert.deepEqual(steppers.map(match=>match[1]),['-1','1']);
-  for(const [,direction] of steppers)assert.ok(['-1','1'].includes(direction));
-  for(const step of steppers){assert.match(step[0],/\sdisabled(?:\s|=|>)/);assert.match(step[0],/aria-controls="viewer-card"/);assert.match(step[0],/aria-label="[^"]+"/);assert.match(step[0],/<svg\b/);}
+  assert.doesNotMatch(html,/data-building-step|data-mobile-tour/,`${key}: landmark tabs replace redundant arrows and pause controls`);
   assert.equal((html.match(/id="city-canvas"/g)||[]).length,1);
   assert.equal((html.match(/id="inquiry-dialog"/g)||[]).length,1);
   assert.equal((html.match(/\bdata-inquiry-cta(?:\s|=|>)/g)||[]).length,1);
@@ -149,8 +146,9 @@ test('cards and the shared reading fallback retain factual projects, local mocku
    const cardStart=html.indexOf(`<section data-viewer-card="${id}"`);
    const card=html.slice(cardStart,html.indexOf('<section data-viewer-card="',cardStart+1));
    assert.match(card,/<img\b[^>]*src="\/portrait\.jpg"[^>]*alt="João Victor"/);
-   for(const value of [c.about.title,c.hero.description,...c.about.paragraphs,c.trust.title])assert.ok(card.includes(e(value)),`${key}: ${id} personal profile`);
-   for(const item of [...c.expertise.items,...c.trust.items]){assert.ok(card.includes(e(item.title)),`${key}: ${id} experience and method`);assert.ok(card.includes(e(item.body)));}
+   for(const value of [c.about.title,c.hero.description,...c.about.paragraphs])assert.ok(card.includes(e(value)),`${key}: ${id} personal profile`);
+   assert.ok(!card.includes(e(c.trust.title)),`${key}: method stays in shared reading only`);
+   for(const item of c.expertise.items){assert.ok(card.includes(e(item.title)),`${key}: ${id} experience and method`);assert.ok(card.includes(e(item.body)));}
    const technologies=[...card.matchAll(/<ul\b[^>]*data-tech-primary[^>]*>([\s\S]*?)<\/ul>/g)].map(match=>match[1]).join('');
    assert.equal((technologies.match(/class="technology-name"/g)||[]).length,54,`${key}: ${id} technology names`);
    for(const icon of ['elixir','java','javascript','react'])assert.ok(technologies.includes(`/icons/${icon}.svg`));
@@ -172,7 +170,11 @@ test('cards and the shared reading fallback retain factual projects, local mocku
   for(const image of images)assert.match(image,/\bloading="lazy"/);
   const challenge=html.slice(html.indexOf('<section data-viewer-card="challenge"'),html.indexOf('</aside>',html.indexOf('<section data-viewer-card="challenge"')));
   assert.ok(challenge.includes(e(cityCopy[key].brief)),`${key}: challenge briefing invitation`);
-  for(const value of [c.contact.title,c.contact.description,c.contact.availability])assert.ok(challenge.includes(e(value)),`${key}: real contact copy`);
+  assert.ok(challenge.includes(e(c.contact.availability)),`${key}: real availability`);
+  assert.match(challenge,/<strong>(?:Menos tarefas repetitivas|Fewer repetitive tasks|Menos tareas repetitivas)/);
+  assert.ok(challenge.includes(e({'pt-br':'O que vamos construir juntos?',en:'What shall we build together?',es:'¿Qué vamos a construir juntos?'}[key])),`${key}: collaborative challenge title`);
+  assert.match(challenge,/(?:hoje|today|hoy)\?<\/strong>/);
+  for(const value of [c.contact.title,c.contact.description])assert.ok(reading.includes(e(value)),`${key}: shared contact copy unchanged`);
   assert.match(challenge,/<button\b[^>]*\bdata-inquiry\b/);
   for(const url of ['https://wa.me/5579998230872','mailto:jovi47profissional@gmail.com','https://www.linkedin.com/in/jovi47/'])assert.ok(challenge.includes(`href="${url}"`));
   assert.equal((reading.match(/\bdata-project-process(?:\s|=|>)/g)||[]).length,1);
