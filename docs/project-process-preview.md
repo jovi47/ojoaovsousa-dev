@@ -8,6 +8,8 @@ The shared PT/EN/ES component has one localized H2, four native stage buttons in
 
 The process retains25% intersection activation,400ms startup,420ms line pacing and sixteen lines. Completed groups of four lines fill the connectors and reveal header, copy, artwork/metrics and services in the desktop preview through `data-process-built`. Manual selection and Home/End/arrow navigation preserve roving focus. Document hiding pauses work; full viewport exit resets assembly. Reduced motion starts at the final static state. The existing breakpoint listener reconciles panel visibility and accessibility attributes without restarting the clock; cleanup restores static content.
 
+On compact screens through959px, terminal output uses `overflow-y:hidden` and normal overscroll behavior so vertical gestures scroll the page instead of entering an internal history scroller. The existing timed `scrollTop` updates still advance to the latest lines; `clip`, pointer-event disabling and gesture handlers are not used. Text selection remains available. Desktop retains manual internal history scrolling. This CSS-only adjustment requires native page-gesture QA in the integrated preview; no new test or repeated suite was added for CSS values. Whitespace checking passed, and JavaScript remains unchanged.
+
 A45% dark overlay and green check remain above the finished preview, including reduced-motion and no-JavaScript rendering. The check pop and450ms example entrance respect reduced motion. The final examples carousel uses one5000ms timer only when the finished component is sufficiently visible, the document is visible and reduced motion is off. No additional animation timer was introduced by the new examples.
 
 ## Five local examples and shuffled order
