@@ -1,4 +1,5 @@
-.project-process{margin:34px 0 0;color:var(--ink);min-width:0;position:relative}
+.project-process{margin:var(--direct-space,44px) 0;color:var(--ink);min-width:0;position:relative}
+.project-process-title{width:100%;max-width:1040px;margin:0 auto 24px;font-size:clamp(30px,4vw,40px);line-height:1.08;letter-spacing:-.04em;text-wrap:balance}
 .project-process-pin{display:grid;gap:26px;align-items:start;min-width:0}
 .project-process-steps{min-width:0}.project-process-steps ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:0}
 .project-process-steps li{position:relative;border:0}.project-process-steps li:not(:last-child)::before{content:'';position:absolute;left:14px;top:40px;bottom:-10px;width:1px;background:color-mix(in srgb,var(--ink) 18%,transparent)}
@@ -34,7 +35,7 @@
 
 @media(min-width:800px){.project-process-pin{grid-template-columns:minmax(240px,.85fr) minmax(0,1.15fr);gap:clamp(35px,6vw,90px)}.project-process-screen{height:390px}.project-process-panel{padding:30px}}
 @media(max-width:799px){
- .project-process{margin-top:24px}.project-process-pin{gap:20px}.project-process-steps button,.project-process[data-process-enhanced] .project-process-steps button{min-height:48px;padding:8px 0;gap:12px}.project-process-steps strong{font-size:19px}.project-process-steps li:not(:last-child)::before{top:35px;bottom:-9px}.project-process-description{font-size:13px;margin-top:7px}
+.project-process-pin{gap:20px}.project-process-steps button,.project-process[data-process-enhanced] .project-process-steps button{min-height:48px;padding:8px 0;gap:12px}.project-process-steps strong{font-size:19px}.project-process-steps li:not(:last-child)::before{top:35px;bottom:-9px}.project-process-description{font-size:13px;margin-top:7px}
  .project-process[data-process-enhanced] .project-process-description{display:none}.project-process[data-process-enhanced] .project-process-active-description:not([hidden]){display:block;font-size:14px;line-height:1.45;min-height:0;margin:12px 0 0}
  .project-process-panel{padding:21px}.project-process-screen{height:330px}
 }
@@ -59,7 +60,7 @@
 .project-process[data-process-enhanced] .project-process-steps strong{padding:0;font-size:clamp(11px,2.5vw,16px);line-height:1.25;letter-spacing:-.02em;overflow-wrap:anywhere;hyphens:auto}
 .project-process[data-process-enhanced] .project-process-description{display:none}
 .project-process[data-process-enhanced] .project-process-active-description:not([hidden]){display:block;max-width:60ch;min-height:0;margin:10px 0 0;font-size:14px;line-height:1.45}
-@media(min-width:800px){.project-process[data-process-enhanced] .project-process-steps,.project-process[data-process-enhanced] .project-process-preview{width:100%;max-width:760px;justify-self:center}}
+@media(min-width:800px){.project-process[data-process-enhanced] .project-process-steps,.project-process[data-process-enhanced] .project-process-preview{width:100%;max-width:1040px;justify-self:center}}
 
 .project-process[data-process-enhanced] .project-process-steps li:not(:last-child)::after{content:'';position:absolute;left:calc(50% + 15px);right:calc(-50% + 15px);top:22px;height:2px;background:var(--gold);transform:scaleX(var(--step-progress,0));transform-origin:left;transition:transform 420ms linear;pointer-events:none}
 .project-process-steps li:nth-child(1){--step-progress:var(--process-link-0,0)}
@@ -96,3 +97,32 @@
 }
 
 .project-process[data-process-phase="4"] .project-process-success{display:grid}
+
+@media(min-width:960px){
+ .project-process[data-process-enhanced] .project-process-steps button{min-height:100px;gap:14px}
+ .project-process[data-process-enhanced] .project-process-number{width:40px;height:40px;line-height:38px;font-size:13px}
+ .project-process[data-process-enhanced] .project-process-steps button>span>strong{font-size:18px}
+ .project-process[data-process-enhanced] .project-process-steps li:not(:last-child)::before,.project-process[data-process-enhanced] .project-process-steps li:not(:last-child)::after{top:28px;left:calc(50% + 21px);right:calc(-50% + 21px)}
+ .project-process[data-process-enhanced] .project-process-active-description:not([hidden]){font-size:16px;max-width:70ch}
+ .project-process-screen{height:430px}
+ .project-process-output{font-size:13px}.project-process-terminal-heading{font-size:11px}
+}
+
+
+/* The desktop demonstration builds beside its terminal; compact screens alternate windows. */
+.project-process-windows{display:grid;gap:22px;min-width:0}
+.project-process-browser{min-width:0}
+.project-process-browser[hidden],.project-process-building{display:none}
+@media(min-width:960px){
+ .project-process[data-process-enhanced] .project-process-windows{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+ .project-process[data-process-enhanced] .project-process-panel{padding:24px}
+ .project-process[data-process-enhanced]:not([data-process-phase="4"]) .project-process-window-title{display:none}
+ .project-process[data-process-enhanced]:not([data-process-phase="4"]) .project-process-building{display:inline}
+ .project-process[data-process-enhanced][data-process-built="0"] .project-process-site-header,
+ .project-process[data-process-enhanced]:is([data-process-built="0"],[data-process-built="1"]) :is(.project-process-site-hero>div,.project-process-management-main>:is(span,h3,p)),
+ .project-process[data-process-enhanced]:is([data-process-built="0"],[data-process-built="1"],[data-process-built="2"]) :is(.project-process-site-art,.project-process-metrics,.project-process-chart),
+ .project-process[data-process-enhanced]:not([data-process-built="4"]) .project-process-site-services{opacity:0;visibility:hidden;translate:0 10px}
+}
+@media(min-width:960px) and (prefers-reduced-motion:no-preference){
+ .project-process[data-process-enhanced] :is(.project-process-site-header,.project-process-site-hero>div,.project-process-site-art,.project-process-management-main>:is(span,h3,p),.project-process-metrics,.project-process-chart,.project-process-site-services){transition:opacity .35s ease,translate .35s ease,visibility .35s}
+}

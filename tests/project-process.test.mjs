@@ -12,11 +12,12 @@ class Target extends EventTarget{
  get listenerCount(){return [...this.listeners.values()].reduce((count,listeners)=>count+listeners.size,0);}
 }
 
-function fixture({home=true,reduced=false}={}){
+function fixture({home=true,reduced=false,desktop=false}={}){
  const observers=[],timers=new Map(),scrolls=[],classes=new Set(),style=new Map();
  let now=0,timerId=0,completions=0;
  const reducedMedia=Object.assign(new Target(),{matches:reduced});
- const view=Object.assign(new Target(),{Event,matchMedia:()=>reducedMedia,scrollTo:options=>scrolls.push(options)});
+ const desktopMedia=Object.assign(new Target(),{matches:desktop});
+ const view=Object.assign(new Target(),{Event,matchMedia:query=>query==='(min-width: 960px)'?desktopMedia:reducedMedia,scrollTo:options=>scrolls.push(options)});
  view.setTimeout=(callback,delay)=>{const id=++timerId;timers.set(id,{callback,at:now+delay});return id;};
  view.clearTimeout=id=>timers.delete(id);
  view.IntersectionObserver=class{
@@ -42,7 +43,8 @@ function fixture({home=true,reduced=false}={}){
  });
  const status={textContent:'Online example'},description={hidden:true,textContent:'Description 4',set innerHTML(value){this.textContent=value.replace(/<[^>]*>/g,'');this.html=value;}},terminal={hidden:true,setAttribute(name,value){this[name]=value;}},site={hidden:false,dataset:{processComplete:'Online example'},setAttribute(name,value){this[name]=value;}},pin={};
  const output={clientHeight:200,position:0,writes:[],get scrollHeight(){return visibleLines()*22+20;},get scrollTop(){return this.position;},set scrollTop(value){this.position=value;this.writes.push(value);}};
- const nodes={'[data-process-pin]':pin,'[data-process-panel="terminal"]':terminal,'[data-process-panel="site"]':site,'[data-process-status]':status,'[data-process-description]':description,'.project-process-output':output};
+ const terminalWindow={hidden:true},siteWindow={hidden:false};
+ const nodes={'[data-process-window="terminal"]':terminalWindow,'[data-process-window="site"]':siteWindow,'[data-process-pin]':pin,'[data-process-panel="terminal"]':terminal,'[data-process-panel="site"]':site,'[data-process-status]':status,'[data-process-description]':description,'.project-process-output':output};
  const block={dataset:{processCurrent:'3',processPhase:'4'},ownerDocument:doc,
   style:{setProperty:(key,value)=>style.set(key,value),getPropertyValue:key=>style.get(key)||'',removeProperty:key=>style.delete(key)},
   matches:selector=>selector==='[data-project-process]',closest:selector=>selector==='.viewer-reading'&&home?{}:selector==='.direct-page'&&!home?{}:null,
@@ -61,8 +63,9 @@ function fixture({home=true,reduced=false}={}){
  function intersect(isIntersecting,intersectionRatio=isIntersecting?1:0){observers[0]?.callback([{target:block,isIntersecting,intersectionRatio}]);}
  function visibility(hidden){doc.hidden=hidden;doc.dispatchEvent(new Event('visibilitychange'));}
  function motion(matches){reducedMedia.matches=matches;reducedMedia.dispatchEvent(new Event('change'));}
+ function resize(matches){desktopMedia.matches=matches;desktopMedia.dispatchEvent(new Event('change'));}
  function visibleLines(){return logs.reduce((count,log)=>count+(log.hidden?0:log.lines.filter(line=>!line.hidden).length),0);}
- return {root,block,buttons,logs,status,description,terminal,site,output,view,doc,reducedMedia,observers,timers,classes,style,scrolls,tick,intersect,visibility,motion,visibleLines,get completions(){return completions;}};
+ return {root,block,buttons,logs,status,description,terminal,site,terminalWindow,siteWindow,resize,desktopMedia,output,view,doc,reducedMedia,observers,timers,classes,style,scrolls,tick,intersect,visibility,motion,visibleLines,get completions(){return completions;}};
 }
 
 test('localised stages preserve sixteen log lines and a clearly fictional static website without JS',()=>{
@@ -75,6 +78,9 @@ test('localised stages preserve sixteen log lines and a clearly fictional static
   for(const log of logs)assert.equal((log[2].match(/\bdata-process-line(?:\s|=|>)/g)||[]).length,4);
   assert.equal((html.match(/\bdata-process-line(?:\s|=|>)/g)||[]).length,16);
   for(const label of labels)assert.ok(html.includes(label));
+  const headline={'pt-br':'Da sua ideia à solução pronta',en:'From your idea to a finished solution',es:'De tu idea a una solución lista'}[key];
+  assert.ok(html.includes(`<h2 class="project-process-title">${headline}</h2>`));
+  assert.equal((html.match(/<h2\b/g)||[]).length,1);
   assert.match(html,/ilustrativ|illustrative/i);
   assert.match(html,/Estúdio fictício|Fictional studio|Estudio ficticio/);
   assert.match(html,/class="project-process-site-brand">forma<\/span>/);
@@ -85,7 +91,7 @@ test('localised stages preserve sixteen log lines and a clearly fictional static
   assert.match(example,/<span class="project-process-site-cta">/);
   assert.doesNotMatch(example,/<(?:a|button|input|form)\b|href=|onclick=|tabindex=/);
   assert.doesNotMatch(html,/project-process-delivery-mark|project-process-runner|process-dino|Seu site implementado|Your website implemented|Tu sitio web implementado/);
-  assert.match(html,/data-process-phase="4"/);assert.match(html,/data-process-panel="terminal" hidden/);
+  assert.match(html,/data-process-phase="4"/);assert.equal((html.match(/data-process-window=/g)||[]).length,2);assert.match(html,/data-process-built="4"/);assert.match(html,/data-process-panel="terminal" hidden/);
   assert.doesNotMatch(html,/data-process-panel="site"[^>]*\bhidden/);
   assert.doesNotMatch(html,/data-process-replay/);
   assert.match(html,/aria-live="polite"/);assert.equal((html.match(/type="button"/g)||[]).length,4);
@@ -206,7 +212,7 @@ test('initialization is single-instance and cleanup removes timers, observers an
  f.intersect(true);assert.equal(f.timers.size,1);f.tick(400);assert.equal(f.visibleLines(),1);
  const completions=f.completions;cleanup();cleanup();
  assert.equal(f.timers.size,0);assert.equal(f.observers[0].disconnected,true);
- for(const target of [...f.buttons,f.view,f.reducedMedia])assert.equal(target.listenerCount,0);
+ for(const target of [...f.buttons,f.view,f.reducedMedia,f.desktopMedia])assert.equal(target.listenerCount,0);
  assert.equal(f.doc.listeners.get('visibilitychange')?.size||0,0);
  assert.equal(f.block.dataset.processEnhanced,undefined);assert.equal(f.block.dataset.processPinned,undefined);assert.equal(f.block.dataset.processFinished,undefined);assert.equal(f.classes.has('project-process-complete'),false);
  assert.equal(f.block.dataset.processPhase,'4');assert.equal(f.site.hidden,false);assert.equal(f.terminal.hidden,true);assert.equal(f.description.hidden,true);assert.equal(f.completions,completions);
@@ -248,4 +254,31 @@ test('example carousel cycles at five seconds, pauses and releases its timer',()
  tick();assert.deepEqual(examples.map(e=>e.hidden),[false,true,true]);
  carousel.setActive(false);assert.equal(timers.size,0);
  carousel.setActive(true);assert.equal(timers.size,1);carousel.destroy();assert.equal(timers.size,0);
+});
+
+
+test('desktop keeps separate windows visible and builds the site from the existing line clock across resize',()=>{
+ const f=fixture({desktop:true}),cleanup=initProjectProcess(f.root);
+ assert.equal(f.terminal.hidden,false);assert.equal(f.site.hidden,false);
+ assert.equal(f.terminalWindow.hidden,false);assert.equal(f.siteWindow.hidden,false);
+ assert.equal(f.terminal['aria-hidden'],'false');assert.equal(f.site['aria-hidden'],'false');
+ assert.equal(f.block.dataset.processBuilt,'0');f.intersect(true);
+ for(let built=1;built<=4;built++){
+  f.tick(built===1?400+3*420:4*420);
+  assert.equal(f.block.dataset.processBuilt,String(built));assert.equal(f.visibleLines(),built*4);assert.equal(f.timers.size,1);
+ }
+ f.resize(false);assert.equal(f.site.hidden,true);assert.equal(f.siteWindow.hidden,true);assert.equal(f.site['aria-hidden'],'true');
+ f.resize(true);assert.equal(f.site.hidden,false);assert.equal(f.siteWindow.hidden,false);assert.equal(f.timers.size,1);
+ f.tick(420);assert.equal(f.block.dataset.processPhase,'4');assert.equal(f.terminal.hidden,false);assert.equal(f.terminalWindow.hidden,false);assert.equal(f.timers.size,0);
+ f.resize(false);assert.equal(f.terminal.hidden,true);assert.equal(f.terminalWindow.hidden,true);assert.equal(f.terminal['aria-hidden'],'true');
+ f.resize(true);assert.equal(f.terminal.hidden,false);assert.equal(f.terminal['aria-hidden'],'false');
+ cleanup();assert.equal(f.desktopMedia.listenerCount,0);assert.equal(f.terminalWindow.hidden,true);assert.equal(f.siteWindow.hidden,false);assert.equal(f.block.dataset.processBuilt,'4');
+});
+
+test('desktop reduced motion shows both completed windows without animation timers',()=>{
+ const f=fixture({desktop:true,reduced:true}),cleanup=initProjectProcess(f.root);
+ assert.equal(f.terminal.hidden,false);assert.equal(f.site.hidden,false);assert.equal(f.visibleLines(),16);
+ assert.equal(f.block.dataset.processBuilt,'4');assert.equal(f.block.dataset.processRunning,'false');assert.equal(f.timers.size,0);
+ f.resize(false);assert.equal(f.terminal.hidden,true);assert.equal(f.site.hidden,false);f.resize(true);assert.equal(f.terminal.hidden,false);
+ cleanup();assert.equal(f.desktopMedia.listenerCount,0);
 });

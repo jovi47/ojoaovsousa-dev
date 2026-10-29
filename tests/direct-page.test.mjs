@@ -24,7 +24,8 @@ test('the direct portfolio has complete localised content without the world runt
    assert.match(socialIcon(kind),/alt="" aria-hidden="true" width="24" height="24"/);
    assert.equal((html.split(socialIcon(kind)).length-1),3,`${key}: same local mark in contact, dialog and footer`);
   }
-  assert.match(socialIcon('mail'),/^<svg\b/);
+  assert.match(socialIcon('mail'),/^<span class="social-brick social-brick-mail" aria-hidden="true"><svg\b/);
+  for(const kind of ['whatsapp','linkedin','github'])assert.ok(socialIcon(kind).startsWith(`<span class="social-brick social-brick-${kind}" aria-hidden="true"><img`));
   for(const group of [c.work,c.expertise]){
    assert.ok(factual.includes(e(group.title)),`${key}: section title`);
    assert.ok(!factual.includes(e(group.description)),`${key}: concise section introduction`);
