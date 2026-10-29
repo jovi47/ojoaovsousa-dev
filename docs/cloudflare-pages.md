@@ -14,6 +14,14 @@ The next desktop/visual refinement is tracked by `docs/desktop-layout.md`; its s
 
 Search Console ownership for the exact canonical prefix was auto-verified through the published HTML tag. The dashboard is accessible; sitemap submission/indexing confirmation remain separate follow-up actions. Preserve the tag.
 
+## Responsive follow-up published · 2026-10-29 UTC
+
+Source `fda06efcbf2e9be24efc6ce9958b3b038cdcc582` is confirmed live as deployment `71efe85e-a470-446f-bfd3-2cbd9bcec96c`, Production/main. This includes all refinements documented in `desktop-layout.md`: shared desktop identity/cue, cards and alignment, compact brick controls/flags, contact brick icons, process headline, separate desktop terminal/preview and staged construction.19 files uploaded and113 reused, plus the two Pages control files. No Git branch was merged.
+
+Validation:126 local tests passed; production build and audit191 sources/134 outputs passed. The new canonical production passed36 HTTP/artifact checks and12 additional exact CSS/JS comparisons. Native public desktop showed the localized headline and both windows with the final green-check overlay, no overflow; source-native responsive/theme evidence is in the desktop guide. Frozen ZIP/JSON manifest for this exact source are retained in the local task artifacts. Previous719ba634 was reverified with36 checks immediately before upload and remains the recovery target; real rollback was not exercised.
+
+[PR14](https://github.com/jovi47/ojoaovsousa-dev/pull/14) preserves this follow-up independently of pipeline PR13. The shared localhost3000 preview remains active in the integration worktree; delivered release checkouts may be retired after remote recoverability and local-content checks. Search Console ownership is verified, but authenticated browser input/screenshot repeatedly timed out before sitemap submission confirmation; no indexing request or confirmed indexing is claimed.
+
 ## Scope and architecture
 
 One Direct Upload project serves the existing static `dist/` artifact. GitHub remains the code source; no Git integration, push-triggered build, deploy hook or remote test workflow is added. A future change from Direct Upload to Git integration requires a new Pages project. No Kubernetes, database, container or VPS is needed for these static files.
