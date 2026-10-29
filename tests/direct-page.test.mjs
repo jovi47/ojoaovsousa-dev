@@ -12,6 +12,13 @@ test('the direct portfolio has complete localised content without the world runt
   const factual=renderDirectContent(c,key);
   const siteHeader=html.match(/<header\b[^>]*>[\s\S]*?<\/header>/)?.[0];
   assert.doesNotMatch(siteHeader,/data-tour-link|aria-disabled/);
+  const footerNav=html.match(/<nav class="footer-socials"[^>]*>([\s\S]*?)<\/nav>/)?.[1];
+  assert.equal((footerNav.match(/<a /g)||[]).length,1);
+  assert.match(footerNav,/href="https:\/\/github.com\/jovi47"/);
+  const headerMark=siteHeader.match(/<a class="wordmark"[^>]*>([\s\S]*?)<\/a>/)?.[1],footerMark=html.match(/<a class="footer-name"[^>]*>([\s\S]*?)<\/a>/)?.[1];
+  assert.equal(footerMark,'ojoaovsousa',`${key}: footer keeps only the pixel wordmark`);assert.match(headerMark,/src="\/jovi-poster\.webp"/);
+  const siteFooter=html.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/)?.[0];assert.ok(siteFooter);assert.ok(!siteFooter.includes(`href="/${key}/direct/"`),`${key}: footer omits the reading option`);
+  assert.doesNotMatch(factual,/data-contact-character|direct-contact-character/);
   for(const id of ['experience','projects','faq','contact'])assert.equal((siteHeader.match(new RegExp(`href="#${id}"`,'g'))||[]).length,2,`${key}: local native section navigation`);
   assert.ok(html.includes(factual),`${key}: direct content renderer`);
   const channels=contactLinks(c);
@@ -22,7 +29,7 @@ test('the direct portfolio has complete localised content without the world runt
   for(const kind of ['whatsapp','linkedin']){
    assert.match(socialIcon(kind),new RegExp(`src="/contact-icons/${kind}\\.svg"`));
    assert.match(socialIcon(kind),/alt="" aria-hidden="true" width="24" height="24"/);
-   assert.equal((html.split(socialIcon(kind)).length-1),3,`${key}: same local mark in contact, dialog and footer`);
+   assert.equal((html.split(socialIcon(kind)).length-1),2,`${key}: same local mark in contact and dialog`);
   }
   assert.match(socialIcon('mail'),/^<span class="social-brick social-brick-mail" aria-hidden="true"><svg\b/);
   for(const kind of ['whatsapp','linkedin','github'])assert.ok(socialIcon(kind).startsWith(`<span class="social-brick social-brick-${kind}" aria-hidden="true"><img`));
@@ -117,13 +124,13 @@ test('reading biography introduces the portrait beside its first paragraph witho
  }
 });
 
-test('reading services retain their complete copy with decorative existing local icons',()=>{
+test('reading services retain their complete copy with decorative local brick vectors',()=>{
  for(const [key,c] of Object.entries(content)){
   const html=renderDirectContent(c,key),services=html.match(/<dl class="direct-expertise">([\s\S]*?)<\/dl>/)?.[1];
   assert.ok(services);
-  const icons=[...services.matchAll(/<img class="direct-service-icon"[^>]*>/g)].map(match=>match[0]);
+  const icons=[...services.matchAll(/<svg class="direct-service-icon service-[0-3]"[^>]*>[\s\S]*?<\/svg>/g)].map(match=>match[0]);
   assert.equal(icons.length,c.expertise.items.length);
-  for(const icon of icons){assert.match(icon,/src="\/technology-icons\/[a-z0-9-]+\.svg"/);assert.match(icon,/alt="" aria-hidden="true"/);}
+  for(const icon of icons){assert.match(icon,/viewBox="0 0 32 32"/);assert.match(icon,/aria-hidden="true" focusable="false"/);assert.match(icon,/<path/);assert.doesNotMatch(icon,/<image|<script|\bstyle=/);}
   for(const item of c.expertise.items){assert.ok(services.includes(e(item.title)));assert.ok(services.includes(e(item.body)));}
  }
 });
