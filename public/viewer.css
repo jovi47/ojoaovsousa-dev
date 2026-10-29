@@ -203,6 +203,7 @@ body:has(dialog[open]) .viewer-more-content{visibility:hidden;pointer-events:non
 
 .viewer-identity--compact{display:none}
 @media(min-width:701px){
+ .viewer-card{scroll-padding-top:88px}
  .viewer-card>.viewer-identity--compact{display:flex;position:sticky;top:0;z-index:2;gap:12px;margin-bottom:18px;padding:8px 0 14px;background:var(--bg);border-bottom:1px solid color-mix(in srgb,var(--ink) 14%,transparent)}
  .viewer-card>.viewer-identity--compact>img{width:44px;height:54px}
  .viewer-identity--compact .viewer-role{font-size:12px;margin:0 0 5px}

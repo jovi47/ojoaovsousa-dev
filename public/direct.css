@@ -118,11 +118,15 @@ body:not(.tour-complete):not(.reading):not(.graphics-failed) .viewer-page .inqui
 @media(max-width:430px){.site-header{padding-inline:12px;gap:4px}.site-header .wordmark{font-size:clamp(16px,4vw,18px);gap:3px}.header-character{width:22px;height:32px}.site-header .header-actions{gap:4px}}
 
 
+/* Service cards share the same icon, surface and hierarchy at every width. */
+.direct-expertise>div{min-width:0;padding:17px 18px;border:1px solid color-mix(in srgb,var(--ink) 15%,transparent);border-radius:5px;background:color-mix(in srgb,var(--panel) 38%,var(--bg))}.direct-expertise dt{display:flex;align-items:center;gap:12px;font-size:20px;line-height:1.2}.direct-expertise .direct-service-icon{display:block;width:30px;height:30px;flex:none}.direct-expertise dd{font-size:16px;line-height:1.5;margin-top:12px;max-width:none}
+@media(min-width:960px){.direct-expertise{gap:20px}.direct-expertise>div{padding:22px 24px}.direct-expertise dt{font-size:22px}.direct-expertise .direct-service-icon{width:28px;height:28px}}
+
 /* The shared reading DOM follows explanation → preview → actions at compact widths. */
 @media(max-width:959px){
  .direct-case{gap:20px}.direct-case-end{min-width:0}.direct-case-end .project-actions{margin-top:0}
  .direct-about{display:flow-root}.direct-about>h2{margin-bottom:22px}.direct-about-portrait{float:left;width:88px;max-width:none;margin:4px 18px 10px 0;order:0}.direct-about-portrait img{width:88px;height:104px;aspect-ratio:auto}.direct-about-copy{display:contents}.direct-about-copy>p{font-size:17px;line-height:1.55;max-width:none;margin-top:20px}.direct-about-copy>p:first-child{display:flow-root;margin-top:0}.direct-about-copy .career{clear:both}
- .direct-expertise{grid-template-columns:minmax(0,1fr);gap:12px}.direct-expertise>div{min-width:0;padding:17px 18px;border:1px solid color-mix(in srgb,var(--ink) 15%,transparent);border-radius:5px;background:color-mix(in srgb,var(--panel) 38%,var(--bg))}.direct-expertise dt{display:flex;align-items:center;gap:12px;font-size:20px;line-height:1.2}.direct-expertise .direct-service-icon{display:block;width:30px;height:30px;flex:none}.direct-expertise dd{font-size:16px;line-height:1.5;margin-top:12px;max-width:none}
+ .direct-expertise{grid-template-columns:minmax(0,1fr);gap:12px}
 }
 @media(min-width:545px) and (max-width:959px){.direct-expertise{grid-template-columns:repeat(2,minmax(0,1fr))}.direct-expertise dt{font-size:19px;align-items:flex-start}}
 @media(max-width:700px){
@@ -143,9 +147,11 @@ body:not(.tour-complete):not(.reading):not(.graphics-failed) .viewer-page .inqui
  [data-scroll-reveal=left]{--reveal-x:-14px;--reveal-y:0px}
  [data-scroll-reveal=right]{--reveal-x:14px;--reveal-y:0px}
  [data-scroll-reveal=down]{--reveal-y:-14px}
+ .direct-section-intro[data-scroll-reveal],.direct-case>[data-project-mockup][data-scroll-reveal],.direct-contact-content>[data-scroll-reveal]{--reveal-x:0px;--reveal-y:14px}
  [data-scroll-reveal].is-revealed{animation:content-build-in .55s cubic-bezier(.2,.7,.3,1) both}
  [data-scroll-reveal]:focus-within{animation:none}
- .page-hidden [data-scroll-reveal],.annotation-active [data-scroll-reveal]{animation-play-state:paused}
+ .page-hidden [data-scroll-reveal]{animation-play-state:paused}
+ .annotation-active [data-scroll-reveal]{animation:none}
  @keyframes content-build-in{from{opacity:.65;translate:var(--reveal-x) var(--reveal-y)}to{opacity:1;translate:0 0}}
 }
 
@@ -153,7 +159,6 @@ body:has(#analytics-consent:not([hidden])) :is(.inquiry-cta,.viewer-more-content
 
 @media(min-width:960px){
  .direct-contact>.direct-section-intro,.direct-contact>.direct-contact-content{max-width:none;grid-template-columns:1.1fr 1fr;column-gap:85px}
- .direct-contact>[data-scroll-reveal],.direct-contact-content>[data-scroll-reveal]{--reveal-x:0px;--reveal-y:14px}
 }
 
 .analytics-consent{padding:14px max(16px,env(safe-area-inset-right)) max(14px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}.analytics-consent h2{font-size:18px;padding-right:36px}.analytics-consent p{font-size:13px;line-height:1.4;margin-top:6px}.analytics-consent a{display:inline;min-height:0}.consent-actions{gap:8px;margin:10px auto 0}.consent-actions .button{min-height:44px;padding:8px 10px}.consent-brick-icon{position:absolute;right:16px;top:13px;width:26px;height:26px;color:var(--ink)}
