@@ -1,6 +1,16 @@
 # Cloudflare Pages: manual release
 
-Updated 2026-10-29 UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). The owner-authorized source `9f2dbb5544c525dcdea94f81620fcaf731f59126` was published and verified as recorded below. No custom domain was purchased. This runbook separates the confirmed release from instructions for future releases and unresolved Search Console/recovery work.
+Updated2026-10-29UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). Current source is `10c5b6bcaa003fbdf9e567482c09dd6c7facb11b`; earlier dated receipts below describe their historical releases. No custom domain was purchased. This runbook separates the confirmed release from instructions for future releases and unresolved Search Console/recovery work.
+
+## Current visual release ·2026-10-29UTC
+
+Production source `10c5b6bcaa003fbdf9e567482c09dd6c7facb11b`, deployment `0976c277-0da3-4fe5-8c49-6eb6d9975d3c`, is confirmed at https://ojoaovsousa.pages.dev/pt-br/ through existing Pages Direct Upload/Production main. All approved icon/theme/footer/alignment changes, five shuffled fictional examples, separate terminal/preview at all widths, process-before-FAQ order, horizontal-S airplane and removal of the rejected contact figure are included. GitHub drafts PR15/PR16 preserve the independent source scopes; the consolidated source branch is `codex/visual-release-2026-10-29`. No branch was merged.
+
+132 local tests passed; audit195 source files/136 outputs passed. All runtime/build inputs match the integrated localhost preview byte-for-byte.136 files total10,068,215 raw bytes; frozen ZIP5,951,998 bytes, SHA256 `5628ba3dcacf93392e9c9c60cfe2c048e1aed3e96a7f2d402ad0f6c53a56812e`.60 outgoing historical blobs were checked for protected paths/detected keys. Only audited dist was uploaded:20 new files,114 reused, plus the two control files. After publication36 HTTP/artifact checks and12 exact changed CSS/JS checks passed. Native public1654px footer confirmed the shared reading layout and process-before-FAQ order;430px home had the live canvas and no overflow.
+
+Previous healthy sourcefda06ef/deployment71efe85e passed36 checks immediately before publication and remains the recovery target. Actual rollback was not exercised. No remote tests/build, new provider, permission, paid feature or data treatment was added. Local integrated preview remains available; release checkouts are retired only after remote recovery and local-process/content checks.
+
+Search Console prefix ownership is verified. On this release follow-up the existing tab displayed “Sitemap submitted successfully”; reloading confirmed `/sitemap.xml` submitted29Oct2026, with current status “Couldn't fetch”, unknown type and0discovered pages. Public sitemap/robots and all9canonical URLs passed HTTP checks. Do not resubmit the same sitemap repeatedly. Google fetch/processing and URL-indexing confirmation remain pending; native input still timed out, so no URL-inspection/index request is claimed. No auth/session was copied.
 
 ## Confirmed publication · 2026-10-29 UTC
 

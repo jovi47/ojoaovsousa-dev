@@ -54,3 +54,5 @@ Integration validation on2026-10-29UTC:132 local tests passed, including all thr
 
 
 Footer alignment correction: native1654px screenshot pixel bounds measured both wordmark and copyright ink at y775px, correcting the previous8px difference. GitHub precedes copyright; both gaps before/after copyright measured16px. Native960px measured both ink tops at y730px with no horizontal overflow;320px retains the original compact layout with no optical offset. This CSS-only follow-up reuses the132 passing integrated cases from the same source behavior; no new numeric-value unit test or production deploy was introduced.
+
+Publication: current visual refinements are confirmed in source10c5b6b/deployment0976c277 on2026-10-29UTC.132 local tests,195/136audit,36 public checks and12 changed runtime comparisons passed; native public1654/430px had no overflow. See cloudflare-pages.md for recovery and Search Console limits.

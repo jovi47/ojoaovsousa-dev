@@ -1,6 +1,6 @@
 # Search discovery
 
-Updated 2026-10-23 UTC. Static discovery originated on `codex/search-discovery` and is included in published source `488d3e3184c74bc82706c7c0b0c42ee6617601ec` at [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/), Cloudflare Pages Free Direct Upload. [Release receipt](cloudflare-pages.md#confirmed-production-release) identifies the exact artifact. Public source is [jovi47/ojoaovsousa-dev](https://github.com/jovi47/ojoaovsousa-dev); repository visibility does not imply PR merge. Technical crawlability does not guarantee ranking, Google indexing, rich results or LLM inclusion.
+Updated2026-10-29UTC. Current publication is10c5b6b/deployment0976c277; the original dated figures below retain provenance. Static discovery originated on `codex/search-discovery` and is included in published source `488d3e3184c74bc82706c7c0b0c42ee6617601ec` at [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/), Cloudflare Pages Free Direct Upload. [Release receipt](cloudflare-pages.md#confirmed-production-release) identifies the exact artifact. Public source is [jovi47/ojoaovsousa-dev](https://github.com/jovi47/ojoaovsousa-dev); repository visibility does not imply PR merge. Technical crawlability does not guarantee ranking, Google indexing, rich results or LLM inclusion.
 
 ## Content and generation
 
@@ -44,14 +44,7 @@ New text files total **5,585 bytes** in the default preview. At the 25-byte fake
 
 The authorized release uses `SITE_URL=https://ojoaovsousa.pages.dev` and `INDEXABLE=true`; default/local previews retain noindex. No custom domain was purchased. The exact source/deployment/ZIP receipt and 36 public HTTP checks are in [Cloudflare Pages](cloudflare-pages.md#confirmed-production-release). The published sitemap contains the nine canonical home/policy URLs, with direct/legacy/404/Markdown omitted as described above. The source-root configuration does not make a GitHub Pages project subpath compatible without a separately reviewed path adaptation.
 
-A URL-prefix property for `https://ojoaovsousa.pages.dev/` was added in the account identified as `jovi47personal`, but **ownership remains unverified**. The verification-file download failed; no verification file was downloaded into Downloads or installed in the site, and no metatag was installed. UI automation became unstable while the owner used the computer. Property creation alone proves neither ownership nor indexing.
-
-1. Obtain the official verification mechanism, install it in a reviewed authorized release and confirm ownership in the correct property; do not store auth/session secrets in Git or docs.
-2. Submit the real [sitemap.xml](https://ojoaovsousa.pages.dev/sitemap.xml) once and confirm its reading, avoiding redundant submissions.
-3. Inspect canonical PT-BR/en/es homes and request indexing/new crawl when appropriate. Record accepted requests separately from later indexing results. Do not request direct, previews, private/retired pages or hypothetical APIs.
-4. For future URL changes, preserve equivalents with permanent redirects when applicable, or remove retired URLs from current links/sitemaps and handle HTTP/removal evidence explicitly.
-
-**No sitemap submission or crawl/indexing request has been made; Google indexing is not confirmed.** Contact uses visitor-chosen WhatsApp/mailto/Copy/LinkedIn, with no form, backend, Gmail SMTP/API or CAPTCHA. That owner decision replaced the earlier contact-backend proposal; it is not a pending integration requirement. No remote CI, new provider or Search Console operation was performed by this documentation reconciliation.
+The exact URL-prefix property `https://ojoaovsousa.pages.dev/` is verified by the published HTML tag. Current release10c5b6b preserves all9canonical URLs and passed36 public artifact/HTTP checks. The existing Search Console tab showed the submission success confirmation; after reload its table lists `/sitemap.xml`, submitted29Oct2026, status “Couldn't fetch”, unknown type and0discovered pages. The public sitemap/robots respond correctly. Keep the accepted submission, avoid redundant resubmissions and investigate Google fetch/processing after its report updates. Native input commands still time out, so no URL-inspection/indexing request or confirmed indexing is claimed. No auth or session data was copied.
 
 ## Primary references
 
