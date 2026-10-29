@@ -41,7 +41,34 @@
 .social-brick{position:relative;display:inline-grid;place-items:center;flex:none;width:28px;height:28px;box-sizing:border-box;border:1px solid currentColor;border-radius:3px;background:var(--bg);color:var(--ink)}
 .social-brick::before,.social-brick::after{content:'';position:absolute;top:-4px;width:6px;height:4px;box-sizing:border-box;border:1px solid currentColor;border-bottom:0;border-radius:2px 2px 0 0;background:inherit}
 .social-brick::before{left:5px}.social-brick::after{right:5px}
-.social-brick-whatsapp{color:#00b956}.social-brick-linkedin{color:#0a66c2}
+.social-brick-whatsapp{color:#009b48;background:currentColor}.social-brick-linkedin{color:#0077b5;background:currentColor}
+.social-brick-whatsapp>.social-brand-whatsapp{filter:brightness(0) invert(1)}
+.social-brick-github{color:#19191b;background:currentColor}.social-brick-mail{color:#7652a3;background:currentColor}
+.footer-socials .social-brick-github>.social-brand-github{filter:brightness(0) invert(1)}
+.social-brick-mail>svg{color:#fff}
 .contact-channel .social-brick>:is(svg,img),.footer-socials .social-brick>:is(svg,img),.viewer-card .contact-links .social-brick>:is(svg,img){width:19px;height:19px;padding:0;background:none;border-radius:0}
 
 .footer-socials .social-brick{display:inline-grid}
+
+html[data-theme=dark] .social-brick-github{box-shadow:0 0 0 1px #ffffff40}
+
+/* The glyph represents the current theme; the accessible label names the toggle action. */
+.site-header .theme-sun{display:block;color:#a76b00;fill:#ffd25a}
+.site-header .theme-moon{display:none}
+html[data-theme=dark] .site-header .theme-sun{display:none}
+html[data-theme=dark] .site-header .theme-moon{display:block;color:#9bb9eb;fill:#e4eeff;filter:drop-shadow(0 0 2px #aaccff66)}
+
+.site-footer .footer-name{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-family:Pixelify,Bricolage,sans-serif;font-size:28px;font-weight:400;letter-spacing:-1px}
+.direct-service-icon.service-0{color:#56806c}.direct-service-icon.service-1{color:#8871b2}.direct-service-icon.service-2{color:#3c8998}.direct-service-icon.service-3{color:#5c85a1}
+
+.direct-contact-primary{display:grid;grid-template-columns:minmax(0,1fr) clamp(64px,18vw,132px);column-gap:16px;align-items:start}
+.direct-contact-primary>.panel-actions,.direct-contact-primary>.contact-links{grid-column:1}
+.direct-contact-primary>.direct-availability{grid-column:1/-1}
+.direct-contact-character{grid-column:2;grid-row:1/span 2;align-self:center;justify-self:center;width:100%;margin:0;perspective:600px;pointer-events:none}
+.direct-contact-character img{display:block;width:100%;height:160px;object-fit:contain}
+@media(max-width:360px){.direct-contact-primary{grid-template-columns:minmax(0,1fr) 64px;column-gap:12px}}
+@media(prefers-reduced-motion:no-preference){
+ .direct-contact-character img{animation:contact-character-turn 12s linear infinite;animation-play-state:paused}
+ .contact-visible:not(.page-hidden):not(.annotation-active):not(:has(dialog[open])) .direct-contact-character img{animation-play-state:running}
+ @keyframes contact-character-turn{to{transform:rotateY(360deg)}}
+}
