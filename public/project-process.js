@@ -9,7 +9,7 @@ export function initProjectProcess(root=document){
   const terminal=block.querySelector('[data-process-panel="terminal"]'),site=block.querySelector('[data-process-panel="site"]'),status=block.querySelector('[data-process-status]'),description=block.querySelector('[data-process-description]'),output=block.querySelector('.project-process-output');
   const terminalWindow=block.querySelector('[data-process-window="terminal"]'),siteWindow=block.querySelector('[data-process-window="site"]');
   if(buttons.length!==4||logs.length!==4||lines.length!==16||!terminal||!site||!status||!description||!output||!terminalWindow||!siteWindow)continue;
-  const doc=block.ownerDocument,view=doc.defaultView,reduced=view.matchMedia('(prefers-reduced-motion: reduce)'),desktop=view.matchMedia('(min-width: 960px)'),listeners=[];
+  const doc=block.ownerDocument,view=doc.defaultView,reduced=view.matchMedia('(prefers-reduced-motion: reduce)'),listeners=[];
   const examples=createProjectExamples(block);
   let timer=null,near=!view.IntersectionObserver,manual=false,disposed=false,count=0,phase=0;
   function listen(target,event,callback){target.addEventListener(event,callback);listeners.push(()=>target.removeEventListener(event,callback));}
@@ -20,8 +20,7 @@ export function initProjectProcess(root=document){
    block.dataset.processFinished='true';doc.body.classList.add('project-process-complete');doc.dispatchEvent(new Event('projectprocesscomplete'));
   }
   function syncPanels(){
-   const split=desktop.matches&&!disposed,finished=phase===4;
-   terminal.hidden=terminalWindow.hidden=!split&&finished;site.hidden=siteWindow.hidden=!split&&!finished;
+   terminal.hidden=terminalWindow.hidden=disposed;site.hidden=siteWindow.hidden=false;
    terminal.setAttribute('aria-hidden',String(terminal.hidden));site.setAttribute('aria-hidden',String(site.hidden));
   }
   function render(next,focus=false){
@@ -48,7 +47,6 @@ export function initProjectProcess(root=document){
    listen(button,'click',()=>choose(index));
    listen(button,'keydown',event=>{const next=event.key==='Home'?0:event.key==='End'?3:['ArrowDown','ArrowRight'].includes(event.key)?(index+1)%4:['ArrowUp','ArrowLeft'].includes(event.key)?(index+3)%4:null;if(next===null)return;event.preventDefault();choose(next,true);});
   });
-  listen(desktop,'change',syncPanels);
   listen(doc,'visibilitychange',()=>{if(doc.hidden)stop();else schedule();syncMotion();});
   listen(reduced,'change',()=>{if(reduced.matches){stop();count=lines.length;render(4);if(near)finish();}else schedule();syncMotion();});
   const observer=view.IntersectionObserver?new view.IntersectionObserver(entries=>{for(const entry of entries){near=entry.isIntersecting&&entry.intersectionRatio>=.25;if(near){if(reduced.matches&&phase===4)finish();schedule(count?420:400);}else{stop();if(!entry.isIntersecting&&!reduced.matches){manual=false;count=0;render(0);}}syncMotion();}},{threshold:[0,.25]}):null;

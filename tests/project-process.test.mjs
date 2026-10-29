@@ -12,12 +12,11 @@ class Target extends EventTarget{
  get listenerCount(){return [...this.listeners.values()].reduce((count,listeners)=>count+listeners.size,0);}
 }
 
-function fixture({home=true,reduced=false,desktop=false,exampleCount=0}={}){
+function fixture({home=true,reduced=false,exampleCount=0}={}){
  const observers=[],timers=new Map(),scrolls=[],classes=new Set(),style=new Map();
  let now=0,timerId=0,completions=0;
  const reducedMedia=Object.assign(new Target(),{matches:reduced});
- const desktopMedia=Object.assign(new Target(),{matches:desktop});
- const view=Object.assign(new Target(),{Event,matchMedia:query=>query==='(min-width: 960px)'?desktopMedia:reducedMedia,scrollTo:options=>scrolls.push(options)});
+ const view=Object.assign(new Target(),{Event,matchMedia:query=>{assert.equal(query,'(prefers-reduced-motion: reduce)');return reducedMedia;},scrollTo:options=>scrolls.push(options)});
  view.setTimeout=(callback,delay)=>{const id=++timerId;timers.set(id,{callback,at:now+delay});return id;};
  view.clearTimeout=id=>timers.delete(id);
  view.IntersectionObserver=class{
@@ -64,9 +63,8 @@ function fixture({home=true,reduced=false,desktop=false,exampleCount=0}={}){
  function intersect(isIntersecting,intersectionRatio=isIntersecting?1:0){observers[0]?.callback([{target:block,isIntersecting,intersectionRatio}]);}
  function visibility(hidden){doc.hidden=hidden;doc.dispatchEvent(new Event('visibilitychange'));}
  function motion(matches){reducedMedia.matches=matches;reducedMedia.dispatchEvent(new Event('change'));}
- function resize(matches){desktopMedia.matches=matches;desktopMedia.dispatchEvent(new Event('change'));}
  function visibleLines(){return logs.reduce((count,log)=>count+(log.hidden?0:log.lines.filter(line=>!line.hidden).length),0);}
- return {root,block,examples,buttons,logs,status,description,terminal,site,terminalWindow,siteWindow,resize,desktopMedia,output,view,doc,reducedMedia,observers,timers,classes,style,scrolls,tick,intersect,visibility,motion,visibleLines,get completions(){return completions;}};
+ return {root,block,examples,buttons,logs,status,description,terminal,site,terminalWindow,siteWindow,output,view,doc,reducedMedia,observers,timers,classes,style,scrolls,tick,intersect,visibility,motion,visibleLines,get completions(){return completions;}};
 }
 
 test('localised stages preserve sixteen log lines and a clearly fictional static website without JS',()=>{
@@ -114,7 +112,7 @@ test('logs grow down from the top and only scroll after the fixed output area is
 
 test('completed-preview motion eligibility follows visibility and preference and cleans up its state',()=>{
  const f=fixture(),cleanup=initProjectProcess(f.root);f.intersect(true);assert.equal(f.block.dataset.processRunning,'false');
- f.buttons[3].click();assert.equal(f.block.dataset.processRunning,'true');assert.equal(f.terminal['aria-hidden'],'true');assert.equal(f.site['aria-hidden'],'false');
+ f.buttons[3].click();assert.equal(f.block.dataset.processRunning,'true');assert.equal(f.terminal['aria-hidden'],'false');assert.equal(f.site['aria-hidden'],'false');
  f.intersect(true,.24);assert.equal(f.block.dataset.processRunning,'false');f.intersect(true,.25);assert.equal(f.block.dataset.processRunning,'true');
  f.visibility(true);assert.equal(f.block.dataset.processRunning,'false');f.visibility(false);assert.equal(f.block.dataset.processRunning,'true');
  f.motion(true);assert.equal(f.block.dataset.processRunning,'false');f.motion(false);assert.equal(f.block.dataset.processRunning,'true');cleanup();assert.equal(f.block.dataset.processRunning,undefined);
@@ -129,12 +127,12 @@ test('the preview keeps a fixed viewport, top-aligned output and opacity-only li
  assert.doesNotMatch(css,/process-dino|project-process-runner/);
 });
 
-test('home and direct start only at 25% visibility and reveal sixteen timed lines before the final site',()=>{
+test('home and direct start only at 25% visibility and reveal sixteen timed lines before marking the visible site complete',()=>{
  for(const home of [true,false]){
   const f=fixture({home}),cleanup=initProjectProcess(f.root);
   assert.equal(f.block.dataset.processPhase,'0');assert.equal(f.visibleLines(),0);assert.equal(f.timers.size,0);
   assert.equal(f.block.dataset.processPinned,undefined);assert.equal(f.style.has('--process-track-height'),false);
-  assert.equal(f.site.hidden,true);assert.equal(f.terminal.hidden,false);
+  assert.equal(f.site.hidden,false);assert.equal(f.terminal.hidden,false);
   assert.equal(f.observers.length,1);assert.deepEqual(f.observers[0].targets,[f.block]);
   f.intersect(true,.24);f.intersect(false,1);assert.equal(f.timers.size,0);
   f.intersect(true,.25);f.intersect(true,.8);assert.equal(f.timers.size,1);
@@ -145,9 +143,9 @@ test('home and direct start only at 25% visibility and reveal sixteen timed line
    f.tick(1);assert.equal(f.visibleLines(),line);assert.equal(f.timers.size,1);
    if([5,9,13].includes(line))assert.equal(f.block.dataset.processPhase,String(Math.floor((line-1)/4)));
   }
-  assert.equal(f.block.dataset.processPhase,'3');assert.equal(f.site.hidden,true);assert.equal(f.completions,0);
-  f.tick(419);assert.equal(f.site.hidden,true);
-  f.tick(1);assert.equal(f.block.dataset.processPhase,'4');assert.equal(f.site.hidden,false);assert.equal(f.terminal.hidden,true);assert.equal(f.status.textContent,'Online example');
+  assert.equal(f.block.dataset.processPhase,'3');assert.equal(f.site.hidden,false);assert.equal(f.completions,0);
+  f.tick(419);assert.equal(f.site.hidden,false);
+  f.tick(1);assert.equal(f.block.dataset.processPhase,'4');assert.equal(f.site.hidden,false);assert.equal(f.terminal.hidden,false);assert.equal(f.status.textContent,'Online example');
   assert.equal(f.block.dataset.processFinished,'true');assert.ok(f.classes.has('project-process-complete'));assert.equal(f.completions,1);assert.equal(f.timers.size,0);
   f.intersect(true);f.tick(10000);assert.equal(f.completions,1);assert.equal(f.timers.size,0);
   assert.equal(f.view.listeners.get('scroll')?.size||0,0);assert.equal(f.scrolls.length,0);assert.equal(f.block.dataset.processPinned,undefined);assert.equal(f.style.has('--process-track-height'),false);
@@ -174,7 +172,7 @@ test('only a full exit restarts autoplay; manual selection and the completion la
  f.intersect(false);assert.equal(f.block.dataset.processPhase,'0');assert.equal(f.visibleLines(),0);assert.equal(f.timers.size,0);
  f.intersect(true);f.tick(400);assert.equal(f.visibleLines(),1);
  f.buttons[3].click();assert.equal(f.site.hidden,false);assert.equal(f.block.dataset.processFinished,'true');assert.equal(f.completions,1);
- f.intersect(true,.24);assert.equal(f.site.hidden,false);f.intersect(false);assert.equal(f.block.dataset.processPhase,'0');assert.equal(f.site.hidden,true);
+ f.intersect(true,.24);assert.equal(f.site.hidden,false);f.intersect(false);assert.equal(f.block.dataset.processPhase,'0');assert.equal(f.site.hidden,false);
  assert.equal(f.block.dataset.processFinished,'true');assert.ok(f.classes.has('project-process-complete'));
  f.intersect(true);f.tick(400);assert.equal(f.visibleLines(),1);f.tick(16*420);assert.equal(f.site.hidden,false);assert.equal(f.completions,1);cleanup();
 });
@@ -191,10 +189,10 @@ test('keyboard selection keeps roving focus, supports Home and End, and never sc
  assert.equal(f.scrolls.length,0);assert.equal(f.timers.size,0);cleanup();
 });
 
-test('reduced motion starts at the final site and never restarts on visibility changes',()=>{
+test('reduced motion starts with both completed windows and never restarts on visibility changes',()=>{
  for(const home of [true,false]){
   const f=fixture({home,reduced:true}),cleanup=initProjectProcess(f.root);
-  assert.equal(f.block.dataset.processPhase,'4');assert.equal(f.site.hidden,false);assert.equal(f.terminal.hidden,true);assert.equal(f.timers.size,0);
+  assert.equal(f.block.dataset.processPhase,'4');assert.equal(f.site.hidden,false);assert.equal(f.terminal.hidden,false);assert.equal(f.timers.size,0);
   assert.ok(f.buttons.every(button=>button.dataset.processComplete==='true'));assert.equal(f.style.get('--process-link-0'),'1');
   assert.equal(f.block.dataset.processFinished,undefined);assert.equal(f.classes.has('project-process-complete'),false);
   assert.equal(f.completions,0);f.intersect(true,.24);assert.equal(f.completions,0);f.intersect(true,.25);assert.equal(f.completions,1);assert.equal(f.block.dataset.processFinished,'true');assert.ok(f.classes.has('project-process-complete'));f.tick(10000);assert.equal(f.timers.size,0);
@@ -216,7 +214,7 @@ test('initialization is single-instance and cleanup removes timers, observers an
  f.intersect(true);assert.equal(f.timers.size,1);f.tick(400);assert.equal(f.visibleLines(),1);
  const completions=f.completions;cleanup();cleanup();
  assert.equal(f.timers.size,0);assert.equal(f.observers[0].disconnected,true);
- for(const target of [...f.buttons,f.view,f.reducedMedia,f.desktopMedia])assert.equal(target.listenerCount,0);
+ for(const target of [...f.buttons,f.view,f.reducedMedia])assert.equal(target.listenerCount,0);
  assert.equal(f.doc.listeners.get('visibilitychange')?.size||0,0);
  assert.equal(f.block.dataset.processEnhanced,undefined);assert.equal(f.block.dataset.processPinned,undefined);assert.equal(f.block.dataset.processFinished,undefined);assert.equal(f.classes.has('project-process-complete'),false);
  assert.equal(f.block.dataset.processPhase,'4');assert.equal(f.site.hidden,false);assert.equal(f.terminal.hidden,true);assert.equal(f.description.hidden,true);assert.equal(f.completions,completions);
@@ -266,7 +264,7 @@ test('shuffled carousel chooses its first example immediately, visits all five, 
 
 test('the chosen preview survives assembly, motion changes and visibility pauses with one carousel timer',()=>{
  for(const reduced of [false,true]){
-  const f=fixture({desktop:true,reduced,exampleCount:5}),cleanup=initProjectProcess(f.root);
+  const f=fixture({reduced,exampleCount:5}),cleanup=initProjectProcess(f.root);
   const visible=()=>f.examples.findIndex(example=>!example.hidden),first=visible();
   assert.equal(f.examples.filter(example=>!example.hidden).length,1);assert.equal(f.timers.size,0);
   f.intersect(true);
@@ -279,28 +277,26 @@ test('the chosen preview survives assembly, motion changes and visibility pauses
  }
 });
 
-test('desktop keeps separate windows visible and builds the site from the existing line clock across resize',()=>{
- const f=fixture({desktop:true}),cleanup=initProjectProcess(f.root);
- assert.equal(f.terminal.hidden,false);assert.equal(f.site.hidden,false);
- assert.equal(f.terminalWindow.hidden,false);assert.equal(f.siteWindow.hidden,false);
- assert.equal(f.terminal['aria-hidden'],'false');assert.equal(f.site['aria-hidden'],'false');
- assert.equal(f.block.dataset.processBuilt,'0');f.intersect(true);
+test('enhancement keeps both windows visible through all four building stages and cleanup restores fallback',()=>{
+ const f=fixture(),cleanup=initProjectProcess(f.root);
+ const assertVisible=()=>{
+  for(const panel of [f.terminal,f.site]){assert.equal(panel.hidden,false);assert.equal(panel['aria-hidden'],'false');}
+  assert.equal(f.terminalWindow.hidden,false);assert.equal(f.siteWindow.hidden,false);
+ };
+ assertVisible();assert.equal(f.block.dataset.processBuilt,'0');f.intersect(true);
  for(let built=1;built<=4;built++){
   f.tick(built===1?400+3*420:4*420);
-  assert.equal(f.block.dataset.processBuilt,String(built));assert.equal(f.visibleLines(),built*4);assert.equal(f.timers.size,1);
+  assert.equal(f.block.dataset.processBuilt,String(built));assert.equal(f.visibleLines(),built*4);assert.equal(f.timers.size,1);assertVisible();
  }
- f.resize(false);assert.equal(f.site.hidden,true);assert.equal(f.siteWindow.hidden,true);assert.equal(f.site['aria-hidden'],'true');
- f.resize(true);assert.equal(f.site.hidden,false);assert.equal(f.siteWindow.hidden,false);assert.equal(f.timers.size,1);
- f.tick(420);assert.equal(f.block.dataset.processPhase,'4');assert.equal(f.terminal.hidden,false);assert.equal(f.terminalWindow.hidden,false);assert.equal(f.timers.size,0);
- f.resize(false);assert.equal(f.terminal.hidden,true);assert.equal(f.terminalWindow.hidden,true);assert.equal(f.terminal['aria-hidden'],'true');
- f.resize(true);assert.equal(f.terminal.hidden,false);assert.equal(f.terminal['aria-hidden'],'false');
- cleanup();assert.equal(f.desktopMedia.listenerCount,0);assert.equal(f.terminalWindow.hidden,true);assert.equal(f.siteWindow.hidden,false);assert.equal(f.block.dataset.processBuilt,'4');
+ f.tick(420);assert.equal(f.block.dataset.processPhase,'4');assert.equal(f.timers.size,0);assertVisible();
+ f.intersect(false);assert.equal(f.block.dataset.processBuilt,'0');assertVisible();
+ cleanup();assert.equal(f.terminalWindow.hidden,true);assert.equal(f.siteWindow.hidden,false);assert.equal(f.block.dataset.processBuilt,'4');
+ assert.equal(f.terminal['aria-hidden'],'true');assert.equal(f.site['aria-hidden'],'false');
 });
 
-test('desktop reduced motion shows both completed windows without animation timers',()=>{
- const f=fixture({desktop:true,reduced:true}),cleanup=initProjectProcess(f.root);
+test('reduced motion keeps both completed windows visible without animation timers',()=>{
+ const f=fixture({reduced:true}),cleanup=initProjectProcess(f.root);
  assert.equal(f.terminal.hidden,false);assert.equal(f.site.hidden,false);assert.equal(f.visibleLines(),16);
  assert.equal(f.block.dataset.processBuilt,'4');assert.equal(f.block.dataset.processRunning,'false');assert.equal(f.timers.size,0);
- f.resize(false);assert.equal(f.terminal.hidden,true);assert.equal(f.site.hidden,false);f.resize(true);assert.equal(f.terminal.hidden,false);
- cleanup();assert.equal(f.desktopMedia.listenerCount,0);
+ cleanup();assert.equal(f.reducedMedia.listenerCount,0);assert.equal(f.terminal.hidden,true);assert.equal(f.site.hidden,false);
 });
