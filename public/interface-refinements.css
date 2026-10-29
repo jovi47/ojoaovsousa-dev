@@ -61,17 +61,13 @@ html[data-theme=dark] .site-header .theme-moon{display:block;color:#9bb9eb;fill:
 .site-footer .footer-name{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-family:Pixelify,Bricolage,sans-serif;font-size:28px;font-weight:400;letter-spacing:-1px}
 .direct-service-icon.service-0{color:#56806c}.direct-service-icon.service-1{color:#8871b2}.direct-service-icon.service-2{color:#3c8998}.direct-service-icon.service-3{color:#5c85a1}
 
-.direct-contact-primary{display:grid;grid-template-columns:minmax(0,1fr) clamp(64px,18vw,132px);column-gap:16px;align-items:start}
-.direct-contact-primary>.panel-actions,.direct-contact-primary>.contact-links{grid-column:1}
-.direct-contact-primary>.direct-availability{grid-column:1/-1}
-.direct-contact-character{grid-column:2;grid-row:1/span 2;align-self:center;justify-self:center;width:100%;margin:0;perspective:600px;pointer-events:none}
-.direct-contact-character img{display:block;width:100%;height:160px;object-fit:contain}
-@media(max-width:360px){.direct-contact-primary{grid-template-columns:minmax(0,1fr) 64px;column-gap:12px}}
-@media(prefers-reduced-motion:no-preference){
- .direct-contact-character img{animation:contact-character-turn 12s linear infinite;animation-play-state:paused}
- .contact-visible:not(.page-hidden):not(.annotation-active):not(:has(dialog[open])) .direct-contact-character img{animation-play-state:running}
- @keyframes contact-character-turn{to{transform:rotateY(360deg)}}
-}
-
 @media(min-width:701px){.site-footer .footer-name{font-size:34px}}
-@media(min-width:960px){.site-footer>.footer-legal{justify-content:flex-start;gap:0 16px}}
+@media(min-width:960px){
+ .site-footer,.viewer-page .site-footer,.direct-page .site-footer{align-items:start}
+ .site-footer>.footer-legal{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:0 12px}
+ .footer-legal>span{grid-column:1;grid-row:1}
+ .footer-legal>[data-analytics-preferences]{grid-column:2;grid-row:1}
+ .footer-legal>a[href$="/privacy/"]{grid-column:3;grid-row:1}
+ .footer-legal>a[href$="/terms/"]{grid-column:2;grid-row:2}
+ .footer-legal>a[href$="/LICENSE.txt"]{grid-column:3;grid-row:2}
+}

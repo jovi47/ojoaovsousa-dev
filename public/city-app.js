@@ -1,9 +1,7 @@
-import {initContactCharacters} from './contact-character.js';
 import {initContactChannels} from './contact-channels.js';
 import {initProjectProcess} from './project-process.js';
 import {initTechnologyMarquee} from './technology-marquee.js';
 import {initViewerOverflow} from './viewer-overflow.js';
-const disposeContactCharacters=initContactCharacters();
 const disposeProjectProcess=initProjectProcess();
 const disposeTechnologyMarquee=initTechnologyMarquee();
 const disposeViewerOverflow=initViewerOverflow();
@@ -115,4 +113,4 @@ async function start(){
 }
 document.querySelector('[data-retry]')?.addEventListener('click',()=>{reading(false);start();});
 if(canvas){if(reduced.matches){reading(true);worldStatus.textContent=labels.reduced;}else start();}
-window.addEventListener('pagehide',event=>{if(!event.persisted){world?.dispose();disposeProjectProcess();disposeTechnologyMarquee();disposeViewerOverflow();disposeContactCharacters();}});
+window.addEventListener('pagehide',event=>{if(!event.persisted){world?.dispose();disposeProjectProcess();disposeTechnologyMarquee();disposeViewerOverflow();}});
