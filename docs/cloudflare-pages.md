@@ -2,6 +2,16 @@
 
 Updated 2026-10-23 UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). The owner-authorized source `9f2dbb5544c525dcdea94f81620fcaf731f59126` was published and verified as recorded below. No custom domain was purchased. This runbook separates the confirmed release from instructions for future releases and unresolved Search Console/recovery work.
 
+## Prepared release · 2026-10-29 UTC
+
+Runtime source `1d6a70e69c02a7866e14fd6e361226f6374430d5`, branch `codex/production-2026-10-29`, consolidates the owner-approved responsive, copy, tour, preview, consent and recovery refinements. Publication is authorized but not yet confirmed.
+
+Local validation: sequential Node suite reported121 passes and one missing-dist failure in2.791seconds. After the required default build, that sole affected site test passed; all122 cases therefore have passing evidence with no source changes between checks. Production build with `SITE_URL=https://ojoaovsousa.pages.dev INDEXABLE=true ANALYTICS_PREVIEW=false`, audit190 regular sources/134 outputs and whitespace check passed. These small static checks were performed sequentially without another preview or compiler. The prior queued job6aa2aa2c was confirmed cancelled before execution (PID/start null) at11:55:50Z; no duplicate execution was left queued.
+
+Audited production package:134 files,10,012,829 raw bytes; ZIP5,936,500 bytes; SHA256 `a9f01f03c4b5fd5d33519601a1f608dddff2d7fe7b98bec7ed07a426fe458327`. Largest asset2,416,372 bytes, below25MiB. Only dist contents appear at ZIP root. Audit of11 outgoing commits/101 historical blobs/1,183,068 bytes detected no protected paths or key signatures; branch pushed for recoverability. No private/env/auth files were read or uploaded.
+
+Cloudflare Production destination is confirmed, but upload is blocked by the browser extension's missing file-URL permission. The filechooser API rejected the file; native ZIP and dist selectors also left their final action disabled. Action-time authorization was requested to enable access only for upload and revoke afterward. No upload/deploy, production hash check or Search Console verification is claimed at this checkpoint. Existing34340e9f remains the known production deployment.
+
 ## Scope and architecture
 
 One Direct Upload project serves the existing static `dist/` artifact. GitHub remains the code source; no Git integration, push-triggered build, deploy hook or remote test workflow is added. A future change from Direct Upload to Git integration requires a new Pages project. No Kubernetes, database, container or VPS is needed for these static files.
