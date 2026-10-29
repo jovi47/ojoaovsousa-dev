@@ -23,23 +23,23 @@ test('flight follows the construction clock, pauses without a timer and releases
  flight.destroy();assert.equal(f.animation.cancelled,true);assert.equal(f.lane.hidden,true);
 });
 
-test('each four-line stage orbits its actual number center and resize preserves clock position',()=>{
+test('flight weaves above and below the actual stage centers with slower edge passages and no flips',()=>{
  const f=fixture(),flight=createProcessFlight(f.block);
  for(let stage=0;stage<4;stage++){
-  const start=f.animation.frames.find(frame=>Math.abs(frame.offset-(stage/4+.025))<1e-8);
-  assert.equal(start.transform,`translate(${f.balls[stage].left+14}px, 188px) rotate(${-stage*360}deg)`);
-  const top=f.animation.frames.find(frame=>Math.abs(frame.offset-(stage/4+.125))<1e-8);
-  const [,x,y]=top.transform.match(/translate\(([^p]+)px, ([^p]+)px/);
-  assert.ok(Math.abs(Number(x)-(f.balls[stage].left+14))<1e-8);assert.equal(Number(y),120);
+  const peak=f.animation.frames.find(frame=>Math.abs(frame.offset-(stage/4+.125))<1e-8);
+  const [,x,y]=peak.transform.match(/translate\(([^p]+)px, ([^p]+)px/);
+  assert.equal(Number(x),f.balls[stage].left+14);assert.equal(Number(y),stage%2?188:120);
  }
+ assert.equal(f.animation.frames[40].offset,.125);assert.equal(f.animation.frames.at(-41).offset,.875);
+ assert.ok(f.animation.frames.every(frame=>Math.abs(Number(frame.transform.match(/rotate\(([^d]+)deg/)[1]))<=45));
  flight.sync({count:8,active:true,reduced:false});
  f.balls[0].left=35;f.balls[0].top=280;
  f.doc.documentElement.clientWidth=320;f.observer.callback();assert.equal(f.observer.target,f.block);
  assert.equal(f.animation.currentTime,3360);assert.equal(f.styles.get('--flight-width'),'320px');assert.equal(f.styles.get('--flight-left'),'-24px');
  assert.match(f.animation.frames[0].transform,/translate\(-80px/);
  assert.match(f.animation.frames.at(-1).transform,/translate\(400px/);
- assert.match(f.animation.frames.at(-1).transform,/rotate\(-1440deg\)/);
- assert.equal(f.animation.frames.find(frame=>Math.abs(frame.offset-.025)<1e-8).transform,'translate(49px, 228px) rotate(0deg)');
+ assert.match(f.animation.frames.at(-1).transform,/rotate\(0deg\)/);
+ assert.equal(f.animation.frames.find(frame=>Math.abs(frame.offset-.125)<1e-8).transform,'translate(49px, 160px) rotate(0deg)');
  flight.destroy();assert.equal(f.observer.disconnected,true);
 });
 
