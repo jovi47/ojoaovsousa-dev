@@ -126,3 +126,5 @@
 @media(min-width:960px) and (prefers-reduced-motion:no-preference){
  .project-process[data-process-enhanced] :is(.project-process-site-header,.project-process-site-hero>div,.project-process-site-art,.project-process-management-main>:is(span,h3,p),.project-process-metrics,.project-process-chart,.project-process-site-services){transition:opacity .35s ease,translate .35s ease,visibility .35s}
 }
+
+.project-process-shop .project-process-site-hero h3{color:#68527d}.project-process-restaurant .project-process-site-hero h3{color:#8c422d}

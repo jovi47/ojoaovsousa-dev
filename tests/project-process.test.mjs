@@ -12,7 +12,7 @@ class Target extends EventTarget{
  get listenerCount(){return [...this.listeners.values()].reduce((count,listeners)=>count+listeners.size,0);}
 }
 
-function fixture({home=true,reduced=false,desktop=false}={}){
+function fixture({home=true,reduced=false,desktop=false,exampleCount=0}={}){
  const observers=[],timers=new Map(),scrolls=[],classes=new Set(),style=new Map();
  let now=0,timerId=0,completions=0;
  const reducedMedia=Object.assign(new Target(),{matches:reduced});
@@ -45,10 +45,11 @@ function fixture({home=true,reduced=false,desktop=false}={}){
  const output={clientHeight:200,position:0,writes:[],get scrollHeight(){return visibleLines()*22+20;},get scrollTop(){return this.position;},set scrollTop(value){this.position=value;this.writes.push(value);}};
  const terminalWindow={hidden:true},siteWindow={hidden:false};
  const nodes={'[data-process-window="terminal"]':terminalWindow,'[data-process-window="site"]':siteWindow,'[data-process-pin]':pin,'[data-process-panel="terminal"]':terminal,'[data-process-panel="site"]':site,'[data-process-status]':status,'[data-process-description]':description,'.project-process-output':output};
+ const examples=Array.from({length:exampleCount},(_,i)=>({hidden:i!==0}));
  const block={dataset:{processCurrent:'3',processPhase:'4'},ownerDocument:doc,
   style:{setProperty:(key,value)=>style.set(key,value),getPropertyValue:key=>style.get(key)||'',removeProperty:key=>style.delete(key)},
   matches:selector=>selector==='[data-project-process]',closest:selector=>selector==='.viewer-reading'&&home?{}:selector==='.direct-page'&&!home?{}:null,
-  querySelector:selector=>nodes[selector]||null,querySelectorAll:selector=>selector==='[data-process-step]'?buttons:selector==='[data-process-log]'?logs:selector==='[data-process-line]'?logs.flatMap(log=>log.lines):[],
+  querySelector:selector=>nodes[selector]||null,querySelectorAll:selector=>selector==='[data-process-example]'?examples:selector==='[data-process-step]'?buttons:selector==='[data-process-log]'?logs:selector==='[data-process-line]'?logs.flatMap(log=>log.lines):[],
   getClientRects:()=>[{}]};
  const root={querySelectorAll:selector=>selector==='[data-project-process]'?[block]:[]};
  function tick(ms){
@@ -65,7 +66,7 @@ function fixture({home=true,reduced=false,desktop=false}={}){
  function motion(matches){reducedMedia.matches=matches;reducedMedia.dispatchEvent(new Event('change'));}
  function resize(matches){desktopMedia.matches=matches;desktopMedia.dispatchEvent(new Event('change'));}
  function visibleLines(){return logs.reduce((count,log)=>count+(log.hidden?0:log.lines.filter(line=>!line.hidden).length),0);}
- return {root,block,buttons,logs,status,description,terminal,site,terminalWindow,siteWindow,resize,desktopMedia,output,view,doc,reducedMedia,observers,timers,classes,style,scrolls,tick,intersect,visibility,motion,visibleLines,get completions(){return completions;}};
+ return {root,block,examples,buttons,logs,status,description,terminal,site,terminalWindow,siteWindow,resize,desktopMedia,output,view,doc,reducedMedia,observers,timers,classes,style,scrolls,tick,intersect,visibility,motion,visibleLines,get completions(){return completions;}};
 }
 
 test('localised stages preserve sixteen log lines and a clearly fictional static website without JS',()=>{
@@ -83,6 +84,9 @@ test('localised stages preserve sixteen log lines and a clearly fictional static
   assert.equal((html.match(/<h2\b/g)||[]).length,1);
   assert.match(html,/ilustrativ|illustrative/i);
   assert.match(html,/Estúdio fictício|Fictional studio|Estudio ficticio/);
+  assert.deepEqual([...html.matchAll(/data-process-example="(\d)"/g)].map(match=>match[1]),['0','1','2','3','4']);
+  assert.match(html,/Loja fictícia|Fictional shop|Tienda ficticia/);assert.match(html,/Restaurante fictício|Fictional restaurant|Restaurante ficticio/);
+  assert.equal((html.match(/data-process-example="[1-4]" hidden/g)||[]).length,4);
   assert.match(html,/class="project-process-site-brand">forma<\/span>/);
   assert.match(html,/Espaços com intenção|Spaces with intention|Espacios con intención/);
   assert.match(html,/class="project-process-site-art"[^>]*aria-hidden="true"/);
@@ -243,19 +247,37 @@ test('stage descriptions highlight keywords without leaving markdown or the remo
  cleanup();
 });
 
-test('example carousel cycles at five seconds, pauses and releases its timer',()=>{
- const examples=[{hidden:false},{hidden:true},{hidden:true}],timers=new Map();let id=0;
- const block={querySelectorAll:()=>examples,ownerDocument:{defaultView:{setTimeout(fn,ms){assert.equal(ms,5000);timers.set(++id,fn);return id;},clearTimeout(key){timers.delete(key);}}}};
- const carousel=createProjectExamples(block);
- const tick=()=>{const [key,fn]=timers.entries().next().value;timers.delete(key);fn();};
- carousel.setActive(true);carousel.setActive(true);assert.equal(timers.size,1);
- tick();assert.deepEqual(examples.map(e=>e.hidden),[true,false,true]);
- tick();assert.deepEqual(examples.map(e=>e.hidden),[true,true,false]);
- tick();assert.deepEqual(examples.map(e=>e.hidden),[false,true,true]);
- carousel.setActive(false);assert.equal(timers.size,0);
- carousel.setActive(true);assert.equal(timers.size,1);carousel.destroy();assert.equal(timers.size,0);
+test('shuffled carousel chooses its first example immediately, visits all five, pauses and restores fallback',()=>{
+ for(const randomValue of [0,.999]){
+  const examples=Array.from({length:5},(_,i)=>({hidden:i!==0})),timers=new Map();let id=0,draws=0;
+  const block={querySelectorAll:()=>examples,ownerDocument:{defaultView:{setTimeout(fn,ms){assert.equal(ms,5000);timers.set(++id,fn);return id;},clearTimeout(key){timers.delete(key);}}}};
+  const carousel=createProjectExamples(block,()=>{draws++;return randomValue;});
+  const visible=()=>{assert.equal(examples.filter(e=>!e.hidden).length,1);return examples.findIndex(e=>!e.hidden);};
+  const first=visible();assert.equal(first,randomValue===0?1:0);assert.equal(draws,4);assert.equal(timers.size,0);
+  const tick=()=>{const [key,fn]=timers.entries().next().value;timers.delete(key);fn();};
+  carousel.setActive(true);carousel.setActive(true);assert.equal(timers.size,1);assert.equal(visible(),first);
+  const order=[first];for(let i=0;i<4;i++){tick();order.push(visible());}
+  assert.equal(new Set(order).size,5);assert.equal(draws,4);
+  tick();assert.equal(visible(),first);assert.notEqual(order[4],first);
+  carousel.setActive(false);assert.equal(timers.size,0);assert.equal(visible(),first);
+  carousel.setActive(true);assert.equal(timers.size,1);carousel.destroy();assert.equal(timers.size,0);assert.equal(visible(),0);
+ }
 });
 
+test('the chosen preview survives assembly, motion changes and visibility pauses with one carousel timer',()=>{
+ for(const reduced of [false,true]){
+  const f=fixture({desktop:true,reduced,exampleCount:5}),cleanup=initProjectProcess(f.root);
+  const visible=()=>f.examples.findIndex(example=>!example.hidden),first=visible();
+  assert.equal(f.examples.filter(example=>!example.hidden).length,1);assert.equal(f.timers.size,0);
+  f.intersect(true);
+  if(!reduced){f.tick(400+7*420);assert.equal(visible(),first);f.tick(9*420);}
+  assert.equal(f.block.dataset.processPhase,'4');assert.equal(visible(),first);assert.equal(f.timers.size,reduced?0:1);
+  f.motion(true);assert.equal(f.timers.size,0);assert.equal(visible(),first);
+  f.motion(false);assert.equal(f.timers.size,1);f.tick(5000);assert.notEqual(visible(),first);
+  const next=visible();f.visibility(true);f.tick(10000);assert.equal(f.timers.size,0);assert.equal(visible(),next);
+  f.visibility(false);assert.equal(f.timers.size,1);cleanup();assert.equal(f.timers.size,0);assert.equal(visible(),0);
+ }
+});
 
 test('desktop keeps separate windows visible and builds the site from the existing line clock across resize',()=>{
  const f=fixture({desktop:true}),cleanup=initProjectProcess(f.root);
