@@ -50,8 +50,8 @@ function fixture({home=true,reduced=false,exampleCount=0,flight=false}={}){
  const block={dataset:{processCurrent:'3',processPhase:'4'},ownerDocument:doc,
   style:{setProperty:(key,value)=>style.set(key,value),getPropertyValue:key=>style.get(key)||'',removeProperty:key=>style.delete(key)},
   matches:selector=>selector==='[data-project-process]',closest:selector=>selector==='.viewer-reading'&&home?{}:selector==='.direct-page'&&!home?{}:null,
-  querySelector:selector=>nodes[selector]||null,querySelectorAll:selector=>selector==='[data-process-example]'?examples:selector==='[data-process-step]'?buttons:selector==='[data-process-log]'?logs:selector==='[data-process-line]'?logs.flatMap(log=>log.lines):[],
-  getClientRects:()=>[{}],getBoundingClientRect:()=>({left:24})};
+  querySelector:selector=>nodes[selector]||null,querySelectorAll:selector=>selector==='.project-process-number'?buttons.map((_,i)=>({getBoundingClientRect:()=>({left:48+i*100,top:240,width:28,height:28})})):selector==='[data-process-example]'?examples:selector==='[data-process-step]'?buttons:selector==='[data-process-log]'?logs:selector==='[data-process-line]'?logs.flatMap(log=>log.lines):[],
+  getClientRects:()=>[{}],getBoundingClientRect:()=>({left:24,top:100})};
  const root={querySelectorAll:selector=>selector==='[data-project-process]'?[block]:[]};
  function tick(ms){
   const end=now+ms;

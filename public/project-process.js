@@ -53,7 +53,7 @@ export function initProjectProcess(root=document){
   listen(view,'resize',()=>flight.resize());
   listen(reduced,'change',()=>{if(reduced.matches){stop();count=lines.length;render(4);if(near)finish();}else schedule();syncMotion();});
   const observer=view.IntersectionObserver?new view.IntersectionObserver(entries=>{for(const entry of entries){near=entry.isIntersecting&&entry.intersectionRatio>=.25;if(near){if(reduced.matches&&phase===4)finish();schedule(count?420:400);}else{stop();if(!entry.isIntersecting&&!reduced.matches){manual=false;count=0;render(0);}}syncMotion();}},{threshold:[0,.25]}):null;
-  observer?.observe(block);if(reduced.matches)count=lines.length;render(reduced.matches?4:0);block.dataset.processEnhanced='true';if(reduced.matches){if(near)finish();}else schedule(400);
+  observer?.observe(block);if(reduced.matches)count=lines.length;render(reduced.matches?4:0);block.dataset.processEnhanced='true';flight.resize();if(reduced.matches){if(near)finish();}else schedule(400);
   const cleanup=()=>{if(disposed)return;disposed=true;stop();examples.destroy();flight.destroy();observer?.disconnect();for(const remove of listeners)remove();count=lines.length;render(4);description.hidden=true;delete block.dataset.processEnhanced;delete block.dataset.processFinished;delete block.dataset.processRunning;doc.body.classList.remove('project-process-complete');instances.delete(block);};
   instances.set(block,cleanup);dispose.push(cleanup);
  }
