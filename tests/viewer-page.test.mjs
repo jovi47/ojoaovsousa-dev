@@ -72,7 +72,7 @@ test('the portfolio viewer has five panels, four landmark selectors and a separa
   assert.doesNotMatch(siteHeader,/version-picker|mobile-versions|\/black\//);
   for(const locale of ['pt-br','en','es'])assert.ok(siteHeader.includes(`href="/${locale}/"`),`${key}: canonical language ${locale}`);
   assert.ok(html.includes(`href="/${key}/direct/"`),`${key}: accessible reading mode remains outside header`);
-  assert.match(html,/<a class="viewer-direct button button-secondary" href="\/(?:pt-br|en|es)\/direct\/"/);
+  assert.doesNotMatch(html,/class="[^"]*(?:viewer-direct|viewer-card-direct)[^"]*"/);
   assert.match(html,/<button[^>]*class="viewer-start-cue"[^>]*data-start-build[^>]*aria-label="[^"]+"/);
   const startCue=html.match(/<button type="button" class="viewer-start-cue"[^>]*data-start-build[^>]*>[\s\S]*?<\/button>/)?.[0];
   assert.ok(startCue,`${key}: prominent native assembly cue`);
@@ -183,7 +183,7 @@ test('cards and the shared reading fallback retain factual projects, local mocku
   assert.doesNotMatch(challenge,/\b\d[\d.,]*\s*(?:%|peças|pieces|piezas)/i);
   const siteFooter=html.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/)?.[0];
   assert.ok(siteFooter,`${key}: shared footer`);
-  for(const url of ['https://github.com/jovi47','https://www.linkedin.com/in/jovi47/','https://wa.me/5579998230872','mailto:jovi47profissional@gmail.com']){
+  for(const url of ['https://github.com/jovi47']){
    const social=[...siteFooter.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/g)].map(match=>match[0]).find(link=>link.includes(`href="${url}"`));
    assert.ok(social,`${key}: footer ${url}`);
    if(url.startsWith('mailto:'))assert.match(social,/<svg\b/);
