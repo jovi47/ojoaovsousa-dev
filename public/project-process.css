@@ -105,3 +105,22 @@
  .project-process[data-process-enhanced] .project-process-active-description:not([hidden]){font-size:16px;max-width:70ch}
  .project-process-screen{height:430px}
 }
+
+
+/* The desktop demonstration builds beside its terminal; compact screens alternate windows. */
+.project-process-windows{display:grid;gap:22px;min-width:0}
+.project-process-browser{min-width:0}
+.project-process-browser[hidden],.project-process-building{display:none}
+@media(min-width:960px){
+ .project-process[data-process-enhanced] .project-process-windows{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+ .project-process[data-process-enhanced] .project-process-panel{padding:24px}
+ .project-process[data-process-enhanced]:not([data-process-phase="4"]) .project-process-window-title{display:none}
+ .project-process[data-process-enhanced]:not([data-process-phase="4"]) .project-process-building{display:inline}
+ .project-process[data-process-enhanced][data-process-built="0"] .project-process-site-header,
+ .project-process[data-process-enhanced]:is([data-process-built="0"],[data-process-built="1"]) :is(.project-process-site-hero>div,.project-process-management-main>:is(span,h3,p)),
+ .project-process[data-process-enhanced]:is([data-process-built="0"],[data-process-built="1"],[data-process-built="2"]) :is(.project-process-site-art,.project-process-metrics,.project-process-chart),
+ .project-process[data-process-enhanced]:not([data-process-built="4"]) .project-process-site-services{opacity:0;visibility:hidden;translate:0 10px}
+}
+@media(min-width:960px) and (prefers-reduced-motion:no-preference){
+ .project-process[data-process-enhanced] :is(.project-process-site-header,.project-process-site-hero>div,.project-process-site-art,.project-process-management-main>:is(span,h3,p),.project-process-metrics,.project-process-chart,.project-process-site-services){transition:opacity .35s ease,translate .35s ease,visibility .35s}
+}

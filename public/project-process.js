@@ -7,8 +7,9 @@ export function initProjectProcess(root=document){
   if(instances.has(block))continue;
   const buttons=[...block.querySelectorAll('[data-process-step]')],logs=[...block.querySelectorAll('[data-process-log]')],lines=[...block.querySelectorAll('[data-process-line]')];
   const terminal=block.querySelector('[data-process-panel="terminal"]'),site=block.querySelector('[data-process-panel="site"]'),status=block.querySelector('[data-process-status]'),description=block.querySelector('[data-process-description]'),output=block.querySelector('.project-process-output');
-  if(buttons.length!==4||logs.length!==4||lines.length!==16||!terminal||!site||!status||!description||!output)continue;
-  const doc=block.ownerDocument,view=doc.defaultView,reduced=view.matchMedia('(prefers-reduced-motion: reduce)'),listeners=[];
+  const terminalWindow=block.querySelector('[data-process-window="terminal"]'),siteWindow=block.querySelector('[data-process-window="site"]');
+  if(buttons.length!==4||logs.length!==4||lines.length!==16||!terminal||!site||!status||!description||!output||!terminalWindow||!siteWindow)continue;
+  const doc=block.ownerDocument,view=doc.defaultView,reduced=view.matchMedia('(prefers-reduced-motion: reduce)'),desktop=view.matchMedia('(min-width: 960px)'),listeners=[];
   const examples=createProjectExamples(block);
   let timer=null,near=!view.IntersectionObserver,manual=false,disposed=false,count=0,phase=0;
   function listen(target,event,callback){target.addEventListener(event,callback);listeners.push(()=>target.removeEventListener(event,callback));}
@@ -18,13 +19,17 @@ export function initProjectProcess(root=document){
    if(block.dataset.processFinished==='true')return;
    block.dataset.processFinished='true';doc.body.classList.add('project-process-complete');doc.dispatchEvent(new Event('projectprocesscomplete'));
   }
+  function syncPanels(){
+   const split=desktop.matches&&!disposed,finished=phase===4;
+   terminal.hidden=terminalWindow.hidden=!split&&finished;site.hidden=siteWindow.hidden=!split&&!finished;
+   terminal.setAttribute('aria-hidden',String(terminal.hidden));site.setAttribute('aria-hidden',String(site.hidden));
+  }
   function render(next,focus=false){
    phase=next;const index=Math.min(3,phase),finished=phase===4;
-   block.dataset.processCurrent=String(index);block.dataset.processPhase=String(phase);
+   block.dataset.processCurrent=String(index);block.dataset.processPhase=String(phase);block.dataset.processBuilt=String(Math.floor(count/4));
    buttons.forEach((button,i)=>{button.dataset.processComplete=String(count>=(i+1)*4);block.style.setProperty('--process-link-'+i,String(Math.max(0,Math.min(1,(count-i*4)/4))));button.setAttribute('aria-pressed',String(i===index));button.tabIndex=i===index?0:-1;if(i===index)button.setAttribute('aria-current','step');else button.removeAttribute('aria-current');});
-   terminal.hidden=finished;site.hidden=!finished;logs.forEach((log,i)=>{log.hidden=i>index;});lines.forEach((line,i)=>{line.hidden=i>=count;});
-   terminal.setAttribute('aria-hidden',String(finished));site.setAttribute('aria-hidden',String(!finished));
-   if(!finished){if(count===0)output.scrollTop=0;else if(output.scrollHeight>output.clientHeight)output.scrollTop=output.scrollHeight-output.clientHeight;}
+   syncPanels();logs.forEach((log,i)=>{log.hidden=i>index;});lines.forEach((line,i)=>{line.hidden=i>=count;});
+   if(!terminal.hidden){if(count===0)output.scrollTop=0;else if(output.scrollHeight>output.clientHeight)output.scrollTop=output.scrollHeight-output.clientHeight;}
    syncMotion();
    status.textContent=finished?site.dataset.processComplete:buttons[index].dataset.processStatusText;
    description.innerHTML=buttons[index].querySelector('.project-process-description').innerHTML;description.hidden=false;
@@ -43,6 +48,7 @@ export function initProjectProcess(root=document){
    listen(button,'click',()=>choose(index));
    listen(button,'keydown',event=>{const next=event.key==='Home'?0:event.key==='End'?3:['ArrowDown','ArrowRight'].includes(event.key)?(index+1)%4:['ArrowUp','ArrowLeft'].includes(event.key)?(index+3)%4:null;if(next===null)return;event.preventDefault();choose(next,true);});
   });
+  listen(desktop,'change',syncPanels);
   listen(doc,'visibilitychange',()=>{if(doc.hidden)stop();else schedule();syncMotion();});
   listen(reduced,'change',()=>{if(reduced.matches){stop();count=lines.length;render(4);if(near)finish();}else schedule();syncMotion();});
   const observer=view.IntersectionObserver?new view.IntersectionObserver(entries=>{for(const entry of entries){near=entry.isIntersecting&&entry.intersectionRatio>=.25;if(near){if(reduced.matches&&phase===4)finish();schedule(count?420:400);}else{stop();if(!entry.isIntersecting&&!reduced.matches){manual=false;count=0;render(0);}}syncMotion();}},{threshold:[0,.25]}):null;
