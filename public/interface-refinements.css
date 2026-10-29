@@ -72,3 +72,6 @@ html[data-theme=dark] .site-header .theme-moon{display:block;color:#9bb9eb;fill:
  .contact-visible:not(.page-hidden):not(.annotation-active):not(:has(dialog[open])) .direct-contact-character img{animation-play-state:running}
  @keyframes contact-character-turn{to{transform:rotateY(360deg)}}
 }
+
+@media(min-width:701px){.site-footer .footer-name{font-size:34px}}
+@media(min-width:960px){.site-footer>.footer-legal{justify-content:flex-start;gap:0 16px}}

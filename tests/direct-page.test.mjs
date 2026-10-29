@@ -14,6 +14,7 @@ test('the direct portfolio has complete localised content without the world runt
   assert.doesNotMatch(siteHeader,/data-tour-link|aria-disabled/);
   const headerMark=siteHeader.match(/<a class="wordmark"[^>]*>([\s\S]*?)<\/a>/)?.[1],footerMark=html.match(/<a class="footer-name"[^>]*>([\s\S]*?)<\/a>/)?.[1];
   assert.equal(footerMark,'ojoaovsousa',`${key}: footer keeps only the pixel wordmark`);assert.match(headerMark,/src="\/jovi-poster\.webp"/);
+  const siteFooter=html.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/)?.[0];assert.ok(siteFooter);assert.ok(!siteFooter.includes(`href="/${key}/direct/"`),`${key}: footer omits the reading option`);
   assert.match(factual,/<figure class="direct-contact-character" aria-hidden="true"><img[^>]*src="\/jovi-poster\.webp"[^>]*alt=""/);
   for(const id of ['experience','projects','faq','contact'])assert.equal((siteHeader.match(new RegExp(`href="#${id}"`,'g'))||[]).length,2,`${key}: local native section navigation`);
   assert.ok(html.includes(factual),`${key}: direct content renderer`);
