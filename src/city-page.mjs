@@ -5,7 +5,7 @@ export const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<'
 const e=escape;
 
 const localized=(k,pt,en,es)=>k==='pt-br'?pt:k==='en'?en:es;
-const languageFlag=key=>`<svg class="language-flag" data-flag="${key}" viewBox="0 0 24 18" aria-hidden="true" focusable="false">${key==='pt-br'?'<path fill="#168342" d="M1 2h22v14H1z"/><path fill="#ffdb45" d="M12 3h2v2h4v2h3v4h-3v2h-4v2h-4v-2H6v-2H3V7h3V5h4V3z"/><path fill="#2452a0" d="M9 6h6v2h2v4h-2v2H9v-2H7V8h2z"/><path fill="#fff" d="M8 9h8v1H8z"/>':key==='en'?'<path fill="#fff" d="M1 2h22v14H1z"/><path fill="#bd3343" d="M1 2h22v2H1zm0 4h22v2H1zm0 4h22v2H1zm0 4h22v2H1z"/><path fill="#254575" d="M1 2h10v8H1z"/><path fill="#fff" d="M3 4h2v2H3zm4 0h2v2H7zM5 7h2v2H5z"/>':'<path fill="#b82e3c" d="M1 2h22v14H1z"/><path fill="#ffd45b" d="M1 6h22v6H1z"/><path fill="#b82e3c" d="M6 7h4v4H6z"/><path fill="#f8f3d8" d="M7 7h2v2H7z"/>'}<path fill="#fff" opacity=".2" d="M3 3h2v1H3zm16 0h2v1h-2z"/></svg>`;
+const languageFlag=key=>`<svg class="language-flag" data-flag="${key}" viewBox="0 0 24 18" aria-hidden="true" focusable="false">${key==='pt-br'?'<path fill="#168342" d="M1 2h22v14H1z"/><path fill="#ffdb45" d="m12 3 9 6-9 6-9-6Z"/><circle fill="#2452a0" cx="12" cy="9" r="3.7"/><path d="M8.5 7.8q3.7-.4 6.9 2" fill="none" stroke="#fff" stroke-width=".9"/>':key==='en'?'<path fill="#fff" d="M1 2h22v14H1z"/><path fill="#bd3343" d="M1 2h22v2H1zm0 4h22v2H1zm0 4h22v2H1zm0 4h22v2H1z"/><path fill="#254575" d="M1 2h10v8H1z"/><path fill="#fff" d="M3 4h2v2H3zm4 0h2v2H7zM5 7h2v2H5z"/>':'<path fill="#b82e3c" d="M1 2h22v14H1z"/><path fill="#ffd45b" d="M1 6h22v6H1z"/><path fill="#b82e3c" d="M6 7h4v4H6z"/><path fill="#f8f3d8" d="M7 7h2v2H7z"/>'}<path fill="#fff" opacity=".2" d="M3 3h2v1H3zm16 0h2v1h-2z"/></svg>`;
 export const scrollCueIcon=()=>'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9 2h6v11h5v3h-3v3h-3v3h-4v-3H7v-3H4v-3h5Z"/><path d="M11 4h2v2h-2Zm0 4h2v2h-2Z" fill="var(--bg)" opacity=".45"/></svg>';
 const contactIcon=className=>`<svg class="${className}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true" focusable="false"><path d="M6 4h12v2h2v10h-2v2h-6v2H8v2H6v-4H4V6h2Z"/><path d="M8 8h3v3H8Zm5 0h3v3h-3Z"/></svg>`;
 const btn=(attr,label,cls='button')=>`<button type="button" ${attr} class="${cls}">${e(label)}</button>`;
@@ -25,8 +25,8 @@ export function header(c,key,isHome=false,direct=false,variant='island'){
 }
 const contentLang=k=>k==='pt-br'?'pt-BR':k==='en'?'en-GB':'es';
 export function socialIcon(kind){
- if(kind!=='mail')return `<img class="social-brand-icon social-brand-${kind}" src="/${kind==='github'?'technology-icons':'contact-icons'}/${kind}.svg" alt="" aria-hidden="true" width="24" height="24" loading="lazy" decoding="async">`;
- return '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>';
+ const icon=kind!=='mail'?`<img class="social-brand-icon social-brand-${kind}" src="/${kind==='github'?'technology-icons':'contact-icons'}/${kind}.svg" alt="" aria-hidden="true" width="24" height="24" loading="lazy" decoding="async">`:'<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>';
+ return `<span class="social-brick social-brick-${kind}" aria-hidden="true">${icon}</span>`;
 }
 export function projectLogo(item,{className='project-logo',symbol=false}={}){
  const hor=item.id==='horagora',base=hor?'horagora-logo':symbol?'asc-symbol':'asc-logo';

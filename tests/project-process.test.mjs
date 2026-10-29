@@ -78,6 +78,9 @@ test('localised stages preserve sixteen log lines and a clearly fictional static
   for(const log of logs)assert.equal((log[2].match(/\bdata-process-line(?:\s|=|>)/g)||[]).length,4);
   assert.equal((html.match(/\bdata-process-line(?:\s|=|>)/g)||[]).length,16);
   for(const label of labels)assert.ok(html.includes(label));
+  const headline={'pt-br':'Da sua ideia à solução pronta',en:'From your idea to a finished solution',es:'De tu idea a una solución lista'}[key];
+  assert.ok(html.includes(`<h2 class="project-process-title">${headline}</h2>`));
+  assert.equal((html.match(/<h2\b/g)||[]).length,1);
   assert.match(html,/ilustrativ|illustrative/i);
   assert.match(html,/Estúdio fictício|Fictional studio|Estudio ficticio/);
   assert.match(html,/class="project-process-site-brand">forma<\/span>/);
