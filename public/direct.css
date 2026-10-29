@@ -151,4 +151,9 @@ body:not(.tour-complete):not(.reading):not(.graphics-failed) .viewer-page .inqui
 
 body:has(#analytics-consent:not([hidden])) :is(.inquiry-cta,.viewer-more-content){visibility:hidden;pointer-events:none}
 
+@media(min-width:960px){
+ .direct-contact>.direct-section-intro,.direct-contact>.direct-contact-content{max-width:none;grid-template-columns:1.1fr 1fr;column-gap:85px}
+ .direct-contact>[data-scroll-reveal],.direct-contact-content>[data-scroll-reveal]{--reveal-x:0px;--reveal-y:14px}
+}
+
 .analytics-consent{padding:14px max(16px,env(safe-area-inset-right)) max(14px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}.analytics-consent h2{font-size:18px;padding-right:36px}.analytics-consent p{font-size:13px;line-height:1.4;margin-top:6px}.analytics-consent a{display:inline;min-height:0}.consent-actions{gap:8px;margin:10px auto 0}.consent-actions .button{min-height:44px;padding:8px 10px}.consent-brick-icon{position:absolute;right:16px;top:13px;width:26px;height:26px;color:var(--ink)}

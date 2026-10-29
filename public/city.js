@@ -227,7 +227,7 @@ export async function createCity(canvas,copy,openInquiry){
   if(locked){release();if(selected)setSelection(null,false);showPanel(construction>.015?(chapter||'challenge'):null,true);const card=document.querySelector('#viewer-card');if(card)card.scrollTop=readingOffset(scrollFrame.within,storyOverflows[chapter],scrollFrame.length);desired=guidedView(construction);}else{if(before<1)showPanel(null);if(before<1||!selected)desired=overview();}
   if(!selected){camera.near=.1;camera.updateProjectionMatrix();}
   if(justCompleted)setSelection('challenge',false);
-  invalidate();
+  syncMore();invalidate();
  }
  function storyScroll(){
   const returningToStart=scrollY<lastStoryScroll&&scrollY<=storyTop()+2;lastStoryScroll=scrollY;
@@ -274,8 +274,12 @@ export async function createCity(canvas,copy,openInquiry){
  const more=document.querySelector('[data-more-content]');
  on(more,'click',()=>window.scrollBy({top:innerHeight*.65,behavior:reduced?'instant':'smooth'}));
  const cueDismissDistance=innerHeight*.5;
- let cueDismissed=scrollY>=cueDismissDistance;
- const syncMore=()=>{if(scrollY>=cueDismissDistance)cueDismissed=true;if(more)more.hidden=cueDismissed||document.documentElement.scrollHeight-innerHeight-scrollY<=100;};on(window,'scroll',syncMore,{passive:true});on(window,'resize',syncMore);syncMore();
+ let cueDismissed=scrollY>=cueDismissDistance,desktopCueDismissed=false;
+ function syncMore(){
+  if(mobileEntry){if(scrollY>=cueDismissDistance)cueDismissed=true;}
+  else if(assembled&&scrollY>=cueDismissDistance)desktopCueDismissed=true;
+  if(more)more.hidden=(mobileEntry?cueDismissed:!assembled||desktopCueDismissed)||document.documentElement.scrollHeight-innerHeight-scrollY<=100;
+ }on(window,'scroll',syncMore,{passive:true});on(window,'resize',syncMore);syncMore();
  on(document,'toggle',e=>{if(e.target.matches('.project-detail,.career-details'))scheduleStoryLayout();},true);
  on(window,'wheel',e=>{if(e.deltaY>0&&!e.ctrlKey&&!e.metaKey)scrollIntent=true;},{passive:true});
  on(window,'pointerdown',e=>{if(e.pointerType==='touch')touchStartY=e.clientY;else if(e.clientX>=document.documentElement.clientWidth-20)scrollIntent=true;},{passive:true});

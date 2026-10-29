@@ -172,11 +172,9 @@ body:not(.construction-started):not(.tour-complete):not(.reading):not(.graphics-
 
 
 .viewer-more-content{display:none}
-@media(max-width:700px){
  .world-loaded:not(.reading):not(.graphics-failed) .viewer-more-content{position:fixed;z-index:12;left:50%;bottom:max(76px,calc(env(safe-area-inset-bottom) + 64px));transform:translateX(-50%);display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid color-mix(in srgb,var(--ink) 16%,transparent);border-radius:50%;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);color:var(--ink);opacity:.82}
  .viewer-more-content svg{display:block;width:26px;height:26px;flex:none;stroke-width:2.4}
 
-}
 @media(min-width:701px) and (max-width:1080px){
  .viewer-card{width:42%;min-width:280px;padding:18px;max-height:calc(100% - 165px)}
  .viewer-card h2{font-size:30px}.viewer-card [data-viewer-card]>p{font-size:14px}
@@ -202,5 +200,16 @@ body:not(.construction-started):not(.tour-complete):not(.reading):not(.graphics-
 .viewer-inspection-hint{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 
 body:has(dialog[open]) .viewer-more-content{visibility:hidden;pointer-events:none}
+
+.viewer-identity--compact{display:none}
+@media(min-width:701px){
+ .viewer-card>.viewer-identity--compact{display:flex;position:sticky;top:0;z-index:2;gap:12px;margin-bottom:18px;padding:8px 0 14px;background:var(--bg);border-bottom:1px solid color-mix(in srgb,var(--ink) 14%,transparent)}
+ .viewer-card>.viewer-identity--compact>img{width:44px;height:54px}
+ .viewer-identity--compact .viewer-role{font-size:12px;margin:0 0 5px}
+ .viewer-identity--compact .viewer-identity-name{font-size:24px;line-height:1.05;font-weight:650;letter-spacing:-.035em;margin:0}
+ .viewer-card>.viewer-card-top,.viewer-card .viewer-about-photo,.viewer-card .viewer-about-heading .viewer-eyebrow{display:none}
+ .world-loaded:not(.reading):not(.graphics-failed) .viewer-more-content{bottom:12px}
+ body:not(.tour-complete) .viewer-more-content{display:none}
+}
 
 @media(min-width:701px){.viewer-card :is([data-viewer-card=stack],[data-viewer-card=about])>p,.viewer-card :is([data-viewer-card=stack],[data-viewer-card=about]) .viewer-about-block>p{font-size:15px;line-height:1.45;margin-top:12px}.viewer-card :is([data-viewer-card=stack],[data-viewer-card=about]) .viewer-about-block{margin-top:18px}.viewer-card .viewer-about-heading h2{font-size:28px;line-height:1.1}.viewer-card .viewer-about-photo{width:52px;height:64px}.viewer-card .viewer-about-block dd{font-size:14px;line-height:1.45}.viewer-card .viewer-about-block h3{font-size:19px}}

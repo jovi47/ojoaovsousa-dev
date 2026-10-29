@@ -59,7 +59,7 @@
 .project-process[data-process-enhanced] .project-process-steps strong{padding:0;font-size:clamp(11px,2.5vw,16px);line-height:1.25;letter-spacing:-.02em;overflow-wrap:anywhere;hyphens:auto}
 .project-process[data-process-enhanced] .project-process-description{display:none}
 .project-process[data-process-enhanced] .project-process-active-description:not([hidden]){display:block;max-width:60ch;min-height:0;margin:10px 0 0;font-size:14px;line-height:1.45}
-@media(min-width:800px){.project-process[data-process-enhanced] .project-process-steps,.project-process[data-process-enhanced] .project-process-preview{width:100%;max-width:760px;justify-self:center}}
+@media(min-width:800px){.project-process[data-process-enhanced] .project-process-steps,.project-process[data-process-enhanced] .project-process-preview{width:100%;max-width:1040px;justify-self:center}}
 
 .project-process[data-process-enhanced] .project-process-steps li:not(:last-child)::after{content:'';position:absolute;left:calc(50% + 15px);right:calc(-50% + 15px);top:22px;height:2px;background:var(--gold);transform:scaleX(var(--step-progress,0));transform-origin:left;transition:transform 420ms linear;pointer-events:none}
 .project-process-steps li:nth-child(1){--step-progress:var(--process-link-0,0)}
@@ -96,3 +96,12 @@
 }
 
 .project-process[data-process-phase="4"] .project-process-success{display:grid}
+
+@media(min-width:960px){
+ .project-process[data-process-enhanced] .project-process-steps button{min-height:100px;gap:14px}
+ .project-process[data-process-enhanced] .project-process-number{width:40px;height:40px;line-height:38px;font-size:13px}
+ .project-process[data-process-enhanced] .project-process-steps button>span>strong{font-size:18px}
+ .project-process[data-process-enhanced] .project-process-steps li:not(:last-child)::before,.project-process[data-process-enhanced] .project-process-steps li:not(:last-child)::after{top:28px;left:calc(50% + 21px);right:calc(-50% + 21px)}
+ .project-process[data-process-enhanced] .project-process-active-description:not([hidden]){font-size:16px;max-width:70ch}
+ .project-process-screen{height:430px}
+}

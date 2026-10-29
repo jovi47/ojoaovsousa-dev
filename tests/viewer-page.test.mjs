@@ -62,7 +62,7 @@ test('the portfolio viewer has five panels, four landmark selectors and a separa
   assert.doesNotMatch(siteHeader,/data-skip-build|header-direct|header-skip/);
   assert.doesNotMatch(siteHeader,/header-github|href="https:\/\/github\.com/);
   assert.match(siteHeader,/<img class="header-character" src="\/jovi-poster\.webp"[^>]*alt=""/);
-  for(const flag of ['🇧🇷','🇬🇧','🇪🇸'])assert.ok(siteHeader.includes(flag),`${key}: language flag ${flag}`);
+  for(const flag of ['pt-br','en','es'])assert.ok(siteHeader.includes(`data-flag="${flag}"`),`${key}: local SVG language flag ${flag}`);
   assert.match(siteHeader,/class="language-picker"><summary aria-label="[^"]+: (?:Português|English|Español)"/);
   const skip=html.match(/<a\b[^>]*\bdata-skip-build\b[^>]*>/)?.[0];
   assert.ok(skip,`${key}: skip remains available within the scene`);
@@ -106,7 +106,7 @@ test('the portfolio viewer has five panels, four landmark selectors and a separa
   assert.ok(html.indexOf('data-inquiry-cta')>html.indexOf('</main>'),`${key}: floating contact is outside the scene and reading stacking contexts`);
   for(const attribute of ['data-inquiry','data-replay-landmark','data-retry'])assert.ok(html.includes(attribute),`${key}: ${attribute}`);
   assert.doesNotMatch(html,/data-clear-selection|closeCard/);
-  assert.match(html,/<aside[^>]+id="viewer-card"[^>]*><p class="viewer-card-top">[^<]+<\/p><section data-viewer-card="stack"/);
+  assert.match(html,/<aside[^>]+id="viewer-card"[^>]*><div class="viewer-identity viewer-identity--compact">[\s\S]*?<\/div><\/div><p class="viewer-card-top">[^<]+<\/p><section data-viewer-card="stack"/);
   assert.ok(html.includes(`/${key}/direct/`));
   assert.ok(html.includes({'pt-br':'Role para montar · Depois arraste para girar',en:'Scroll to build · Then drag to rotate',es:'Desplázate para montar · Luego arrastra para girar'}[key]));
   assert.match(html,/<aside[^>]+id="viewer-card"[^>]+hidden/);
@@ -195,5 +195,14 @@ test('cards and the shared reading fallback retain factual projects, local mocku
   assert.doesNotMatch(html,/skill-(?:gauge|ring|value)|skills-note|stroke-dasharray/);
   const ids=[...html.matchAll(/\sid="([^"]+)"/g)].map(match=>match[1]);
   assert.equal(new Set(ids).size,ids.length,`${key}: duplicated DOM id`);
+ }
+});
+test('desktop cards share one compact identity without another main heading',()=>{
+ for(const [key,c] of Object.entries(content)){
+  const html=viewerHome(c,key),card=html.slice(html.indexOf('<aside id="viewer-card"'),html.indexOf('</aside>'));
+  assert.equal((html.match(/<h1\b/g)||[]).length,1);
+  assert.equal((card.match(/viewer-identity--compact/g)||[]).length,1);
+  assert.match(card,/<p class="viewer-identity-name">João Victor<\/p>/);
+  assert.ok(card.indexOf('viewer-identity--compact')<card.indexOf('data-viewer-card="stack"'));
  }
 });
