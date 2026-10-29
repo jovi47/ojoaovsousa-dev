@@ -64,12 +64,13 @@ html[data-theme=dark] .site-header .theme-moon{display:block;color:#9bb9eb;fill:
 .footer-policy-links{display:contents}
 @media(min-width:701px){.site-footer .footer-name{font-size:38px}}
 @media(min-width:960px){
- .site-footer,.viewer-page .site-footer,.direct-page .site-footer{grid-template-columns:minmax(0,1fr) auto auto;grid-template-rows:44px 44px;align-items:start;column-gap:16px;row-gap:0}
+ .site-footer,.viewer-page .site-footer,.direct-page .site-footer{grid-template-columns:minmax(0,1fr) auto auto auto;grid-template-rows:auto;align-items:start;column-gap:16px;row-gap:0}
  .site-footer>.footer-legal{display:contents}
- .footer-legal>span{grid-column:2;grid-row:1;display:flex;align-items:center;min-height:44px;font-size:13px;color:var(--soft)}
- .site-footer>.footer-socials{grid-column:2;grid-row:2;justify-content:flex-start}
- .footer-policy-links{grid-column:3;grid-row:1/3;display:grid;grid-template-columns:max-content max-content;align-items:center;gap:0 16px;min-width:0;font-size:13px;color:var(--soft)}
- .site-footer .footer-name{grid-column:1;grid-row:1;align-self:start;font-size:clamp(40px,3.6vw,46px);height:44px;line-height:44px;position:relative;top:-5px}
+ .footer-legal>span{grid-column:3;grid-row:1;display:flex;align-items:center;min-height:44px;font-size:13px;color:var(--soft)}
+ .site-footer>.footer-socials{grid-column:2;grid-row:1;justify-content:flex-start}
+ .footer-policy-links{grid-column:4;grid-row:1;display:grid;grid-template-columns:max-content max-content;align-items:center;gap:0 16px;min-width:0;font-size:13px;color:var(--soft)}
+ /* Match Pixelify's visible glyph top to the 13px copyright, across its 40–46px size range. */
+ .site-footer .footer-name{grid-column:1;grid-row:1;align-self:start;font-size:clamp(40px,3.6vw,46px);height:44px;line-height:44px;position:relative;top:clamp(0px,calc(1.8vw - 20px),3px)}
  .footer-policy-links>[data-analytics-preferences]{text-align:left;justify-content:flex-start;padding-inline:0}
  .footer-policy-links>a[href$="/terms/"],.footer-policy-links>a[href$="/LICENSE.txt"]{justify-self:end}
 }
