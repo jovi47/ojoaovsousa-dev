@@ -1,22 +1,12 @@
 # João Victor · ojoaovsousa
 
-Device language/theme preferences initialize before styles; manual choices are remembered. The generic entry negotiates language while explicit localized links remain stable. [Behavior, publication checks and local QA](docs/device-preferences.md).
+A static portfolio in PT-BR, English and Spanish, published at [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/) through Cloudflare Pages Free Direct Upload. Current runtime source **ed8f6557fc76666109c0755274c4b923a752164c**, deployment **2afdc26e-91f0-4068-8142-1cf45942652d**, confirmed 2026-10-31 UTC. The release includes responsive selectors, consistent header controls with the original contact action and menu, a guarded floating-contact shake, and remembered manual language/theme choices over device defaults. **138 local tests and 37 public HTTP/artifact checks passed.** [Publication, recovery, costs and Search Console receipt](docs/cloudflare-pages.md#current-controls-and-preferences-release).
 
-The floating contact action has a subtle12second shake with reduced-motion and interaction guards. [Behavior and local QA](docs/contact-validation.md#floating-contact-motion).
-
-The shared header retains the original contact action, flag-only language, theme and the original28px unbordered menu. [Current controls and local QA](docs/mobile-controls.md).
-
-Local responsive correction: the four construction selectors above700px retain their natural button widths, with wrapping and room above the floating contact action. The existing header menu is retained. [Evidence and publication limits](docs/mobile-experience.md#responsive-selectors--local-correction-2026-10-30-utc).
-
-Local process refinement: the shared four-stage sequence is horizontal and its terminal completes into a clearly fictional Forma landing-page sample. [Implementation and focused QA](docs/project-process-preview.md) record the local-only state; the published artifact below is unchanged.
-
-Local review follow-up: phone autoplay/enlarged inspection now ends at700px; medium screens use scroll construction. Scene controls are replay plus the four selectors; the labeled FAB is the sole phone header-independent contact shortcut. [Current local implementation and QA limits](docs/mobile-experience.md#local-refinement-awaiting-owner-testing) distinguish this work from the published artifact below. No new deployment is recorded.
-
-A static portfolio in PT-BR, English and Spanish. The single **Montagem 3D** home has light/dark themes, three LEGO buildings (About me, HorAgora and Andréa Sousa Consultoria) and a question-mark challenge, each on a small individual base. Reading uses the same content without requiring 3D. The owner-authorized source `488d3e3184c74bc82706c7c0b0c42ee6617601ec` is published at [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/) through Cloudflare Pages Free Direct Upload. The public repository is [jovi47/ojoaovsousa-dev](https://github.com/jovi47/ojoaovsousa-dev); repository visibility does not imply merge of its independently scoped PRs. [Release evidence](docs/cloudflare-pages.md#confirmed-production-release) records the exact artifact, HTTP checks and remaining Search Console work.
+The public repository is [jovi47/ojoaovsousa-dev](https://github.com/jovi47/ojoaovsousa-dev). Independent draft PRs17–20 remain unmerged. Google still reports Couldn't fetch for its existing sitemap submission; publication does not confirm indexing. The integrated HMR preview remains [localhost:3000/pt-br/](http://localhost:3000/pt-br/).
 
 ## Current source experience
 
-The current source supersedes the responsive behavior of the published release above. Publication of this source is authorized, but remains pending until the release gates and Direct Upload are confirmed. See the component guides for focused evidence and physical-device limits.
+The source behavior below is included in the current runtime release. Component guides preserve focused evidence and physical-device limits.
 
 - Phones through700px start on **Your project → About me → HorAgora → ASC**, then repeat. Every first selection, manual or automatic, assembles over4.2seconds. Each assembled model gets10seconds before automatic advancement. Selecting a model pauses advancement until the entire viewer board leaves the viewport; on return the current model gets a fresh interval. Offscreen, hidden-document, dialog and reduced-motion guards remain.
 - Medium and large screens above700px build with page scrolling. Lateral reading advances during construction, so text and construction finish together without extra reading-only scroll spans. Replay and the four selectors remain; previous/next and pause controls are removed.

@@ -1,6 +1,8 @@
 # Device language and theme
 
-Owner decision,2026-10-30UTC: use device preferences by default and remember a visitor's explicit changes. Implemented in `codex/device-preferences`, based on9efeedf; publication requires the release receipt.
+Published in runtime `ed8f655` on 2026-10-31 UTC. [Confirmed publication and remaining limits](cloudflare-pages.md#current-controls-and-preferences-release). Earlier local observations below preserve their original validation scope.
+
+Owner decision,2026-10-30UTC: use device preferences by default and remember a visitor's explicit changes. Implemented in `codex/device-preferences`, based on9efeedf; publication is recorded in the release receipt.
 
 ## Behavior
 
@@ -16,12 +18,12 @@ To return to automatic preferences, remove only these two preference keys from t
 
 Pages must serve the generic root with HTTP200 rather than the former fixed301 to PT-BR. Root remains noindex. The other trailing-slash and retired-language redirects remain. The release verifier checks the exact root document and preference script. A browser that cached the previous permanent redirect may keep using it until that cache is refreshed; validate with a fresh session after publication.
 
-Nine canonical localized pages, reciprocal hreflang, PT-BR x-default, direct-reading noindex and sitemap membership are unchanged. Localized pages never force another language, following [Google's multilingual-site guidance](https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites). The policy copy changes within its existing URLs. After authorized publication, verify root200, bootstrap MIME/CSP, localized canonical/indexability, privacy copy and sitemap availability; keep the existing Search Console submission and record its actual processing state.
+Nine canonical localized pages, reciprocal hreflang, PT-BR x-default, direct-reading noindex and sitemap membership are unchanged. Localized pages never force another language, following [Google's multilingual-site guidance](https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites). The policy copy changes within its existing URLs. Public checks confirmed root200, bootstrap MIME/CSP, localized canonical/indexability, privacy copy and sitemap availability; the existing Search Console submission is retained with its actual pending processing state.
 
 ## Evidence and cost
 
 The new bootstrap/load-order and root deployment regressions failed before implementation.22 focused local tests passed in the integrated source, including a real production-mode static build of the existing SEO contract; no remote test workflow ran. Independent review found the fixed-root redirect conflict, which was corrected and re-reviewed without remaining findings.
 
-Native browser QA used an isolated loopback origin: Spanish device settings selected `/es/` with query/fragment intact; a manual English choice survived returning to root; explicit PT-BR remained accessible. Dark applied automatically; manual light survived reload and a dark device setting; after clearing only QA-created preferences, live device changes updated the theme. These are emulated browser preferences, not physical-device certification. The QA tab and emulation are temporary and must be released before closing the delivery.
+Native browser QA used an isolated loopback origin: Spanish device settings selected `/es/` with query/fragment intact; a manual English choice survived returning to root; explicit PT-BR remained accessible. Dark applied automatically; manual light survived reload and a dark device setting; after clearing only QA-created preferences, live device changes updated the theme. These are emulated browser preferences, not physical-device certification. The QA tab and emulation were released before closing the delivery.
 
 `preferences.js` adds2298 raw bytes and one cacheable same-origin script request; removing duplicate theme code saves861 raw JS bytes, net+1437. The script tag adds39 raw bytes per generated document; the three privacy paragraphs add407 raw text bytes in total. Actual compressed transfer, cache, latency, energy and monthly billing are unmeasured. Monthly marginal transfer equals effective requests per changed artifact times its effective transferred-byte delta, plus changed HTML traffic; applicable tariffs and usage remain unknown. No dependency, paid service, server job or JavaScript timer is added.

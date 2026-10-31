@@ -1,12 +1,14 @@
 # Contact channels
 
+Published in runtime `ed8f655` on 2026-10-31 UTC. [Confirmed publication and remaining limits](cloudflare-pages.md#current-controls-and-preferences-release). Earlier local observations below preserve their original validation scope.
+
 ## Floating contact motion
 
 Local delivery `codex/contact-shake`, base9efeedf,2026-10-30UTC: the owner requested a subtle shake approximately every10–15seconds. The existing floating CTA now uses a12second CSS cycle, stationary for its first94%, with a brief horizontal shake bounded by3px. It reuses the existing tour/visibility/contact/dialog lifecycle; there is no JavaScript timer. Hidden/offscreen/contact-section/dialog states pause it. Hover, keyboard focus, active press, disabled state and annotation suppress it; reduced motion keeps the action static. Existing label, touch target and contact channels remain.
 
 Native reading-page evidence: an actual running CSS animation reported12000ms duration;128 samples over≈12.8seconds captured6 moving samples, maximum observed displacement≈2.9px. Reduced-motion emulation returned animation none; opening the contact dialog paused the cycle. Static review covers the remaining existing lifecycle selectors. The temporary QA tab was closed and emulation reset. This does not measure physical-device performance, energy or every pause transition. Whitespace checks passed; no remote tests, push or deployment were performed.
 
-Static CSS grows176 raw bytes across the two affected files. This is not a transfer or cost measurement; cache, compression, traffic and device work remain unmeasured. No dependency, provider, request, stored data or client JavaScript timer is introduced. Post-publication visual/SEO checks remain pending authorized publication.
+Static CSS grows176 raw bytes across the two affected files. This is not a transfer or cost measurement; cache, compression, traffic and device work remain unmeasured. No dependency, provider, request, stored data or client JavaScript timer is introduced. Post-publication visual/SEO checks are recorded in the release receipt; Google processing remains pending.
 
 
 Owner decision2026-10-22 UTC: replace the briefing fields/local draft with direct contact channels; CAPTCHA is unnecessary because the site does not accept or send messages. Originated on `codex/contact-channels`, based on integration`6dd40b5`, and is included in published source `9f2dbb5544c525dcdea94f81620fcaf731f59126`. The [release receipt](cloudflare-pages.md#confirmed-production-release) records the actual deployment and integrated proof.

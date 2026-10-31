@@ -1,12 +1,14 @@
 # Mobile 3D experience
 
+Published in runtime `ed8f655` on 2026-10-31 UTC. [Confirmed publication and remaining limits](cloudflare-pages.md#current-controls-and-preferences-release). Earlier local observations below preserve their original validation scope.
+
 ## Responsive selectors — local correction, 2026-10-30 UTC
 
 At752×978px, the four equal grid tracks compressed selectors to approximately74px, letting the About me and HorAgora contents extend beyond their buttons. Above700px, the selectors now use intrinsic-width flex buttons, centered with wrapping and a bounded container. The80px bottom offset leaves the floating contact action clear, including its decorative studs. The existing phone grid through700px is preserved. Selection, replay and tour visibility are unchanged. The owner explicitly retained the existing header menu after considering its removal.
 
 Native integrated-preview checks at320/390/430/700/701/752/960/1080/1100/1280/1440px found no page or selector-content horizontal overflow. The four selections updated their corresponding cards; keyboard traversal reached replay after the last selector. Light/dark752px and screenshots at430/701/1440px were inspected. English and Spanish labels also fit at701px. Nine focused viewer/direct tests passed locally, zero failures/skips; whitespace checking and an independent CSS cascade review passed. Physical devices and zoom combinations remain untested.
 
-Branch `codex/responsive-navigation` is based on `origin/codex/visual-release-2026-10-29` (`9efeedf`); only its CSS correction is integrated into the existing localhost3000 preview. No new server or external service was created. `viewer.css` grows by288 raw bytes; actual compressed transfer and monthly cost are unmeasured. URLs, metadata, canonical, robots, structured data, internal links and sitemap inputs are unchanged. Publication and any post-publication Search Console verification remain pending; this local check does not change Google's existing processing state.
+Branch `codex/responsive-navigation` is based on `origin/codex/visual-release-2026-10-29` (`9efeedf`); only its CSS correction is integrated into the existing localhost3000 preview. No new server or external service was created. `viewer.css` grows by288 raw bytes; actual compressed transfer and monthly cost are unmeasured. URLs, metadata, canonical, robots, structured data, internal links and sitemap inputs are unchanged. Publication and HTTP/SEO checks are confirmed in the release receipt; Google processing remains pending.
 
 
 ## Local refinement awaiting owner testing
