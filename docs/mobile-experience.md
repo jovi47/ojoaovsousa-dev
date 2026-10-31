@@ -1,5 +1,14 @@
 # Mobile 3D experience
 
+## Responsive selectors — local correction, 2026-10-30 UTC
+
+At752×978px, the four equal grid tracks compressed selectors to approximately74px, letting the About me and HorAgora contents extend beyond their buttons. Above700px, the selectors now use intrinsic-width flex buttons, centered with wrapping and a bounded container. The80px bottom offset leaves the floating contact action clear, including its decorative studs. The existing phone grid through700px is preserved. Selection, replay and tour visibility are unchanged. The owner explicitly retained the existing header menu after considering its removal.
+
+Native integrated-preview checks at320/390/430/700/701/752/960/1080/1100/1280/1440px found no page or selector-content horizontal overflow. The four selections updated their corresponding cards; keyboard traversal reached replay after the last selector. Light/dark752px and screenshots at430/701/1440px were inspected. English and Spanish labels also fit at701px. Nine focused viewer/direct tests passed locally, zero failures/skips; whitespace checking and an independent CSS cascade review passed. Physical devices and zoom combinations remain untested.
+
+Branch `codex/responsive-navigation` is based on `origin/codex/visual-release-2026-10-29` (`9efeedf`); only its CSS correction is integrated into the existing localhost3000 preview. No new server or external service was created. `viewer.css` grows by288 raw bytes; actual compressed transfer and monthly cost are unmeasured. URLs, metadata, canonical, robots, structured data, internal links and sitemap inputs are unchanged. Publication and any post-publication Search Console verification remain pending; this local check does not change Google's existing processing state.
+
+
 ## Local refinement awaiting owner testing
 
 The current local branch/preview supersedes the published responsive behavior described below: phone flow ends at700px; medium widths above700px use the existing scroll construction. Phones start on Your project, then cycle through About me, HorAgora and ASC. Each first visit assembles over4.2seconds; automatic advancement follows one full idle turn for Your project (30seconds at the existing rotation speed) and5seconds for the other models, after assembly. Later visits reuse the assembled model. Manual interaction stops automatic advancement; rotation continues except for hidden/annotation/other-dialog/reduced motion states. Only replay and the four selectors remain; previous/next and the proposed pause button were removed at the owner’s request. Phone framing uses a50° field of view and10.8 distance for the tower (houses6.32, challenge7.3); the initial camera snaps to its intended frame.

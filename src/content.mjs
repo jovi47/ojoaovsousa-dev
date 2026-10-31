@@ -172,7 +172,7 @@ export const content = {
         {"title": "Conservação das métricas", "body": "Segundo a documentação atual do Clarity, reproduções de sessão ficam por 30 dias; sessões favoritas ou rotuladas, mapas de calor e dados de cliques ficam por 9 meses. Esses prazos do provedor são distintos dos 90 dias da sua escolha local. A revogação interrompe novas coletas nesta navegação; não apaga retroativamente registros já recebidos. Para exercer direitos aplicáveis, use o contato desta política. Fonte: https://learn.microsoft.com/en-us/clarity/setup-and-installation/data-retention."},
         {
           "title": "Navegação e preferências",
-          "body": "O site não usa publicidade. Preferências de tema, movimento e métricas opcionais podem ser salvas no localStorage do navegador. A escolha de métricas vale por 90 dias e pode ser revista em Preferências de privacidade no rodapé. Recusar mantém todas as funções do portfólio. O miniworld não registra partidas nem envia a posição do personagem a um servidor."
+          "body": "O site não usa publicidade. Preferências de idioma, tema, movimento e métricas opcionais podem ser salvas no localStorage do navegador. Sem uma escolha manual, idioma e tema seguem as preferências do dispositivo; links de idioma explícito continuam disponíveis. A escolha de métricas vale por 90 dias e pode ser revista em Preferências de privacidade no rodapé. Recusar mantém todas as funções do portfólio. O miniworld não registra partidas nem envia a posição do personagem a um servidor."
         },
         {
           "title": "Hospedagem",
@@ -375,7 +375,7 @@ export const content = {
         {"title": "Analytics retention", "body": "According to current Clarity documentation, session playback is kept for 30 days; favorited or labeled sessions, heatmaps and click data are kept for 9 months. Provider retention is separate from your 90-day local choice. Revocation stops new collection in this browsing context; it does not retroactively delete data already received. To exercise applicable rights, use the contact in this policy. Source: https://learn.microsoft.com/en-us/clarity/setup-and-installation/data-retention."},
         {
           "title": "Browsing and preferences",
-          "body": "The website uses no advertising. Theme, motion and optional analytics preferences may be saved in your browser’s localStorage. The analytics choice lasts 90 days and can be changed through Privacy preferences in the footer. Declining keeps every portfolio feature available. The miniworld does not record game sessions or send the character’s position to a server."
+          "body": "The website uses no advertising. Language, theme, motion and optional analytics preferences may be saved in your browser’s localStorage. Without a manual choice, language and theme follow your device preferences; explicit language links remain available. The analytics choice lasts 90 days and can be changed through Privacy preferences in the footer. Declining keeps every portfolio feature available. The miniworld does not record game sessions or send the character’s position to a server."
         },
         {
           "title": "Hosting",
@@ -574,7 +574,7 @@ export const content = {
         {"title": "Conservación de las métricas", "body": "Según la documentación actual de Clarity, las reproducciones de sesión se conservan 30 días; las sesiones favoritas o etiquetadas, los mapas de calor y los datos de clics, 9 meses. Estos plazos del proveedor son distintos de los 90 días de tu elección local. Revocar detiene nuevas recopilaciones en esta navegación; no elimina retroactivamente datos ya recibidos. Para ejercer los derechos aplicables, usa el contacto de esta política. Fuente: https://learn.microsoft.com/en-us/clarity/setup-and-installation/data-retention."},
         {
           "title": "Navegación y preferencias",
-          "body": "El sitio no utiliza publicidad. Las preferencias de tema, movimiento y métricas opcionales pueden guardarse en el localStorage del navegador. La elección de métricas dura 90 días y puede cambiarse en Preferencias de privacidad en el pie de página. Rechazar mantiene todas las funciones del portafolio. El minimundo no registra partidas ni envía la posición del personaje a un servidor."
+          "body": "El sitio no utiliza publicidad. Las preferencias de idioma, tema, movimiento y métricas opcionales pueden guardarse en el localStorage del navegador. Sin una elección manual, idioma y tema siguen las preferencias del dispositivo; los enlaces de idioma explícito siguen disponibles. La elección de métricas dura 90 días y puede cambiarse en Preferencias de privacidad en el pie de página. Rechazar mantiene todas las funciones del portafolio. El minimundo no registra partidas ni envía la posición del personaje a un servidor."
         },
         {
           "title": "Alojamiento",

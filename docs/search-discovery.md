@@ -56,3 +56,7 @@ Consulted 2026-10-22 UTC:
 - [Google: noindex and the robots limitation](https://developers.google.com/search/docs/crawling-indexing/block-indexing).
 - [Google: building and submitting a sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap).
 - [llms.txt v2](https://llmstxt.org/) and [Schema.org Service](https://schema.org/Service). These formats do not promise retrieval or search appearance.
+
+## Device-preference entry — local change
+
+The current source serves the generic root with200/noindex and a same-origin early preference script, replacing its fixed PT-BR301. Explicit language URLs, reciprocal alternates, PT-BR x-default and the nine sitemap URLs remain. The existing policy URLs now describe manual language/theme preference storage. [Implementation, local evidence and post-publication checks](device-preferences.md). Cached historical301 responses may require a fresh browser session; no Search Console processing result follows from this source change.

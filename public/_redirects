@@ -1,5 +1,4 @@
-# The root has a fixed, explicit PT-BR default; languages stay user-selectable.
-/ /pt-br/ 301
+# Serve the generic root so device/manual language preferences can choose a locale.
 /pt-br /pt-br/ 301
 /en /en/ 301
 /es /es/ 301

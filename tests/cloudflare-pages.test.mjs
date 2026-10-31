@@ -12,7 +12,7 @@ const csp=(await readFile(new URL('public/_headers',root),'utf8')).match(/  Cont
 
 test('Pages rules preserve real404 handling and allow only the required inline noscript style',async()=>{
  const rules=await readFile(new URL('public/_redirects',root),'utf8');
- assert.match(rules,/^\/ \/pt-br\/ 301$/m);
+ assert.doesNotMatch(rules,/^\/\s+/m,'generic root must serve the preference bootstrap');
  for(const key of ['pt-br','en','es'])for(const ending of ['','/'])assert.ok(rules.includes(`/${key}/black${ending} /${key}/ 301`));
  assert.doesNotMatch(rules,/^\/\* /m);
  assert.doesNotMatch(csp,/unsafe-inline|unsafe-eval/);
@@ -36,10 +36,11 @@ function fixture({preview=false,alter=()=>{}}={}){
  files.set('/_headers',`/*\n  Content-Security-Policy: ${csp}\n`);
  const fetcher=async(url)=>{
   const pathname=new URL(url).pathname;
-  const redirect=pathname==='/'?'/pt-br/':pathname.match(/^\/(pt-br|en|es)\/black\/?$/)?.[1];
+  const redirect=pathname.match(/^\/(pt-br|en|es)\/black\/?$/)?.[1];
   if(redirect)return new Response(null,{status:301,headers:{Location:redirect.startsWith('/')?redirect:`/${redirect}/`}});
   let body,status=200,extra={};
-  if(pathname==='/__portfolio-release-missing__/'){body='404';status=404;}
+  if(pathname==='/')body='<html><script src="/preferences.js"></script><meta name="robots" content="noindex, nofollow"></html>';
+  else if(pathname==='/__portfolio-release-missing__/'){body='404';status=404;}
   else if(/^\/(pt-br|en|es)\/$/.test(pathname))body=`<html><link rel="canonical" href="${origin}${pathname}"><meta name="robots" content="${preview?'noindex, nofollow':'index, follow'}"></html>`;
   else if(pathname==='/robots.txt')body=`User-agent: *\n${preview?'Disallow: /':'Allow: /\nSitemap: '+origin+'/sitemap.xml'}\n`;
   else if(pathname==='/sitemap.xml')body=preview?'<urlset/>':'<urlset>'+Array.from({length:9},()=>'<loc>https://portfolio.example/</loc>').join('')+'</urlset>';
@@ -60,6 +61,10 @@ test('release verifier compares responses with the exact local artifact',async()
  await assert.rejects(verifyDeployment(changed.origin,changed.options),/artifact differs: \/portrait.jpg/);
  const missing=fixture({alter:(path,result)=>{if(path==='/__portfolio-release-missing__/')result.status=200;}});
  await assert.rejects(verifyDeployment(missing.origin,missing.options),/expected 404/);
+ const fixedLanguage=fixture({alter:(path,result)=>{if(path==='/'){result.status=301;result.headers.Location='/pt-br/';}}});
+ await assert.rejects(verifyDeployment(fixedLanguage.origin,fixedLanguage.options),/expected 200/);
+ const stalePreferences=fixture({alter:(path,result)=>{if(path==='/preferences.js')result.body='stale preferences';}});
+ await assert.rejects(verifyDeployment(stalePreferences.origin,stalePreferences.options),/artifact differs: \/preferences.js/);
 });
 
 test('preview verification requires noindex and invalid target never makes a request',async()=>{
