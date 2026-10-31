@@ -5,22 +5,8 @@ import {initViewerOverflow} from './viewer-overflow.js';
 const disposeProjectProcess=initProjectProcess();
 const disposeTechnologyMarquee=initTechnologyMarquee();
 const disposeViewerOverflow=initViewerOverflow();
-const body=document.body,html=document.documentElement;
+const body=document.body;
 function syncInquiryAvailability(){if(body.classList.contains('reading')||body.classList.contains('graphics-failed'))for(const button of document.querySelectorAll('.inquiry-cta[data-question]'))button.disabled=false;}
-let savedTheme;try{savedTheme=localStorage.getItem('portfolio-theme');}catch{}
-if(savedTheme==='light'||savedTheme==='dark')html.dataset.theme=savedTheme;
-function syncThemeButtons(){
- const dark=html.dataset.theme==='dark';
- for(const button of document.querySelectorAll('[data-theme-toggle]')){
-  const label=dark?button.dataset.themeLight:button.dataset.themeDark;
-  button.setAttribute('aria-pressed',String(dark));if(label){button.setAttribute('aria-label',label);button.title=label;}
- }
-}
-syncThemeButtons();
-for(const button of document.querySelectorAll('[data-theme-toggle]'))button.addEventListener('click',()=>{
- html.dataset.theme=html.dataset.theme==='dark'?'light':'dark';syncThemeButtons();
- try{localStorage.setItem('portfolio-theme',html.dataset.theme);}catch{}document.dispatchEvent(new Event('themechange'));
-});
 const menu=document.querySelector('#mobile-menu'),menuToggle=document.querySelector('[data-menu]');
 menuToggle?.addEventListener('click',()=>{menu.hidden=!menu.hidden;menuToggle.setAttribute('aria-expanded',String(!menu.hidden));});
 for(const a of menu?.querySelectorAll('a')||[])a.addEventListener('click',()=>{menu.hidden=true;menuToggle.setAttribute('aria-expanded','false');});
