@@ -138,6 +138,12 @@ body:not(.construction-started):not(.tour-complete):not(.reading):not(.graphics-
 
 .viewer-replay-label,.viewer-touch-hint{display:none}
 
+/* Keep each selector wide enough for its label instead of squeezing four equal columns. */
+@media(min-width:701px){
+ .viewer-houses{display:flex;flex-wrap:wrap;justify-content:center;width:max-content;max-width:calc(100% - 48px);left:50%;bottom:80px}
+ .viewer-house-button{flex:none}
+}
+
 @media(max-width:700px){
  body:not(.reading):not(.graphics-failed) .viewer-tour{height:auto;min-height:0}
  body.world-loaded:not(.reading):not(.graphics-failed) .viewer-board{position:relative;top:auto;display:grid;grid-template-areas:"intro" "scene" "navigation" "controls" "hint";height:auto;overflow:visible;gap:12px;background:transparent}
