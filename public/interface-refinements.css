@@ -1,22 +1,26 @@
 /* Shared contact controls keep the same icon and alignment in every layout. */
-.site-header .header-actions{align-items:center}
-.site-header .header-contact{align-items:center;justify-content:center;line-height:1;gap:8px;box-shadow:0 2px 0 var(--ink)}
+.site-header .header-actions{align-items:center;gap:8px}
+
+.site-header .header-contact{align-items:center;justify-content:center;height:44px;min-height:44px;padding:9px 15px;border:2px solid var(--ink);border-radius:5px;line-height:1;gap:8px;font-size:14px;box-shadow:0 2px 0 var(--ink)}
+.site-header .header-contact:active{box-shadow:0 1px 0 var(--ink)}
 .site-header .header-contact-icon{display:block;width:20px;height:20px;flex:none}
+
 .site-header .language-flag{display:block;width:24px;height:18px;flex:none}
 .inquiry-cta{width:auto;height:auto;min-width:0;min-height:46px;padding:10px 14px;gap:8px;border-radius:7px;box-shadow:0 2px 0 var(--button-ink);animation:none}
 .inquiry-cta::before,.inquiry-cta::after{content:'';width:18px;height:6px;top:-7px;border-radius:3px 3px 0 0}
 .inquiry-cta .viewer-contact-label{display:block;font-size:14px}
 .inquiry-cta .inquiry-cta-icon{width:20px;height:20px}
 
-.site-header .header-actions>.language-picker>summary,.site-header .header-actions>.theme-toggle{position:relative;isolation:isolate;height:44px;min-height:44px;border:0;background:transparent}
-.site-header .header-actions>.language-picker>summary{min-width:88px;padding:3px 11px}
-.site-header .header-actions>.theme-toggle{width:44px;min-width:44px;padding:3px}
-.site-header .header-actions>.language-picker>summary::before,.site-header .header-actions>.theme-toggle::before{content:'';position:absolute;inset:3px;z-index:-1;border:1px solid color-mix(in srgb,var(--ink) 16%,transparent);border-radius:12px;background:var(--bg);pointer-events:none}
+.site-header .header-actions>.language-picker>summary,.site-header .header-actions>:is(.theme-toggle,.menu-toggle){align-items:center;justify-content:center;height:44px;min-height:44px;padding:0 12px;border:1px solid color-mix(in srgb,var(--ink) 25%,transparent);border-radius:12px;background:var(--bg);color:var(--ink);box-shadow:none;font-size:14px;font-weight:500;line-height:1}
+.site-header .header-actions>.language-picker>summary,.site-header .header-actions>:is(.theme-toggle,.menu-toggle){width:44px;min-width:44px;padding:0}
+.site-header .header-actions>.language-picker>summary:hover,.site-header .header-actions>:is(.theme-toggle,.menu-toggle):hover{background:var(--panel)}
+.site-header .header-actions>.menu-toggle{border:0;background:transparent}
 
 @media(max-width:700px){
+ .site-header .header-actions>.header-contact{display:none}
+ .site-header .header-actions{gap:6px}
  .site-header .header-actions>.language-picker>summary,.site-header .header-actions>.theme-toggle{display:grid;place-items:center;flex:none;width:44px;height:44px;min-width:44px;min-height:44px;padding:0}
  .site-header .header-actions>.menu-toggle{display:grid;place-items:center;width:44px;height:44px;min-width:44px;padding:0;font-size:0;line-height:1}
- .site-header .header-actions>.header-contact{display:none}
  body:not(.reading):not(.graphics-failed) .viewer-page .viewer-house-button{min-height:48px;padding:6px 4px;gap:3px;font-size:11px}
  .viewer-page .viewer-house-button .viewer-brand-symbol{--symbol-size:21px}
  .viewer-page .viewer-house-button img.viewer-profile-icon{width:21px;height:21px}
@@ -28,6 +32,8 @@
  .inquiry-cta{right:calc(var(--layout-edge) + 6px);bottom:max(14px,env(safe-area-inset-bottom));min-height:46px;padding:10px 13px}
  .inquiry-cta .viewer-contact-label{font-size:13px}
 }
+
+@media(max-width:430px){.site-header .header-actions{gap:4px}}
 
 @media(prefers-reduced-motion:no-preference){
  .site-header .header-character{transform-origin:50% 80%;animation:header-character-sway 7s ease-in-out infinite}

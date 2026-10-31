@@ -54,6 +54,8 @@ test('the portfolio viewer has five panels, four landmark selectors and a separa
   assert.ok(contact,`${key}: separate contact button`);
   for(const attribute of ['data-question','data-inquiry','disabled'])assert.match(contact,new RegExp(`\\s${attribute}(?:\\s|=|>)`));
   const siteHeader=html.match(/<header\b[^>]*>[\s\S]*?<\/header>/)?.[0];
+  assert.doesNotMatch(siteHeader,/language-current/,`${key}: language summary keeps only the flag`);
+  assert.match(siteHeader,/class="button header-contact"/,`${key}: original header contact action remains available`);
   assert.ok(siteHeader.includes('>ojoaovsousa</a>'),`${key}: current public handle`);
   assert.doesNotMatch(html,/>ojoaovsousa<span[^>]*>\.<\/span>/);
   for(const heading of html.matchAll(/<h[1-6]\b[^>]*>([\s\S]*?)<\/h[1-6]>/g))assert.ok(!heading[1].replace(/<[^>]+>/g,'').trim().endsWith('.'),`${key}: titles have no terminal full stop`);
