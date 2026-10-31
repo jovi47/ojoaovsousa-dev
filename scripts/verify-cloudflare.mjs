@@ -34,7 +34,9 @@ export async function verifyDeployment(origin,{preview=false,canonicalOrigin=ori
   const response=await request(from,301);
   assert.equal(new URL(response.headers.get('location'),origin).href,origin+to,`${from}: wrong redirect`);
  }
- await redirect('/','/pt-br/');
+ const {text:root}=await exact('/');
+ assert.ok(root.includes('<meta name="robots" content="noindex, nofollow">'),'Generic root must stay noindex');
+ assert.ok(root.includes('<script src="/preferences.js"></script>'),'Generic root must load device preferences');
  for(const key of ['pt-br','en','es']){
   for(const ending of ['','/'])await redirect(`/${key}/black${ending}`,`/${key}/`);
   const {response,text}=await exact(`/${key}/`);
@@ -53,7 +55,7 @@ export async function verifyDeployment(origin,{preview=false,canonicalOrigin=ori
   const {response}=await exact(`/${key}/index.md`);
   assert.match(response.headers.get('content-type')||'',/^text\/markdown\b/);
  }
- for(const pathname of ['/llms.txt','/black.css','/city-app.js','/city.js','/portrait.jpg','/bricolage.woff2','/pixelify.woff2','/jovi-character.glb','/hori-character.glb','/andrea-character.glb','/vendor/three.module.js'])await exact(pathname);
+ for(const pathname of ['/llms.txt','/black.css','/preferences.js','/city-app.js','/city.js','/portrait.jpg','/bricolage.woff2','/pixelify.woff2','/jovi-character.glb','/hori-character.glb','/andrea-character.glb','/vendor/three.module.js'])await exact(pathname);
  const missing=await request('/__portfolio-release-missing__/',404);
  assert.ok(Buffer.from(await missing.arrayBuffer()).equals(Buffer.from(await readArtifact('/404.html'))),'Unknown route must serve the custom404 artifact');
  return checks;

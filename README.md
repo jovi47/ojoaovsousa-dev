@@ -1,5 +1,7 @@
 # João Victor · ojoaovsousa
 
+Device language/theme preferences initialize before styles; manual choices are remembered. The generic entry negotiates language while explicit localized links remain stable. [Behavior, publication checks and local QA](docs/device-preferences.md).
+
 Local process refinement: the shared four-stage sequence is horizontal and its terminal completes into a clearly fictional Forma landing-page sample. [Implementation and focused QA](docs/project-process-preview.md) record the local-only state; the published artifact below is unchanged.
 
 Local review follow-up: phone autoplay/enlarged inspection now ends at700px; medium screens use scroll construction. Scene controls are replay plus the four selectors; the labeled FAB is the sole phone header-independent contact shortcut. [Current local implementation and QA limits](docs/mobile-experience.md#local-refinement-awaiting-owner-testing) distinguish this work from the published artifact below. No new deployment is recorded.

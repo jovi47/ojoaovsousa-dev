@@ -42,7 +42,7 @@ The owner replaced the form with a shared contact window listing WhatsApp, e-mai
 
 ## Routing, security and cache
 
-- `/` permanently redirects to `/pt-br/`; `/pt-br`, `/en` and `/es` normalize to their trailing-slash homes. The language switch remains explicit, without IP/language inference.
+- In the current local source, `/` serves a noindex200 preference entry; `/pt-br`, `/en` and `/es` still normalize to their trailing-slash homes. Device/manual language negotiation is client-side only at the generic entry, with explicit language links preserved. This routing becomes published only with its release receipt. See [device preferences](device-preferences.md).
 - Each localized `/black` and `/black/` URL permanently redirects 301 to its same-language home. There is no wildcard rewrite to the home.
 - The generator retains root `404.html`. Pages uses that custom 404 for missing paths and does not enable its implicit SPA fallback. The confirmed release passed the real HTTP404 check; repeat it for each later release.
 - Static responses receive MIME-sniffing, framing, referrer and permissions protections. The CSP permits local scripts/fonts/styles and local/data/blob images; `connect-src blob:` is needed by Three’s embedded GLB texture loading. Only the existing noscript style hash is permitted inline. New third-party scripts/frames/networking require a reviewed policy change and browser verification.
