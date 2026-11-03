@@ -70,3 +70,12 @@ test('every localized document loads device preferences before styles can paint'
   assert.ok(script>0&&script<html.indexOf('<link rel="stylesheet"'));
  }
 });
+
+test('changing language preserves known routes and public anchors without copying queries',()=>{
+ for(const route of ['', 'direct/', 'privacy/', 'terms/']){
+  const b=browser({path:`/pt-br/${route}?synthetic=private#projects`});b.ready();
+  assert.equal(b.links[1].href,`/en/${route}#projects`);
+  assert.equal(b.links[2].href,`/es/${route}#projects`);
+ }
+ const b=browser({path:'/pt-br/#arbitrary-private'});b.ready();assert.equal(b.links[1].href,'/en/');
+});

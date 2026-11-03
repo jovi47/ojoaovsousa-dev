@@ -35,7 +35,7 @@ test('preview and localhost builds never advertise an indexable release',async t
 test('opted-in HTTPS release has reciprocal language URLs and factual linked discovery',async t=>{
  const f=await fixture(t),base='https://portfolio.example';
  f.build(base,'true');
- const expected=[['pt-br','pt-BR','Desenvolvedor de software sob medida'],['en','en-GB','Custom software developer'],['es','es','Desarrollador de software a medida']];
+ const expected=[['pt-br','pt-BR','Sites e software sob medida'],['en','en-GB','Websites and custom software'],['es','es','Sitios web y software a medida']];
  for(const [key,lang,title] of expected){
   const html=await f.read(`${key}/index.html`);
   assert.ok(html.includes(`<title>João Victor | ${title}</title>`));

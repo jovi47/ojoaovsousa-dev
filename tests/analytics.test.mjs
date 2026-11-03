@@ -13,18 +13,19 @@ function page(options={}){
  const deny=node(),accept=node(),signal=node(),preferences=node(),panel=node();
  panel.dataset={deny:'Recusar',denyReload:'Recusar e recarregar',preview:options.preview?'true':'false'};
  panel.querySelector=selector=>selector.includes('denied')?deny:selector.includes('granted')?accept:signal;
- const scripts=[],events={},cookies=[],storage=new Map();
+ const scripts=[],events={},documentEvents={},cookies=[],storage=new Map(),observers=[];
  if(options.stored!==undefined)storage.set(key,typeof options.stored==='string'?options.stored:JSON.stringify(options.stored));
  const location=new URL(options.url||'https://ojoaovsousa.pages.dev/pt-br/');
  location.reload=()=>{location.reloaded=true;};
  location.replace=value=>{location.replaced=value;};
- const document={referrer:options.referrer||'',querySelector:()=>panel,querySelectorAll:()=>[preferences],createElement:()=>({}),head:{append(script){if(options.appendFails)throw new Error('blocked');scripts.push(script);}}};
+ const projects={id:'projects'};
+ const document={referrer:options.referrer||'',addEventListener:(event,fn)=>{documentEvents[event]=fn;},querySelector:selector=>selector==='#projects'?projects:panel,querySelectorAll:()=>[preferences],createElement:()=>({}),head:{append(script){if(options.appendFails)throw new Error('blocked');scripts.push(script);}}};
  Object.defineProperty(document,'cookie',{get:()=>options.cookies||'',set:value=>{if(options.cookieFails)throw new Error('blocked');cookies.push(value);}});
  const window={location,addEventListener:(name,fn)=>{events[name]=fn;}};
- const context={URL,window,document,navigator:{doNotTrack:options.dnt?'1':'0',globalPrivacyControl:!!options.gpc},localStorage:{getItem:k=>{if(options.storageFails)throw new Error('blocked');return storage.get(k);},setItem:(k,v)=>{if(options.storageFails||options.writeFails)throw new Error('blocked');storage.set(k,v);},removeItem:k=>{if(options.storageFails)throw new Error('blocked');storage.delete(k);}},Date:class extends Date{static now(){return now;}}};
+ const context={URL,window,document,IntersectionObserver:class{constructor(callback){this.callback=callback;observers.push(this);}observe(){}disconnect(){}},navigator:{doNotTrack:options.dnt?'1':'0',globalPrivacyControl:!!options.gpc},localStorage:{getItem:k=>{if(options.storageFails)throw new Error('blocked');return storage.get(k);},setItem:(k,v)=>{if(options.storageFails||options.writeFails)throw new Error('blocked');storage.set(k,v);},removeItem:k=>{if(options.storageFails)throw new Error('blocked');storage.delete(k);}},Date:class extends Date{static now(){return now;}}};
  assert.ok(source,'the real local consent loader must exist');
  vm.runInNewContext(source.replace(/^export /gm,''),context);
- return {deny,accept,signal,preferences,panel,scripts,events,location,storage,window,cookies};
+ return {deny,accept,signal,preferences,panel,scripts,events,location,storage,window,cookies,documentEvents,observers,projects};
 }
 
 test('Clarity is absent until an explicit choice and revocation reloads the page',()=>{
@@ -78,7 +79,7 @@ test('only clean canonical homes on the exact production origin or explicit loca
   'https://ojoaovsousa.pages.dev/pt-br/?email=synthetic@example.test',
   'https://ojoaovsousa.pages.dev/pt-br/?utm_source=synthetic',
   'https://ojoaovsousa.pages.dev/pt-br/#synthetic-private-value',
-  'https://ojoaovsousa.pages.dev/pt-br/#main','http://localhost:3000/pt-br/',
+  'https://ojoaovsousa.pages.dev/pt-br/#projects-private','http://localhost:3000/pt-br/',
  ]){const p=page({url,stored:{choice:'granted',at:now}});assert.equal(p.scripts.length,0,url);}
  assert.equal(page({url:'http://localhost:3000/pt-br/',preview:true,stored:{choice:'granted',at:now}}).scripts.length,1);
  const local=page({url:'http://localhost:3000/pt-br/'});
@@ -117,4 +118,25 @@ test('localized consent uses native equal actions, masks main and stays out of m
  assert.match(css,/\.consent-actions[^}]*grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
  assert.match(css,/\.consent-actions \.button[^}]*min-height:48px/);
  assert.match(css,/env\(safe-area-inset-bottom\)/);
+});
+
+// Losing consent must stop events immediately; names never contain URLs or messages.
+test('conversion events use fixed names only after consent and safe public anchors stay eligible',()=>{
+ const p=page();
+ const click=name=>p.documentEvents.click?.({target:{closest:()=>({dataset:{conversion:name}})}});
+ click('whatsapp_hero');assert.equal(p.window.clarity,undefined);
+ p.accept.listeners.click();
+ assert.equal(p.observers.length,1);
+ click('whatsapp_hero');click('projects_hero');click('case_andrea');click('synthetic-private@example.test');
+ p.location.hash='#projects';click('case_horagora');
+ p.observers[0].callback([{isIntersecting:true,intersectionRatio:.5}]);
+ p.observers[0].callback([{isIntersecting:true,intersectionRatio:.5}]);
+ assert.deepEqual(JSON.parse(JSON.stringify(p.window.clarity.q.slice(1))),[
+  ['event','whatsapp_hero'],['event','projects_hero'],['event','case_andrea'],['event','case_horagora'],['event','projects_view']
+ ]);
+ p.location.hash='#synthetic-private';click('whatsapp_hero');
+ p.location.hash='';p.deny.listeners.click();const count=p.window.clarity.q.length;click('whatsapp_hero');
+ assert.equal(p.window.clarity.q.length,count);
+ const denied=page({stored:{choice:'denied',at:now}});assert.equal(denied.observers.length,0);
+ for(const fragment of ['#main','#projects','#case-andrea','#contact'])assert.equal(page({url:`https://ojoaovsousa.pages.dev/pt-br/${fragment}`,stored:{choice:'granted',at:now}}).scripts.length,1);
 });

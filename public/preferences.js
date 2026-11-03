@@ -30,9 +30,16 @@
   for(const button of document.querySelectorAll('[data-theme-toggle]'))button.addEventListener('click',()=>{
    manualTheme=html.dataset.theme==='dark'?'light':'dark';save(themeKey,manualTheme);applyTheme(manualTheme);
   });
-  for(const link of document.querySelectorAll('.language-picker a[lang]'))link.addEventListener('click',()=>{
-   const chosen=locale(link.getAttribute('lang'));if(chosen)save(languageKey,chosen);
-  });
+  for(const link of document.querySelectorAll('.language-picker a[lang]')){
+   const chosen=locale(link.getAttribute('lang'));
+   function destination(){
+    const route=location.pathname.match(/^\/(?:pt-br|en|es)\/(direct\/|privacy\/|terms\/)?$/);
+    const hash=/^#(?:main|intro|technologies|projects|case-horagora|case-andrea|about|experience|faq|contact)$/.test(location.hash)?location.hash:'';
+    if(chosen&&route)link.href=`/${chosen}/${route[1]||''}${hash}`;
+   }
+   destination();
+   link.addEventListener('click',()=>{destination();if(chosen)save(languageKey,chosen);});
+  }
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bindChoices,{once:true});else bindChoices();
 })();

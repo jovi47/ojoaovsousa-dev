@@ -8,7 +8,7 @@ export function setupAnalytics(){
  const local=location.protocol==='http:'&&['localhost','127.0.0.1'].includes(location.hostname);
  const preview=panel.dataset.preview==='true'&&local;
  if(!production&&!local)return;
- const home=()=>/^\/(pt-br|en|es)\/$/.test(location.pathname)&&!location.search&&!location.hash;
+ const home=()=>/^\/(pt-br|en|es)\/$/.test(location.pathname)&&!location.search&&/^(?:#(?:main|intro|technologies|projects|case-horagora|case-andrea|about|experience|faq|contact))?$/.test(location.hash);
  const protectedBrowser=()=>navigator.doNotTrack==='1'||navigator.doNotTrack==='yes'||window.doNotTrack==='1'||navigator.globalPrivacyControl===true;
  const safeReferrer=()=>{
   if(!document.referrer)return true;
@@ -19,6 +19,12 @@ export function setupAnalytics(){
   }catch{return false;}
  };
  let enabled=false,choice='';
+ const events=new Set(['whatsapp_hero','projects_hero','case_horagora','case_andrea','projects_view']);
+ function track(name){
+  if(!enabled||choice!=='granted'||protectedBrowser()||!home()||!events.has(name))return;
+  try{window.clarity('event',name);}catch{/* Metrics never block navigation or contact. */}
+ }
+ document.addEventListener('click',event=>track(event.target.closest?.('[data-conversion]')?.dataset.conversion));
  try{
   const stored=JSON.parse(localStorage.getItem(consentKey)||'null'),age=Date.now()-stored?.at;
   if(stored&&typeof stored.at==='number'&&age>=0&&age<lifetime&&['granted','denied'].includes(stored.choice))choice=stored.choice;
@@ -38,6 +44,13 @@ export function setupAnalytics(){
    const script=document.createElement('script');
    script.async=true;script.referrerPolicy='no-referrer';script.src='https://www.clarity.ms/tag/z43jc8necn';
    document.head.append(script);
+   const projects=document.querySelector('#projects-title');
+   if(projects&&typeof IntersectionObserver!=='undefined'){
+    let seen=false;
+    const observer=new IntersectionObserver(entries=>{if(!seen&&entries.some(entry=>entry.isIntersecting&&entry.intersectionRatio>=.25)){seen=true;track('projects_view');observer.disconnect();}},{threshold:.25});
+    observer.observe(projects);
+    window.addEventListener('pagehide',()=>observer.disconnect(),{once:true});
+   }
   }catch{/* Analytics failure must not interrupt the portfolio or its controls. */}
  }
  const deny=panel.querySelector('[data-consent="denied"]'),accept=panel.querySelector('[data-consent="granted"]');
@@ -53,6 +66,7 @@ export function setupAnalytics(){
  }
  for(const button of [deny,accept])button.addEventListener('click',()=>{
   const accepted=button===accept&&!protectedBrowser();
+  choice=accepted?'granted':'denied';
   try{localStorage.setItem(consentKey,JSON.stringify({choice:accepted?'granted':'denied',at:Date.now()}));}
   catch{if(!accepted)try{localStorage.removeItem(consentKey);}catch{/* Browser storage controls remain available. */}}
   panel.hidden=true;
@@ -65,7 +79,7 @@ export function setupAnalytics(){
  });
  // This is a static site, with no History API router. Fragment/history entry stops this page.
  for(const event of ['hashchange','popstate'])window.addEventListener(event,()=>{if(enabled&&!home())window.location.reload();});
- window.addEventListener('storage',event=>{if(enabled&&(event.key===consentKey||event.key===null))window.location.reload();});
+ window.addEventListener('storage',event=>{if(enabled&&(event.key===consentKey||event.key===null)){choice='';window.location.reload();}});
  if(choice==='granted'&&!protectedBrowser())start();
  else clearCookies();
  accept.disabled=protectedBrowser();

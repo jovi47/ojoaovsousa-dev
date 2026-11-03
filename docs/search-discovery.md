@@ -2,9 +2,11 @@
 
 Updated2026-10-29UTC. Current publication is10c5b6b/deployment0976c277; the original dated figures below retain provenance. Static discovery originated on `codex/search-discovery` and is included in published source `488d3e3184c74bc82706c7c0b0c42ee6617601ec` at [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/), Cloudflare Pages Free Direct Upload. [Release receipt](cloudflare-pages.md#confirmed-production-release) identifies the exact artifact. Public source is [jovi47/ojoaovsousa-dev](https://github.com/jovi47/ojoaovsousa-dev); repository visibility does not imply PR merge. Technical crawlability does not guarantee ranking, Google indexing, rich results or LLM inclusion.
 
+Local revision: [conversion](conversion.md) updates hero/metadata and privacy wording; production remains at its separately recorded release. Search Console follow-up is pending authorized publication.
+
 ## Content and generation
 
-`src/content.mjs` supplies the HTML titles, descriptions and visible introduction in PT-BR, English and Spanish. Titles identify João Victor and the service: **Desenvolvedor de software sob medida**, **Custom software developer**, **Desarrollador de software a medida**. Privacy/terms descriptions use their own introductions. The role remains software engineer; career and education disclosures are unchanged. There are no added ratings, delivery guarantees or qualifications.
+`src/content.mjs` supplies the HTML titles, descriptions and visible introduction in PT-BR, English and Spanish. Titles identify João Victor and the service: **Sites e software sob medida**, **Websites and custom software**, **Sitios web y software a medida**. Privacy/terms descriptions use their own introductions. The role remains software engineer; career and education disclosures are unchanged. There are no added ratings, delivery guarantees or qualifications.
 
 `src/search-discovery.mjs` reuses these same content fields for:
 

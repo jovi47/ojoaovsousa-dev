@@ -1,18 +1,18 @@
 export const content = {
   'pt-br': {
     lang: 'pt-BR', short: 'PT', flag: '🇧🇷',
-    title: 'João Victor | Desenvolvedor de software sob medida',
-    description: 'Desenvolvedor de software sob medida: sistemas, sites, integrações e automações para o seu negócio. Conheça o trabalho de João Victor, engenheiro de software.',
+    title: 'João Victor | Sites e software sob medida',
+    description: 'Sites profissionais, sistemas e automações para o seu negócio. Conheça projetos reais e converse com João Victor, engenheiro de software, sobre uma proposta.',
     nav: { work: 'Projetos', expertise: 'O que construo', about: 'Sobre', contact: 'Vamos conversar' },
     ui: { skip: 'Pular para o conteúdo', theme: 'Alternar tema', motion: 'Alternar movimento', pause: 'Pausar movimento', resume: 'Retomar movimento', menu: 'Abrir menu', prev: 'Projeto anterior', next: 'Próximo projeto', visit: 'Ir para o site', details: 'Ver detalhes', close: 'Fechar', back: 'Voltar', play: 'Explorar o playground', reset: 'Recomeçar', privacy: 'Privacidade', terms: 'Termos de uso', language: 'Escolher idioma' },
     hero: {
-      "eyebrow": "João Victor · engenheiro de software",
+      "eyebrow": "João Victor · Sites, sistemas e automações",
       "titleTop": "João Victor",
-      "titleBottom": "Software feito para o seu negócio",
-      "description": "Desenvolvo software sob medida, com sistemas, sites e automações para transformar ideias em soluções que as pessoas conseguem usar. Da definição do escopo à entrega, cada etapa tem um propósito claro.",
-      "primary": "Conte seu projeto",
-      "secondary": "Explore os projetos",
-      "note": "Elixir · Java · IA aplicada · 3D",
+      "titleBottom": "Sites profissionais e soluções digitais para o seu negócio.",
+      "description": "Crio sites que apresentam sua empresa com clareza e desenvolvo sistemas e automações para simplificar processos. Você me conta o objetivo; eu organizo uma proposta com escopo, prazo e etapas definidos.",
+      "primary": "Pedir orçamento pelo WhatsApp",
+      "secondary": "Ver projetos reais",
+      "note": "Engenheiro de software · Elixir · Java · IA aplicada · 3D",
       "studioLabel": "Oficina de ideias",
       "studioStatus": "Curiosidade em movimento"
     },
@@ -166,9 +166,9 @@ export const content = {
     guide: { hero: 'Pode chegar. A bancada tem espaço para mais uma boa ideia.', work: 'Pode olhar de perto. Essas peças já viraram projetos de verdade.', expertise: 'A caixa de ferramentas é variada. A escolha tem motivo.', method: 'Antes de encaixar, vale conferir se a peça resolve o problema.', about: 'Por trás do código tem alguém que ainda gosta de montar coisas.', play: 'Segure a ideia. Eu ajudo com as peças.', contact: 'A próxima construção pode começar com um simples olá.' },
     privacy: {
       "title": "Privacidade",
-      "intro": "João Victor (ojoaovsousa) é o responsável pelo tratamento de dados neste portfólio. Contato: jovi47profissional@gmail.com. Última atualização: 2026-10-27 UTC.",
+      "intro": "João Victor (ojoaovsousa) é o responsável pelo tratamento de dados neste portfólio. Contato: jovi47profissional@gmail.com. Última atualização: 2026-11-02.",
       "sections": [
-        {"title": "Métricas opcionais e consentimento", "body": "Somente após seu aceite, o Microsoft Clarity pode usar cookies e identificadores pseudônimos, informações técnicas do navegador e interações como cliques e rolagem para analisar usabilidade por gravações de sessão e mapas de calor. A base é seu consentimento. O conteúdo da página é mascarado, com modo Strict no projeto; isso não é promessa de anonimato. A coleta fica limitada às três homes canônicas, sem parâmetros ou fragmentos; páginas de leitura, políticas e erro não carregam o Clarity. Não enviamos identificadores ou eventos personalizados e negamos armazenamento de publicidade. Do Not Track e Global Privacy Control desativam as métricas mesmo com aceite anterior. Revogar no rodapé limpa os cookies próprios do Clarity e recarrega a página para encerrar o SDK. A Microsoft pode processar dados fora do Brasil: https://privacy.microsoft.com/privacystatement."},
+        {"title": "Métricas opcionais e consentimento", "body": "Somente após seu aceite, o Microsoft Clarity pode usar cookies e identificadores pseudônimos, informações técnicas do navegador e interações como cliques e rolagem para analisar usabilidade por gravações de sessão e mapas de calor. A base é seu consentimento. O conteúdo da página é mascarado, com modo Strict no projeto; isso não é promessa de anonimato. A coleta fica limitada às três homes canônicas, sem parâmetros de busca e apenas com âncoras públicas predefinidas; páginas de leitura, políticas e erro não carregam o Clarity. Não enviamos identificadores personalizados. Eventos com nomes fixos indicam cliques no WhatsApp ou nos projetos e visualização da seção de projetos, sem incluir mensagens ou dados de contato. Negamos armazenamento de publicidade. Do Not Track e Global Privacy Control desativam as métricas mesmo com aceite anterior. Revogar no rodapé limpa os cookies próprios do Clarity e recarrega a página para encerrar o SDK. A Microsoft pode processar dados fora do Brasil: https://privacy.microsoft.com/privacystatement."},
         {"title": "Conservação das métricas", "body": "Segundo a documentação atual do Clarity, reproduções de sessão ficam por 30 dias; sessões favoritas ou rotuladas, mapas de calor e dados de cliques ficam por 9 meses. Esses prazos do provedor são distintos dos 90 dias da sua escolha local. A revogação interrompe novas coletas nesta navegação; não apaga retroativamente registros já recebidos. Para exercer direitos aplicáveis, use o contato desta política. Fonte: https://learn.microsoft.com/en-us/clarity/setup-and-installation/data-retention."},
         {
           "title": "Navegação e preferências",
@@ -208,18 +208,18 @@ export const content = {
   },
   en: {
     lang: 'en-GB', short: 'EN', flag: '🇬🇧',
-    title: 'João Victor | Custom software developer',
-    description: 'Custom software developer for business systems, websites, integrations and automation. Explore the work of João Victor, software engineer.',
+    title: 'João Victor | Websites and custom software',
+    description: 'Professional websites, custom software and automation for your business. Explore real projects and discuss a proposal with João Victor, software engineer.',
     nav: { work: 'Work', expertise: 'What I build', about: 'About', contact: 'Let’s talk' },
     ui: { skip: 'Skip to content', theme: 'Switch theme', motion: 'Toggle motion', pause: 'Pause motion', resume: 'Resume motion', menu: 'Open menu', prev: 'Previous project', next: 'Next project', visit: 'Visit the website', details: 'View details', close: 'Close', back: 'Back', play: 'Explore the playground', reset: 'Start again', privacy: 'Privacy', terms: 'Terms of use', language: 'Choose language' },
     hero: {
-      "eyebrow": "João Victor · software engineer",
+      "eyebrow": "João Victor · Websites, software and automation",
       "titleTop": "João Victor",
-      "titleBottom": "Software built for your business",
-      "description": "I build custom software, websites and automation that turn ideas into solutions people can use. From defining the scope to delivery, every step has a clear purpose.",
-      "primary": "Tell me about your project",
-      "secondary": "Explore my work",
-      "note": "Elixir · Java · Applied AI · 3D",
+      "titleBottom": "Professional websites and digital tools for your business.",
+      "description": "I create websites that clearly present your business, along with custom software and automation to simplify your processes. Tell me your goal, and I will put together a proposal with a clear scope, timeline and stages.",
+      "primary": "Request a quote on WhatsApp",
+      "secondary": "See real projects",
+      "note": "Software engineer · Elixir · Java · Applied AI · 3D",
       "studioLabel": "Idea workshop",
       "studioStatus": "Curiosity in motion"
     },
@@ -369,9 +369,9 @@ export const content = {
     guide: { hero: 'Come on in. There’s room on the workbench for another good idea.', work: 'Take a closer look. These pieces became real projects.', expertise: 'Plenty of tools in the box. Each choice has a reason.', method: 'Before it clicks into place, let’s check it solves the problem.', about: 'Behind the code is someone who still loves building things.', play: 'Hold that idea. I’ll help with the pieces.', contact: 'The next build could start with a simple hello.' },
     privacy: {
       "title": "Privacy",
-      "intro": "João Victor (ojoaovsousa) is the controller responsible for personal data on this portfolio. Contact: jovi47profissional@gmail.com. Last updated: 2026-10-27 UTC.",
+      "intro": "João Victor (ojoaovsousa) is the controller responsible for personal data on this portfolio. Contact: jovi47profissional@gmail.com. Last updated: 2026-11-02.",
       "sections": [
-        {"title": "Optional analytics and consent", "body": "Only after you agree, Microsoft Clarity may use cookies and pseudonymous identifiers, browser technical information and interactions such as clicks and scrolling to assess usability through session recordings and heatmaps. The legal basis is your consent. Page content is masked, with Strict mode enabled for the project; this does not promise anonymity. Collection is limited to the three canonical home pages without query parameters or fragments; reading, policy and error pages do not load Clarity. We send no custom identifiers or events and deny advertising storage. Do Not Track and Global Privacy Control disable analytics even after earlier consent. Revoking through the footer clears Clarity first-party cookies and reloads the page to end the SDK. Microsoft may process data outside Brazil: https://privacy.microsoft.com/privacystatement."},
+        {"title": "Optional analytics and consent", "body": "Only after you agree, Microsoft Clarity may use cookies and pseudonymous identifiers, browser technical information and interactions such as clicks and scrolling to assess usability through session recordings and heatmaps. The legal basis is your consent. Page content is masked, with Strict mode enabled for the project; this does not promise anonymity. Collection is limited to the three canonical home pages without query parameters and with only predefined public anchors; reading, policy and error pages do not load Clarity. We send no custom identifiers. Fixed event names indicate WhatsApp or project clicks and views of the projects section, without messages or contact details. Advertising storage is denied. Do Not Track and Global Privacy Control disable analytics even after earlier consent. Revoking through the footer clears Clarity first-party cookies and reloads the page to end the SDK. Microsoft may process data outside Brazil: https://privacy.microsoft.com/privacystatement."},
         {"title": "Analytics retention", "body": "According to current Clarity documentation, session playback is kept for 30 days; favorited or labeled sessions, heatmaps and click data are kept for 9 months. Provider retention is separate from your 90-day local choice. Revocation stops new collection in this browsing context; it does not retroactively delete data already received. To exercise applicable rights, use the contact in this policy. Source: https://learn.microsoft.com/en-us/clarity/setup-and-installation/data-retention."},
         {
           "title": "Browsing and preferences",
@@ -409,18 +409,18 @@ export const content = {
   },
   es: {
     lang: 'es', short: 'ES', flag: '🇪🇸',
-    title: 'João Victor | Desarrollador de software a medida',
-    description: 'Desarrollador de software a medida: sistemas, sitios web, integraciones y automatizaciones para tu negocio. Conoce el trabajo de João Victor, ingeniero de software.',
+    title: 'João Victor | Sitios web y software a medida',
+    description: 'Sitios profesionales, sistemas y automatizaciones para tu negocio. Conoce proyectos reales y habla con João Victor, ingeniero de software, sobre una propuesta.',
     nav: { work: 'Proyectos', expertise: 'Qué construyo', about: 'Sobre mí', contact: 'Hablemos' },
     ui: { skip: 'Saltar al contenido', theme: 'Cambiar tema', motion: 'Alternar movimiento', pause: 'Pausar movimiento', resume: 'Reanudar movimiento', menu: 'Abrir menú', prev: 'Proyecto anterior', next: 'Siguiente proyecto', visit: 'Ir al sitio', details: 'Ver detalles', close: 'Cerrar', back: 'Volver', play: 'Explorar el playground', reset: 'Empezar de nuevo', privacy: 'Privacidad', terms: 'Términos de uso', language: 'Elegir idioma' },
     hero: {
-      "eyebrow": "João Victor · ingeniero de software",
+      "eyebrow": "João Victor · Sitios web, sistemas y automatizaciones",
       "titleTop": "João Victor",
-      "titleBottom": "Software hecho para tu negocio",
-      "description": "Desarrollo software a medida, con sistemas, sitios web y automatizaciones para convertir ideas en soluciones que las personas puedan usar. Desde la definición del alcance hasta la entrega, cada etapa tiene un propósito claro.",
-      "primary": "Cuéntame tu proyecto",
-      "secondary": "Explora los proyectos",
-      "note": "Elixir · Java · IA aplicada · 3D",
+      "titleBottom": "Sitios profesionales y soluciones digitales para tu negocio.",
+      "description": "Creo sitios que presentan tu empresa con claridad y desarrollo sistemas y automatizaciones para simplificar procesos. Cuéntame tu objetivo y prepararé una propuesta con alcance, plazo y etapas definidos.",
+      "primary": "Pedir presupuesto por WhatsApp",
+      "secondary": "Ver proyectos reales",
+      "note": "Ingeniero de software · Elixir · Java · IA aplicada · 3D",
       "studioLabel": "Taller de ideas",
       "studioStatus": "Curiosidad en movimiento"
     },
@@ -568,9 +568,9 @@ export const content = {
     guide: { hero: 'Adelante. En la mesa de trabajo cabe otra buena idea.', work: 'Mira de cerca. Estas piezas ya se convirtieron en proyectos reales.', expertise: 'Hay muchas herramientas. Cada elección tiene su motivo.', method: 'Antes de encajar la pieza, veamos si resuelve el problema.', about: 'Detrás del código hay alguien que aún disfruta construyendo cosas.', play: 'Mantén esa idea. Yo ayudo con las piezas.', contact: 'La próxima construcción puede empezar con un simple hola.' },
     privacy: {
       "title": "Privacidad",
-      "intro": "João Victor (ojoaovsousa) es el responsable del tratamiento de datos personales en este portafolio. Contacto: jovi47profissional@gmail.com. Última actualización: 2026-10-27 UTC.",
+      "intro": "João Victor (ojoaovsousa) es el responsable del tratamiento de datos personales en este portafolio. Contacto: jovi47profissional@gmail.com. Última actualización: 2026-11-02.",
       "sections": [
-        {"title": "Métricas opcionales y consentimiento", "body": "Solo después de que aceptes, Microsoft Clarity puede usar cookies e identificadores seudónimos, información técnica del navegador e interacciones como clics y desplazamiento para analizar la usabilidad mediante grabaciones de sesión y mapas de calor. La base es tu consentimiento. El contenido de la página se enmascara, con el modo Strict activado en el proyecto; esto no promete anonimato. La recopilación se limita a las tres páginas de inicio canónicas sin parámetros ni fragmentos; las páginas de lectura, políticas y error no cargan Clarity. No enviamos identificadores ni eventos personalizados y denegamos el almacenamiento publicitario. Do Not Track y Global Privacy Control desactivan las métricas incluso con consentimiento anterior. Revocar desde el pie de página borra las cookies propias de Clarity y recarga la página para finalizar el SDK. Microsoft puede procesar datos fuera de Brasil: https://privacy.microsoft.com/privacystatement."},
+        {"title": "Métricas opcionales y consentimiento", "body": "Solo después de que aceptes, Microsoft Clarity puede usar cookies e identificadores seudónimos, información técnica del navegador e interacciones como clics y desplazamiento para analizar la usabilidad mediante grabaciones de sesión y mapas de calor. La base es tu consentimiento. El contenido de la página se enmascara, con el modo Strict activado en el proyecto; esto no promete anonimato. La recopilación se limita a las tres páginas de inicio canónicas sin parámetros de búsqueda y solo con anclas públicas predefinidas; las páginas de lectura, políticas y error no cargan Clarity. No enviamos identificadores personalizados. Los eventos con nombres fijos indican clics en WhatsApp o proyectos y visitas a la sección de proyectos, sin mensajes ni datos de contacto. Denegamos el almacenamiento publicitario. Do Not Track y Global Privacy Control desactivan las métricas incluso con consentimiento anterior. Revocar desde el pie de página borra las cookies propias de Clarity y recarga la página para finalizar el SDK. Microsoft puede procesar datos fuera de Brasil: https://privacy.microsoft.com/privacystatement."},
         {"title": "Conservación de las métricas", "body": "Según la documentación actual de Clarity, las reproducciones de sesión se conservan 30 días; las sesiones favoritas o etiquetadas, los mapas de calor y los datos de clics, 9 meses. Estos plazos del proveedor son distintos de los 90 días de tu elección local. Revocar detiene nuevas recopilaciones en esta navegación; no elimina retroactivamente datos ya recibidos. Para ejercer los derechos aplicables, usa el contacto de esta política. Fuente: https://learn.microsoft.com/en-us/clarity/setup-and-installation/data-retention."},
         {
           "title": "Navegación y preferencias",

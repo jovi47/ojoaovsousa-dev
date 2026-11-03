@@ -58,16 +58,18 @@ if('IntersectionObserver' in window){
  const observer=new IntersectionObserver(entries=>{for(const entry of entries){
   if(entry.target.dataset.scrollReveal){if(entry.isIntersecting&&entry.intersectionRatio>=.08)entry.target.classList.add('is-revealed');else if(!entry.isIntersecting)entry.target.classList.remove('is-revealed');}
   if(entry.target.id==='contact')body.classList.toggle('contact-visible',entry.isIntersecting);
+  else if(entry.target.matches('.viewer-houses'))body.classList.toggle('viewer-controls-visible',entry.isIntersecting);
   else if(entry.target.matches('[data-project-mockup],[data-inquiry-cta]'))entry.target.classList.toggle('is-visible',entry.isIntersecting);
  }},{threshold:[0,.08,.1]});
- for(const block of new Set([...revealTargets,...document.querySelectorAll('[data-project-mockup],[data-inquiry-cta],#contact')]))observer.observe(block);
+ for(const block of new Set([...revealTargets,...document.querySelectorAll('[data-project-mockup],[data-inquiry-cta],#contact,.viewer-houses')]))observer.observe(block);
  window.addEventListener('pagehide',event=>{if(!event.persisted)observer.disconnect();});
 }
 document.addEventListener('visibilitychange',()=>body.classList.toggle('page-hidden',document.hidden));
 
 let world=null,starting=false;
 function applySeason(){document.body.dataset.season='spring';world?.setSeason?.('spring');}
-const canvas=document.querySelector('#city-canvas'),worldStatus=document.querySelector('#world-status');
+let canvas=document.querySelector('#city-canvas');
+const worldStatus=document.querySelector('#world-status');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 function reading(value){
  if(value)document.dispatchEvent(new Event('citypause'));
@@ -79,24 +81,38 @@ function reading(value){
  if(!value&&!world)start();
  if(menu&&!menu.hidden){menu.hidden=true;menuToggle.setAttribute('aria-expanded','false');}
 }
-document.addEventListener('cityreading',()=>{body.classList.add('graphics-failed');worldStatus.textContent=labels.fallback;reading(true);});
+function failWorld(error){
+ console.error('World unavailable:',error);
+ const previous=world;world=null;
+ body.classList.add('graphics-failed');body.classList.remove('immersive','world-loaded','construction-started','tour-complete','is-building');
+ worldStatus.textContent=labels.fallback;document.querySelector('[data-retry]').hidden=false;reading(true);
+ try{previous?.dispose();}catch(disposalError){console.error('World cleanup failed:',disposalError);}
+ // A lost context remains attached to its canvas even after renderer disposal.
+ const replacement=canvas.cloneNode(false);canvas.replaceWith(replacement);canvas=replacement;
+}
+document.addEventListener('cityreading',()=>failWorld(new Error('WebGL context lost')));
+for(const link of document.querySelectorAll('[data-read-projects]'))link.addEventListener('click',()=>{if(canvas){reading(true);document.querySelector('[data-retry]').hidden=false;}});
 for(const button of document.querySelectorAll('[data-reading]'))button.addEventListener('click',()=>{
  const id=document.querySelector('.chapter.active')?.id||'intro';reading(!body.classList.contains('reading'));
  requestAnimationFrame(()=>{if(body.classList.contains('reading'))document.getElementById(id)?.scrollIntoView();else world?.goTo(id);});
 });
 async function start(){
  if(!canvas||starting||world)return;starting=true;
+ let timer;
  try{
-  const {createCity}=await import('./city.js');world=await createCity(canvas,labels,openInquiry,openResident);
+  const module=await Promise.race([import('./city.js'),new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('World module timed out')),10000);})]);
+  world=await module.createCity(canvas,labels,openInquiry,openResident);
   body.classList.add('immersive','world-loaded');body.classList.remove('graphics-failed');
   worldStatus.textContent=reduced.matches?labels.reduced:canvas.dataset.exploreReady==='false'?labels.constructionStack:(labels.readySea||labels.ready);
   document.querySelector('[data-retry]').hidden=true;
   applySeason();world.setReading(body.classList.contains('reading'));const hash=location.hash.slice(1);if(hash||!body.classList.contains('mobile-entry'))world.goTo(hash||'intro');
  }catch(error){
-  console.error('World initialization failed:',error);body.classList.add('graphics-failed');body.classList.remove('immersive','world-loaded');
-  worldStatus.textContent=labels.fallback;document.querySelector('[data-retry]').hidden=false;reading(true);
- }finally{starting=false;}
+  failWorld(error);
+ }finally{clearTimeout(timer);starting=false;}
 }
-document.querySelector('[data-retry]')?.addEventListener('click',()=>{reading(false);start();});
+document.querySelector('[data-retry]')?.addEventListener('click',async()=>{
+ await start();
+ if(world){reading(false);canvas.focus({preventScroll:true});document.querySelector('.viewer-board')?.scrollIntoView({behavior:'instant',block:'start'});}
+});
 if(canvas){if(reduced.matches){reading(true);worldStatus.textContent=labels.reduced;}else start();}
 window.addEventListener('pagehide',event=>{if(!event.persisted){world?.dispose();disposeProjectProcess();disposeTechnologyMarquee();disposeViewerOverflow();}});

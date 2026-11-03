@@ -33,11 +33,19 @@ export function projectLogo(item,{className='project-logo',symbol=false}={}){
  const crop=symbol&&hor?' viewer-horagora-symbol':'';
  return `<span class="brand-image ${className}${crop}" aria-hidden="true"><img class="brand-light" src="/${base}.svg" alt="" width="${hor?1134:symbol?1000:1220}" height="${hor?266:symbol?1000:400}" loading="lazy" decoding="async"><img class="brand-dark" src="/${base}-dark.svg" alt="" width="${hor?1134:symbol?1000:1220}" height="${hor?266:symbol?1000:400}" loading="lazy" decoding="async"></span>`;
 }
+const whatsappUrl='https://wa.me/5579998230872';
+export function whatsappCta(c){
+ const greeting=localized(c.lang==='pt-BR'?'pt-br':c.lang==='es'?'es':'en',
+  'Olá, João! Vi seu portfólio e queria conversar sobre um projeto para minha empresa.',
+  'Hi João! I saw your portfolio and would like to discuss a project for my business.',
+  '¡Hola, João! Vi tu portafolio y me gustaría hablar sobre un proyecto para mi negocio.');
+ return `<a class="button" href="${whatsappUrl}?text=${encodeURIComponent(greeting)}" target="_blank" rel="noopener noreferrer" data-conversion="whatsapp_hero">${e(c.hero.primary)}</a>`;
+}
 export function contactLinks(c,{dialog=false}={}){
  const q=c.inquiry,email='jovi47profissional@gmail.com';
  const address=`<a class="contact-channel" href="mailto:${email}">${socialIcon('mail')}<span>${dialog?`<strong>${e(q.email)}</strong><span class="contact-email-address" data-contact-email tabindex="-1">${email}</span>`:email}</span></a>`;
  const copy=dialog?`<button type="button" class="contact-copy button-secondary" data-copy-email="${email}" data-copied="${e(q.copied)}" data-copy-failed="${e(q.copyFailed)}" aria-label="${e(q.copyEmail)}">${e(q.copy)}</button>`:'';
- return `<div class="contact-links${dialog?' contact-channels':''}"><a class="contact-channel${dialog?' button contact-channel-primary':''}" href="https://wa.me/5579998230872" target="_blank" rel="noopener noreferrer">${socialIcon('whatsapp')}<span>${e(c.contact.whatsapp)}</span></a>${dialog?`<div class="contact-email-row">${address}${copy}</div>`:address}<a class="contact-channel" href="https://www.linkedin.com/in/jovi47/" target="_blank" rel="noopener noreferrer">${socialIcon('linkedin')}<span>LinkedIn</span></a></div>`;
+ return `<div class="contact-links${dialog?' contact-channels':''}"><a class="contact-channel${dialog?' button contact-channel-primary':''}" href="${whatsappUrl}" target="_blank" rel="noopener noreferrer">${socialIcon('whatsapp')}<span>${e(c.contact.whatsapp)}</span></a>${dialog?`<div class="contact-email-row">${address}${copy}</div>`:address}<a class="contact-channel" href="https://www.linkedin.com/in/jovi47/" target="_blank" rel="noopener noreferrer">${socialIcon('linkedin')}<span>LinkedIn</span></a></div>`;
 }
 export const inquiryCtaCopy={
  'pt-br':{idea:'Fale comigo',question:'Fale comigo: escolher canal de contato'},

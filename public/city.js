@@ -146,10 +146,10 @@ export async function createCity(canvas,copy,openInquiry){
   if(intro)intro.hidden=!mobileEntry&&!!id;
   for(const panel of panels)panel.hidden=(mobileEntry&&!inspection?.active)||panel.dataset.viewerCard!==id;
   const panel=panels.find(node=>node.dataset.viewerCard===id),title=panel?.querySelector('[data-viewer-title]')?.textContent.trim(),description=panel?.querySelector(':scope > p')?.textContent.trim();
-  const context=mobileEntry&&id!=='stack'&&id!=='about'&&panel,offer=document.querySelector('.viewer-offer'),introCopy=document.querySelector('.viewer-intro-description');
+  const context=mobileEntry&&id!=='stack'&&id!=='about'&&panel,offer=document.querySelector('[data-selection-title]'),introCopy=document.querySelector('[data-selection-description]');
   const offerText=context&&title?title:introOffer,descriptionText=context&&description?description:introDescription;
   if(offer&&offer.textContent!==offerText)offer.textContent=offerText;
-  if(mobileEntry&&introCopy&&introCopy.textContent!==descriptionText){introCopy.textContent=descriptionText;if(context&&id==='challenge'){const paragraph=panel.querySelector(':scope > p');if(paragraph?.innerHTML)introCopy.innerHTML=paragraph.innerHTML;}}
+  if(introCopy&&introCopy.textContent!==descriptionText){introCopy.textContent=descriptionText;if(context&&id==='challenge'){const paragraph=panel.querySelector(':scope > p');if(paragraph?.innerHTML)introCopy.innerHTML=paragraph.innerHTML;}}
   if(changed&&mobileEntry&&title){const status=document.querySelector('#world-status');if(status&&status.textContent!==title)status.textContent=title;}
   if(changed&&!mobileEntry)enter(id?card:intro);
  }
@@ -221,7 +221,7 @@ export async function createCity(canvas,copy,openInquiry){
   if(justCompleted){assembled=true;tour?.style.removeProperty('height');document.body.classList.add('tour-complete');if(!reduced)window.scrollTo({top:0,behavior:'instant'});}
   const locked=construction<1;const status=document.querySelector('#world-status'),message=locked?(story.phase==='reading'?copy.readPause:chapter==='stack'?copy.constructionStack:chapter==='horagora'?copy.constructionHoragora:chapter==='andrea'?copy.constructionAndrea:copy.constructionChallenge||copy.constructionAndrea):(copy.readySea||copy.ready);if(!mobileEntry&&status&&message&&status.textContent!==message)status.textContent=message;canvas.dataset.exploreReady=String(!locked);document.querySelector('.viewer-board')?.classList.toggle('is-building',locked);
   for(const node of document.querySelectorAll('.viewer-intro-hint,.viewer-scroll-hint'))node.textContent=locked?copy.help:(copy.readySea||copy.ready);
-  const introCopy=document.querySelector('.viewer-intro-description');if(mobileEntry)showPanel(selected||'stack');else if(introCopy)introCopy.textContent=locked?copy.intro:copy.projectTitle;
+  if(mobileEntry)showPanel(selected||'stack');
   canvas.style.touchAction=mobileEntry?'pan-y pinch-zoom':locked?'pan-y':'none';for(const button of document.querySelectorAll('[data-select-building],[data-select-about],[data-building-step],[data-replay-landmark],[data-question]'))button.disabled=locked||(reduced&&button.matches('[data-replay-landmark]'));
   for(const link of document.querySelectorAll('[data-tour-link]')){if(locked){link.setAttribute('aria-disabled','true');link.tabIndex=-1;}else{link.removeAttribute('aria-disabled');link.removeAttribute('tabindex');}}
   if(locked){release();if(selected)setSelection(null,false);showPanel(construction>.015?(chapter||'challenge'):null,true);const card=document.querySelector('#viewer-card');if(card)card.scrollTop=readingOffset(scrollFrame.within,storyOverflows[chapter],scrollFrame.length);desired=guidedView(construction);}else{if(before<1)showPanel(null);if(before<1||!selected)desired=overview();}
@@ -242,7 +242,7 @@ export async function createCity(canvas,copy,openInquiry){
   mobileEntry=usesViewerFlow(innerWidth);if(!mobileEntry&&inspection?.active)inspection.close();document.body.classList.toggle('mobile-entry',mobileEntry);
   if(mobileEntry){assembled=true;construction=1;document.body.classList.add('tour-complete');document.body.classList.remove('construction-started');}
   canvas.setAttribute('aria-describedby',mobileEntry?'viewer-mobile-help':'viewer-help');
-  for(const button of document.querySelectorAll('[data-select-building],[data-building-step]'))button.setAttribute('aria-controls',mobileEntry?'viewer-intro city-canvas':'viewer-card');
+  for(const button of document.querySelectorAll('[data-select-building],[data-building-step]'))button.setAttribute('aria-controls',mobileEntry?'viewer-selection-copy city-canvas':'viewer-card');
   const mobile=usesViewerFlow(innerWidth),rect=canvas.getBoundingClientRect(),width=rect.width||innerWidth,height=rect.height||innerHeight;const pixelRatioLimit=matchMedia('(pointer: fine) and (hover: hover)').matches?2:(innerWidth<=1100?1.15:1.4);renderer.setPixelRatio(Math.min(devicePixelRatio||1,pixelRatioLimit));renderer.setSize(width,height,false);camera.aspect=width/height;camera.fov=inspection?.active?48:mobile?50:38;camera.updateProjectionMatrix();measureStory(true);syncConstruction();if(construction>=1)setSelection(selected||'challenge',false);if(mobileEntry&&lastPaint<0){view.distance=desired.distance;view.azimuth=desired.azimuth;view.elevation=desired.elevation;target.copy(desired.target);}invalidate();
  }
  function release(){if(drag?.active&&construction>=1&&(drag.moved>=5||drag.interrupted))resumeAfterGesture(drag.moved>=5&&performance.now()-drag.lastMove<100?drag.velocity:0);for(const id of pointers.keys())if(canvas.hasPointerCapture(id))canvas.releasePointerCapture(id);drag=null;pointers.clear();pinch=0;canvas.classList.remove('dragging');invalidate();}
