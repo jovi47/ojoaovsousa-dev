@@ -1,6 +1,6 @@
 # João Victor · ojoaovsousa
 
-Local conversion work in `codex/portfolio-conversion` keeps the owner-approved hero and direct WhatsApp action. Services, cases, FAQ and the always-open technology strip retain their earlier presentation after owner review. [Scope, recovery, consent and QA](docs/conversion.md). No upload or publication is authorized for this branch.
+Local conversion work in `codex/portfolio-conversion` keeps the owner-approved hero and direct WhatsApp action. Services, cases, FAQ and the always-open technology strip retain their earlier presentation after owner review. [Scope, recovery, consent and QA](docs/conversion.md). Publication was authorized on2026-11-03, with the exact release receipt maintained in the Pages runbook.
 
 A static portfolio in PT-BR, English and Spanish, published at [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/) through Cloudflare Pages Free Direct Upload. Current runtime source **ed8f6557fc76666109c0755274c4b923a752164c**, deployment **2afdc26e-91f0-4068-8142-1cf45942652d**, confirmed 2026-10-31 UTC. The release includes responsive selectors, consistent header controls with the original contact action and menu, a guarded floating-contact shake, and remembered manual language/theme choices over device defaults. **138 local tests and 37 public HTTP/artifact checks passed.** [Publication, recovery, costs and Search Console receipt](docs/cloudflare-pages.md#current-controls-and-preferences-release).
 

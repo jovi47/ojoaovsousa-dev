@@ -85,13 +85,13 @@ function failWorld(error){
  console.error('World unavailable:',error);
  const previous=world;world=null;
  body.classList.add('graphics-failed');body.classList.remove('immersive','world-loaded','construction-started','tour-complete','is-building');
- worldStatus.textContent=labels.fallback;document.querySelector('[data-retry]').hidden=false;reading(true);
+ worldStatus.textContent=labels.fallback;document.querySelectorAll('[data-retry]').forEach(button=>button.hidden=false);reading(true);
  try{previous?.dispose();}catch(disposalError){console.error('World cleanup failed:',disposalError);}
  // A lost context remains attached to its canvas even after renderer disposal.
  const replacement=canvas.cloneNode(false);canvas.replaceWith(replacement);canvas=replacement;
 }
 document.addEventListener('cityreading',()=>failWorld(new Error('WebGL context lost')));
-for(const link of document.querySelectorAll('[data-read-projects]'))link.addEventListener('click',()=>{if(canvas){reading(true);document.querySelector('[data-retry]').hidden=false;}});
+for(const link of document.querySelectorAll('[data-read-projects]'))link.addEventListener('click',()=>{if(canvas){reading(true);document.querySelectorAll('[data-retry]').forEach(button=>button.hidden=false);}});
 for(const button of document.querySelectorAll('[data-reading]'))button.addEventListener('click',()=>{
  const id=document.querySelector('.chapter.active')?.id||'intro';reading(!body.classList.contains('reading'));
  requestAnimationFrame(()=>{if(body.classList.contains('reading'))document.getElementById(id)?.scrollIntoView();else world?.goTo(id);});
@@ -104,13 +104,13 @@ async function start(){
   world=await module.createCity(canvas,labels,openInquiry,openResident);
   body.classList.add('immersive','world-loaded');body.classList.remove('graphics-failed');
   worldStatus.textContent=reduced.matches?labels.reduced:canvas.dataset.exploreReady==='false'?labels.constructionStack:(labels.readySea||labels.ready);
-  document.querySelector('[data-retry]').hidden=true;
+  document.querySelectorAll('[data-retry]').forEach(button=>button.hidden=true);
   applySeason();world.setReading(body.classList.contains('reading'));const hash=location.hash.slice(1);if(hash||!body.classList.contains('mobile-entry'))world.goTo(hash||'intro');
  }catch(error){
   failWorld(error);
  }finally{clearTimeout(timer);starting=false;}
 }
-document.querySelector('[data-retry]')?.addEventListener('click',async()=>{
+for(const button of document.querySelectorAll('[data-retry]'))button.addEventListener('click',async()=>{
  await start();
  if(world){reading(false);canvas.focus({preventScroll:true});document.querySelector('.viewer-board')?.scrollIntoView({behavior:'instant',block:'start'});}
 });

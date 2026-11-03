@@ -1,7 +1,9 @@
 # Portfolio conversion
 
-Status: local only, branch `codex/portfolio-conversion`, based on `2d9947d`
-(documentation above published runtime `ed8f655`). No push, PR or deploy.
+Status: publication authorized by the owner on2026-11-03, using the same
+`codex/portfolio-conversion` branch based on `2d9947d`. Runtime16119d2 is
+available on that remote branch, with no merge. Final publication evidence is
+recorded in [Cloudflare Pages](cloudflare-pages.md).
 
 ## Approved scope
 
@@ -33,8 +35,8 @@ caption, unchanged hero and no overflow. No new cost, dependency or provider.
 
 Reading exists before the optional module loads. Import waits at most10seconds;
 a late resolution cannot activate3D after timeout. Startup failure or context
-loss keeps reading accessible and logs diagnostics. A discreet retry follows
-contact instead of introducing a technical banner before the hero. Failed
+loss keeps reading accessible and logs diagnostics. The recovery action belongs to the header navigation, including the mobile
+menu, instead of a detached action after contact or a technical hero banner. Failed
 renderers are disposed and the canvas replaced, because a lost context can
 remain attached after disposal. Retry recreates3D, or reuses a healthy world,
 then scrolls/focuses the scene. Initial reduced motion continues to choose
@@ -73,18 +75,16 @@ physical touch devices and conversion/performance gains remain unmeasured.
 No lint/typecheck scripts exist. Gates: build → Node tests → artifact audit,
 plus syntax/whitespace. Linux was unreachable; Jovi admitted Mac checks.
 
-Production remains unchanged. Search Console and live crawl checks await later
-authorized publication. The existing HMR preview at localhost3000 is retained;
+Publication is authorized, with production and Search Console checks required
+after the final artifact is deployed. The existing HMR preview at localhost3000 is retained;
 no second server was opened. PRIVATE, credentials and environment files were
 excluded from code, artifacts and documentation.
 
 ## Gate receipts
 
-JoviMac job `bf1b1f98-a2ba-48ce-a249-f545267ac5d2` completed build,147tests and
-artifact audit200sources/137outputs (exit0), before the final canvas regression.
-The latest canvas/return changes passed their focused23-case group; the new
-startup-failure case passed in the8-case conversion group. No failing check is
-being hidden. Job `99489563-c404-4f2c-bbc5-c919c3f0fcbd` requests the final build,
-full suite, audit, syntax and whitespace. At this checkpoint it has not started:
-Jovi reports `native_pressure_or_swap` onMac. Do not bypass admission, duplicate
-its execution or assert the final suite passed until its receipt is terminal.
+JoviMac99489563 completed build,148tests, audit200sources/137outputs, syntax
+and whitespace on16119d2, exit0 at2026-11-03T02:46:28.866946Z. The header-menu
+follow-up passed33affected cases and native mobile QA: menu entry visible in
+reading, no bottom action, click closes menu and focuses the canvas with no
+overflow. The production artifact is built separately from the retained noindex
+HMR preview. Deployment/health/cleanup receipts belong in the Pages runbook.

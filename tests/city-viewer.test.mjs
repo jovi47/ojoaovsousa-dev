@@ -48,14 +48,14 @@ test('renderer resize preserves Retina detail for fine hover pointers and keeps 
 
 test('renderer startup preserves mobile scroll without a fragment while honoring explicit anchors and the desktop introduction',async()=>{
  const source=await readFile(new URL('../public/city-app.js',import.meta.url),'utf8');
- const start=source.slice(source.indexOf('async function start(){'),source.indexOf("document.querySelector('[data-retry]')?.addEventListener"));
+ const start=source.slice(source.indexOf('async function start(){'),source.indexOf("for(const button of document.querySelectorAll('[data-retry]'))button.addEventListener"));
  // Exercise the real startup glue with only the WebGL module replaced.
  for(const [width,hash,want] of [[700,'',[]],[701,'',['intro']],[1100,'',['intro']],[1101,'',['intro']],[853,'#main',['main']],[853,'#intro',['intro']],[1280,'#projects',['projects']]]){
   const mobile=usesViewerFlow(width);
   const calls=[],classes=new Set(mobile?['mobile-entry']:[]),world={setReading(){},goTo(id){calls.push(id);}};
   const context={setTimeout,clearTimeout,canvas:{dataset:{}},starting:false,world:null,location:{hash},labels:{},reduced:{matches:false},worldStatus:{},applySeason(){},openInquiry(){},openResident(){},
    body:{classList:{contains:name=>classes.has(name),add:(...names)=>names.forEach(name=>classes.add(name)),remove:name=>classes.delete(name)}},
-   document:{querySelector:()=>({hidden:false})},console:{error(error){throw error;}},loadCity:async()=>({createCity:async()=>world})};
+   document:{querySelector:()=>({hidden:false}),querySelectorAll:()=>[{hidden:false}]},console:{error(error){throw error;}},loadCity:async()=>({createCity:async()=>world})};
   await runInNewContext(`(${start.replace("import('./city.js')","loadCity()")})`,context)();
   assert.deepEqual(calls,want,`${width}px ${hash||'without fragment'}`);
   assert.equal(context.starting,false);

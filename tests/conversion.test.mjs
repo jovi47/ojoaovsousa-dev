@@ -14,7 +14,7 @@ async function startup(loadCity){
  const context={loadCity,starting:false,location:{hash:''},labels:{},openInquiry(){},openResident(){},syncInquiryAvailability(){},menu:null,
   matchMedia:()=>({matches:false}),console:{error:(...args)=>errors.push(args)},Event,CustomEvent:Event,
   document:{body:{dataset:{}},querySelector:selector=>selector==='#city-canvas'?canvas:selector==='.viewer-board'?{scrollIntoView(){navigation.push('scene');}}:selector==='#world-status'?status:selector==='[data-retry]'?retry:null,
-   querySelectorAll:selector=>selector==='[data-read-projects]'?[{addEventListener(_event,fn){listeners.projects=fn;}}]:[],dispatchEvent(){},addEventListener:(event,fn)=>{listeners[event]=fn;}},
+   querySelectorAll:selector=>selector==='[data-retry]'?[retry]:selector==='[data-read-projects]'?[{addEventListener(_event,fn){listeners.projects=fn;}}]:[],dispatchEvent(){},addEventListener:(event,fn)=>{listeners[event]=fn;}},
   body:{classList:{contains:name=>classes.has(name),add:(...names)=>names.forEach(name=>classes.add(name)),remove:(...names)=>names.forEach(name=>classes.delete(name)),toggle:(name,on)=>on?classes.add(name):classes.delete(name)}},
   setTimeout:fn=>{const id=timers.size+1;timers.set(id,fn);return id;},clearTimeout:id=>timers.delete(id),window:{addEventListener(){}}};
  runInNewContext(glue.replace("import('./city.js')",'loadCity()'),context);
@@ -78,12 +78,13 @@ test('localized heroes link straight to the configured WhatsApp with context and
  }
 });
 
-test('fallback retry follows the complete presentation and has no dominant technical banner',()=>{
+test('3D recovery belongs to header navigation and never leaves a detached action after contact',()=>{
  for(const [key,c] of Object.entries(content)){
-  const html=viewerHome(c,key);
-  assert.ok(html.indexOf('class="viewer-recovery"')>html.indexOf('id="contact"'));
-  const recovery=html.match(/<div class="viewer-recovery"[^>]*>([\s\S]*?)<\/div>/)?.[1];
-  assert.ok(recovery);assert.doesNotMatch(recovery,/<p|Reload page|Recarregar página|Recargar página/);
+  const html=viewerHome(c,key),header=html.match(/<header[^>]*>[\s\S]*?<\/header>/)?.[0];
+  assert.equal((header.match(/data-retry/g)||[]).length,2);
+  assert.doesNotMatch(html,/viewer-recovery/);
+  assert.equal((html.match(/data-retry/g)||[]).length,2);
+  assert.doesNotMatch(directHome(c,key),/data-retry/);
  }
 });
 
