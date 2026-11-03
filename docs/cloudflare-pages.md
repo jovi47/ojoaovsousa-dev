@@ -2,6 +2,29 @@
 
 Updated 2026-10-31 UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). Current runtime source is `ed8f6557fc76666109c0755274c4b923a752164c`. Earlier dated receipts describe historical releases; no custom domain was purchased.
 
+## Conversion release preparation
+
+Owner publication authorization:2026-11-03. The same branch
+`codex/portfolio-conversion` is pushed through runtimeb701acd, with no merge.
+It includes the approved hero, personal About me, punctuation cleanup, direct
+WhatsApp, consented events and robust3D recovery. Recovery now belongs to the
+header/menu, with no detached action after contact. Native555px mobile and
+1101/1440px desktop checks passed, including return focus, menu closure and
+absence of header overlap/overflow. Independent review found no blocker.
+
+Prior gate99489563 passed148tests/build/audit/syntax on16119d2. The subsequent
+header change passed33affected cases. Final local production gate5ddeffe9
+(build,148-case suite, indexable build/audit and read-only deployment inventory)
+is queued onMac with `native_pressure_or_swap`, not started at this checkpoint.
+Linux is unreachable. Earlier unstarted preflight120c8d95 was cancelled as
+obsolete, with no PID. No production upload has been attempted in this delivery.
+
+Recovery target2afdc26e/sourceed8f655 passed three GET checks immediately during
+preparation: localized home identity/canonical and exact city-app.js/viewer.css
+bytes. This is a limited health check, not a rollback rehearsal. Once admitted,
+freeze and audit the production dist, deploy only that output to Production/main,
+verify the live artifact, then finish Search Console and worktree retirement.
+
 ## Current controls and preferences release
 
 Publication completed at **2026-10-31T01:04:47Z** (30 October in the owner's timezone), deployment `2afdc26e-91f0-4068-8142-1cf45942652d`, [immutable alias](https://2afdc26e.ojoaovsousa.pages.dev/pt-br/), Production/main. Runtime source is `ed8f6557fc76666109c0755274c4b923a752164c` on `codex/release-2026-10-30`. Subsequent documentation commits do not change this runtime. Independent scopes remain draft [PR17](https://github.com/jovi47/ojoaovsousa-dev/pull/17), [PR18](https://github.com/jovi47/ojoaovsousa-dev/pull/18), [PR19](https://github.com/jovi47/ojoaovsousa-dev/pull/19) and [PR20](https://github.com/jovi47/ojoaovsousa-dev/pull/20); no merge was performed.
