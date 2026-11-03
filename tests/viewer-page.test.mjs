@@ -148,7 +148,8 @@ test('cards and the shared reading fallback retain factual projects, local mocku
    const cardStart=html.indexOf(`<section data-viewer-card="${id}"`);
    const card=html.slice(cardStart,html.indexOf('<section data-viewer-card="',cardStart+1));
    assert.match(card,/<img\b[^>]*src="\/portrait\.jpg"[^>]*alt="João Victor"/);
-   for(const value of [c.about.title,c.hero.description,...c.about.paragraphs])assert.ok(card.includes(e(value)),`${key}: ${id} personal profile`);
+   for(const value of [c.about.title,c.about.signature,...c.about.paragraphs])assert.ok(card.includes(e(value)),`${key}: ${id} personal profile`);
+   assert.ok(!card.includes(e(c.hero.description)),`${key}: personal profile does not repeat the commercial hero`);
    assert.ok(!card.includes(e(c.trust.title)),`${key}: method stays in shared reading only`);
    for(const item of c.expertise.items){assert.ok(card.includes(e(item.title)),`${key}: ${id} experience and method`);assert.ok(card.includes(e(item.body)));}
    const technologies=[...card.matchAll(/<ul\b[^>]*data-tech-primary[^>]*>([\s\S]*?)<\/ul>/g)].map(match=>match[1]).join('');

@@ -29,8 +29,6 @@ export function selectionForHash(hash){return hash==='experience'?'stack':hash==
 export async function createCity(canvas,copy,openInquiry){
  const stackX=-5.6,stackZ=0;
  const motionPreference=matchMedia('(prefers-reduced-motion: reduce)');let reduced=motionPreference.matches;
- const introOffer=document.querySelector('.viewer-offer')?.textContent||copy.offer||'';
- const introDescription=document.querySelector('.viewer-intro-description')?.textContent||copy.intro;
  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'low-power'});
  renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.2;
  renderer.shadowMap.enabled=false;
@@ -145,9 +143,9 @@ export async function createCity(canvas,copy,openInquiry){
   if(card){if(changed)card.scrollTop=0;card.dataset.active=id||'';card.hidden=(mobileEntry&&!inspection?.active)||!id;}
   if(intro)intro.hidden=!mobileEntry&&!!id;
   for(const panel of panels)panel.hidden=(mobileEntry&&!inspection?.active)||panel.dataset.viewerCard!==id;
-  const panel=panels.find(node=>node.dataset.viewerCard===id),title=panel?.querySelector('[data-viewer-title]')?.textContent.trim(),description=panel?.querySelector(':scope > p')?.textContent.trim();
-  const context=mobileEntry&&id!=='stack'&&id!=='about'&&panel,offer=document.querySelector('[data-selection-title]'),introCopy=document.querySelector('[data-selection-description]');
-  const offerText=context&&title?title:introOffer,descriptionText=context&&description?description:introDescription;
+  const panel=panels.find(node=>node.dataset.viewerCard===id),title=panel?.querySelector('[data-viewer-title]')?.textContent.trim(),description=(panel?.querySelector('[data-about-description]')||panel?.querySelector(':scope > p'))?.textContent.trim();
+  const context=mobileEntry&&panel,offer=document.querySelector('[data-selection-title]'),introCopy=document.querySelector('[data-selection-description]');
+  const offerText=context&&title?title:'',descriptionText=context&&description?description:'';
   if(offer&&offer.textContent!==offerText)offer.textContent=offerText;
   if(introCopy&&introCopy.textContent!==descriptionText){introCopy.textContent=descriptionText;if(context&&id==='challenge'){const paragraph=panel.querySelector(':scope > p');if(paragraph?.innerHTML)introCopy.innerHTML=paragraph.innerHTML;}}
   if(changed&&mobileEntry&&title){const status=document.querySelector('#world-status');if(status&&status.textContent!==title)status.textContent=title;}

@@ -17,6 +17,18 @@ Email/LinkedIn and the explicit channel dialog remain. The projects shortcut
 reveals reading immediately, bypassing construction. Mobile model explanations
 have their own caption so selection never replaces the commercial offer.
 
+## Personal profile and punctuation
+
+The owner's follow-up replaces the repeated offer beneath the About me model
+with a personal introduction about technology, learning and LEGO. The mobile
+caption now reads the selected personal panel, which shares the biography with
+ordinary reading and desktop inspection. It never falls back to the hero offer.
+PT-BR/EN/ES use complete sentences instead of semicolons in visitor-facing copy,
+including policies and runtime labels. Case facts and attributed quotes remain.
+The focused33-case group passed, and rendered home/policy text in all locales
+contained zero prose semicolons. Native390/555/1440px QA confirmed the distinct personal
+caption, unchanged hero and no overflow. No new cost, dependency or provider.
+
 ## 3D recovery
 
 Reading exists before the optional module loads. Import waits at most10seconds;

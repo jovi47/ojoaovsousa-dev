@@ -126,8 +126,8 @@ test('physical scroll advances directly between construction chapters without se
 async function selectionContextFixture(key='pt-br'){
  const source=await readFile(new URL('../public/city.js',import.meta.url),'utf8'),c=content[key],u=cityCopy[key];
  const heroOffer={textContent:u.offer},heroDescription={textContent:c.hero.description},offer={textContent:u.offer},description={textContent:c.hero.description},intro={hidden:false},card={dataset:{active:''},hidden:true,scrollTop:12};
- const entries=[['stack',c.about.title,'Chapter marker'],...c.work.cases.map(item=>[item.id,item.name,item.description]),['challenge',c.contact.title,c.contact.description]];
- const panels=entries.map(([id,title,body])=>({dataset:{viewerCard:id},hidden:true,querySelector(selector){return selector==='[data-viewer-title]'?{textContent:title}:selector===':scope > p'?{textContent:body}:selector==='p'?{textContent:'Nested text that is not the project introduction'}:null;}}));
+ const entries=[['stack',c.about.title,c.about.paragraphs[0]],...c.work.cases.map(item=>[item.id,item.name,item.description]),['challenge',c.contact.title,c.contact.description]];
+ const panels=entries.map(([id,title,body])=>({dataset:{viewerCard:id},hidden:true,querySelector(selector){return selector==='[data-viewer-title]'?{textContent:title}:selector==='[data-about-description]'&&id==='stack'?{textContent:body}:selector===':scope > p'?{textContent:body}:selector==='p'?{textContent:'Nested text that is not the project introduction'}:null;}}));
  const statusWrites=[],animations=[],attributes=new Map(),buttons=Array.from({length:2},()=>({attributes:new Map(),setAttribute(name,value){this.attributes.set(name,value);}}));
  let statusText='Ready';const status={get textContent(){return statusText;},set textContent(value){statusWrites.push(value);statusText=value;}};
  const board={dataset:{},classList:{toggle(){}}},tour={style:{removeProperty(){}}};
@@ -154,7 +154,8 @@ test('mobile selection follows the model in its own caption and preserves the co
    assert.equal(f.heroOffer.textContent,f.u.offer);assert.equal(f.heroDescription.textContent,f.c.hero.description);assert.equal(f.intro.hidden,false);assert.equal(f.card.hidden,true);assert.ok(f.panels.every(panel=>panel.hidden));
    assert.equal(f.status.textContent,title);const writes=f.statusWrites.length;f.showPanel(id);assert.equal(f.statusWrites.length,writes,`${key}: unchanged selection is not announced again`);
   }
-  for(const id of ['stack',null]){f.showPanel(id);assert.equal(f.offer.textContent,f.u.offer);assert.equal(f.description.textContent,f.c.hero.description);}
+  f.showPanel('stack');assert.equal(f.offer.textContent,f.c.about.title);assert.equal(f.description.textContent,f.c.about.paragraphs[0]);assert.notEqual(f.description.textContent,f.c.hero.description);
+  f.showPanel(null);assert.equal(f.offer.textContent,'');assert.equal(f.description.textContent,'');
   assert.equal(f.animations.length,0,'mobile selection does not start desktop panel motion');
  }
 });
@@ -163,9 +164,9 @@ test('scroll and mobile-desktop-mobile resize preserve selection while desktop k
  const f=await selectionContextFixture(),item=f.c.work.cases[0];f.context.selected=item.id;f.showPanel(item.id);
  const writes=f.statusWrites.length;f.syncConstruction();assert.equal(f.offer.textContent,item.name);assert.equal(f.description.textContent,item.description);assert.equal(f.statusWrites.length,writes,'scroll does not replace selection announcement with generic ready text');
  f.resize();assert.equal(f.attributes.get('aria-describedby'),'viewer-mobile-help');for(const button of f.buttons)assert.equal(button.attributes.get('aria-controls'),'viewer-selection-copy city-canvas');
- f.context.innerWidth=1280;f.resize();assert.equal(f.offer.textContent,f.u.offer);assert.equal(f.description.textContent,f.c.hero.description);assert.equal(f.intro.hidden,true);assert.equal(f.card.hidden,false);assert.equal(f.panels.find(panel=>panel.dataset.viewerCard===item.id).hidden,false);for(const button of f.buttons)assert.equal(button.attributes.get('aria-controls'),'viewer-card');
+ f.context.innerWidth=1280;f.resize();assert.equal(f.offer.textContent,'');assert.equal(f.description.textContent,'');assert.equal(f.intro.hidden,true);assert.equal(f.card.hidden,false);assert.equal(f.panels.find(panel=>panel.dataset.viewerCard===item.id).hidden,false);for(const button of f.buttons)assert.equal(button.attributes.get('aria-controls'),'viewer-card');
  f.context.innerWidth=430;f.resize();assert.equal(f.context.selected,item.id);assert.equal(f.offer.textContent,item.name);assert.equal(f.description.textContent,item.description);assert.equal(f.heroOffer.textContent,f.u.offer);assert.equal(f.heroDescription.textContent,f.c.hero.description);assert.equal(f.intro.hidden,false);assert.equal(f.card.hidden,true);assert.ok(f.panels.every(panel=>panel.hidden));
- f.context.selected='stack';f.showPanel('stack');f.syncConstruction();assert.equal(f.offer.textContent,f.u.offer);assert.equal(f.description.textContent,f.c.hero.description);
+ f.context.selected='stack';f.showPanel('stack');f.syncConstruction();assert.equal(f.offer.textContent,f.c.about.title);assert.equal(f.description.textContent,f.c.about.paragraphs[0]);
 });
 
 
