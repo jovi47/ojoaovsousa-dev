@@ -1,9 +1,10 @@
 # Portfolio conversion
 
-Status: publication authorized by the owner on2026-11-03, using the same
-`codex/portfolio-conversion` branch based on `2d9947d`. Runtime16119d2 is
-available on that remote branch, with no merge. Final publication evidence is
-recorded in [Cloudflare Pages](cloudflare-pages.md).
+Status: published on2026-11-04T12:45:01Z from source
+`8a17351cd03775e0a93ce27d5fb4f4a3352a533f`, runtime `b701acd`, deployment
+`29c402b2-a0c4-4a99-9b7a-f7d090f4fcb9`. The same
+`codex/portfolio-conversion` branch is preserved remotely, with no merge.
+[Publication, health and recovery evidence](cloudflare-pages.md#current-conversion-release).
 
 ## Approved scope
 
@@ -75,8 +76,8 @@ physical touch devices and conversion/performance gains remain unmeasured.
 No lint/typecheck scripts exist. Gates: build → Node tests → artifact audit,
 plus syntax/whitespace. Linux was unreachable; Jovi admitted Mac checks.
 
-Publication is authorized, with production and Search Console checks required
-after the final artifact is deployed. The existing HMR preview at localhost3000 is retained;
+Production publication and37HTTP/artifact plus4exact-asset checks passed.
+Search Console follow-up is recorded in the release and discovery guides. The existing HMR preview at localhost3000 is retained;
 no second server was opened. PRIVATE, credentials and environment files were
 excluded from code, artifacts and documentation.
 

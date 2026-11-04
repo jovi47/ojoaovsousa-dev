@@ -1,8 +1,14 @@
 # Search discovery
 
-Updated2026-10-29UTC. Current publication is10c5b6b/deployment0976c277; the original dated figures below retain provenance. Static discovery originated on `codex/search-discovery` and is included in published source `488d3e3184c74bc82706c7c0b0c42ee6617601ec` at [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/), Cloudflare Pages Free Direct Upload. [Release receipt](cloudflare-pages.md#confirmed-production-release) identifies the exact artifact. Public source is [jovi47/ojoaovsousa-dev](https://github.com/jovi47/ojoaovsousa-dev); repository visibility does not imply PR merge. Technical crawlability does not guarantee ranking, Google indexing, rich results or LLM inclusion.
+Updated 2026-11-04 UTC. Production source is `8a17351cd03775e0a93ce27d5fb4f4a3352a533f` (runtime `b701acd`), deployment `29c402b2-a0c4-4a99-9b7a-f7d090f4fcb9`, at [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). [Release receipt](cloudflare-pages.md#current-conversion-release) records 148 local tests, 37 production HTTP/artifact checks and 4 additional exact-asset checks. Earlier dated figures below retain provenance. Repository publication does not imply PR merge, Google indexing or ranking.
 
-Local revision: [conversion](conversion.md) updates hero/metadata and privacy wording; production remains at its separately recorded release. Search Console follow-up is pending authorized publication.
+## Current Search Console follow-up
+
+On 2026-11-04 UTC the correct prefix property `https://ojoaovsousa.pages.dev/` was opened under the existing management account. The published verification tag, canonical/hreflang, robots and nine-URL sitemap remain intact. Public checks covered localized homes/policies, redirects, real404 and exact artifact bytes. No sitemap or URL was removed.
+
+The existing sitemap submission (3 November) still reports Couldn't fetch, Unknown and zero discovered pages; it was not resubmitted. Index inspection confirms `/pt-br/` is already indexed, which does not confirm Google's indexed copy contains this new release. Its post-publication live test returned URL is available to Google / Page can be indexed at approximately 12:49 UTC.
+
+A single request for updated indexing of `/pt-br/` was rejected with Quota Exceeded (daily quota). No request was accepted and no retry was made. Further home/policy requests must wait for the provider quota to reset, no earlier than 5 November; no recurring automation was created. The PT-BR privacy URL is unknown to Google's current index. Its post-publication live test also returned URL is available to Google / Page can be indexed at approximately 12:51 UTC. The original verification and management permissions were preserved; no auth/session state was copied.
 
 ## Content and generation
 
@@ -46,7 +52,7 @@ New text files total **5,585 bytes** in the default preview. At the 25-byte fake
 
 The authorized release uses `SITE_URL=https://ojoaovsousa.pages.dev` and `INDEXABLE=true`; default/local previews retain noindex. No custom domain was purchased. The exact source/deployment/ZIP receipt and 36 public HTTP checks are in [Cloudflare Pages](cloudflare-pages.md#confirmed-production-release). The published sitemap contains the nine canonical home/policy URLs, with direct/legacy/404/Markdown omitted as described above. The source-root configuration does not make a GitHub Pages project subpath compatible without a separately reviewed path adaptation.
 
-The exact URL-prefix property `https://ojoaovsousa.pages.dev/` is verified by the published HTML tag. Current release10c5b6b preserves all9canonical URLs and passed36 public artifact/HTTP checks. The existing Search Console tab showed the submission success confirmation; after reload its table lists `/sitemap.xml`, submitted29Oct2026, status “Couldn't fetch”, unknown type and0discovered pages. The public sitemap/robots respond correctly. Keep the accepted submission, avoid redundant resubmissions and investigate Google fetch/processing after its report updates. Native input commands still time out, so no URL-inspection/indexing request or confirmed indexing is claimed. No auth or session data was copied.
+The exact URL-prefix property `https://ojoaovsousa.pages.dev/` is verified by the published HTML tag. Historical release10c5b6b preserves all9canonical URLs and passed36 public artifact/HTTP checks. The existing Search Console tab showed the submission success confirmation; after reload its table lists `/sitemap.xml`, submitted29Oct2026, status “Couldn't fetch”, unknown type and0discovered pages. The public sitemap/robots respond correctly. Keep the accepted submission, avoid redundant resubmissions and investigate Google fetch/processing after its report updates. At that historical checkpoint, native input commands timed out and no URL-inspection/indexing request or confirmed indexing was claimed. Current evidence is recorded above. No auth or session data was copied.
 
 ## Primary references
 

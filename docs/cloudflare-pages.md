@@ -1,29 +1,53 @@
 # Cloudflare Pages: manual release
 
-Updated 2026-10-31 UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). Current runtime source is `ed8f6557fc76666109c0755274c4b923a752164c`. Earlier dated receipts describe historical releases; no custom domain was purchased.
+Updated 2026-11-04 UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). Current published source is `8a17351cd03775e0a93ce27d5fb4f4a3352a533f` (runtime `b701acd`). Earlier dated receipts describe historical releases; no custom domain was purchased.
 
-## Conversion release preparation
+## Current conversion release
 
-Owner publication authorization:2026-11-03. The same branch
-`codex/portfolio-conversion` is pushed through runtimeb701acd, with no merge.
-It includes the approved hero, personal About me, punctuation cleanup, direct
-WhatsApp, consented events and robust3D recovery. Recovery now belongs to the
-header/menu, with no detached action after contact. Native555px mobile and
-1101/1440px desktop checks passed, including return focus, menu closure and
-absence of header overlap/overflow. Independent review found no blocker.
+Published on **2026-11-04T12:45:01Z**, Production/main, deployment
+`29c402b2-a0c4-4a99-9b7a-f7d090f4fcb9`, [immutable alias](https://29c402b2.ojoaovsousa.pages.dev/pt-br/).
+Source `8a17351cd03775e0a93ce27d5fb4f4a3352a533f`, runtime `b701acd`, is preserved
+on `codex/portfolio-conversion`. Documentation-only commits after this source
+retain the same runtime. No PR merge or remote test workflow was performed.
 
-Prior gate99489563 passed148tests/build/audit/syntax on16119d2. The subsequent
-header change passed33affected cases. Final local production gate5ddeffe9
-(build,148-case suite, indexable build/audit and read-only deployment inventory)
-is queued onMac with `native_pressure_or_swap`, not started at this checkpoint.
-Linux is unreachable. Earlier unstarted preflight120c8d95 was cancelled as
-obsolete, with no PID. No production upload has been attempted in this delivery.
+The release includes the approved PT-BR/EN/ES hero and WhatsApp action, personal
+About me/LEGO introduction, punctuation cleanup, consented fixed-name events,
+direct access to projects and optional3D recovery through the header/menu.
+Services, cases, FAQ and always-open technologies retain the owner-approved scope.
+See [conversion behavior and limits](conversion.md).
 
-Recovery target2afdc26e/sourceed8f655 passed three GET checks immediately during
-preparation: localized home identity/canonical and exact city-app.js/viewer.css
-bytes. This is a limited health check, not a rollback rehearsal. Once admitted,
-freeze and audit the production dist, deploy only that output to Production/main,
-verify the live artifact, then finish Search Console and worktree retirement.
+Local gate `5ddeffe9-d7b0-4282-b227-a0dd52e328c8` completed on this exact source:
+148tests, default/indexable builds, audit200sources/137outputs and whitespace,
+exit0. The evidence was reused. Read-only preflight `11c91640` passed24recovery
+checks and compared all135runtime/build inputs with the retained integration.
+Immediately before upload the publication job reconfirmed clean source, every
+source/output hash, current production identity and four exact recovery-asset GETs.
+The previous production `2afdc26e-91f0-4068-8142-1cf45942652d`/source `ed8f655`
+remains the healthy recovery target; actual rollback was not exercised.
+
+Only audited `dist/` was uploaded:137files,10,075,017raw bytes, largest file
+2,416,372bytes, artifact manifest SHA-256
+`5b3c97b4f8accbefc44ff80f82eebc187edc6d935a4daf3ce2ccc778d72be2c2`.
+Wrangler4.155.0 reported23new files and112reused files, plus headers/redirects.
+Actual transferred/billed bytes are unmeasured. No provider, dependency, plan,
+recurring process or contracted charge was added; raw output grew5,067bytes
+against the previous release, independently of caching/compression/traffic.
+PRIVATE, real envs, auth/session state and the checkout were excluded.
+
+Jovi job `ab267a2f-2f5e-4dd2-afce-dc5f08c3e89a` completed with exit0.
+All37production HTTP/artifact checks and four additional exact JS/CSS checks
+passed. Public browser QA at390/1440px confirmed the hero, one live canvas and
+no page overflow. The mobile projects shortcut switches to reading; the menu's
+Experiência3D action returns focus to `city-canvas`. Captured warning/error logs
+were empty. Previous source QA covers320–1440px, reduced motion and real WebGL
+loss/recreation; physical touch and provider event ingestion remain unmeasured.
+
+Search Console confirmed the home is already indexed; post-publication live tests
+of the home and PT-BR privacy page are eligible. The privacy page is not yet indexed.
+The single new indexing request was rejected for daily quota, with no retry.
+See [the exact follow-up and policy/sitemap limits](search-discovery.md).
+The existing sitemap submission was preserved, without another resubmission.
+The single localhost3000 integration/HMR preview remains available.
 
 ## Current controls and preferences release
 
