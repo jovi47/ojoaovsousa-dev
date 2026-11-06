@@ -6,6 +6,8 @@ The approved conversion release is published at [ojoaovsousa.pages.dev](https://
 
 The public repository is [jovi47/ojoaovsousa-dev](https://github.com/jovi47/ojoaovsousa-dev). Independent PR scopes remain separate. Google processing is tracked in [search discovery](docs/search-discovery.md), independently of publication. The integrated HMR preview remains [localhost:3000/pt-br/](http://localhost:3000/pt-br/).
 
+The owner-authorized [main reconciliation](docs/release-reconciliation.md) preserves this published runtime and the historical PR heads. Its new merge/publication remains pending until the recorded gates and exact release receipt succeed. Automatic deployment PR13 remains a separate draft pending its dedicated credential and environment policy.
+
 ## Current source experience
 
 The source behavior below is included in the current runtime release. Component guides preserve focused evidence and physical-device limits.

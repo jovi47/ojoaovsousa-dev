@@ -1,8 +1,14 @@
 # Verification of the integrated portfolio
 
+Current runtime is `b701acd`, published from source `8a17351cd03775e0a93ce27d5fb4f4a3352a533f` on 2026-11-04 as deployment `29c402b2-a0c4-4a99-9b7a-f7d090f4fcb9`. Its exact local gate passed148tests and audit200sources/137outputs; publication passed37HTTP/artifact checks plus4exact asset comparisons. [Current publication and recovery](cloudflare-pages.md#current-conversion-release) records the receipt and limits. [Main reconciliation](release-reconciliation.md) tracks the authorized Git/release follow-up without changing this runtime.
+
+## Historical verification — 2026-10-23
+
+Everything below describes its explicitly named historical checkpoint. References to “current” in those original receipts refer to that checkpoint, not the present production. Their Google verification and responsive-layout states have been superseded by the current release guides.
+
 Updated 2026-10-23 UTC. Current published source `488d3e3184c74bc82706c7c0b0c42ee6617601ec` ([PR8](https://github.com/jovi47/ojoaovsousa-dev/pull/8), integration `43af65e`) includes synchronized compact context and `99f479d`. The source passed 96/96 local tests (zero failures/skips, 1.20885s Node), default build, whitespace check and audit 164 sources/128 outputs. Direct Upload succeeded on 2026-10-23 UTC, deployment `34340e9f-8a71-4ee8-8384-78f709f5be8a` ([alias](https://34340e9f.ojoaovsousa.pages.dev)), with 36 exact-artifact + 3 critical-CSS checks passed. Local/public observed browser QA is recorded below; physical touch/pinch remains untested. Previous healthy source fd9/3a6 is the verified recovery target, without an actual rollback rehearsal. Later docs commits are not another deployed source.
 
-## Current selector correction
+## Historical selector correction
 
 Published immutable source `488d3e3184c74bc82706c7c0b0c42ee6617601ec` on `codex/mobile-entry`, integration `43af65e`, including `99f479d`: compact selectors through 1100px now synchronize the visible introduction’s offer/description with the model, reusing the selected hidden rich card’s title/first direct paragraph. About me restores the original copy; the identity H1, primary contact action and full reading remain. Scroll/resize retain the selected context, controls identify the visible introduction plus canvas, and the existing status announces the title. The same delivery includes `99f479d`, hiding only the successfully loaded phone opening’s secondary reading action through 700px; footer/recovery and wider layouts remain.
 
