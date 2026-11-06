@@ -1,4 +1,4 @@
-# Main release reconciliation implementation plan
+# Main release reconciliation
 
 **Goal:** make `main` the recoverable source of the approved public portfolio and reconcile its historical PRs without restoring superseded behavior.
 
@@ -29,18 +29,18 @@
 | 17–20 | Release `ed8f655` names all four exact PR heads and contains their consolidated source. |
 | 13 | Separate automation scope. Keep draft: Pages-scoped Actions secret and environment policy are not configured; no hosted run/live automatic rollback is proven. |
 
-The ancestry-only merge `a27b8a0` preserves the complete `fa58b3e` tree. It intentionally does not apply the historical branches' old runtime or old current-state documentation again. PR2 and PR7 will be closed as superseded; the other 17 historical feature PRs will be retargeted to `main` and become indirectly merged through this reconciliation. See [GitHub indirect merge semantics](https://docs.github.com/en/pull-requests/reference/pull-request-merges#indirect-merges).
+The ancestry-only merge `a27b8a0` preserves the complete `fa58b3e` tree. It intentionally does not apply the historical branches' old runtime or old current-state documentation again. PR2 and PR7 were closed as superseded; the other17historical feature PRs were retargeted to main and confirmed indirectly merged through PR21. Main merge is `c94e71c30b207ed03cc92f19005de3a6e2edcd08`. See [GitHub indirect merge semantics](https://docs.github.com/en/pull-requests/reference/pull-request-merges#indirect-merges).
 
 ## Execution
 
 - [x] Confirm repository, open PR heads, exact deployed source and canonical origin.
 - [x] Create one internal worktree and preserve the published tree while reconciling ancestry.
 - [x] Run default build, 148-test suite, production build, artifact audit, protected-history review and37current-production HTTP/artifact checks. JoviMac `e3698b15-55ca-40e1-993b-8887decccc94` completed exit0 on `de62f97699def4f1f880100d14ce97c40f58108f`:148pass/0fail/0skip,201sources/137outputs/10,075,017bytes. The reachable-history audit checked1,055objects/611blobs without protected paths or detected keys. The37public checks cover the verifier's declared paths, not every output file.
-- [ ] Obtain independent read-only review of the reconciliation and its proofs.
-- [ ] Retarget the 17 active feature PRs, close the two superseded PRs and merge the reconciliation PR into `main` without squash/rebase.
-- [ ] Confirm the merged runtime inputs match the checked revision; publish that exact SHA after rechecking the healthy previous target.
-- [ ] Verify public bytes/HTTP, browser recovery, consent/SEO invariants and Search Console state.
-- [ ] Record exact merge/deployment receipts and costs, update canonical memory, retire delivered inactive worktrees safely.
+- [x] Obtain independent read-only review; no Critical/Important issue, both wording findings corrected.
+- [x] Retarget the17active feature PRs, close the two superseded PRs and merge PR21 into main without squash/rebase. GitHub confirmed actual states; no workflow run was triggered.
+- [x] Confirm merged runtime inputs and all137frozen outputs match the checked revision; publish the exact SHA after16healthy previous-target reads.
+- [x] Verify37public HTTP/artifact checks,4extra exact assets,390/1440px browser recovery/contact/focus and SDK revocation. The unchanged sitemap's provider error remains a separately investigated pending state.
+- [x] Record exact merge/deployment receipts and costs. [Published receipt](cloudflare-pages.md#main-reconciliation-release) preserves source/deployment identity. Local retirement records and canonical project memory track safe cleanup independently of subsequent documentation-only commits.
 
 ## Host, costs and limits
 

@@ -1,12 +1,12 @@
 # João Victor · ojoaovsousa
 
-The approved conversion release is published at [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). Source **8a17351cd03775e0a93ce27d5fb4f4a3352a533f**, runtime **b701acd**, deployment **29c402b2-a0c4-4a99-9b7a-f7d090f4fcb9**, confirmed2026-11-04T12:45:01Z. It includes the PT-BR/EN/ES hero/direct WhatsApp, personal About me, direct project reading, consented events and header/menu3D recovery. Services, cases, FAQ and always-open technologies keep their approved presentation. [Scope and limits](docs/conversion.md).
+The approved portfolio is published from **main** at [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). Source **c94e71c30b207ed03cc92f19005de3a6e2edcd08**, unchanged runtime **b701acd**, deployment **46a28ba1-0cde-48ad-95b5-d94d9a9a82d5**, verified2026-11-06T00:11:07Z (5November in the owner's timezone). It includes the PT-BR/EN/ES hero/direct WhatsApp, personal About me, direct project reading, consented events and header/menu3D recovery. Services, cases, FAQ and always-open technologies keep their approved presentation. [Scope and limits](docs/conversion.md).
 
-**148 local tests,37public HTTP/artifact checks and4additional exact-asset checks passed.** Mobile390px and desktop1440px public QA confirmed the hero, live canvas, project shortcut/recovery and no overflow. [Publication, recovery and cost receipt](docs/cloudflare-pages.md#current-conversion-release). Source is preserved on `codex/portfolio-conversion`; no merge or remote test pipeline was run.
+**148 local tests,37public HTTP/artifact checks and4additional exact-asset checks passed.** Mobile390px and desktop1440px public QA confirmed the hero, live canvas, project shortcut/recovery and no overflow. [Publication, recovery and cost receipt](docs/cloudflare-pages.md#main-reconciliation-release). Reconciliation PR21 merged the17active historical feature PRs into main; PR2/PR7 were closed as superseded. No remote test pipeline ran.
 
 The public repository is [jovi47/ojoaovsousa-dev](https://github.com/jovi47/ojoaovsousa-dev). Independent PR scopes remain separate. Google processing is tracked in [search discovery](docs/search-discovery.md), independently of publication. The integrated HMR preview remains [localhost:3000/pt-br/](http://localhost:3000/pt-br/).
 
-The owner-authorized [main reconciliation](docs/release-reconciliation.md) preserves this published runtime and the historical PR heads. Its new merge/publication remains pending until the recorded gates and exact release receipt succeed. Automatic deployment PR13 remains a separate draft pending its dedicated credential and environment policy.
+The owner-authorized [main reconciliation](docs/release-reconciliation.md) preserves this published runtime and the historical PR heads. Main is the repository default. Automatic deployment PR13 remains a separate draft pending its dedicated credential, environment policy and reconciliation against current main; publication currently uses the existing manual Pages path.
 
 ## Current source experience
 

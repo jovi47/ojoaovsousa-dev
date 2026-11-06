@@ -1,6 +1,18 @@
 # Cloudflare Pages: manual release
 
-Updated 2026-11-04 UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). Current published source is `8a17351cd03775e0a93ce27d5fb4f4a3352a533f` (runtime `b701acd`). Earlier dated receipts describe historical releases; no custom domain was purchased.
+Updated 2026-11-06 UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). Current published source is `c94e71c30b207ed03cc92f19005de3a6e2edcd08` on main (unchanged runtime `b701acd`). Earlier dated receipts describe historical releases; no custom domain was purchased.
+
+## Main reconciliation release
+
+Owner authorized reconciliation, meaningful merges into main and production publication on2026-11-05. [PR21](https://github.com/jovi47/ojoaovsousa-dev/pull/21) merged at2026-11-06T00:09:11Z as `c94e71c30b207ed03cc92f19005de3a6e2edcd08`. The17active feature PRs became merged with their original heads preserved; PR2/PR7 were closed as superseded. Main is now the default branch. [Reconciliation evidence](release-reconciliation.md) explains why old code was not reapplied. PR13 remains draft, retargeted to main; its missing dedicated Actions credential/environment policy does not block the existing manual deployment.
+
+JoviMac gate `e3698b15-55ca-40e1-993b-8887decccc94` completed exit0 on candidate `de62f97699def4f1f880100d14ce97c40f58108f`:148tests/0fail/0skip, default/production builds, audit201sources/137outputs and37current-production HTTP/artifact checks. Subsequent documentation and main merge changed no runtime/build/test inputs. Independent read-only review had no Critical/Important issue; its two documentation wording findings were corrected. The history review checked1,055objects/611blobs without protected paths or detected keys.
+
+Publication job `a03100a8-9ed9-4684-9f4e-9e56bc107695` completed exit0 at2026-11-06T00:11:07.234353Z, deployment `46a28ba1-0cde-48ad-95b5-d94d9a9a82d5`, [immutable alias](https://46a28ba1.ojoaovsousa.pages.dev/pt-br/), Production/main. Before its single upload attempt it verified clean/exact local and remote main SHA, every frozen output hash, audit, current production identity and16exact recovery reads against previous deployment `29c402b2-a0c4-4a99-9b7a-f7d090f4fcb9`. Only audited dist was uploaded:137files/10,075,017raw bytes, byte-identical to the approved previous artifact. No PRIVATE/env/auth/checkout was included and no new credential was created or copied.
+
+Post-publication37HTTP/artifact checks and four extra exact assets passed. Native public390/1440px confirmed no overflow, one canvas, direct project reading and menu3D recovery/focus. Contact dialog/Escape restored trigger focus without sending a message. The QA browser initially loaded the existing Clarity SDK under an effective saved choice; Recusar e recarregar then removed both provider scripts and left zero warning/error logs. This proves that observed browser revocation, not provider ingestion, masking or retroactive erasure. Physical devices and actual rollback remain untested.
+
+Runtime, URLs, canonical/hreflang, robots, verification tag and nine-URL sitemap did not change. The authenticated Search Console sitemap report still shows Couldn't fetch with last read3November; a separate owner-requested investigation follows it. No sitemap was blindly renamed or resubmitted by this release. Hosting remains the existing Free static plan: no new contracted cost or output bytes; actual upload/billing/energy remain unmeasured. Subsequent receipt-only commits are not another deployed runtime.
 
 ## Current conversion release
 
