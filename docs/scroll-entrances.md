@@ -1,0 +1,7 @@
+# Repeating content entrances
+
+The shared city-app IntersectionObserver now observes the intro, service cards, technology strip, project text/mockups/actions, biography/portrait/career, FAQ items, process preview and contact/footer content. Entries animate again after fully leaving either viewport edge. Partial exits do not reset the effect. Four directions use14px individual CSS translate and opacity.65→1 over550ms, preserving existing transform placement (including desktop viewer centering). Content is always readable without JavaScript/IntersectionObserver and reduced motion disables entrances. Focused content avoids motion; hidden/annotation states pause it.
+
+No scroll listener, added observer, timer, library or external request. Existing contact-visible and mockup/CTA visibility contracts remain. The obsolete one-shot data-reveal attributes/styles were removed. Client paint occurs only on entries; no recurring provider cost or data collection change. URLs, metadata, sitemap and indexability unchanged; no Search Console action before authorized publication.
+
+Validation:20 local tests passed (observer replay/contact/cleanup, direct content, process). Native main483px:43 targets, zero horizontal overflow. Native direct1280px: service card is-revealed true→false→true on down/up scrolling; content-build-in runs, zero overflow. Physical device testing and full-suite validation were not repeated. Existing preview remains localhost:3000; no publication.

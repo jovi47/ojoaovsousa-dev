@@ -1,0 +1,33 @@
+.career{display:grid;gap:24px;min-width:0;color:var(--ink)}
+.career-intro{min-width:0}
+.career .career-title{font-size:clamp(34px,4.5vw,62px);line-height:1.08;letter-spacing:-.04em;max-width:18ch;margin:0}
+.career-intro>p{max-width:36ch;margin:22px 0 0;color:var(--soft);font-size:17px;line-height:1.55}
+.career-details{min-width:0;align-self:start;border-block:1px solid color-mix(in srgb,var(--ink) 20%,transparent)}
+.career-details>summary{display:grid;grid-template-columns:minmax(0,1fr) 26px;gap:16px;align-items:center;min-height:64px;padding:17px 0;list-style:none;cursor:pointer;font:inherit;font-size:18px;font-weight:600;line-height:1.4;touch-action:manipulation}
+.career-details>summary::-webkit-details-marker{display:none}
+.career-details>summary:hover>span:first-child{text-decoration:underline;text-underline-offset:4px}
+.career-details>summary:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:3px}
+.career-symbol{display:grid;place-items:center;width:26px;height:26px;font-size:22px;font-weight:400;line-height:1;background:var(--panel);border-radius:4px}
+.career-details[open] .career-symbol{transform:rotate(45deg);box-shadow:0 0 0 1px var(--gold)}
+.career-content{padding:0 0 22px;min-width:0;color:var(--soft);font-size:16px;line-height:1.6;overflow-wrap:anywhere}
+.career .career-label{font-size:16px;font-weight:600;line-height:1.4;color:var(--ink);letter-spacing:0;margin:0 0 13px;max-width:none}
+.career-companies{display:flex;flex-wrap:wrap;gap:8px 22px;list-style:none;padding:0;margin:0 0 24px;color:var(--ink);font-weight:600}
+.career-content>p{margin:0 0 18px}
+.career-education{margin-top:28px}
+.career-education dl{display:grid;gap:18px;margin:0}
+.career-education-item dt{font-size:15px;font-weight:600;color:var(--ink)}
+.career-company-link,.career-school-link{display:inline-flex;align-items:center;gap:12px;min-height:44px;max-width:100%;color:var(--ink);text-decoration:none}
+.career-company-link:hover>span:last-child,.career-school-link:hover .career-school-name{text-decoration:underline;text-underline-offset:4px}
+.career-company-link:focus-visible,.career-school-link:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:4px}
+.career-mark{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:7px;background:var(--panel);padding:4px}
+.career-mark img{display:block;width:32px;height:32px;max-width:100%;object-fit:contain;color-scheme:inherit}
+.career-mark--stone{background:#f7f5ee}.career-mark--ifs{background:#19191b}
+.career-school-name,.career-course-name{display:block}.career-course-name{font-weight:400;color:var(--soft);margin-top:2px}
+.career-education-item dd{margin:3px 0 0 52px;font-size:15px;line-height:1.5}
+.career-course-status{display:block;font-size:14px;color:var(--soft);margin-top:2px}
+.career--compact{gap:10px;margin:25px 0}
+.career--compact .career-title{font-size:22px;line-height:1.25;letter-spacing:-.025em;max-width:none}
+.career--compact .career-details>summary{min-height:44px;font-size:15px;padding:12px 0}
+.career--compact .career-content{font-size:15px}
+.career--compact .career-companies{gap:7px 17px}
+@media(min-width:900px){.career:not(.career--compact){grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);align-items:start;gap:64px}}

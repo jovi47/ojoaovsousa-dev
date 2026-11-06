@@ -1,0 +1,2 @@
+.viewer-overflow-hint{position:absolute;z-index:5;display:flex;align-items:flex-end;justify-content:center;height:48px;max-width:100%;padding:20px 12px 7px;box-sizing:border-box;transform:translateY(-100%);pointer-events:none;border-radius:0 0 5px 5px;background:linear-gradient(to bottom,transparent,var(--bg) 55%);color:var(--soft);font-size:12px;font-weight:550;line-height:1.35;text-align:center}
+.viewer-overflow-hint[hidden]{display:none}

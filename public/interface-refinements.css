@@ -1,0 +1,86 @@
+/* Shared contact controls keep the same icon and alignment in every layout. */
+.site-header .header-actions{align-items:center;gap:8px}
+
+.site-header .header-contact{align-items:center;justify-content:center;height:44px;min-height:44px;padding:9px 15px;border:2px solid var(--ink);border-radius:5px;line-height:1;gap:8px;font-size:14px;box-shadow:0 2px 0 var(--ink)}
+.site-header .header-contact:active{box-shadow:0 1px 0 var(--ink)}
+.site-header .header-contact-icon{display:block;width:20px;height:20px;flex:none}
+
+.site-header .language-flag{display:block;width:24px;height:18px;flex:none}
+.inquiry-cta{width:auto;height:auto;min-width:0;min-height:46px;padding:10px 14px;gap:8px;border-radius:7px;box-shadow:0 2px 0 var(--button-ink)}
+.inquiry-cta::before,.inquiry-cta::after{content:'';width:18px;height:6px;top:-7px;border-radius:3px 3px 0 0}
+.inquiry-cta .viewer-contact-label{display:block;font-size:14px}
+.inquiry-cta .inquiry-cta-icon{width:20px;height:20px}
+
+.site-header .header-actions>.language-picker>summary,.site-header .header-actions>:is(.theme-toggle,.menu-toggle){align-items:center;justify-content:center;height:44px;min-height:44px;padding:0 12px;border:1px solid color-mix(in srgb,var(--ink) 25%,transparent);border-radius:12px;background:var(--bg);color:var(--ink);box-shadow:none;font-size:14px;font-weight:500;line-height:1}
+.site-header .header-actions>.language-picker>summary,.site-header .header-actions>:is(.theme-toggle,.menu-toggle){width:44px;min-width:44px;padding:0}
+.site-header .header-actions>.language-picker>summary:hover,.site-header .header-actions>:is(.theme-toggle,.menu-toggle):hover{background:var(--panel)}
+.site-header .header-actions>.menu-toggle{border:0;background:transparent}
+
+@media(max-width:700px){
+ .site-header .header-actions>.header-contact{display:none}
+ .site-header .header-actions{gap:6px}
+ .site-header .header-actions>.language-picker>summary,.site-header .header-actions>.theme-toggle{display:grid;place-items:center;flex:none;width:44px;height:44px;min-width:44px;min-height:44px;padding:0}
+ .site-header .header-actions>.menu-toggle{display:grid;place-items:center;width:44px;height:44px;min-width:44px;padding:0;font-size:0;line-height:1}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-house-button{min-height:48px;padding:6px 4px;gap:3px;font-size:11px}
+ .viewer-page .viewer-house-button .viewer-brand-symbol{--symbol-size:21px}
+ .viewer-page .viewer-house-button img.viewer-profile-icon{width:21px;height:21px}
+ .viewer-page .viewer-house-question .viewer-question-mark{font-size:23px}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-landmark-tools{grid-area:scene;position:relative;inset:auto;align-self:start;justify-self:end;justify-content:flex-end;gap:3px;width:max-content;padding:3px;margin:4px 8px 0 0;border-radius:6px;background:color-mix(in srgb,var(--bg) 92%,transparent)}
+ body:not(.reading):not(.graphics-failed) .viewer-page .viewer-landmark-tools .icon-button{display:grid;place-items:center;width:44px;height:44px;min-width:44px;min-height:44px;padding:10px}
+ .viewer-page .viewer-landmark-tools svg{width:20px;height:20px}
+ .viewer-page .viewer-landmark-tools .viewer-replay-label{display:none}
+ .inquiry-cta{right:calc(var(--layout-edge) + 6px);bottom:max(14px,env(safe-area-inset-bottom));min-height:46px;padding:10px 13px}
+ .inquiry-cta .viewer-contact-label{font-size:13px}
+}
+
+@media(max-width:430px){.site-header .header-actions{gap:4px}}
+
+@media(prefers-reduced-motion:no-preference){
+ .site-header .header-character{transform-origin:50% 80%;animation:header-character-sway 7s ease-in-out infinite}
+ .page-hidden .header-character,.annotation-active .header-character,body:has(dialog[open]) .header-character,.site-header .wordmark:is(:hover,:focus-visible) .header-character{animation-play-state:paused}
+ @keyframes header-character-sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+}
+
+.site-header .menu-toggle svg{display:block;flex:none;width:28px;height:28px}
+
+/* Brand artwork sits inside the same small brick across contact and footer links. */
+.social-brick{position:relative;display:inline-grid;place-items:center;flex:none;width:28px;height:28px;box-sizing:border-box;border:1px solid currentColor;border-radius:3px;background:var(--bg);color:var(--ink)}
+.social-brick::before,.social-brick::after{content:'';position:absolute;top:-4px;width:6px;height:4px;box-sizing:border-box;border:1px solid currentColor;border-bottom:0;border-radius:2px 2px 0 0;background:inherit}
+.social-brick::before{left:5px}.social-brick::after{right:5px}
+.social-brick-whatsapp{color:#009b48;background:currentColor}.social-brick-linkedin{color:#0077b5;background:currentColor}
+.social-brick-whatsapp>.social-brand-whatsapp{filter:brightness(0) invert(1)}
+.social-brick-github{color:#19191b;background:currentColor}.social-brick-mail{color:#7652a3;background:currentColor}
+.footer-socials .social-brick-github>.social-brand-github{filter:brightness(0) invert(1)}
+.social-brick-mail>svg{color:#fff}
+.contact-channel .social-brick>:is(svg,img),.footer-socials .social-brick>:is(svg,img),.viewer-card .contact-links .social-brick>:is(svg,img){width:19px;height:19px;padding:0;background:none;border-radius:0}
+
+.footer-socials .social-brick{display:inline-grid}
+
+html[data-theme=dark] .social-brick-github{box-shadow:0 0 0 1px #ffffff40}
+
+/* The glyph represents the current theme; the accessible label names the toggle action. */
+.site-header .theme-sun{display:block;color:#a76b00;fill:#ffd25a}
+.site-header .theme-moon{display:none}
+html[data-theme=dark] .site-header .theme-sun{display:none}
+html[data-theme=dark] .site-header .theme-moon{display:block;color:#9bb9eb;fill:#e4eeff;filter:drop-shadow(0 0 2px #aaccff66)}
+
+.site-footer .footer-name{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-family:Pixelify,Bricolage,sans-serif;font-size:28px;font-weight:400;letter-spacing:-1px}
+.direct-service-icon.service-0{color:#56806c}.direct-service-icon.service-1{color:#8871b2}.direct-service-icon.service-2{color:#3c8998}.direct-service-icon.service-3{color:#5c85a1}
+
+.footer-policy-links{display:contents}
+@media(min-width:701px){.site-footer .footer-name{font-size:38px}}
+@media(min-width:960px){
+ .site-footer,.viewer-page .site-footer,.direct-page .site-footer{grid-template-columns:minmax(0,1fr) auto auto auto;grid-template-rows:auto;align-items:start;column-gap:16px;row-gap:0}
+ .site-footer>.footer-legal{display:contents}
+ .footer-legal>span{grid-column:3;grid-row:1;display:flex;align-items:center;min-height:44px;font-size:13px;color:var(--soft)}
+ .site-footer>.footer-socials{grid-column:2;grid-row:1;justify-content:flex-start}
+ .footer-policy-links{grid-column:4;grid-row:1;display:grid;grid-template-columns:max-content max-content;align-items:center;gap:0 16px;min-width:0;font-size:13px;color:var(--soft)}
+ /* Match Pixelify's visible glyph top to the 13px copyright, across its 40–46px size range. */
+ .site-footer .footer-name{grid-column:1;grid-row:1;align-self:start;font-size:clamp(40px,3.6vw,46px);height:44px;line-height:44px;position:relative;top:clamp(0px,calc(1.8vw - 20px),3px)}
+ .footer-policy-links>[data-analytics-preferences]{text-align:left;justify-content:flex-start;padding-inline:0}
+ .footer-policy-links>a[href$="/terms/"],.footer-policy-links>a[href$="/LICENSE.txt"]{justify-self:end}
+}
+
+@media(min-width:1280px){
+ .footer-policy-links{grid-row:1;grid-template-columns:repeat(4,max-content)}
+}

@@ -1,0 +1,42 @@
+{
+  "reviewed_at_utc": "2026-10-22",
+  "purpose": "Local portfolio light/dark brand rendering, no image generation",
+  "assets": [
+    {
+      "runtime": "public/horagora-logo.svg",
+      "source": "/Users/jovi47/Documents/Projects/horagora/.worktrees/local-preview/apps/web/public/brand/logo.svg",
+      "sha256": "091c0d98902148b0adb5f67761ef506e10d5e3d2bc3cc01988b8f95e398d8f44",
+      "derivation": "unmodified approved SVG"
+    },
+    {
+      "runtime": "public/horagora-logo-dark.svg",
+      "source": "/Users/jovi47/Documents/Projects/horagora/.worktrees/local-preview/apps/web/public/brand/logo-white.svg",
+      "sha256": "159bcbf603c9bb7a82834026c544a75cd80885f1ec4b2e20ce7794575267bd2f",
+      "derivation": "unmodified approved SVG"
+    },
+    {
+      "runtime": "public/asc-logo.svg",
+      "source": "/Users/jovi47/Documents/Obsidian Vault/Andrea Sousa Consultoria/brand/kit/logos/logo-horizontal.svg",
+      "sha256": "89937cce4fef38c28bb86fe41354baa7070b30efae99d1e1db71e49a9bd6517f",
+      "derivation": "unmodified approved SVG"
+    },
+    {
+      "runtime": "public/asc-symbol.svg",
+      "source": "/Users/jovi47/Documents/Obsidian Vault/Andrea Sousa Consultoria/brand/kit/logos/symbol.svg",
+      "sha256": "d66c82648f27a80c41cb272c945b38a040c312b775a68b491715a3d6b52664e3",
+      "derivation": "unmodified approved SVG"
+    },
+    {
+      "runtime": "public/asc-logo-dark.svg",
+      "source": "/Users/jovi47/Documents/Obsidian Vault/Andrea Sousa Consultoria/brand/kit/logos/logo-horizontal.svg",
+      "sha256": "bbace01e02b3f6e40d11d258a8bc52ffb8b1c55b86d0134db516848a8a674455",
+      "derivation": "UI reverse requested by owner: navy to white; mint, paths, viewBox and proportions unchanged; does not replace brand master"
+    },
+    {
+      "runtime": "public/asc-symbol-dark.svg",
+      "source": "/Users/jovi47/Documents/Obsidian Vault/Andrea Sousa Consultoria/brand/kit/logos/symbol.svg",
+      "sha256": "2dba838101fde5f8c335c3401b8077a2f715c5d0753ff9d16a70645fb0c0f5c2",
+      "derivation": "UI reverse requested by owner: navy to white; mint, paths, viewBox and proportions unchanged; does not replace brand master"
+    }
+  ]
+}

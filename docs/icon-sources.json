@@ -1,0 +1,30 @@
+{
+  "retrieved_utc": "2026-10-22",
+  "source": "Devicon original variants; trademarks belong to their owners",
+  "icons": [
+    {
+      "name": "java",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg",
+      "sha256": "7582e518a9c02425f97155e5a3bd39d1a3a7d421b78caf9c8df7443dad3edc5d",
+      "bytes": 1540
+    },
+    {
+      "name": "elixir",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/elixir/elixir-original.svg",
+      "sha256": "17c37b03035f1704f90631d7c945b45621813f395cef4487b7fe40ad5c47be34",
+      "bytes": 4026
+    },
+    {
+      "name": "javascript",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg",
+      "sha256": "0656ff65fc8eeacda5c78d7f9ffe91ec1eb919db64f56e0b7dcd460af4bbd36c",
+      "bytes": 1144
+    },
+    {
+      "name": "react",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg",
+      "sha256": "5825b649c8c04dec13ecf01d0182401bd0ec71789d2fa06224866d882cd1515f",
+      "bytes": 2387
+    }
+  ]
+}

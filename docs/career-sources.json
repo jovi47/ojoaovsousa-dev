@@ -1,0 +1,50 @@
+{
+  "retrieved_utc": "2026-10-22T19:50:15.251Z",
+  "purpose": "Official organisation icons for the selected career/education disclosure. Names and links remain visible; marks do not imply an endorsement.",
+  "notes": [
+    "No PDF or private CV contact data is included.",
+    "Stone, Sicredi, UFS and IFS artwork is identified from the respective official websites.",
+    "IFS is the unmodified white official mark; a dark interface backplate keeps it readable.",
+    "UFS retains its official SVG light/dark preference rules.",
+    "Sicredi embeds the exact official homepage fills in its extracted mobile SVG; path geometry is unchanged."
+  ],
+  "assets": [
+    {
+      "id": "ufs",
+      "file": "public/career-icons/ufs.svg",
+      "bytes": 2874,
+      "sha256": "74dc755ccc5aa08be59d4b3a6da8f6580223040c574aed109d6370ea8777565e",
+      "derivation": "Unmodified official asset served by the organisation’s website.",
+      "source_page": "https://www.ufs.br/",
+      "source_asset": "https://www.ufs.br/assets/favicon.svg?v=2"
+    },
+    {
+      "id": "ifs",
+      "file": "public/career-icons/ifs.png",
+      "bytes": 1010,
+      "sha256": "ca6ed889574e957fbb6fef14c0576b5d648b0d030338559f5af81883d5f122cb",
+      "derivation": "Unmodified official asset served by the organisation’s website.",
+      "source_page": "https://www.ifs.edu.br/",
+      "source_asset": "https://www.ifs.edu.br/images/exemplo_emblemas/ifs_logo.png"
+    },
+    {
+      "id": "stone",
+      "file": "public/career-icons/stone.png",
+      "bytes": 799,
+      "sha256": "6fba8d32fd45559add01ed92832f629b1e05c1425eb3c4d9e9d6d3dd4d960117",
+      "derivation": "Unmodified official PNG favicon linked by the Stone homepage.",
+      "source_page": "https://www.stone.com.br/",
+      "source_asset": "https://sites-cms-deco-prd.s3.us-east-1.amazonaws.com/incoming/stone/a33c1db8-dd22-4561-99a0-470435aa52ca/Brand"
+    },
+    {
+      "id": "sicredi",
+      "file": "public/career-icons/sicredi.svg",
+      "bytes": 4137,
+      "sha256": "1016358ad7a4f0fcf5ba9b24a0614b50636718bc762820da78a36d35768a2ae5",
+      "derivation": "Official inline mobile SVG extracted from the homepage. Embedded the same homepage CSS fills (#64C832 and first path #146E37) to make it standalone; all path data unchanged.",
+      "source_svg_sha256": "813e798e7bda3be7f4cec86efc04c699c46db56abb973e208abf333289b408ff",
+      "source_page": "https://www.sicredi.com.br/home/",
+      "source_asset": "https://www.sicredi.com.br/home/"
+    }
+  ]
+}

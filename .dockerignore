@@ -7,3 +7,4 @@ ACESSOS.local.md
 .vercel
 node_modules
 work
+.wrangler/
