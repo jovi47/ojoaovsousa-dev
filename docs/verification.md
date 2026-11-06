@@ -2,6 +2,8 @@
 
 Current runtime is `b701acd`, published from main source `c94e71c30b207ed03cc92f19005de3a6e2edcd08` as deployment `46a28ba1-0cde-48ad-95b5-d94d9a9a82d5`, verified2026-11-06T00:11:07Z. The local candidate gate passed148tests and audit201sources/137outputs; exact comparison proved the merged runtime/build/test inputs and frozen artifact unchanged. Publication passed37HTTP/artifact checks plus4exact asset comparisons, following16recovery reads. [Current publication and recovery](cloudflare-pages.md#main-reconciliation-release) records the receipt, public browser QA and limits. [Main reconciliation](release-reconciliation.md) records the historical-head integration without changing product behavior.
 
+The owner-requested sitemap/console investigation is recorded in [search discovery](search-discovery.md#sitemap-fetch-investigation): Google itself fetched the exact XML successfully, and its source/More info panels confirmed the actual XML, application/xml and200OK. One subsequent submission is saved as5November, while sitemap processing still reports Couldn't fetch. Public390/1440px browser journeys and real consent revocation had zero captured warning/error logs. No runtime change was made on evidence of a historical report or a client-specific Cloudflare1010response.
+
 ## Historical verification — 2026-10-23
 
 Everything below describes its explicitly named historical checkpoint. References to “current” in those original receipts refer to that checkpoint, not the present production. Their Google verification and responsive-layout states have been superseded by the current release guides.
