@@ -1,6 +1,6 @@
 # Verification of the integrated portfolio
 
-Current runtime is `b701acd`, published from source `8a17351cd03775e0a93ce27d5fb4f4a3352a533f` on 2026-11-04 as deployment `29c402b2-a0c4-4a99-9b7a-f7d090f4fcb9`. Its exact local gate passed148tests and audit200sources/137outputs; publication passed37HTTP/artifact checks plus4exact asset comparisons. [Current publication and recovery](cloudflare-pages.md#current-conversion-release) records the receipt and limits. [Main reconciliation](release-reconciliation.md) tracks the authorized Git/release follow-up without changing this runtime.
+Current runtime is `b701acd`, published from main source `c94e71c30b207ed03cc92f19005de3a6e2edcd08` as deployment `46a28ba1-0cde-48ad-95b5-d94d9a9a82d5`, verified2026-11-06T00:11:07Z. The local candidate gate passed148tests and audit201sources/137outputs; exact comparison proved the merged runtime/build/test inputs and frozen artifact unchanged. Publication passed37HTTP/artifact checks plus4exact asset comparisons, following16recovery reads. [Current publication and recovery](cloudflare-pages.md#main-reconciliation-release) records the receipt, public browser QA and limits. [Main reconciliation](release-reconciliation.md) records the historical-head integration without changing product behavior.
 
 ## Historical verification — 2026-10-23
 
