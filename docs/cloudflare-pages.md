@@ -1,6 +1,12 @@
 # Cloudflare Pages: manual release
 
-Updated 2026-11-06 UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). Current published source is `c94e71c30b207ed03cc92f19005de3a6e2edcd08` on main (unchanged runtime `b701acd`). Earlier dated receipts describe historical releases; no custom domain was purchased.
+Updated 2026-11-12 UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). Current published source is `77a158203131ec04459a11804159c2bb945a63f1`, deployed to Production/main. Earlier dated receipts describe historical releases; no custom domain was purchased.
+
+## Fisiopoa prototype release
+
+The approved light-only [Fisiopoa landing](https://ojoaovsousa.pages.dev/prototypes/fisiopoa/) was verified at `2026-11-12T19:30:32Z`: deployment `61aff60c-f400-4df6-b78d-18705db24833`, [immutable alias](https://61aff60c.ojoaovsousa.pages.dev/prototypes/fisiopoa/), [PR24](https://github.com/jovi47/ojoaovsousa-dev/pull/24). The 17 package files were byte-identical to the reviewed ZIP. All 136 pre-existing files except the separate Pages headers control file were byte-identical to the previous deployment. The previous deployment `46a28ba1-0cde-48ad-95b5-d94d9a9a82d5` passed eight exact recovery reads; no rollback was needed or exercised.
+
+Local gates: 150 tests, preview and production builds, audit of 218 sources / 154 outputs, and Pages emulator checks. Jovi Mac job `7ba36bda-08b5-4e12-9244-9d9dd9da058f` completed exit 0 after uploading only the audited 154-file artifact (10,611,960 raw bytes). Production passed 23 exact prototype and 37 portfolio HTTP checks, including headers, relative assets, privacy, the original CSP on existing pages and the unchanged nine-URL sitemap. Browser checks at 390 and 1280 px confirmed the light version, mobile menu, live Google Maps and privacy link, with no captured console warnings/errors or horizontal overflow. No indexing request or client message was sent.
 
 ## Main reconciliation release
 

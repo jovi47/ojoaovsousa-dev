@@ -7,7 +7,14 @@ const vendors=new Set(['BufferGeometryUtils.js','GLTFLoader.js','SkeletonUtils.j
 const icons=new Set(['LICENSE.txt','elixir.svg','java.svg','javascript.svg','react.svg']);
 const careerIcons=new Set(['stone.png','sicredi.svg','ufs.svg','ifs.png']);
 const contactIcons=new Set(['whatsapp.svg','linkedin.svg','LICENSE.txt']);
-const publicAsset=name=>['_headers','_redirects'].includes(name)||/^[a-zA-Z0-9_-]+\.(?:js|css|jpg|png|webp|glb|woff2|svg|txt)$/.test(name)||name.startsWith('vendor/')&&vendors.has(name.slice(7))||name.startsWith('icons/')&&icons.has(name.slice(6))||name.startsWith('career-icons/')&&careerIcons.has(name.slice(13))||name.startsWith('contact-icons/')&&contactIcons.has(name.slice(14))||/^technology-icons\/[a-z0-9-]+\.svg$/.test(name)||name==='technology-icons/LICENSE.txt';
+const fisiopoa=new Set([
+ 'index.html','privacidade.html','style.css','tokens.css','page.js',
+ 'assets/brand.webp','assets/movimento-lilas.webp','assets/movimento-lilas-small.webp',
+ 'assets/urbanist.woff2','assets/urbanist-license.txt','assets/domiciliar.webp',
+ 'assets/cuidado-no-lar.webp','assets/retrato-ilustrativo-1.webp','assets/retrato-ilustrativo-2.webp',
+ 'assets/avaliacao.webp','assets/pilates.webp','assets/fortalecimento.webp'
+]);
+const publicAsset=name=>['_headers','_redirects'].includes(name)||/^[a-zA-Z0-9_-]+\.(?:js|css|jpg|png|webp|glb|woff2|svg|txt)$/.test(name)||name.startsWith('vendor/')&&vendors.has(name.slice(7))||name.startsWith('icons/')&&icons.has(name.slice(6))||name.startsWith('career-icons/')&&careerIcons.has(name.slice(13))||name.startsWith('contact-icons/')&&contactIcons.has(name.slice(14))||/^technology-icons\/[a-z0-9-]+\.svg$/.test(name)||name==='technology-icons/LICENSE.txt'||name.startsWith('prototypes/fisiopoa/')&&fisiopoa.has(name.slice('prototypes/fisiopoa/'.length));
 const allowed=name=>/^(?:\.gitignore|\.dockerignore|package(?:-lock)?\.json|vercel\.json|README\.md|\.openai\/hosting\.json|(?:src|scripts|tests|docs)\/[a-zA-Z0-9./_-]+)$/.test(name)||name.startsWith('public/')&&publicAsset(name.slice(7));
 const prohibited=/(?:^|\/)(?:\.private|ACESSOS\.local\.md|\.env(?:\.[^/]*)?|\.vercel|node_modules)(?:\/|$)/i;
 const secret=/(?:-----BEGIN (?:[A-Z ]+ )?PRIVATE KEY-----|(?:sk-proj-|ghp_|github_pat_)[a-zA-Z0-9_]{20,}|[?&](?:access_token|refresh_token|api_key)=[a-zA-Z0-9_-]{16,})/;
@@ -16,7 +23,7 @@ for(const name of names){
  if(prohibited.test(name)||!allowed(name))throw new Error(`Unapproved source path: ${name}`);
  let info;try{info=await lstat(path.join(root,name));}catch(error){if(error.code==='ENOENT')continue;throw error;}
  if(!info.isFile()||info.isSymbolicLink())throw new Error(`Source must be a regular file: ${name}`);
- if((/\.(?:js|mjs|json|md|css|svg|txt)$/.test(name)||/\/(?:_headers|_redirects)$/.test(name))&&secret.test(await readFile(path.join(root,name),'utf8')))throw new Error(`Possible protected value in ${name}`);
+ if((/\.(?:html|js|mjs|json|md|css|svg|txt)$/.test(name)||/\/(?:_headers|_redirects)$/.test(name))&&secret.test(await readFile(path.join(root,name),'utf8')))throw new Error(`Possible protected value in ${name}`);
  if(name.startsWith('public/'))publicNames.add(name.slice(7));sources++;
 }
 const generated=new Set(['index.html','404.html','robots.txt','sitemap.xml','llms.txt']);let outputs=0;
@@ -24,7 +31,7 @@ async function auditOutput(directory,prefix=''){
  for(const entry of await readdir(directory,{withFileTypes:true})){
   const name=prefix+entry.name,full=path.join(directory,entry.name);
   if(prohibited.test(name))throw new Error(`Protected output path: ${name}`);
-  if(entry.isDirectory()&&(/^(pt-br|en|es)(\/(privacy|terms|direct|black))?$/.test(name)||['icons','technology-icons','career-icons','contact-icons','vendor'].includes(name)))await auditOutput(full,name+'/');
+  if(entry.isDirectory()&&(/^(pt-br|en|es)(\/(privacy|terms|direct|black))?$/.test(name)||['icons','technology-icons','career-icons','contact-icons','vendor','prototypes','prototypes/fisiopoa','prototypes/fisiopoa/assets'].includes(name)))await auditOutput(full,name+'/');
   else if(!entry.isFile()||(!publicNames.has(name)&&!generated.has(name)&&!/^(pt-br|en|es)\/(?:(privacy|terms|direct|black)\/)?index\.html$/.test(name)&&!/^(pt-br|en|es)\/index\.md$/.test(name)))throw new Error(`Unapproved artifact path: ${name}`);
   else{
    const bytes=await readFile(full);

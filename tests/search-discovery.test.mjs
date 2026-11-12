@@ -7,11 +7,12 @@ import {execFileSync} from 'node:child_process';
 import {content} from '../src/content.mjs';
 import {escape} from '../src/city-page.mjs';
 
-async function fixture(t){
+async function fixture(t,{copyPublic=false}={}){
  const root=await mkdtemp(path.join(tmpdir(),'portfolio-discovery-'));
  t.after(()=>rm(root,{recursive:true,force:true}));
  await mkdir(path.join(root,'scripts'));
  await mkdir(path.join(root,'public'));
+ if(copyPublic)await cp(new URL('../public/',import.meta.url),path.join(root,'public'),{recursive:true});
  await cp(new URL('../src/',import.meta.url),path.join(root,'src'),{recursive:true});
  for(const name of ['build.mjs','audit.mjs'])await cp(new URL(`../scripts/${name}`,import.meta.url),path.join(root,'scripts',name));
  await writeFile(path.join(root,'package.json'),'{"type":"module"}');
@@ -83,4 +84,24 @@ test('artifact audit permits only the three generated Markdown pages and llms.tx
  assert.match(execFileSync(process.execPath,['scripts/audit.mjs'],{cwd:f.root,encoding:'utf8'}),/audit passed/);
  await writeFile(path.join(f.root,'dist','pt-br','extra.md'),'Unapproved');
  assert.throws(()=>execFileSync(process.execPath,['scripts/audit.mjs'],{cwd:f.root,encoding:'utf8',stdio:'pipe'}),/Unapproved artifact path: pt-br\/extra.md/);
+});
+
+test('an indexable portfolio build keeps the Fisiopoa preview out of discovery',async t=>{
+ const f=await fixture(t,{copyPublic:true});
+ f.build('https://portfolio.example','true');
+ const route='prototypes/fisiopoa/';
+ const html=await f.read(route+'index.html');
+ const privacy=await f.read(route+'privacidade.html');
+ for(const page of [html,privacy])assert.ok(/<meta name="robots" content="noindex, nofollow">/.test(page),'prototype pages must declare noindex and nofollow');
+ const stylesheet=html.match(/<link rel="stylesheet" href="((?:\.\/)?[a-z-]+\.css)">/)?.[1];
+ assert.ok(stylesheet,'stylesheet must resolve relative to the prototype route');
+ assert.ok((await f.read(new URL(stylesheet,'https://portfolio.example/'+route).pathname.slice(1))).length>0);
+ assert.ok(/<nav\b/.test(html),'standalone navigation must be present');
+ assert.ok(/href="privacidade\.html(?:#[^"]+)?"/.test(html),'privacy link must stay inside the prototype');
+ const map=html.match(/<iframe\b[^>]+>/)?.[0]??'';
+ assert.ok(/src="https:\/\/www\.google\.com\/maps\/embed\?/.test(map)&&/referrerpolicy="no-referrer"/.test(map)&&/loading="lazy"/.test(map),'map must use the approved lazy embed without a referrer');
+ assert.ok(!/data-theme|theme-toggle|prefers-color-scheme|localStorage|document\.cookie|clarity\(/i.test(html+privacy+(await f.read(route+'page.js'))+(await f.read(route+'style.css'))),'prototype must not add a theme switch or tracking code');
+ const locales=Object.keys(content);
+ const discovery=['sitemap.xml','llms.txt','index.html',...locales.flatMap(locale=>['','direct/','privacy/','terms/'].map(page=>locale+'/'+page+'index.html'))];
+ for(const file of discovery)assert.doesNotMatch(await f.read(file),/fisiopoa/i,file);
 });

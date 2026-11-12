@@ -1,0 +1,43 @@
+:root {
+  color-scheme:light;
+  --color-stage:#110e14;
+  --color-deep:#1d1422;
+  --color-brand:#845c8c;
+  --color-ink:#241b29;
+  --color-paper:#fcfafd;
+  --color-on-dark:#faf4fb;
+  --color-soft:#d3c2d8;
+  --color-muted:#5e5064;
+  --color-accent:#e7c8ed;
+  --color-accent-ink:var(--color-ink);
+  --color-accent-hover:#f3dcf7;
+  --color-leaf:#f1e8f2;
+  --color-stroke:#d4c4d8;
+  --color-orbit:#5e4465;
+  --color-focus:#784287;
+  --color-fog:#c59bd05c;
+  --color-fog-soft:#8d609c55;
+  --color-glass-light:#f8e5fb;
+  --color-glass-mid:#bc83c7;
+  --color-glass-deep:#653770;
+  --color-glass-shade:#301b3a;
+  --color-glass-card:#fbf5fc;
+  --color-glass-rim:#fffaff;
+  --color-glass-glint:#fffaff9c;
+  --color-glass-shadow:#53365e21;
+  --color-glass-dark:#261b2ce6;
+  --font-display:"Urbanist",Arial,sans-serif;
+  --font-body:var(--font-display);
+  --wrap:82rem;
+  --gutter:clamp(1rem,5vw,5rem);
+  --column-gap:clamp(1.25rem,5vw,5rem);
+  --round:1.4rem;
+  --header-height:4.5rem;
+  --orb-size:clamp(16rem,33vw,27rem);
+  --small:.875rem;
+  --body:clamp(1rem,.97rem + .22vw,1.125rem);
+  --lead:clamp(1.1rem,1.015rem + .48vw,1.36rem);
+  --heading:clamp(2.32rem,1.45rem + 3.9vw,4.6rem);
+  --display:clamp(3.3rem,1.15rem + 7.5vw,8.1rem);
+}
+
