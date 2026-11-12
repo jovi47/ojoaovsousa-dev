@@ -118,6 +118,23 @@ test('an indexable portfolio build keeps the Toro prototype isolated',async t=>{
  assert.equal(business.telephone,'+5534999927815');
  assert.equal(business.address.streetAddress,'Av. Rio Branco, 1200');
  assert.doesNotMatch(JSON.stringify(business),/review|rating|openingHours/i);
+ const header=html.match(/<header\b[\s\S]*?<\/header>/)[0];
+ assert.match(header,/<a class="header-logo"[^>]*>[\s\S]*?<span class="brand-mark"[^>]*><\/span>\s*<\/a>/);
+ assert.ok(header.indexOf('class="menu-toggle')<header.indexOf('class="button button-header"'));
+ for(const item of ['Baterias','Correias','Óleo e filtro de óleo','Palhetas','Escapamentos','Velas e cabos','Alinhamento e balanceamento','Injeção eletrônica','Ar-condicionado','Faróis','Freios','Suspensão']) {
+  assert.ok(html.includes('>'+item+'</button>'),item);
+ }
+ for(const item of ['Peças em geral','Instalação de bateria','Buscamos seu carro','Revisão'])assert.ok(html.includes('>'+item+'</h3>'),item);
+ for(const item of ['Raio X','Vista explodida','Bateria para moto'])assert.ok(html.includes('>'+item+'</button>'),item);
+ const stage=await f.read(route+'vehicle-stage.js');
+ for(const [file,nodes] of [['coupe.glb',['BodyHood','IllustrativeEngine','WheelFrontL','WheelRearL']],['moto.glb',[]]]){
+  const bytes=await readFile(path.join(f.root,'dist',route,'assets',file));
+  assert.equal(bytes.toString('ascii',0,4),'glTF');
+  assert.ok(bytes.length<3*1024*1024,file);
+  assert.ok(stage.includes("'"+file+"'"));
+  const gltf=JSON.parse(bytes.toString('utf8',20,20+bytes.readUInt32LE(12)));
+  for(const node of nodes)assert.ok(gltf.nodes.some(item=>item.name===node),node);
+ }
  const discovery=['sitemap.xml','llms.txt','index.html',...Object.keys(content).flatMap(locale=>['','direct/','privacy/','terms/'].map(page=>locale+'/'+page+'index.html'))];
  for(const file of discovery)assert.doesNotMatch(await f.read(file),/toro-auto-center/i,file);
 });
