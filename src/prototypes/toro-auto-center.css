@@ -166,7 +166,7 @@ html:has(dialog[open]), .page:has(dialog[open]) { overflow: hidden; }
 .battery-card { display: flex; align-items: start; gap: .9rem; padding: clamp(1rem, 3vw, 1.65rem); background: var(--panel); }
 .service-icon { width: 1.7rem; height: 1.7rem; }
 .battery-card .service-icon { color: var(--accent); }
-.battery-card h3 { font-size: clamp(1.35rem, 3vw, 2rem); }
+.battery-card h2, .battery-card h3 { font-size: clamp(1.35rem, 3vw, 2rem); line-height: 1.2; }
 .battery-card p { max-width: 34ch; margin-top: .35rem; color: var(--muted); }
 .battery-link { justify-content: space-between; min-height: 3.5rem; padding-inline: clamp(1rem, 3vw, 1.65rem); border-radius: 0; background: var(--graphite); color: var(--accent); text-align: left; }
 .battery-link:hover { background: var(--accent); color: var(--graphite); }
@@ -174,32 +174,47 @@ html:has(dialog[open]), .page:has(dialog[open]) { overflow: hidden; }
 .battery-photo { min-height: 12rem; border-radius: .35rem; }
 .battery-photo img { aspect-ratio: 1.65; }
 .battery-photo figcaption { right: .75rem; }
-.car-viewer { overflow: hidden; margin-bottom: 1rem; border: 1px solid var(--line-dark); border-radius: .55rem; background: #202125; color: var(--white); }
-.vehicle-picker { display: flex; gap: .25rem; padding: .75rem .85rem; }
-.inspection-modes { display: flex; flex-wrap: wrap; gap: .4rem; padding: 0 .85rem .7rem; }
+.services {
+  --showcase-backdrop: radial-gradient(ellipse at 50% 53%, #525356 0%, #353639 43%, #202124 78%);
+  padding-block: clamp(2.25rem, 5vw, 5rem) clamp(2rem, 5vw, 4rem);
+  background: var(--showcase-backdrop) fixed;
+}
+.services .section-intro { margin-bottom: clamp(.8rem, 2vw, 1.7rem); }
+.services .section-intro p { margin-top: .45rem; color: var(--muted); }
+.car-viewer { padding-bottom: 1rem; }
+.car-viewer-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem .9rem; padding-block: .35rem; }
+.vehicle-picker { display: flex; gap: .25rem; }
+.inspection-modes { display: flex; flex-wrap: wrap; gap: .4rem; }
 .inspection-modes button { min-height: 44px; padding-inline: .72rem; border: 1px solid #737176; border-radius: .28rem; font-size: .85rem; cursor: pointer; }
 .inspection-modes button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--graphite); }
 .vehicle-picker[hidden], .inspection-modes[hidden], .car-controls[hidden], .service-options[hidden], .reset-view[hidden] { display: none; }
 .vehicle-picker button { min-height: 44px; padding-inline: .9rem; border-radius: .25rem; color: var(--muted); cursor: pointer; }
 .vehicle-picker button[aria-pressed="true"] { background: var(--accent); color: var(--graphite); }
-.car-stage { position: relative; overflow: hidden; aspect-ratio: 1.12; background: #d6d6d6; }
+.car-display { position: relative; z-index: 1; scroll-margin-block: .6rem 1rem; }
+.car-stage { position: relative; overflow: hidden; min-width: 0; height: clamp(12.75rem, 78vw, 22rem); }
 .car-stage img, .car-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .car-stage canvas { visibility: hidden; }
-.car-stage[data-ready] { background: radial-gradient(ellipse at 50% 48%, #494241 0%, #241d20 52%, #111115 86%); }
 .car-stage[data-ready] canvas { visibility: visible; }
 .car-stage[data-ready] img { visibility: hidden; }
-.rotation-button { position: absolute; right: .55rem; bottom: .5rem; min-height: 44px; padding-inline: .65rem; border-radius: .25rem; background: #17171c; color: var(--white); font-size: .8rem; cursor: pointer; }
-.vehicle-credit { padding: 0 clamp(1rem, 3vw, 1.55rem) 1rem; color: var(--muted); font-size: .8rem; }
+.rotation-button { position: absolute; right: .55rem; bottom: .5rem; min-height: 44px; padding-inline: .65rem; border-radius: .25rem; background: #17171cbf; color: var(--white); font-size: .8rem; cursor: pointer; }
+.vehicle-credit { padding-block: .25rem 1rem; color: var(--muted); font-size: .8rem; }
 .vehicle-credit a { text-decoration: underline; }
+.car-stage img { object-fit: contain; }
 .car-stage img.is-focused { transform: scale(1.6); }
-.car-stage figcaption { position: absolute; inset: auto auto .6rem .7rem; border-radius: .25rem; background: #17171c; padding: .25rem .48rem; font-size: .8rem; color: var(--white); }
+.car-stage figcaption { position: absolute; inset: auto auto .6rem .7rem; border-radius: .25rem; background: #17171cbf; padding: .25rem .48rem; font-size: .8rem; color: var(--white); }
+.part-navigation { display: flex; gap: .4rem; margin-top: .55rem; }
+.part-navigation[hidden] { display: none; }
+.part-navigation button { min-height: 44px; padding-inline: .65rem; border: 1px solid #737176; border-radius: .28rem; font-size: .83rem; cursor: pointer; }
+.part-navigation button:hover:enabled { border-color: var(--accent); }
+.part-navigation button:disabled { opacity: .45; cursor: default; }
+.part-navigation span { margin-inline: .16rem; font-size: 1.12rem; line-height: 1; }
 .car-viewer :focus-visible { outline-color: var(--accent); }
-.car-detail { padding: clamp(1rem, 3vw, 1.55rem); }
+.car-detail { display: grid; align-content: center; gap: .42rem; padding-block: .75rem 1rem; }
 .car-detail-title { font-size: clamp(1.4rem, 3vw, 2rem); }
-.car-description { margin-top: .55rem; color: var(--muted); }
+.car-description { max-width: 46ch; color: var(--muted); }
 .reset-view { margin-top: .35rem; min-height: 44px; color: var(--accent); font-size: .85rem; cursor: pointer; }
 .reset-view:hover { text-decoration: underline; }
-.car-controls { display: grid; gap: .85rem 1.25rem; padding: 1rem clamp(1rem, 3vw, 1.55rem) 1.35rem; }
+.car-controls { display: grid; gap: .85rem 1.25rem; padding-block: 1.15rem 1rem; }
 .car-controls h3 { margin-bottom: .55rem; color: var(--muted); font-size: .94rem; letter-spacing: normal; }
 .service-buttons { display: flex; flex-wrap: wrap; gap: .4rem; }
 .service-buttons button { min-height: 44px; padding: .4rem .65rem; border: 1px solid #737176; border-radius: .28rem; text-align: start; font-size: .83rem; cursor: pointer; }
@@ -290,8 +305,10 @@ html:has(dialog[open]), .page:has(dialog[open]) { overflow: hidden; }
   .menu-toggle { display: none; }
 }
 @media (width >= 768px) {
-  .car-display { display: grid; grid-template-columns: minmax(0, 2.5fr) minmax(0, 1fr); align-items: center; }
-  .car-stage { aspect-ratio: 1.48; }
+  .car-display { display: grid; grid-template-columns: minmax(0, 1fr) minmax(13rem, 24%); align-items: center; gap: clamp(1rem, 3vw, 3rem); }
+  .car-stage { height: clamp(19rem, 62svh, 43rem); }
+  .car-detail { padding-inline-end: .4rem; }
+  .service-buttons button { flex: 1 1 12rem; }
   .car-controls { grid-template-columns: 1fr 1fr; }
   .other-grid { grid-template-columns: 1fr 1fr; }
   .hero { display: grid; align-items: center; min-height: clamp(33rem, 49vw, 46rem); }
@@ -308,6 +325,13 @@ html:has(dialog[open]), .page:has(dialog[open]) { overflow: hidden; }
   .placeholder-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .location-layout { grid-template-columns: minmax(0, .8fr) minmax(0, 1.35fr); align-items: center; }
   .footer-layout { grid-template-columns: 1fr auto; align-items: center; }
+}
+@media (max-width: 767px) and (min-height: 750px), (min-width: 768px) and (min-height: 670px) {
+  .car-viewer:has(.car-stage[data-ready]) .car-display {
+    position: sticky;
+    top: calc(var(--header-height) + .5rem + env(safe-area-inset-top));
+    background: var(--showcase-backdrop) fixed;
+  }
 }
 @media (width >= 1024px) {
   :root { --gutter: clamp(5rem, 6.5vw, 7.25rem); }

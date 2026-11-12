@@ -54,8 +54,13 @@ const controls = viewer.querySelector('.car-controls');
 const title = viewer.querySelector('.car-detail-title');
 const description = viewer.querySelector('.car-description');
 const reset = viewer.querySelector('.reset-view');
+const navigation = viewer.querySelector('.part-navigation');
+const [previous, next] = navigation.querySelectorAll('button');
+const chapterButtons = [...controls.querySelectorAll('[data-service]')];
+const display = viewer.querySelector('.car-display');
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const photos = {
-  coupe: ['assets/picape.webp', 'Picape ilustrativa em vista de três quartos'],
+  coupe: ['assets/coupe.webp', 'Mercedes-AMG GT branco ilustrativo em vista de três quartos'],
   motorcycle: ['assets/moto.webp', 'Moto urbana grafite em vista de três quartos']
 };
 
@@ -68,7 +73,8 @@ function showMode(value = '') {
 function focusVehicle() {
   scene?.showService(selected?.dataset.service);
   caption.textContent = stage.hasAttribute('data-ready')
-    ? 'Modelo 3D ilustrativo' : 'Imagem ilustrativa';
+    ? selected ? 'Peça 3D ilustrativa' : 'Modelo 3D ilustrativo'
+    : 'Imagem ilustrativa';
 }
 async function loadVehicle() {
   if (!scene) return;
@@ -90,6 +96,11 @@ function showService(button) {
   title.textContent = button?.textContent || 'Visão geral';
   description.textContent = button?.dataset.info || 'Explore as peças do veículo e os serviços disponíveis na oficina.';
   reset.hidden = !button;
+  const chapters = chapterButtons.filter(chapter => !chapter.closest('[data-for]').hidden);
+  const index = chapters.indexOf(button);
+  previous.disabled = index === -1;
+  next.disabled = index === chapters.length - 1;
+  navigation.hidden = chapters.length < 2;
   focusVehicle();
 }
 picker.addEventListener('click', event => {
@@ -105,10 +116,20 @@ picker.addEventListener('click', event => {
 });
 controls.addEventListener('click', event => {
   const button = event.target.closest('[data-point]');
-  if (button) {
-    showMode();
-    showService(button);
-  }
+  if (!button) return;
+  showMode();
+  showService(button);
+  title.focus({ preventScroll: true });
+  display.scrollIntoView({ block: 'nearest', behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+});
+navigation.addEventListener('click', event => {
+  const button = event.target.closest('[data-step]');
+  if (!button) return;
+  const chapters = chapterButtons.filter(chapter => !chapter.closest('[data-for]').hidden);
+  const index = chapters.indexOf(selected);
+  showMode();
+  showService(chapters[index + Number(button.dataset.step)]);
+  if (button.disabled) (button === next ? previous : next).focus({ preventScroll: true });
 });
 modes.addEventListener('click', event => {
   const button = event.target.closest('[data-mode]');
@@ -130,6 +151,7 @@ reset.addEventListener('click', () => {
 });
 picker.hidden = false;
 controls.hidden = false;
+showService();
 if ('IntersectionObserver' in window && 'ResizeObserver' in window) {
   const lazy = new IntersectionObserver(entries => {
     if (!entries.some(entry => entry.isIntersecting)) return;

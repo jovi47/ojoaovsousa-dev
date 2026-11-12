@@ -111,55 +111,61 @@
         </figure>
       </section>
 
-      <section class="section services light" id="servicos" tabindex="-1" aria-labelledby="services-title">
+      <section class="section services" id="servicos" tabindex="-1" aria-labelledby="services-title">
         <div class="wrap">
           <div class="section-intro" data-reveal>
             <h2 id="services-title">Explore o carro</h2>
-            <p>Escolha um dos botões para ver onde a equipe trabalha.</p>
+            <p>Veja de perto as peças e o que a oficina faz em cada serviço.</p>
           </div>
-          <div class="car-viewer" data-reveal>
-            <div class="vehicle-picker" role="group" aria-label="Veículo" hidden>
-              <button type="button" data-vehicle="coupe" aria-pressed="true">Carro</button>
-              <button type="button" data-vehicle="motorcycle" aria-pressed="false">Moto</button>
+          <div class="car-viewer">
+            <div class="car-viewer-toolbar">
+              <div class="vehicle-picker" role="group" aria-label="Veículo" hidden>
+                <button type="button" data-vehicle="coupe" aria-pressed="true">Carro</button>
+                <button type="button" data-vehicle="motorcycle" aria-pressed="false">Moto</button>
+              </div>
+              <div class="inspection-modes" role="group" aria-label="Modo de visualização" hidden>
+                <button type="button" data-mode="xray" aria-pressed="false">Raio X</button>
+                <button type="button" data-mode="exploded" aria-pressed="false">Vista explodida</button>
+              </div>
             </div>
-            <div class="inspection-modes" role="group" aria-label="Modo de visualização" hidden>
-              <button type="button" data-mode="xray" aria-pressed="false">Raio X</button>
-              <button type="button" data-mode="exploded" aria-pressed="false">Vista explodida</button>
-            </div>
-            <div class="car-display">
+            <div class="car-display" id="vehicle-display">
               <figure class="car-stage">
-                <img src="assets/picape.webp" alt="Picape ilustrativa em vista de três quartos" width="1050" height="700" loading="lazy" decoding="async">
+                <img src="assets/coupe.webp" alt="Mercedes-AMG GT branco ilustrativo em vista de três quartos" width="795" height="538" loading="lazy" decoding="async">
                 <canvas aria-hidden="true"></canvas>
                 <figcaption>Imagem ilustrativa</figcaption>
                 <button class="rotation-button" type="button" hidden>Pausar rotação</button>
               </figure>
               <div class="car-detail">
-                <h3 class="car-detail-title">Visão geral</h3>
+                <h3 class="car-detail-title" tabindex="-1">Visão geral</h3>
                 <p class="car-description" aria-live="polite">Explore as peças do veículo e os serviços disponíveis na oficina.</p>
                 <button class="reset-view" type="button" hidden>Voltar à visão geral</button>
+                <nav class="part-navigation" aria-label="Percorrer peças e serviços" hidden>
+                  <button type="button" data-step="-1" aria-controls="vehicle-display"><span aria-hidden="true">‹</span> Anterior</button>
+                  <button type="button" data-step="1" aria-controls="vehicle-display">Próximo <span aria-hidden="true">›</span></button>
+                </nav>
               </div>
             </div>
             <div class="car-controls" aria-label="Peças e serviços" hidden>
               <div class="service-options" data-for="coupe">
                 <h3>Produtos</h3>
                 <div class="service-buttons">
-                  <button type="button" aria-pressed="false" data-service="battery" data-point="34% 55%" data-info="No compartimento do motor, a bateria fornece energia para a partida e os sistemas elétricos.">Baterias</button>
-                  <button type="button" aria-pressed="false" data-service="belt" data-point="27% 57%" data-info="No motor, as correias sincronizam componentes ou acionam acessórios, conforme o veículo.">Correias</button>
-                  <button type="button" aria-pressed="false" data-service="oil" data-point="39% 50%" data-info="O óleo lubrifica o motor e o filtro retém impurezas no circuito de lubrificação.">Óleo e filtro de óleo</button>
-                  <button type="button" aria-pressed="false" data-service="wipers" data-point="41% 35%" data-info="As palhetas ficam na base do para-brisa e ajudam a manter a visibilidade.">Palhetas</button>
-                  <button type="button" aria-pressed="false" data-service="exhaust" data-point="93% 70%" data-info="O escapamento conduz os gases do motor pela parte inferior do carro.">Escapamentos</button>
-                  <button type="button" aria-pressed="false" data-service="spark" data-point="37% 50%" data-info="As velas produzem a faísca da ignição. Alguns motores usam cabos para levar a corrente até elas.">Velas e cabos</button>
+                  <button type="button" aria-pressed="false" data-service="battery" data-point="34% 55%" data-info="A bateria alimenta a partida e os sistemas elétricos. Na troca, a oficina confere a capacidade e a posição dos terminais.">Baterias</button>
+                  <button type="button" aria-pressed="false" data-service="belt" data-point="27% 57%" data-info="A correia de acessórios é a faixa de borracha que passa pelas polias. Ela transmite o giro do motor para componentes como o alternador e o compressor do ar-condicionado.">Correias</button>
+                  <button type="button" aria-pressed="false" data-service="oil" data-point="39% 50%" data-info="Veja o filtro de óleo, com a vedação e os orifícios de passagem. Na troca, a oficina usa o óleo e o filtro indicados para o motor.">Óleo e filtro de óleo</button>
+                  <button type="button" aria-pressed="false" data-service="wipers" data-point="41% 35%" data-info="As lâminas de borracha encostam no para-brisa para remover a água. A oficina confere o encaixe e o comprimento das palhetas.">Palhetas</button>
+                  <button type="button" aria-pressed="false" data-service="exhaust" data-point="93% 70%" data-info="O tubo conduz os gases do motor, e o silencioso reduz o ruído. A oficina verifica o conjunto e suas conexões.">Escapamentos</button>
+                  <button type="button" aria-pressed="false" data-service="spark" data-point="37% 50%" data-info="A ponta metálica da vela produz a faísca. Nos motores com cabos de ignição, eles levam a corrente até as velas.">Velas e cabos</button>
                 </div>
               </div>
               <div class="service-options" data-for="coupe">
                 <h3>Serviços</h3>
                 <div class="service-buttons">
-                  <button type="button" aria-pressed="false" data-service="alignment" data-point="46% 75%" data-info="O alinhamento ajusta os ângulos das rodas e o balanceamento corrige desequilíbrios no conjunto.">Alinhamento e balanceamento</button>
-                  <button type="button" aria-pressed="false" data-service="injection" data-point="39% 49%" data-info="O diagnóstico verifica o sistema que controla a alimentação de combustível do motor.">Injeção eletrônica</button>
-                  <button type="button" aria-pressed="false" data-service="ac" data-point="23% 55%" data-info="O sistema de climatização tem componentes na frente do veículo e no compartimento do motor.">Ar-condicionado</button>
-                  <button type="button" aria-pressed="false" data-service="lights" data-point="30% 54%" data-info="Os faróis ficam na parte dianteira e fazem parte do sistema de iluminação.">Faróis</button>
-                  <button type="button" aria-pressed="false" data-service="brakes" data-point="46% 75%" data-info="Os freios são inspecionados junto às rodas, onde ficam os discos, pastilhas ou tambores.">Freios</button>
-                  <button type="button" aria-pressed="false" data-service="suspension" data-point="87% 65%" data-info="Junto às rodas, molas e amortecedores ajudam a controlar os movimentos do carro.">Suspensão</button>
+                  <button type="button" aria-pressed="false" data-service="alignment" data-point="46% 75%" data-info="Veja o eixo traseiro e as duas rodas. O alinhamento ajusta os ângulos das rodas. O balanceamento corrige a distribuição de peso de cada roda e pneu para reduzir vibrações.">Alinhamento e balanceamento</button>
+                  <button type="button" aria-pressed="false" data-service="injection" data-point="39% 49%" data-info="Os bicos injetores dosam o combustível. No diagnóstico, a oficina verifica o funcionamento do sistema de injeção eletrônica.">Injeção eletrônica</button>
+                  <button type="button" aria-pressed="false" data-service="ac" data-point="23% 55%" data-info="O compressor movimenta o fluido refrigerante do ar-condicionado. A oficina verifica a refrigeração e investiga sinais de vazamento ou falha.">Ar-condicionado</button>
+                  <button type="button" aria-pressed="false" data-service="lights" data-point="30% 54%" data-info="Os dois faróis iluminam a via. A oficina confere as luzes de cada lado e regula a altura e a direção dos fachos.">Faróis</button>
+                  <button type="button" aria-pressed="false" data-service="brakes" data-point="46% 75%" data-info="A pinça aperta as pastilhas contra o disco para desacelerar a roda. Na inspeção, a oficina confere o desgaste dessas peças.">Freios</button>
+                  <button type="button" aria-pressed="false" data-service="suspension" data-point="87% 65%" data-info="A mola sustenta o carro e o amortecedor controla a oscilação. A oficina inspeciona o conjunto para identificar desgaste ou folga.">Suspensão</button>
                 </div>
               </div>
               <div class="service-options" data-for="motorcycle" hidden>
@@ -172,12 +178,17 @@
             <noscript><p class="car-description">Produtos: baterias, correias, óleo e filtros, palhetas, escapamentos, velas e cabos. Serviços: alinhamento e balanceamento, injeção eletrônica, ar-condicionado, faróis, freios e suspensão.</p></noscript>
             <p class="vehicle-credit">Mercedes-AMG GT por <a href="https://sketchfab.com/3d-models/661dcab94455463784651a3ebc63cfb9">Yan Carvalho</a>. Motor ilustrativo adaptado do <a href="https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/CarConcept">Car Concept</a>, por Eric Chadwick / Darmstadt Graphics Group. Moto gerada com <a href="https://www.meshy.ai/">Meshy</a>. <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
           </div>
+        </div>
+      </section>
+
+      <section class="section light battery-section" aria-labelledby="battery-title">
+        <div class="wrap">
           <div class="battery-layout grid" data-reveal>
             <div class="battery-services grid">
               <article class="battery-card">
                 <svg class="icon service-icon" aria-hidden="true"><use href="#icon-battery"/></svg>
                 <div>
-                  <h3>Troca de baterias</h3>
+                  <h2 id="battery-title">Troca de baterias</h2>
                   <p>Teste do sistema de carga e instalação de bateria compatível com o veículo.</p>
                 </div>
               </article>

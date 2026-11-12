@@ -134,6 +134,11 @@ test('an indexable portfolio build keeps the Toro prototype isolated',async t=>{
   assert.ok(stage.includes("'"+file+"'"));
   const gltf=JSON.parse(bytes.toString('utf8',20,20+bytes.readUInt32LE(12)));
   for(const node of nodes)assert.ok(gltf.nodes.some(item=>item.name===node),node);
+  if(file==='coupe.glb') {
+   const paint=gltf.materials.find(item=>item.name==='Paint 1 Toro');
+   const [red,green,blue]=paint.pbrMetallicRoughness.baseColorFactor;
+   assert.ok(Math.min(red,green,blue)>.75 && Math.max(red,green,blue)-Math.min(red,green,blue)<.08);
+  }
  }
  const discovery=['sitemap.xml','llms.txt','index.html',...Object.keys(content).flatMap(locale=>['','direct/','privacy/','terms/'].map(page=>locale+'/'+page+'index.html'))];
  for(const file of discovery)assert.doesNotMatch(await f.read(file),/toro-auto-center/i,file);

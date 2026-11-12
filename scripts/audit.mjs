@@ -15,9 +15,9 @@ const fisiopoa=new Set([
  'assets/avaliacao.webp','assets/pilates.webp','assets/fortalecimento.webp'
 ]);
 const toro=new Set([
- 'index.html','style.css','page.js','vehicle-stage.js','assets/toro.svg','assets/geist.woff2',
+ 'index.html','style.css','page.js','vehicle-stage.js','vehicle-parts.js','assets/toro.svg','assets/geist.woff2',
  'assets/geist-license.txt','assets/bateria.webp','assets/oficina.webp','assets/oficina-mobile.webp',
- 'assets/picape.webp','assets/moto.webp','assets/coupe.glb','assets/moto.glb'
+ 'assets/coupe.webp','assets/moto.webp','assets/coupe.glb','assets/moto.glb'
 ]);
 const prototypes=new Map([['prototypes/fisiopoa',fisiopoa],['prototypes/toro-auto-center',toro]]);
 const prototypeDirectories=[...prototypes.keys()].flatMap(name=>[name,name+'/assets']);
