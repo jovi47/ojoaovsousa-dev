@@ -29,6 +29,17 @@ test('Pages rules preserve real404 handling and allow only the required inline n
  assert.doesNotMatch(headers,/^\s+Cache-Control:.*(?:immutable|max-age=315)/m);
 });
 
+test('the standalone landing replaces the inherited CSP only on its slash URL',async()=>{
+ const headers=await readFile(new URL('public/_headers',root),'utf8');
+ const mapRules=headers.split(/\n\n/).filter(block=>block.includes('frame-src https://www.google.com'));
+ assert.equal(mapRules.length,1);
+ assert.match(mapRules[0],/^\/prototypes\/fisiopoa\/\n  ! Content-Security-Policy\n  Content-Security-Policy: default-src 'self';/m);
+ for(const scope of ['/prototypes/fisiopoa','/prototypes/fisiopoa/*']){
+  assert.ok(headers.includes(scope+'\n  X-Robots-Tag: noindex, nofollow\n'));
+ }
+ assert.doesNotMatch(csp,/frame-src|https:\/\/www\.google\.com/);
+});
+
 function fixture({preview=false,alter=()=>{}}={}){
  const origin='https://portfolio.example',files=new Map();
  const headers={'Content-Security-Policy':csp,'X-Content-Type-Options':'nosniff','X-Frame-Options':'DENY','Referrer-Policy':'strict-origin-when-cross-origin','Permissions-Policy':'camera=(), microphone=(), geolocation=()'};

@@ -52,6 +52,16 @@ In an opted-in release, each language home/policy self-canonicalizes and supplie
 
 Robots disallow is a crawler directive, not access control or a guaranteed removal mechanism. A crawler cannot read an HTML noindex when robots blocks its fetch; a previously discovered public preview would require an appropriate accessible noindex/removal plan. Keep unpublished previews private until hosting controls and the release are approved. Preparing these files alone does not establish that a URL is absent from search.
 
+## Standalone Fisiopoa preview
+
+`/prototypes/fisiopoa/` serves the approved light version with its own navigation, relative assets and privacy page. The 17 reviewed files match archive SHA-256 `b486b75af9ba34c397ae61deaae7f47f5288d5a25612f420dd7bde96d0fdc0c3` byte for byte. There is no theme selector or portfolio analytics on the prototype. It is absent from the portfolio's links, sitemap and `llms.txt` even in an indexable build. Production robots.txt remains crawlable so crawlers can read the exclusion directives.
+
+Both HTML pages declare `noindex, nofollow`; Pages `_headers` covers the bare route and its subtree. Pages' directory redirects resolve relative assets from the slash URL, and the privacy document serves at `/prototypes/fisiopoa/privacidade` (the `.html` link redirects there). The local dev handler mirrors these variants and preserves query strings. The artifact audit allows only the 17 reviewed files under this path.
+
+On the slash URL only, Pages removes the inherited CSP and replaces it with one policy that permits a frame from `https://www.google.com`. The map is lazy and sends no referrer. The privacy page, sibling routes and the rest of the portfolio retain their existing CSP. No message is sent by loading the landing; contact links open their providers only on visitor action.
+
+To preview locally, run `npm run build` then `npm run dev` and open the route in the project preview. On publication, verify HTTP 200 after the slash redirect, relative assets and privacy, both robots directives, one effective CSP, the visible map and the independent navigation on mobile. Do not request indexing. The package adds 536,541 raw bytes plus 402 bytes of Pages rules, with no dependency or contracted charge. The map adds requests to its provider only when loaded; transfer and billing remain unmeasured.
+
 ## Local checks and cost
 
 Published correction source `488d3e3`, integration `43af65e`, passed 96 local tests and build/audit 164/128. Only `city.js`/`viewer.css` change against published fd9; HTML/Markdown, URLs, metadata, canonical/hreflang, robots/schema/sitemap remain unchanged. Its frozen 128-file package is 9,966,622 raw bytes, ZIP 5,921,711 bytes; publication is confirmed as `34340e9f-8a71-4ee8-8384-78f709f5be8a` on 2026-10-23 UTC. All 36exact-artifact + 3 critical-CSS checks and 3 previous-fd9-target exact GETs passed; actual rollback was not exercised. No Search Console operation or new permission was added.
