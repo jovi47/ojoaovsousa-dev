@@ -105,3 +105,19 @@ test('an indexable portfolio build keeps the Fisiopoa preview out of discovery',
  const discovery=['sitemap.xml','llms.txt','index.html',...locales.flatMap(locale=>['','direct/','privacy/','terms/'].map(page=>locale+'/'+page+'index.html'))];
  for(const file of discovery)assert.doesNotMatch(await f.read(file),/fisiopoa/i,file);
 });
+
+test('an indexable portfolio build keeps the Toro prototype isolated',async t=>{
+ const f=await fixture(t,{copyPublic:true});
+ f.build('https://portfolio.example','true');
+ const route='prototypes/toro-auto-center/';
+ const html=await f.read(route+'index.html');
+ assert.match(html,/<meta name="robots" content="noindex, nofollow">/);
+ assert.match(html,/<iframe\b[^>]*src="https:\/\/www\.google\.com\/maps[^>]*loading="lazy"/);
+ const business=JSON.parse(html.match(/<script type="application\/ld\+json">([^<]+)<\/script>/)[1]);
+ assert.equal(business['@type'],'AutoRepair');
+ assert.equal(business.telephone,'+5534999927815');
+ assert.equal(business.address.streetAddress,'Av. Rio Branco, 1200');
+ assert.doesNotMatch(JSON.stringify(business),/review|rating|openingHours/i);
+ const discovery=['sitemap.xml','llms.txt','index.html',...Object.keys(content).flatMap(locale=>['','direct/','privacy/','terms/'].map(page=>locale+'/'+page+'index.html'))];
+ for(const file of discovery)assert.doesNotMatch(await f.read(file),/toro-auto-center/i,file);
+});
