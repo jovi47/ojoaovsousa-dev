@@ -76,3 +76,41 @@ if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: re
     reveal.observe(element);
   });
 }
+
+const rail = document.querySelector('.rail-light');
+const outlet = document.querySelector('.tooth-outlet');
+
+if (rail && outlet && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const header = document.querySelector('.site-header');
+  const main = document.querySelector('.site-main');
+  const intro = rail.querySelector('.rail-intro');
+  const loop = rail.querySelector('.rail-loop');
+
+  function fitRail() {
+    const top = header.getBoundingClientRect().bottom;
+    const width = main.getBoundingClientRect().width;
+    const bottom = Math.max(0, document.documentElement.clientHeight - top - 16);
+    const outletY = outlet.getBoundingClientRect().top + scrollY - top + 1;
+    const start = Math.max(1, Math.min(outletY, bottom));
+    const right = width - .5;
+    const turn = `V .5 H ${right} V ${bottom}`;
+    const introLength = start + bottom + width - 2;
+    const loopLength = bottom * 2 + width - 2;
+    const trail = Math.min(270, Math.max(160, width * .22));
+
+    intro.setAttribute('d', `M .5 ${start} ${turn}`);
+    loop.setAttribute('d', `M .5 ${bottom} ${turn}`);
+    rail.style.setProperty('--rail-top', `${top - 1}px`);
+    rail.style.setProperty('--rail-trail', `${trail}px`);
+    rail.style.setProperty('--rail-gap', `${loopLength + trail}px`);
+    rail.style.setProperty('--rail-intro-time', `${introLength / 270}s`);
+    rail.style.setProperty('--rail-loop-time', `${loopLength / 270}s`);
+    rail.style.setProperty('--rail-intro-end', `${trail - introLength}px`);
+    rail.style.setProperty('--rail-loop-end', `${trail - loopLength}px`);
+    rail.classList.add('is-tracing');
+  }
+
+  fitRail();
+  document.fonts.ready.then(fitRail);
+  window.addEventListener('resize', fitRail);
+}

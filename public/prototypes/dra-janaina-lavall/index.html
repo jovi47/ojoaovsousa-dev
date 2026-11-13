@@ -27,27 +27,38 @@
       </nav>
       <div class="header-actions">
         <button class="menu-toggle" type="button" aria-controls="menu" aria-expanded="false" aria-haspopup="dialog" aria-label="Abrir menu" hidden><span aria-hidden="true"></span></button>
-        <a class="button header-book" href="#contato" data-contact>Agendar <span aria-hidden="true">↗</span></a>
+        <a class="button primary header-book" href="#contato" data-contact>Agendar <span aria-hidden="true">↗</span></a>
       </div>
     </div>
     <dialog id="menu" class="mobile-menu" aria-labelledby="menu-title">
       <div class="menu-heading">
-        <strong id="menu-title">Dra. Janaína Lavall</strong>
+        <strong class="brand" id="menu-title"><img src="assets/brand.webp" width="42" height="37" alt="">Dra. Janaína Lavall</strong>
         <form method="dialog"><button type="submit" class="menu-close" aria-label="Fechar menu" autofocus>×</button></form>
       </div>
       <nav aria-label="Navegação no celular">
-        <a href="#tratamentos">Tratamentos</a>
-        <a href="#sobre">Sobre a Dra.</a>
-        <a href="#contato" data-contact>Contato</a>
-        <a href="#localizacao">Localização</a>
+        <a href="#tratamentos"><svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4c-2 0-3-1-5-1-3 0-4.5 2-4.5 5 0 2.5 1.5 4 2.2 6.4.8 2.5 1 6.6 3 6.6 1.4 0 1.3-5 4.3-5s2.9 5 4.3 5c2 0 2.2-4.1 3-6.6.7-2.4 2.2-3.9 2.2-6.4 0-3-1.5-5-4.5-5-2 0-3 1-5 1Z"/></svg>Tratamentos</a>
+        <a href="#sobre"><svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/></svg>Sobre a Dra.</a>
+        <a href="#contato" data-contact><svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.5a8.5 8.5 0 0 1-8.5 8.5H4l1.5-4A8.5 8.5 0 1 1 20.5 11.5Z"/><path d="M8.5 11.5h7"/></svg>Contato</a>
+        <a href="#localizacao"><svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 10c0 4.8-7 10.5-7 10.5S5 14.8 5 10a7 7 0 0 1 14 0Z"/><circle cx="12" cy="10" r="2.3"/></svg>Localização</a>
       </nav>
     </dialog>
   </header>
 
+  <svg class="rail-light wrap" fill="none" aria-hidden="true">
+    <path class="rail-intro"/>
+    <path class="rail-loop"/>
+  </svg>
+
   <main class="site-main wrap rails" id="conteudo" tabindex="-1">
-    <span class="rail-light" aria-hidden="true"></span>
     <section class="hero" id="inicio" aria-labelledby="titulo">
       <div class="hero-copy">
+        <svg class="hero-tooth" viewBox="0 0 240 240" fill="none" aria-hidden="true">
+          <path pathLength="1" d="M119 35c-16 0-29-10-48-7-24 4-37 23-35 48 2 26 17 45 24 72 4 17 9 48 23 56 11 6 16-12 20-30 4-16 8-36 17-36 10 0 15 20 18 36 4 18 9 36 20 30 14-8 18-39 23-56 7-27 22-46 24-72 2-25-11-44-35-48-19-3-32 7-48 7h-3Z"/>
+          <path pathLength="1" d="M191 100c-40-27-101-26-140 0"/>
+        </svg>
+        <svg class="tooth-outlet" viewBox="0 0 100 2" preserveAspectRatio="none" fill="none" aria-hidden="true">
+          <path pathLength="1" d="M100 1H0"/>
+        </svg>
         <h1 id="titulo">Dentista <em>perto da Savassi.</em></h1>
         <p class="hero-summary">A Dra. Janaína Lavall atende no Santo Antônio, em Belo Horizonte, com consultas, prevenção e tratamentos estéticos.</p>
         <div class="hero-actions">
@@ -55,10 +66,6 @@
         </div>
       </div>
       <figure class="hero-art">
-        <svg class="hero-tooth" viewBox="0 0 240 240" fill="none" aria-hidden="true">
-          <path pathLength="1" d="M119 35c-16 0-29-10-48-7-24 4-37 23-35 48 2 26 17 45 24 72 4 17 9 48 23 56 11 6 16-12 20-30 4-16 8-36 17-36 10 0 15 20 18 36 4 18 9 36 20 30 14-8 18-39 23-56 7-27 22-46 24-72 2-25-11-44-35-48-19-3-32 7-48 7h-3Z"/>
-          <path pathLength="1" d="M51 100c39-26 100-27 140 0"/>
-        </svg>
         <div class="photo-frame">
           <img class="hero-photo" src="assets/janaina-lavall.webp" srcset="assets/janaina-lavall-small.webp 440w, assets/janaina-lavall.webp 820w" sizes="(min-width: 1120px) 450px, (min-width: 768px) 40vw, 86vw" width="820" height="852" alt="Dra. Janaína Lavall" fetchpriority="high">
         </div>
@@ -75,7 +82,7 @@
           <article class="treatment" data-reveal="up">
             <img src="assets/limpeza.webp" width="680" height="440" alt="" loading="lazy" decoding="async">
             <div class="treatment-copy">
-              <h3>Limpeza dental</h3>
+              <h3><svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17h16M6 17v-3a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3M8 12V8m3 4V8m3 4V8m3 4V8"/></svg><span>Limpeza dental</span></h3>
               <p>Remoção de placa e tártaro, com orientações para cuidar dos dentes e da gengiva entre as consultas.</p>
               <a class="text-link" href="#contato" data-contact="Limpeza dental" aria-label="Consultar sobre limpeza dental">Consultar <span aria-hidden="true">↗</span></a>
             </div>
@@ -83,7 +90,7 @@
           <article class="treatment" data-reveal="up">
             <img src="assets/clareamento.webp" width="680" height="440" alt="" loading="lazy" decoding="async">
             <div class="treatment-copy">
-              <h3>Clareamento dental</h3>
+              <h3><svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3c0 5-2 7-7 7 5 0 7 2 7 7 0-5 2-7 7-7-5 0-7-2-7-7Zm8 11c0 3-1 4-4 4 3 0 4 1 4 4 0-3 1-4 4-4-3 0-4-1-4-4Z"/></svg><span>Clareamento dental</span></h3>
               <p>Conheça as opções para clarear a cor dos dentes após avaliar sua saúde bucal e sua sensibilidade.</p>
               <a class="text-link" href="#contato" data-contact="Clareamento dental" aria-label="Consultar sobre clareamento dental">Consultar <span aria-hidden="true">↗</span></a>
             </div>
@@ -91,7 +98,7 @@
           <article class="treatment" data-reveal="up">
             <img src="assets/implantes.webp" width="680" height="440" alt="" loading="lazy" decoding="async">
             <div class="treatment-copy">
-              <h3>Implantes e próteses</h3>
+              <h3><svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8l2 3-2 4H8L6 6l2-3Zm1 7 1 10 2 1 2-1 1-10m-6 3 6 2m-5 2 4 1"/></svg><span>Implantes e próteses</span></h3>
               <p>Converse sobre as opções para repor dentes ausentes e recuperar a função na mastigação.</p>
               <a class="text-link" href="#contato" data-contact="Implantes e próteses" aria-label="Consultar sobre implantes e próteses">Consultar <span aria-hidden="true">↗</span></a>
             </div>
@@ -99,7 +106,7 @@
           <article class="treatment" data-reveal="up">
             <img src="assets/lentes.webp" width="680" height="440" alt="" loading="lazy" decoding="async">
             <div class="treatment-copy">
-              <h3>Lentes de contato dental</h3>
+              <h3><svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6c4-2 10-2 14 0l-2 10c-3 2-7 2-10 0L5 6Zm3 2c2-1 6-1 8 0"/></svg><span>Lentes de contato dental</span></h3>
               <p>Avaliação da indicação de facetas para ajustar a forma e a aparência dos dentes.</p>
               <a class="text-link" href="#contato" data-contact="Lentes de contato dental" aria-label="Consultar sobre lentes de contato dental">Consultar <span aria-hidden="true">↗</span></a>
             </div>
@@ -107,7 +114,7 @@
           <article class="treatment" data-reveal="up">
             <img src="assets/clinica-geral.webp" width="680" height="440" alt="" loading="lazy" decoding="async">
             <div class="treatment-copy">
-              <h3>Odontologia geral</h3>
+              <h3><svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-3"/><rect x="9" y="3" width="6" height="5" rx="1"/><path d="M12 11v6m-3-3h6"/></svg><span>Odontologia geral</span></h3>
               <p>Consultas, restaurações, tratamento de canal e cirurgias odontológicas conforme a avaliação.</p>
               <a class="text-link" href="#contato" data-contact="Odontologia geral" aria-label="Consultar sobre odontologia geral">Consultar <span aria-hidden="true">↗</span></a>
             </div>
@@ -118,14 +125,13 @@
     </section>
 
     <section class="about section-inner" id="sobre" aria-labelledby="sobre-titulo">
-      <div class="about-identity" data-reveal="left" aria-hidden="true">
-        <img src="assets/brand.webp" width="160" height="141" alt="" loading="lazy">
-      </div>
+      <figure class="about-identity" data-reveal="left">
+        <img src="assets/janaina-lavall.webp" srcset="assets/janaina-lavall-small.webp 440w, assets/janaina-lavall.webp 820w" sizes="(min-width: 1120px) 500px, (min-width: 768px) 37vw, 86vw" width="820" height="852" alt="Dra. Janaína Lavall" loading="lazy" decoding="async">
+      </figure>
       <div class="about-copy" data-reveal="right">
         <h2 id="sobre-titulo">Dra. Janaína Lavall</h2>
         <p class="credential">Cirurgiã-dentista · CRO-MG 28966</p>
-        <p>Cirurgiã-dentista, a Dra. Janaína Lavall atende em consultório particular em Belo Horizonte. Na primeira consulta, você pode contar o que está incomodando, tirar dúvidas e entender as opções de cuidado para o seu caso.</p>
-        <a class="text-link" href="#contato" data-contact>Consultar horários <span aria-hidden="true">↗</span></a>
+        <p>A Dra. Janaína atende em consultório particular em Belo Horizonte. Na primeira consulta, você pode contar o que está incomodando, tirar dúvidas e entender as opções de cuidado para o seu caso. <a class="about-link" href="#contato" data-contact>Consultar horários</a></p>
       </div>
     </section>
 
@@ -158,11 +164,12 @@
         <h2 id="localizacao-titulo">Como chegar</h2>
         <address><strong>Av. do Contorno, 6777, sala 7</strong><br>Santo Antônio, divisa com a Savassi<br>Belo Horizonte, MG</address>
         <p>Estacionamento próprio</p>
+        <h3 class="visit-hours-title"><svg class="detail-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 2"/></svg>Horários</h3>
         <dl class="visit-hours"><div><dt>Segunda a sexta</dt><dd>8h às 19h</dd></div><div><dt>Sábado</dt><dd>9h às 13h</dd></div></dl>
       </div>
       <figure class="map-card" data-reveal="right">
         <iframe title="Google Maps: Av. do Contorno, 6777, Belo Horizonte" src="https://www.google.com/maps/embed?origin=mfe&amp;pb=!1m3!2m1!1sAv.+do+Contorno,+6777,+Belo+Horizonte,+MG!6i16" width="720" height="400" loading="lazy" referrerpolicy="no-referrer" tabindex="-1"></iframe>
-        <figcaption><a class="button secondary" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.%20do%20Contorno%2C%206777%2C%20Belo%20Horizonte%2C%20MG" target="_blank" rel="noopener noreferrer">Traçar rota no Google Maps <span aria-hidden="true">↗</span></a></figcaption>
+        <figcaption><a class="button secondary" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.%20do%20Contorno%2C%206777%2C%20Belo%20Horizonte%2C%20MG" target="_blank" rel="noopener noreferrer" aria-label="Traçar rota no Google Maps">Traçar rota <span aria-hidden="true">↗</span></a></figcaption>
       </figure>
     </section>
   </main>
