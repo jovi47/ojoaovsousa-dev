@@ -1,8 +1,7 @@
-const page = document.querySelector('.page');
-const header = document.querySelector('.site-header');
+import { setupScenes } from './page-scenes.js';
+
 const toggle = document.querySelector('.menu-toggle');
 const menu = document.querySelector('#menu');
-const lightSections = [...document.querySelectorAll('main > .light')];
 
 toggle.hidden = false;
 toggle.addEventListener('click', () => {
@@ -14,35 +13,10 @@ menu.addEventListener('click', event => {
   const link = event.target.closest('a');
   if (!link && event.target !== menu) return;
   menu.close();
-  if (link?.hash) document.getElementById(link.hash.slice(1))?.focus({ preventScroll: true });
 });
 matchMedia('(min-width: 891px)').addEventListener('change', event => {
   if (event.matches && menu.open) menu.close();
 });
-
-function updateHeader() {
-  header.classList.toggle('is-floating', Math.max(window.scrollY, page.scrollTop) > 48);
-  const line = header.getBoundingClientRect().bottom + 8;
-  header.dataset.surface = lightSections.some(section => {
-    const { top, bottom } = section.getBoundingClientRect();
-    return top < line && bottom > line;
-  }) ? 'light' : 'dark';
-}
-window.addEventListener('scroll', updateHeader, { passive: true });
-page.addEventListener('scroll', updateHeader, { passive: true });
-window.addEventListener('resize', updateHeader);
-updateHeader();
-
-if ('IntersectionObserver' in window) {
-  const entries = new IntersectionObserver(changes => {
-    for (const change of changes) {
-      if (!change.isIntersecting) continue;
-      change.target.classList.add('is-entering');
-      entries.unobserve(change.target);
-    }
-  }, { threshold: 0.12 });
-  document.querySelectorAll('[data-reveal]').forEach(element => entries.observe(element));
-}
 
 const viewer = document.querySelector('.car-viewer');
 const stage = viewer.querySelector('.car-stage');
@@ -152,6 +126,44 @@ reset.addEventListener('click', () => {
 picker.hidden = false;
 controls.hidden = false;
 showService();
+
+document.querySelector('#outros-servicos').addEventListener('click', event => {
+  const link = event.target.closest('[data-show-part]');
+  if (!link || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  const car = picker.querySelector('[data-vehicle="coupe"]');
+  if (vehicle !== 'coupe') car.click();
+  showMode();
+  showService(chapterButtons.find(button => button.dataset.service === link.dataset.showPart));
+});
+
+const heroStage = document.querySelector('.hero-stage');
+let transfer;
+setupScenes(({ current, previous, motion }) => {
+  const home = current.id === 'inicio';
+  const services = current.id === 'servicos';
+  const crossing = ['inicio','servicos'].includes(current.id) && ['inicio','servicos'].includes(previous?.id);
+  transfer?.cancel();
+  const from = crossing && motion && innerWidth >= 768 ? stage.getBoundingClientRect() : null;
+  return () => {
+    const target = home ? heroStage : display;
+    if (home) {
+      const car = picker.querySelector('[data-vehicle="coupe"]');
+      if (vehicle !== 'coupe') car.click();
+      else {
+        showMode();
+        showService();
+      }
+    }
+    heroStage.hidden = !home;
+    if ((home || services) && stage.parentNode !== target) target.prepend(stage);
+    if (!from?.width) return;
+    const to = stage.getBoundingClientRect();
+    transfer = stage.animate([
+      { transformOrigin: '0 0', transform: `translate(${from.left - to.left}px,${from.top - to.top}px) scale(${from.width / to.width},${from.height / to.height})` },
+      { transformOrigin: '0 0', transform: 'none' }
+    ], { duration: 610, easing: 'cubic-bezier(.22,.61,.36,1)' });
+  };
+});
 if ('IntersectionObserver' in window && 'ResizeObserver' in window) {
   const lazy = new IntersectionObserver(entries => {
     if (!entries.some(entry => entry.isIntersecting)) return;
@@ -163,5 +175,5 @@ if ('IntersectionObserver' in window && 'ResizeObserver' in window) {
       // Browsers without WebGL use the image view.
     });
   }, { rootMargin: '180px' });
-  lazy.observe(viewer);
+  lazy.observe(stage);
 }

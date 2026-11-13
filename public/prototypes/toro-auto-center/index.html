@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#141414">
+  <meta name="theme-color" content="#232426">
   <meta name="robots" content="noindex, nofollow">
   <title>Toro Auto Center | Baterias e mecânica em Uberlândia</title>
   <meta name="description" content="Precisa trocar a bateria do carro em Uberlândia? A Toro Auto Center oferece troca de baterias, socorro, revisão e mecânica na Av. Rio Branco, 1200.">
@@ -57,7 +57,7 @@
         </a>
         <nav class="header-nav" aria-label="Navegação principal">
           <a href="#servicos">Serviços</a>
-          <a href="#outros-servicos">Produtos e domicílio</a>
+          <a href="#outros-servicos">Mecânica e domicílio</a>
           <a href="#por-que-nos">Por que nós</a>
           <a href="#localizacao">Localização</a>
         </nav>
@@ -80,7 +80,7 @@
           </div>
           <nav class="menu-nav grid" aria-label="Navegação do celular">
             <a href="#servicos">Serviços</a>
-            <a href="#outros-servicos">Produtos e domicílio</a>
+            <a href="#outros-servicos">Mecânica e domicílio</a>
             <a href="#por-que-nos">Por que nós</a>
             <a href="#localizacao">Localização</a>
           </nav>
@@ -89,7 +89,7 @@
     </header>
 
     <main id="conteudo" tabindex="-1">
-      <section class="hero" id="inicio" aria-labelledby="hero-title" tabindex="-1">
+      <section class="hero" id="inicio" data-scene="Início" aria-labelledby="hero-title" tabindex="-1">
         <div class="hero-copy wrap">
           <h1 id="hero-title">
             <span class="hero-name">Toro Auto Center:</span>
@@ -99,9 +99,10 @@
           <p>Seu carro ficou sem partida ou precisa de revisão? Fale com a equipe da Toro.</p>
           <div class="hero-actions flex flex-wrap">
             <a class="button button-primary" href="https://wa.me/5534999927815"><svg class="icon" aria-hidden="true"><use href="#icon-whatsapp"/></svg> Chamar no WhatsApp</a>
-            <a class="button button-outline" href="#localizacao"><svg class="icon" aria-hidden="true"><use href="#icon-pin"/></svg> Como chegar</a>
+            <a class="button button-outline" href="#servicos">Explorar o veículo <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
           </div>
         </div>
+        <div class="hero-stage" hidden></div>
         <figure class="hero-photo">
           <picture>
             <source media="(max-width: 767px)" srcset="assets/oficina-mobile.webp">
@@ -111,10 +112,10 @@
         </figure>
       </section>
 
-      <section class="section services" id="servicos" tabindex="-1" aria-labelledby="services-title">
+      <section class="section services" id="servicos" data-scene="Explore o veículo" tabindex="-1" aria-labelledby="services-title">
         <div class="wrap">
-          <div class="section-intro" data-reveal>
-            <h2 id="services-title">Explore o carro</h2>
+          <div class="section-intro">
+            <h2 id="services-title">Explore o veículo</h2>
             <p>Veja de perto as peças e o que a oficina faz em cada serviço.</p>
           </div>
           <div class="car-viewer">
@@ -181,9 +182,9 @@
         </div>
       </section>
 
-      <section class="section light battery-section" aria-labelledby="battery-title">
+      <section class="section battery-section" id="baterias" data-scene="Baterias" tabindex="-1" aria-labelledby="battery-title">
         <div class="wrap">
-          <div class="battery-layout grid" data-reveal>
+          <div class="battery-layout grid">
             <div class="battery-services grid">
               <article class="battery-card">
                 <svg class="icon service-icon" aria-hidden="true"><use href="#icon-battery"/></svg>
@@ -206,26 +207,33 @@
               <figcaption>Imagem ilustrativa</figcaption>
             </figure>
           </div>
+          <p class="battery-catalog"><strong>Capacidades no catálogo</strong><br>40, 48, 60, 70, 100 e 150 Ah. Para moto, 12 Ah. Consulte a compatibilidade e a disponibilidade.</p>
         </div>
       </section>
 
-      <section class="section other-services light" id="outros-servicos" tabindex="-1" aria-labelledby="other-title">
+      <section class="section other-services" id="outros-servicos" data-scene="Mecânica e domicílio" tabindex="-1" aria-labelledby="other-title">
         <div class="wrap">
-          <div class="section-intro" data-reveal>
-            <h2 id="other-title">Produtos e atendimento em domicílio</h2>
+          <div class="section-intro">
+            <h2 id="other-title">Mecânica e domicílio</h2>
           </div>
-          <div class="other-grid" data-reveal>
+          <div class="other-grid">
             <div class="other-card">
-              <h3>Na oficina</h3>
-              <ul>
-                <li><h3>Baterias para moto</h3><p>O catálogo inclui bateria de 12 Ah. Consulte a compatibilidade e a disponibilidade para sua moto.</p></li>
-                <li><h3>Peças em geral</h3><p>Consulte a disponibilidade de peças para o seu modelo.</p></li>
-                <li><h3>Mecânica e elétrica</h3><p>Diagnóstico, reparos e inspeção veicular.</p></li>
+              <h3>Serviços de mecânica</h3>
+              <ul class="mechanic-list">
+                <li>Revisão de carros</li>
+                <li>Verificação de óleo e freios <a href="#servicos" data-show-part="oil">Óleo</a> · <a href="#servicos" data-show-part="brakes">Freios</a></li>
+                <li>Serviço elétrico <a href="#servicos" data-show-part="lights">Ver faróis</a></li>
+                <li>Alinhamento e balanceamento <a href="#servicos" data-show-part="alignment">Ver eixo</a></li>
+                <li>Troca de bateria <a href="#servicos" data-show-part="battery">Ver bateria</a></li>
+                <li>Manutenção preventiva</li>
+                <li>Troca de óleos <a href="#servicos" data-show-part="oil">Ver troca</a></li>
+                <li>Inspeção veicular</li>
               </ul>
             </div>
             <div class="other-card">
-              <h3>Em domicílio</h3>
+              <h3>Peças e atendimento em domicílio</h3>
               <ul>
+                <li><h3>Peças em geral</h3><p>Consulte outras peças e acessórios para o seu modelo.</p></li>
                 <li><h3>Instalação de bateria</h3><p>Consulte o atendimento no seu endereço.</p></li>
                 <li><h3>Buscamos seu carro</h3><p>Combine a retirada do veículo com a equipe.</p></li>
                 <li><h3>Revisão</h3><p>Confirme com a equipe o atendimento disponível.</p></li>
@@ -236,10 +244,10 @@
         </div>
       </section>
 
-      <section class="section why" id="por-que-nos" tabindex="-1" aria-labelledby="why-title">
+      <section class="section why" id="por-que-nos" data-scene="Por que nós" tabindex="-1" aria-labelledby="why-title">
         <div class="wrap why-layout grid">
-          <h2 id="why-title" data-reveal>Por que nós</h2>
-          <ul class="benefit-grid grid" data-reveal>
+          <h2 id="why-title">Por que nós</h2>
+          <ul class="benefit-grid grid">
             <li><h3>Atendimento rápido</h3><p>Fale com a oficina para entender o próximo passo.</p></li>
             <li><h3>Peças de qualidade</h3><p>Componentes escolhidos conforme a especificação do veículo.</p></li>
             <li><h3>Garantia</h3><p>Consulte a equipe sobre a garantia aplicável à peça ou ao serviço.</p></li>
@@ -248,10 +256,10 @@
         </div>
       </section>
 
-      <section class="section testimonials" aria-labelledby="testimonials-title">
+      <section class="section testimonials" id="depoimentos" data-scene="Depoimentos" tabindex="-1" aria-labelledby="testimonials-title">
         <div class="wrap">
-          <h2 id="testimonials-title" data-reveal>Depoimentos</h2>
-          <ul class="placeholder-grid grid" data-reveal>
+          <h2 id="testimonials-title">Depoimentos</h2>
+          <ul class="placeholder-grid grid">
             <li><span class="placeholder-label">Placeholder</span><h3>Troca de bateria</h3><p>Espaço reservado para um relato de cliente.</p></li>
             <li><span class="placeholder-label">Placeholder</span><h3>Socorro com bateria</h3><p>Espaço reservado para um relato de cliente.</p></li>
             <li><span class="placeholder-label">Placeholder</span><h3>Revisão na oficina</h3><p>Espaço reservado para um relato de cliente.</p></li>
@@ -259,41 +267,50 @@
         </div>
       </section>
 
-      <section class="section location light" id="localizacao" tabindex="-1" aria-labelledby="location-title">
+      <section class="section location" id="localizacao" data-scene="Localização" tabindex="-1" aria-labelledby="location-title">
         <div class="wrap location-layout grid">
-          <div class="location-copy" data-reveal>
+          <div class="location-copy">
             <h2 id="location-title">Como chegar</h2>
             <address>
               <svg class="icon" aria-hidden="true"><use href="#icon-pin"/></svg>
               <span><strong>Av. Rio Branco, 1200</strong><br>Uberlândia, MG</span>
             </address>
-            <p class="opening"><strong>Horário de atendimento</strong><br>Placeholder · a confirmar</p>
+            <p class="opening"><strong>Horário de atendimento</strong><br>Segunda a sexta, das 7h às 17h<br>Sábado, das 7h às 12h</p>
             <a class="button button-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.%20Rio%20Branco%2C%201200%2C%20Uberl%C3%A2ndia%2C%20MG">Traçar rota no Google Maps <svg class="icon" aria-hidden="true"><use href="#icon-external"/></svg></a>
           </div>
-          <figure class="map-frame" data-reveal>
+          <figure class="map-frame">
             <iframe title="Mapa da Toro Auto Center na Av. Rio Branco, 1200, Uberlândia" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3774.3589502481914!2d-48.26686350000001!3d-18.9154995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94a44584dbc13e33%3A0x5923cc2edb4e0f2f!2sToro%20Auto%20Center!5e0!3m2!1spt-BR!2sbr!4v1794519919929!5m2!1spt-BR!2sbr" width="720" height="380" loading="lazy" referrerpolicy="no-referrer"></iframe>
           </figure>
         </div>
+        <footer class="site-footer">
+          <div class="wrap footer-layout grid">
+            <div>
+              <a class="header-logo" href="#inicio" aria-label="Toro Auto Center, voltar ao início">
+                <span class="brand-mark" aria-hidden="true"></span>
+              </a>
+              <p>Av. Rio Branco, 1200 · Uberlândia/MG</p>
+            </div>
+            <div class="footer-links flex flex-wrap">
+              <a href="https://wa.me/5534999927815"><svg class="icon" aria-hidden="true"><use href="#icon-whatsapp"/></svg> (34) 99992-7815</a>
+              <a href="tel:+553432100904">(34) 3210-0904</a>
+              <a href="https://www.instagram.com/toro_autocenter/"><svg class="icon" aria-hidden="true"><use href="#icon-instagram"/></svg> @toro_autocenter</a>
+            </div>
+          </div>
+          <div class="wrap footer-note">Protótipo para revisão</div>
+        </footer>
       </section>
     </main>
-
-    <footer class="site-footer">
-      <div class="wrap footer-layout grid">
-        <div>
-          <a class="header-logo" href="#inicio" aria-label="Toro Auto Center, voltar ao início">
-            <span class="brand-mark" aria-hidden="true"></span>
-          </a>
-          <p>Av. Rio Branco, 1200 · Uberlândia/MG</p>
-        </div>
-        <div class="footer-links flex flex-wrap">
-          <a href="https://wa.me/5534999927815"><svg class="icon" aria-hidden="true"><use href="#icon-whatsapp"/></svg> (34) 99992-7815</a>
-          <a href="https://www.instagram.com/toro_autocenter/"><svg class="icon" aria-hidden="true"><use href="#icon-instagram"/></svg> @toro_autocenter</a>
-        </div>
-      </div>
-      <div class="wrap footer-note">Protótipo para revisão</div>
-    </footer>
   </div>
   <div class="contact-dock">
+    <nav class="scene-navigation" aria-label="Navegação entre cenas" hidden>
+      <button type="button" data-scene-step="-1" aria-label="Cena anterior">
+        <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg>
+      </button>
+      <span role="status" aria-atomic="true"></span>
+      <button type="button" data-scene-step="1" aria-label="Próxima cena">
+        <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg>
+      </button>
+    </nav>
     <a class="floating-contact" href="https://wa.me/5534999927815" aria-label="Chamar a Toro Auto Center no WhatsApp">
       <svg class="icon" aria-hidden="true"><use href="#icon-whatsapp"/></svg>
       <span>WhatsApp</span>
