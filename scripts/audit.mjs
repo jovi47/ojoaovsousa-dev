@@ -20,7 +20,13 @@ const toro=new Set([
  ...['40','48','60','70','100','150','12'].map(capacity=>'assets/battery-'+capacity+'.webp'),
  'assets/coupe.webp','assets/moto.webp','assets/coupe.glb','assets/moto.glb'
 ]);
-const prototypes=new Map([['prototypes/fisiopoa',fisiopoa],['prototypes/toro-auto-center',toro]]);
+const janaina=new Set([
+ 'index.html','privacidade.html','style.css','page.js',
+ 'assets/brand.webp','assets/janaina-lavall.webp','assets/janaina-lavall-small.webp',
+ 'assets/instrument-serif.woff2','assets/instrument-serif-italic.woff2','assets/instrument-serif-license.txt',
+ 'assets/urbanist.woff2','assets/urbanist-license.txt'
+]);
+const prototypes=new Map([['prototypes/fisiopoa',fisiopoa],['prototypes/toro-auto-center',toro],['prototypes/dra-janaina-lavall',janaina]]);
 const prototypeDirectories=[...prototypes.keys()].flatMap(name=>[name,name+'/assets']);
 const publicAsset=name=>['_headers','_redirects'].includes(name)||/^[a-zA-Z0-9_-]+\.(?:js|css|jpg|png|webp|glb|woff2|svg|txt)$/.test(name)||name.startsWith('vendor/')&&vendors.has(name.slice(7))||name.startsWith('icons/')&&icons.has(name.slice(6))||name.startsWith('career-icons/')&&careerIcons.has(name.slice(13))||name.startsWith('contact-icons/')&&contactIcons.has(name.slice(14))||/^technology-icons\/[a-z0-9-]+\.svg$/.test(name)||name==='technology-icons/LICENSE.txt'
  ||[...prototypes].some(([route,files])=>name.startsWith(route+'/')&&files.has(name.slice(route.length+1)));

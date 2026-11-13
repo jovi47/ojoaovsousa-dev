@@ -6,7 +6,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root=fileURLToPath(new URL('../',import.meta.url)),dist=path.join(root,'dist');
 const port=Number(process.env.PORT||3000),clients=new Set();
-const fisiopoa='/prototypes/fisiopoa',toro='/prototypes/toro-auto-center';
+const fisiopoa='/prototypes/fisiopoa',toro='/prototypes/toro-auto-center',janaina='/prototypes/dra-janaina-lavall';
 const pagesHeaders=await readFile(path.join(root,'public/_headers'),'utf8');
 const toroCsp=pagesHeaders.split('\n\n').find(block=>block.startsWith(toro+'/\n'))
  .split('\n').find(line=>line.startsWith('  Content-Security-Policy: ')).slice('  Content-Security-Policy: '.length);
@@ -14,14 +14,14 @@ const mime={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8',
 const server=http.createServer(async(req,res)=>{
  let url,pathname;try{url=new URL(req.url,'http://localhost');pathname=decodeURIComponent(url.pathname);}catch{res.writeHead(400);res.end();return;}
  const legacy=pathname.match(/^\/(pt-br|en|es)\/black\/?$/);if(legacy){res.writeHead(308,{Location:`/${legacy[1]}/${url.search}`});res.end();return;}
- const prototype=[fisiopoa,toro].find(route=>pathname===route||pathname.startsWith(route+'/'));
+ const prototype=[fisiopoa,toro,janaina].find(route=>pathname===route||pathname.startsWith(route+'/'));
  if(prototype){
   res.setHeader('X-Robots-Tag','noindex, nofollow');
   if(['','/index','/index/','/index.html'].includes(pathname.slice(prototype.length))){
    res.writeHead(308,{Location:prototype+'/'+url.search});res.end();return;
   }
-  if(pathname===fisiopoa+'/privacidade.html'){res.writeHead(308,{Location:fisiopoa+'/privacidade'+url.search});res.end();return;}
-  if(pathname===fisiopoa+'/privacidade')pathname+='.html';
+  if(prototype!==toro&&pathname===prototype+'/privacidade.html'){res.writeHead(308,{Location:prototype+'/privacidade'+url.search});res.end();return;}
+  if(prototype!==toro&&pathname===prototype+'/privacidade')pathname+='.html';
   if(pathname===toro+'/')res.setHeader('Content-Security-Policy',toroCsp);
  }
  if(pathname==='/__reload'){res.writeHead(200,{'Content-Type':'text/event-stream','Cache-Control':'no-cache','Connection':'keep-alive'});res.write(': connected\n\n');clients.add(res);req.on('close',()=>clients.delete(res));return;}
