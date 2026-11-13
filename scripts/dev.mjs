@@ -6,12 +6,13 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root=fileURLToPath(new URL('../',import.meta.url)),dist=path.join(root,'dist');
 const port=Number(process.env.PORT||3000),clients=new Set();
-const prototype='/prototypes/fisiopoa';
+const prototypes=['/prototypes/fisiopoa','/prototypes/dra-janaina-lavall'];
 const mime={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.svg':'image/svg+xml','.jpg':'image/jpeg','.png':'image/png','.txt':'text/plain; charset=utf-8','.md':'text/markdown; charset=utf-8','.xml':'application/xml; charset=utf-8','.woff2':'font/woff2','.webp':'image/webp','.webm':'video/webm','.mov':'video/quicktime','.glb':'model/gltf-binary'};
 const server=http.createServer(async(req,res)=>{
  let url,pathname;try{url=new URL(req.url,'http://localhost');pathname=decodeURIComponent(url.pathname);}catch{res.writeHead(400);res.end();return;}
  const legacy=pathname.match(/^\/(pt-br|en|es)\/black\/?$/);if(legacy){res.writeHead(308,{Location:`/${legacy[1]}/${url.search}`});res.end();return;}
- if(pathname===prototype||pathname.startsWith(prototype+'/')){
+ const prototype=prototypes.find(route=>pathname===route||pathname.startsWith(route+'/'));
+ if(prototype){
   res.setHeader('X-Robots-Tag','noindex, nofollow');
   if(['','/index','/index/','/index.html'].includes(pathname.slice(prototype.length))){
    res.writeHead(308,{Location:prototype+'/'+url.search});res.end();return;

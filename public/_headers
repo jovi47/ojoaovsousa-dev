@@ -30,5 +30,11 @@ https://:deployment.:project.pages.dev/*
   ! Content-Security-Policy
   Content-Security-Policy: default-src 'self'; frame-src https://www.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'
 
+/prototypes/dra-janaina-lavall
+  X-Robots-Tag: noindex, nofollow
+
+/prototypes/dra-janaina-lavall/*
+  X-Robots-Tag: noindex, nofollow
+
 /404.html
   X-Robots-Tag: noindex, nofollow
