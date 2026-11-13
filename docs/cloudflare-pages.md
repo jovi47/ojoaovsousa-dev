@@ -1,6 +1,14 @@
 # Cloudflare Pages: manual release
 
-Updated 2026-11-12 UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). Current published source is `77a158203131ec04459a11804159c2bb945a63f1`, deployed to Production/main. Earlier dated receipts describe historical releases; no custom domain was purchased.
+Updated 2026-11-13 UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). Current published source is `ca634ac2b3de5044ee0cf58db712c7965d9acf74`, deployed to Production/main. Earlier dated receipts describe historical releases; no custom domain was purchased.
+
+## Toro Auto Center prototype release
+
+The [Toro prototype](https://ojoaovsousa.pages.dev/prototypes/toro-auto-center/) was verified at `2026-11-13T02:34:36Z`, deployment `4ab770ee-0273-449a-bb24-a49686b55a2d`, [immutable alias](https://4ab770ee.ojoaovsousa.pages.dev/prototypes/toro-auto-center/), [PR25](https://github.com/jovi47/ojoaovsousa-dev/pull/25). The audited Direct Upload contained 175 files and 16,690,118 raw bytes. Wrangler uploaded 21 new files and reused 152, plus the headers and redirects controls. SHA-256 of the file manifest is `cc435d4a5a5b4a106a2e04b2e4ca48144f43c1c52ef86a9131af3117fae4fc58`.
+
+All 21 Toro paths match the reviewed artifact on both URLs. The portfolio passed 37 production HTTP checks. The 153 pre-existing content files match the previous release, and the Pages headers control adds the Toro-specific map and noindex rules. Four exact reads passed at previous deployment `61aff60c-f400-4df6-b78d-18705db24833`, the retained recovery target. No rollback was exercised.
+
+The release passed 152 local tests, both builds, and source/artifact audit. Public Chromium and WebKit at 390 and 1440 px covered the transition, vehicle and part selection, the battery catalog and the reduced-motion image fallback. Chromium also confirmed mobile navigation, the normal A, the home-service steps, the FAQ, the map and the privacy page. Physical devices were outside the test sample. The prototype has `noindex, nofollow` and the nine-URL sitemap is byte-identical. The release calls for no Search Console submission and adds no contracted hosting charge.
 
 ## Fisiopoa prototype release
 

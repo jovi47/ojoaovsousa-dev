@@ -105,3 +105,90 @@ test('an indexable portfolio build keeps the Fisiopoa preview out of discovery',
  const discovery=['sitemap.xml','llms.txt','index.html',...locales.flatMap(locale=>['','direct/','privacy/','terms/'].map(page=>locale+'/'+page+'index.html'))];
  for(const file of discovery)assert.doesNotMatch(await f.read(file),/fisiopoa/i,file);
 });
+
+test('an indexable portfolio build keeps the Toro prototype isolated',async t=>{
+ const f=await fixture(t,{copyPublic:true});
+ f.build('https://portfolio.example','true');
+ const route='prototypes/toro-auto-center/';
+ const html=await f.read(route+'index.html');
+ assert.match(html,/<meta name="robots" content="noindex, nofollow">/);
+ assert.match(html,/<iframe\b[^>]*src="https:\/\/www\.google\.com\/maps[^>]*loading="lazy"/);
+ assert.match(html, /class="map-link"[^>]+target="_blank"/);
+ assert.match(html, /Horário de funcionamento.*7h às 17h.*7h às 12h/);
+ assert.match(html, /href="privacidade.html#privacidade"/);
+ assert.match(await f.read(route+'privacidade.html'), /name="robots" content="noindex, nofollow"/);
+ const business=JSON.parse(html.match(/<script type="application\/ld\+json">([^<]+)<\/script>/)[1]);
+ assert.equal(business['@type'],'AutoRepair');
+ assert.equal(business.telephone,'+5534999927815');
+ assert.equal(business.address.streetAddress,'Av. Rio Branco, 1200');
+ assert.doesNotMatch(JSON.stringify(business),/review|rating|openingHours/i);
+ const header=html.match(/<header\b[\s\S]*?<\/header>/)[0];
+ assert.match(header,/<a class="header-logo"[^>]*>[\s\S]*?<span class="brand-mark"[^>]*><\/span>\s*<span class="brand-name"><span class="brand-oro"><span class="toro-wheel">o<\/span>ro<\/span><span class="brand-descriptor">Auto Center<\/span><\/span>\s*<\/a>/);
+ assert.ok(header.indexOf('class="menu-toggle')<header.indexOf('class="button button-header"'));
+ for(const item of ['Baterias','Correias','Óleo e filtro de óleo','Palhetas','Escapamentos','Velas e cabos','Alinhamento e balanceamento','Injeção eletrônica','Ar-condicionado','Faróis','Freios','Suspensão']) {
+  assert.ok(html.includes('<span>'+item+'</span></button>'),item);
+ }
+ for(const item of ['Entendemos o problema','Combinamos o horário','Buscamos seu carro','Resolvemos para você'])assert.ok(html.includes('>'+item+'</h4>'),item);
+ for(const item of ['Revisão de carros','Manutenção preventiva','Inspeção veicular'])assert.ok(html.includes('>'+item+'</h3>'),item);
+ assert.ok(html.includes('<span>Bateria para moto</span></button>'));
+ assert.doesNotMatch(html,/data-mode=|data-scene-step=|data-step=/);
+ assert.ok(html.indexOf('id="inicio"')<html.indexOf('id="servicos"'));
+ assert.ok(html.indexOf('id="servicos"')<html.indexOf('id="baterias"'));
+ for(const label of ['Carro','Moto'])assert.match(html,new RegExp('aria-label="'+label+'"[^>]*><svg '));
+ assert.match(html,/<details class="vehicle-credit">/);
+ assert.equal((html.match(/data-service="[^"]+"[^>]*><svg /g)||[]).length,13);
+ const catalog=html.match(/<div class="battery-catalog">([\s\S]*?)<p class="battery-spec-note">/)[1];
+ assert.equal((catalog.match(/data-battery="/g)||[]).length,7);
+ for(const capacity of [40,48,60,70,100,150,12]){
+  assert.ok(catalog.includes('aria-controls="battery-'+capacity+'"'),capacity);
+  assert.ok(catalog.includes('id="battery-'+capacity+'"'),capacity);
+  assert.ok(catalog.includes('Consultar bateria de '+capacity+' Ah'),capacity);
+ }
+ assert.match(catalog, /assets\/battery-12\.webp/);
+ assert.equal((html.match(/<canvas\b/g)||[]).length,1,'the opening and explorer share a single canvas');
+ assert.match(html, /class="hero-scroll-cue" href="#servicos"/);
+ assert.doesNotMatch(catalog, /<h4 id="battery-title-\d+"><svg/);
+ const stage=await f.read(route+'vehicle-stage.js');
+ for(const [file,nodes] of [['coupe.glb',['BodyHood','IllustrativeEngine','WheelFrontL','WheelRearL']],['moto.glb',[]]]){
+  const bytes=await readFile(path.join(f.root,'dist',route,'assets',file));
+  assert.equal(bytes.toString('ascii',0,4),'glTF');
+  assert.ok(bytes.length<3*1024*1024,file);
+  assert.ok(stage.includes("'"+file+"'"));
+  const gltf=JSON.parse(bytes.toString('utf8',20,20+bytes.readUInt32LE(12)));
+  for(const node of nodes)assert.ok(gltf.nodes.some(item=>item.name===node),node);
+  if(file==='coupe.glb') {
+   const paint=gltf.materials.find(item=>item.name==='Paint 1 Toro');
+   const [red,green,blue]=paint.pbrMetallicRoughness.baseColorFactor;
+   assert.ok(Math.min(red,green,blue)>.75 && Math.max(red,green,blue)-Math.min(red,green,blue)<.08);
+  }
+ }
+ const discovery=['sitemap.xml','llms.txt','index.html',...Object.keys(content).flatMap(locale=>['','direct/','privacy/','terms/'].map(page=>locale+'/'+page+'index.html'))];
+ for(const file of discovery)assert.doesNotMatch(await f.read(file),/toro-auto-center/i,file);
+});
+
+test('every Toro product and service demonstrates its part and resets on revisit',async()=>{
+ const html=await readFile(new URL('../public/prototypes/toro-auto-center/index.html',import.meta.url),'utf8');
+ const {createPart}=await import('../public/prototypes/toro-auto-center/vehicle-parts.js');
+ const snapshot=node=>{
+  const state=[];
+  node.traverse(({visible,position,rotation,scale,material})=>{
+   state.push([visible,...position,...rotation,...scale,material?.opacity,material?.emissiveIntensity]);
+  });
+  return JSON.stringify(state);
+ };
+ const services=Array.from(html.matchAll(/data-service="([^"]+)"/g),([,service])=>service);
+ assert.equal(services.length,13);
+ for(const service of services){
+  const {node,animate}=createPart(service);
+  assert.equal(typeof animate,'function',service);
+  const initial=snapshot(node);
+  const frames=new Set([initial]);
+  for(let step=1;step<=20;step++){
+   animate(step/5);
+   frames.add(snapshot(node));
+  }
+  assert.ok(frames.size>1,service+' should move or change appearance');
+  animate(0);
+  assert.equal(snapshot(node),initial,service+' should reset');
+ }
+});
