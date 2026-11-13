@@ -119,13 +119,17 @@ test('an indexable portfolio build keeps the Toro prototype isolated',async t=>{
  assert.equal(business.address.streetAddress,'Av. Rio Branco, 1200');
  assert.doesNotMatch(JSON.stringify(business),/review|rating|openingHours/i);
  const header=html.match(/<header\b[\s\S]*?<\/header>/)[0];
- assert.match(header,/<a class="header-logo"[^>]*>[\s\S]*?<span class="brand-mark"[^>]*><\/span>\s*<\/a>/);
+ assert.match(header,/<a class="header-logo"[^>]*>[\s\S]*?<span class="brand-mark"[^>]*><\/span>\s*<span class="brand-name">Toro <span>Auto Center<\/span><\/span>\s*<\/a>/);
  assert.ok(header.indexOf('class="menu-toggle')<header.indexOf('class="button button-header"'));
  for(const item of ['Baterias','Correias','Óleo e filtro de óleo','Palhetas','Escapamentos','Velas e cabos','Alinhamento e balanceamento','Injeção eletrônica','Ar-condicionado','Faróis','Freios','Suspensão']) {
-  assert.ok(html.includes('>'+item+'</button>'),item);
+  assert.ok(html.includes('<span>'+item+'</span></button>'),item);
  }
  for(const item of ['Peças em geral','Instalação de bateria','Buscamos seu carro','Revisão'])assert.ok(html.includes('>'+item+'</h3>'),item);
- for(const item of ['Raio X','Vista explodida','Bateria para moto'])assert.ok(html.includes('>'+item+'</button>'),item);
+ assert.ok(html.includes('<span>Bateria para moto</span></button>'));
+ assert.doesNotMatch(html,/data-mode=|data-scene-step=|data-step=/);
+ assert.ok(html.indexOf('id="baterias"')<html.indexOf('id="servicos"'));
+ assert.match(html,/<details class="vehicle-credit">/);
+ assert.equal((html.match(/data-service="[^"]+"[^>]*><svg /g)||[]).length,13);
  const catalog=html.match(/<div class="battery-options">([\s\S]*?)<p class="battery-spec-note">/)[1];
  assert.equal((catalog.match(/<details name="batteries"/g)||[]).length,7);
  for(const capacity of [40,48,60,70,100,150,12]){

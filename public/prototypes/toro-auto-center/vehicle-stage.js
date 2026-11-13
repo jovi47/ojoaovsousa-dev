@@ -5,16 +5,15 @@ import { createPart } from './vehicle-parts.js';
 const vehicles = {
   coupe: {
     file: 'coupe.glb',
-    overview: { point: [0,.24,0], offset: [1.83,.88,2.52] },
+    overview: { point: [0,.24,0], offset: [1.65,.80,2.29] },
     hood: { node: 'BodyHood', angle: -1.14 },
-    engine: { node: 'IllustrativeEngine', reveal: [0,.10,0], offset: [-.10,.23,.16] },
+    engine: { node: 'IllustrativeEngine', reveal: [0,.035,0] },
     xrayMaterial: 'Paint 1 Toro',
     materials: { Material: { color: 0x232d3c, metalness: .15, roughness: .34 } },
     wheels: {
       front: { node: 'WheelFrontL', offset: [.35,.04,-.10] },
       rear: { node: 'WheelRearL', offset: [.35,.04,-.10] }
     },
-    battery: [.255,.235,.66],
     services: {
       battery: { point: [.255,.255,.66], size: .21, view: [.6,.72,1], engine: true },
       belt: { point: [0,.24,.778], size: .33, view: [.41,.37,1], engine: true },
@@ -40,24 +39,8 @@ const vehicles = {
   }
 };
 const loader = new GLTFLoader();
+const loaded = new Map();
 const hiddenSurface = new T.MeshBasicMaterial({ visible: false });
-
-function addBox(parent, color, size, location, metalness = .3) {
-  const mesh = new T.Mesh(new T.BoxGeometry(...size), new T.MeshStandardMaterial({ color, metalness, roughness: .5 }));
-  mesh.position.set(...location);
-  parent.add(mesh);
-  return mesh;
-}
-
-function illustrativeBattery(parent, location) {
-  const box = new T.Group();
-  box.position.set(...location);
-  addBox(box, 0x22252b, [.123,.068,.12], [0,0,0]);
-  addBox(box, 0xb98e31, [.115,.012,.112], [0,.038,0]);
-  addBox(box, 0xbb3827, [.024,.017,.025], [-.033,.05,.029]);
-  addBox(box, 0xbcc1cb, [.019,.017,.022], [.031,.05,-.033]);
-  parent.add(box);
-}
 
 function prepareModel(model, profile) {
   const bounds = new T.Box3().setFromObject(model);
@@ -91,10 +74,10 @@ function prepareModel(model, profile) {
       part.add(trace);
     }
     traced.push({ part, solid, trace, painted });
-    if (painted && part !== hood) {
+    if (painted) {
       const xray = solid.clone();
       xray.transparent = true;
-      xray.opacity = .25;
+      xray.opacity = .22;
       xray.depthWrite = false;
       panels.push({ part, solid, xray });
     }
@@ -108,10 +91,7 @@ function prepareModel(model, profile) {
   const engine = profile.engine && model.getObjectByName(profile.engine.node);
   const engineRest = engine?.position.clone();
   const engineRevealed = engineRest?.clone().add(new T.Vector3(...profile.engine.reveal));
-  const engineExploded = engineRest?.clone().add(new T.Vector3(...profile.engine.offset));
-  const battery = profile.battery ? new T.Group() : null;
-  if (battery) illustrativeBattery(battery, profile.battery);
-  return { hood, wheels, panels, traced, ghostPaint, battery, engine, engineRest, engineRevealed, engineExploded };
+  return { hood, wheels, panels, traced, ghostPaint, engine, engineRest, engineRevealed };
 }
 
 function softShadow(width, length, height, opacity) {
@@ -131,7 +111,9 @@ function softShadow(width, length, height, opacity) {
   return shadow;
 }
 
-export function createVehicleStage(stage, rotationButton) {
+export function createVehicleStage(stage, { xray = false } = {}) {
+  const rotationButton = stage.querySelector('.rotation-button');
+  const playbackIcon = rotationButton.querySelector('use');
   const canvas = stage.querySelector('canvas');
   const renderer = new T.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' });
   renderer.toneMapping = T.ACESFilmicToneMapping;
@@ -151,17 +133,17 @@ export function createVehicleStage(stage, rotationButton) {
     scene.add(light);
   }
 
-  const platform = new T.Mesh(new T.CylinderGeometry(1.12, 1.14, .046, 64),
+  const platform = new T.Mesh(new T.CylinderGeometry(1.035, 1.05, .046, 64),
     new T.MeshStandardMaterial({ color: 0x28292c, metalness: .24, roughness: .53 }));
   platform.position.y = -.029;
   scene.add(platform);
-  const rim = new T.Mesh(new T.TorusGeometry(1.116, .0035, 8, 72), new T.MeshBasicMaterial({ color: 0xc69836 }));
+  const rim = new T.Mesh(new T.TorusGeometry(1.031, .0035, 8, 72), new T.MeshBasicMaterial({ color: 0xc69836 }));
   rim.rotation.x = -Math.PI / 2;
   rim.position.y = -.007;
   scene.add(rim);
   const holder = new T.Group();
   scene.add(holder);
-  const floorShadow = softShadow(3.3, 2.8, -.059, .72);
+  const floorShadow = softShadow(2.75, 2.6, -.059, .62);
   const contactShadow = softShadow(1.23, 2.19, -.003, .94);
   scene.add(floorShadow);
   holder.add(contactShadow);
@@ -171,11 +153,10 @@ export function createVehicleStage(stage, rotationButton) {
   let activePart, partTime = 0;
 
   let request = 0, last = 0, vehicle = '', desiredVehicle = '', model, parts;
-  let visible = false, lost = false, paused = reduced.matches, turn = -.18, focus = null, mode = '';
+  let visible = false, lost = false, paused = reduced.matches, turn = -.18, focus = null;
   const target = new T.Vector3(0,.35,0), offset = new T.Vector3(-2.32,1.25,2.68);
   const nextTarget = new T.Vector3(), nextOffset = new T.Vector3();
   const orbit = new T.Spherical(), nextOrbit = new T.Spherical();
-  const loaded = new Map();
   const prepared = new WeakMap();
   const reflect = new T.PMREMGenerator(renderer);
   const lighting = new T.Scene();
@@ -213,45 +194,38 @@ export function createVehicleStage(stage, rotationButton) {
       partTime += seconds;
       activePart.animate(partTime);
     }
-    const spinning = !focus && !mode && !paused && !reduced.matches;
+    const spinning = !focus && !paused && !reduced.matches;
     const easing = reduced.matches ? 1 : 1 - Math.exp(-6.5 * seconds);
-    const frame = Math.max(1, 1.25 / camera.aspect);
+    const frame = Math.max(1, 1.20 / camera.aspect);
     if (focus) {
       nextTarget.set(...focus.point);
       const distance = focus.size * (focus.framing || 2.77);
       nextOffset.set(...focus.view).setLength(distance * Math.max(1, 1.05 / camera.aspect));
     } else {
-      if (spinning) turn = (turn + .27 * seconds) % (Math.PI * 2);
+      if (spinning) turn = (turn + .115 * seconds) % (Math.PI * 2);
       const overview = vehicles[vehicle].overview;
       nextTarget.set(...overview.point);
-      nextOffset.set(...overview.offset).multiplyScalar(frame * (mode === 'exploded' ? 1.19 : 1));
+      nextOffset.set(...overview.offset).multiplyScalar(frame);
     }
-    const desiredTurn = focus || mode ? 0 : turn;
+    const desiredTurn = focus ? 0 : turn;
     const yaw = Math.atan2(Math.sin(desiredTurn - holder.rotation.y), Math.cos(desiredTurn - holder.rotation.y));
     holder.rotation.y += yaw * easing;
     let partMotion = 0;
     if (parts.hood) {
-      const hoodAngle = focus?.engine || mode ? vehicles[vehicle].hood.angle : 0;
+      const hoodAngle = focus?.engine ? vehicles[vehicle].hood.angle : 0;
       const hoodDelta = hoodAngle - parts.hood.rotation.x;
       parts.hood.rotation.x += hoodDelta * easing;
       partMotion = Math.abs(hoodDelta);
     }
     for (const { key, node, closed, exploded } of parts.wheels) {
-      const destination = focus?.wheel === key || mode === 'exploded' ? exploded : closed;
+      const destination = focus?.wheel === key ? exploded : closed;
       partMotion = Math.max(partMotion, node.position.distanceTo(destination));
       node.position.lerp(destination, easing);
     }
     if (parts.engine) {
-      const destination = mode === 'exploded' ? parts.engineExploded
-        : focus?.engine || mode === 'xray' ? parts.engineRevealed : parts.engineRest;
+      const destination = focus?.engine || xray ? parts.engineRevealed : parts.engineRest;
       partMotion = Math.max(partMotion, parts.engine.position.distanceTo(destination));
       parts.engine.position.lerp(destination, easing);
-    }
-    if (parts.battery) {
-      const lift = (mode === 'exploded' ? .16 : 0) - parts.battery.position.y;
-      parts.battery.position.y += lift * easing;
-      partMotion = Math.max(partMotion, Math.abs(lift));
-      parts.battery.visible = mode === 'exploded';
     }
     for (const { part, solid, trace, painted } of parts.traced) {
       part.visible = !focus || Boolean(trace);
@@ -259,7 +233,7 @@ export function createVehicleStage(stage, rotationButton) {
       part.material = focus && painted ? parts.ghostPaint : solid;
       if (focus && !painted && trace) part.material = hiddenSurface;
     }
-    if (mode === 'xray') {
+    if (xray && !focus) {
       for (const { part, xray } of parts.panels) part.material = xray;
     }
     platform.visible = rim.visible = floorShadow.visible = contactShadow.visible = !focus;
@@ -297,10 +271,11 @@ export function createVehicleStage(stage, rotationButton) {
   }
 
   function updateControls() {
-    rotationButton.hidden = (focus ? !activePart?.animate : Boolean(mode)) || reduced.matches || !model || lost;
-    rotationButton.textContent = focus
+    rotationButton.hidden = reduced.matches || !stage.hasAttribute('data-ready');
+    rotationButton.setAttribute('aria-label', focus
       ? paused ? 'Retomar animação' : 'Pausar animação'
-      : paused ? 'Girar veículo' : 'Pausar rotação';
+      : paused ? 'Girar veículo' : 'Pausar rotação');
+    playbackIcon.setAttribute('href', paused ? '#icon-play' : '#icon-pause');
   }
 
   async function showVehicle(name) {
@@ -316,11 +291,11 @@ export function createVehicleStage(stage, rotationButton) {
     if (desiredVehicle !== name) return;
     if (model) holder.remove(model);
     vehicle = name;
-    model = vehicleScene;
-    if (!prepared.has(model)) prepared.set(model, prepareModel(model, vehicles[name]));
-    if (parts?.battery) holder.remove(parts.battery);
-    parts = prepared.get(model);
-    if (parts.battery) holder.add(parts.battery);
+    if (!prepared.has(vehicleScene)) {
+      const instance = vehicleScene.clone(true);
+      prepared.set(vehicleScene, { instance, parts: prepareModel(instance, vehicles[name]) });
+    }
+    ({ instance: model, parts } = prepared.get(vehicleScene));
     holder.add(model);
     stage.dataset.ready = '';
     updateControls();
@@ -349,12 +324,6 @@ export function createVehicleStage(stage, rotationButton) {
     updateControls();
     invalidate();
   }
-  function showMode(value) {
-    mode = value;
-    updateControls();
-    invalidate();
-  }
-
   const visibility = new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;
     if (visible) invalidate();
@@ -389,5 +358,5 @@ export function createVehicleStage(stage, rotationButton) {
     updateControls();
     invalidate();
   });
-  return { showVehicle, showService, showMode };
+  return { showVehicle, showService };
 }
