@@ -20,9 +20,9 @@ Use `--watch=always` no segundo comando para recompilar durante a edição. A de
 - A página tem meta robots `noindex, nofollow`. O Cloudflare Pages envia o mesmo cabeçalho na rota e nos seus ativos. A navegação, o sitemap e o índice Markdown do portfólio excluem a rota.
 - A CSP da URL com barra final permite somente o frame de `https://www.google.com`. As demais políticas permanecem sob as regras existentes. O servidor local lê a mesma política dessa rota em `public/_headers`.
 - O mapa usa o compartilhamento incorporado da ficha pública da Toro, com carregamento tardio e `no-referrer`. O endereço e o link de rota ficam disponíveis em HTML. A página usa os contatos públicos de WhatsApp, telefone e Instagram. O horário de balcão segue a página Contate-nos do Wix. A página não instala analytics nem envia formulários. O rodapé apresenta marca, contatos e links para privacidade e termos da prévia. Endereço e horários aparecem lado a lado quando há largura suficiente. O mapa abre a rota no Google Maps.
-- O JSON-LD `AutoRepair` usa o endereço e o WhatsApp confirmados. O horário de balcão aparece no conteúdo. As dúvidas frequentes ficam no HTML em acordeões nativos. O Open Graph aponta para a URL e a foto planejadas no Cloudflare Pages.
+- O JSON-LD `AutoRepair` usa o endereço e o WhatsApp confirmados. O horário de balcão aparece no conteúdo. As dúvidas frequentes ficam no HTML em acordeões nativos. O Open Graph aponta para a URL publicada e a foto de compartilhamento no Cloudflare Pages.
 - Para verificar uma revisão, use `npm test`, o build padrão, o build com `INDEXABLE=true` e `SITE_URL` HTTPS confirmado, e `node scripts/audit.mjs`. A validação da rota no emulador Pages verifica uma única CSP, ausência da exceção nos ativos e nas páginas do portfólio, e redirecionamento dos aliases para a URL com barra.
-- O procedimento de publicação é o [runbook do Cloudflare Pages](cloudflare-pages.md). Esta entrega está em revisão local.
+- O procedimento de publicação é o [runbook do Cloudflare Pages](cloudflare-pages.md). A revisão `ca634ac2b3de5044ee0cf58db712c7965d9acf74` está disponível no [protótipo público](https://ojoaovsousa.pages.dev/prototypes/toro-auto-center/). [Recibo da publicação](cloudflare-pages.md#toro-auto-center-prototype-release).
 
 ## Ativos e custo
 
