@@ -143,3 +143,30 @@ test('an indexable portfolio build keeps the Toro prototype isolated',async t=>{
  const discovery=['sitemap.xml','llms.txt','index.html',...Object.keys(content).flatMap(locale=>['','direct/','privacy/','terms/'].map(page=>locale+'/'+page+'index.html'))];
  for(const file of discovery)assert.doesNotMatch(await f.read(file),/toro-auto-center/i,file);
 });
+
+test('every Toro product and service demonstrates its part and resets on revisit',async()=>{
+ const html=await readFile(new URL('../public/prototypes/toro-auto-center/index.html',import.meta.url),'utf8');
+ const {createPart}=await import('../public/prototypes/toro-auto-center/vehicle-parts.js');
+ const snapshot=node=>{
+  const state=[];
+  node.traverse(({visible,position,rotation,scale,material})=>{
+   state.push([visible,...position,...rotation,...scale,material?.opacity,material?.emissiveIntensity]);
+  });
+  return JSON.stringify(state);
+ };
+ const services=Array.from(html.matchAll(/data-service="([^"]+)"/g),([,service])=>service);
+ assert.equal(services.length,13);
+ for(const service of services){
+  const {node,animate}=createPart(service);
+  assert.equal(typeof animate,'function',service);
+  const initial=snapshot(node);
+  const frames=new Set([initial]);
+  for(let step=1;step<=20;step++){
+   animate(step/5);
+   frames.add(snapshot(node));
+  }
+  assert.ok(frames.size>1,service+' should move or change appearance');
+  animate(0);
+  assert.equal(snapshot(node),initial,service+' should reset');
+ }
+});
