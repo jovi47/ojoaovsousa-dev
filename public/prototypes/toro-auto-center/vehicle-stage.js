@@ -48,7 +48,6 @@ function prepareModel(model, profile) {
   model.position.y = -bounds.min.y;
   const panels = [];
   const traced = [];
-  const outline = new T.LineBasicMaterial({ color: 0xd2d9e4, transparent: true, opacity: .13, depthWrite: false });
   const ghostPaint = new T.MeshBasicMaterial({ color: 0xb5bbc8, transparent: true, opacity: .035, depthWrite: false });
   const hood = profile.hood && model.getObjectByName(profile.hood.node);
   const materials = new Set();
@@ -66,19 +65,14 @@ function prepareModel(model, profile) {
     const solid = part.material;
     const painted = solid.name === profile.xrayMaterial;
     const wheel = /^(Wheel(Front|Rear)L_)?Object_28$/.test(part.name);
-    let trace;
-    if (painted || wheel || profile.traceAll) {
-      trace = new T.LineSegments(new T.EdgesGeometry(part.geometry, wheel ? 44 : profile.traceAll ? 49 : 34), outline);
-      trace.visible = false;
-      part.add(trace);
-    }
-    traced.push({ part, solid, trace, painted });
+    const edgeAngle = wheel ? 44 : profile.traceAll ? 49 : painted ? 34 : 0;
+    traced.push({ part, solid, edgeAngle, painted });
     if (painted) {
       const xray = solid.clone();
       xray.transparent = true;
       xray.opacity = .22;
       xray.depthWrite = false;
-      panels.push({ part, solid, xray });
+      panels.push({ part, xray });
     }
   });
   const wheels = Object.entries(profile.wheels || {}).flatMap(([key, spec]) => {
@@ -155,6 +149,8 @@ export function createVehicleStage(stage, { xray = 0 } = {}) {
   const nextTarget = new T.Vector3(), nextOffset = new T.Vector3();
   const orbit = new T.Spherical(), nextOrbit = new T.Spherical();
   const prepared = new WeakMap();
+  const outline = new T.LineBasicMaterial({ color: 0xd2d9e4, transparent: true, opacity: .13, depthWrite: false });
+  let appearanceDirty = true;
   const reflect = new T.PMREMGenerator(renderer);
   const lighting = new T.Scene();
   lighting.background = new T.Color(0x222026);
@@ -225,19 +221,26 @@ export function createVehicleStage(stage, { xray = 0 } = {}) {
       partMotion = Math.max(partMotion, parts.engine.position.distanceTo(destination));
       parts.engine.position.lerp(destination, easing);
     }
-    for (const { part, solid, trace, painted } of parts.traced) {
-      part.visible = !focus || Boolean(trace);
-      if (trace) trace.visible = Boolean(focus);
-      part.material = focus && painted ? parts.ghostPaint : solid;
-      if (focus && !painted && trace) part.material = hiddenSurface;
-    }
-    if (xray && !focus && vehicle === 'coupe') {
-      for (const { part, xray: translucent } of parts.panels) {
-        translucent.opacity = 1 - xray * .78;
-        part.material = translucent;
+    if (appearanceDirty) {
+      appearanceDirty = false;
+      for (const entry of parts.traced) {
+        const { part, solid, edgeAngle, painted } = entry;
+        if (focus && edgeAngle && !entry.trace) {
+          entry.trace = new T.LineSegments(new T.EdgesGeometry(part.geometry, edgeAngle), outline);
+          part.add(entry.trace);
+        }
+        part.visible = !focus || Boolean(edgeAngle);
+        if (entry.trace) entry.trace.visible = Boolean(focus);
+        part.material = focus && painted ? parts.ghostPaint : focus && edgeAngle ? hiddenSurface : solid;
       }
+      if (xray && !focus && vehicle === 'coupe') {
+        for (const { part, xray: translucent } of parts.panels) {
+          translucent.opacity = 1 - xray * .78;
+          part.material = translucent;
+        }
+      }
+      platform.visible = rim.visible = floorShadow.visible = contactShadow.visible = !focus;
     }
-    platform.visible = rim.visible = floorShadow.visible = contactShadow.visible = !focus;
     target.lerp(nextTarget, easing);
     orbit.setFromVector3(offset);
     nextOrbit.setFromVector3(nextOffset);
@@ -264,8 +267,8 @@ export function createVehicleStage(stage, { xray = 0 } = {}) {
 
   function resize() {
     if (!stage.clientHeight) return;
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.3));
     const width = stage.clientWidth, height = stage.clientHeight;
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.3, Math.sqrt(1_000_000 / (width * height))));
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
     if (focus) {
@@ -297,6 +300,7 @@ export function createVehicleStage(stage, { xray = 0 } = {}) {
     }
     ({ instance: model, parts } = prepared.get(vehicleScene));
     holder.add(model);
+    appearanceDirty = true;
     stage.dataset.ready = '';
     resize();
   }
@@ -320,6 +324,7 @@ export function createVehicleStage(stage, { xray = 0 } = {}) {
     }
     if (!next) activePart = undefined;
     focus = next;
+    appearanceDirty = true;
     resize();
   }
   const visibility = new IntersectionObserver(([entry]) => {
@@ -350,6 +355,7 @@ export function createVehicleStage(stage, { xray = 0 } = {}) {
   function setXray(amount) {
     if (amount === xray) return;
     xray = amount;
+    if (!focus) appearanceDirty = true;
     invalidate();
   }
   return { showVehicle, showService, setXray };
