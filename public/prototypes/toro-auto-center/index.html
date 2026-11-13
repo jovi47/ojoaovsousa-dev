@@ -44,6 +44,8 @@
     <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
     <symbol id="icon-battery" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M7 7V4m10 3V4M7 13h4m3 0h4m-2-2v4"/></symbol>
     <symbol id="icon-bolt" viewBox="0 0 24 24"><path d="m13 2-9 12h7l-1 8 10-12h-7l1-8Z"/></symbol>
+    <symbol id="icon-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3 18.5 2.5a6 6 0 0 0-7.2 7.2l-8 8a2.1 2.1 0 1 0 3 3l8-8a6 6 0 0 0 7.2-7.2l-3.8 3.8-3-.7Z"/></symbol>
+    <symbol id="icon-down" viewBox="0 0 24 16"><path d="M2 3h20M2 7h20L12 15Z"/></symbol>
     <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
     <symbol id="icon-external" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol>
     <symbol id="icon-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></symbol>
@@ -150,6 +152,7 @@
                 <button class="rotation-button icon-button" type="button" aria-label="Pausar rotação" hidden><svg class="icon" aria-hidden="true"><use href="#icon-pause"/></svg></button>
               </figure>
             </div>
+            <a class="hero-scroll-cue" href="#servicos" aria-label="Descer para explorar o veículo" hidden><svg class="icon" aria-hidden="true"><use href="#icon-down"/></svg></a>
           </section>
 
           <section class="section services" id="servicos" tabindex="-1" aria-labelledby="services-title">
@@ -169,11 +172,6 @@
                       <p class="car-description" aria-live="polite">Selecione carro ou moto. Depois, escolha uma peça ou um serviço para ver como funciona.</p>
                     </div>
                   </div>
-                  <figure class="car-stage">
-                    <img src="assets/coupe.webp" alt="Mercedes-AMG GT branco ilustrativo em vista de três quartos" width="795" height="538" loading="lazy" decoding="async">
-                    <canvas aria-hidden="true"></canvas>
-                    <button class="rotation-button icon-button" type="button" aria-label="Pausar rotação" hidden><svg class="icon" aria-hidden="true"><use href="#icon-pause"/></svg></button>
-                  </figure>
                 </div>
                 <div class="car-controls" aria-label="Peças e serviços" hidden>
                   <div class="service-options" data-for="coupe">
@@ -214,19 +212,19 @@
 
       <section class="section battery-section" id="baterias" tabindex="-1" aria-labelledby="battery-title">
         <div class="wrap">
-          <div class="section-intro">
+          <div class="section-intro" data-scroll-reveal="up">
             <h2 id="battery-title">Baterias</h2>
             <p>Teste, troca e socorro onde você estiver em Uberlândia.</p>
           </div>
           <div class="battery-services">
-            <article class="battery-card">
+            <article class="battery-card" data-scroll-reveal="up">
               <svg class="icon service-icon" aria-hidden="true"><use href="#icon-battery"/></svg>
               <div>
                 <h3>Teste e troca de bateria</h3>
                 <p>A equipe verifica a bateria e o sistema de carga e instala o modelo compatível.</p>
               </div>
             </article>
-            <article class="battery-card">
+            <article class="battery-card" data-scroll-reveal="up">
               <svg class="icon service-icon" aria-hidden="true"><use href="#icon-bolt"/></svg>
               <div>
                 <h3>Socorro com bateria</h3>
@@ -234,7 +232,7 @@
               </div>
             </article>
             <div class="battery-catalog">
-              <h3><svg class="icon service-icon" aria-hidden="true"><use href="#icon-battery"/></svg>Catálogo de baterias</h3>
+              <h3 data-scroll-reveal="up"><svg class="icon service-icon" aria-hidden="true"><use href="#icon-battery"/></svg>Catálogo de baterias</h3>
               <div class="battery-options service-buttons" role="group" aria-label="Capacidade da bateria" hidden>
                 <button type="button" data-battery="40" aria-pressed="true" aria-controls="battery-40">40 Ah</button>
                 <button type="button" data-battery="48" aria-pressed="false" aria-controls="battery-48">48 Ah</button>
@@ -249,8 +247,9 @@
                 <div class="battery-sheets">
                   <article class="battery-specs" id="battery-40" aria-labelledby="battery-title-40">
                     <div class="battery-copy">
-                      <header>
-                        <h4 id="battery-title-40"><svg class="icon" aria-hidden="true"><use href="#icon-battery"/></svg><span class="battery-capacity">40 <span>Ah</span></span></h4>
+                      <header class="battery-spec-heading">
+                        <h4 id="battery-title-40"><span class="battery-capacity">40 <span>Ah</span></span></h4>
+                        <div class="battery-type"><svg class="icon" aria-hidden="true"><use href="#icon-car"/></svg><span>Carro</span></div>
                       </header>
                       <a class="button button-outline battery-quote" href="https://wa.me/5534999927815?text=Ol%C3%A1%2C%20gostaria%20de%20consultar%20a%20bateria%20de%2040%20Ah.">Consultar bateria de 40 Ah</a>
                       <div class="battery-detail"><h5>Aplicações por montadora</h5>
@@ -262,12 +261,13 @@
                         </dl>
                       </div>
                     </div>
-                    <figure class="battery-product-photo"><div class="battery-image"><img src="assets/battery-40.webp" alt="Bateria Reifor na foto do catálogo" width="400" height="400" loading="lazy" decoding="async"></div><figcaption><div class="battery-type" aria-label="Carro" title="Carro"><svg class="icon" aria-hidden="true"><use href="#icon-car"/></svg><span>Carro</span></div></figcaption></figure>
+                    <figure class="battery-product-photo"><div class="battery-image"><img src="assets/battery-40.webp" alt="Bateria Reifor na foto do catálogo" width="400" height="400" loading="lazy" decoding="async"></div></figure>
                   </article>
                   <article class="battery-specs" id="battery-48" aria-labelledby="battery-title-48">
                     <div class="battery-copy">
-                      <header>
-                        <h4 id="battery-title-48"><svg class="icon" aria-hidden="true"><use href="#icon-battery"/></svg><span class="battery-capacity">48 <span>Ah</span></span></h4>
+                      <header class="battery-spec-heading">
+                        <h4 id="battery-title-48"><span class="battery-capacity">48 <span>Ah</span></span></h4>
+                        <div class="battery-type"><svg class="icon" aria-hidden="true"><use href="#icon-car"/></svg><span>Carro</span></div>
                       </header>
                       <a class="button button-outline battery-quote" href="https://wa.me/5534999927815?text=Ol%C3%A1%2C%20gostaria%20de%20consultar%20a%20bateria%20de%2048%20Ah.">Consultar bateria de 48 Ah</a>
                       <div class="battery-detail"><h5>Aplicações por montadora</h5>
@@ -280,12 +280,13 @@
                         </dl>
                       </div>
                     </div>
-                    <figure class="battery-product-photo"><div class="battery-image"><img src="assets/battery-48.webp" alt="Bateria Heliar Original na foto do catálogo" width="500" height="320" loading="lazy" decoding="async"></div><figcaption><div class="battery-type" aria-label="Carro" title="Carro"><svg class="icon" aria-hidden="true"><use href="#icon-car"/></svg><span>Carro</span></div></figcaption></figure>
+                    <figure class="battery-product-photo"><div class="battery-image"><img src="assets/battery-48.webp" alt="Bateria Heliar Original na foto do catálogo" width="500" height="320" loading="lazy" decoding="async"></div></figure>
                   </article>
                   <article class="battery-specs" id="battery-60" aria-labelledby="battery-title-60">
                     <div class="battery-copy">
-                      <header>
-                        <h4 id="battery-title-60"><svg class="icon" aria-hidden="true"><use href="#icon-battery"/></svg><span class="battery-capacity">60 <span>Ah</span></span></h4>
+                      <header class="battery-spec-heading">
+                        <h4 id="battery-title-60"><span class="battery-capacity">60 <span>Ah</span></span></h4>
+                        <div class="battery-type"><svg class="icon" aria-hidden="true"><use href="#icon-car"/></svg><span>Carro</span></div>
                       </header>
                       <a class="button button-outline battery-quote" href="https://wa.me/5534999927815?text=Ol%C3%A1%2C%20gostaria%20de%20consultar%20a%20bateria%20de%2060%20Ah.">Consultar bateria de 60 Ah</a>
                       <div class="battery-detail"><h5>Aplicações por montadora</h5>
@@ -306,12 +307,13 @@
                         </dl>
                       </div>
                     </div>
-                    <figure class="battery-product-photo"><div class="battery-image"><img src="assets/battery-60.webp" alt="Bateria Moura na foto do catálogo" width="284" height="284" loading="lazy" decoding="async"></div><figcaption><div class="battery-type" aria-label="Carro" title="Carro"><svg class="icon" aria-hidden="true"><use href="#icon-car"/></svg><span>Carro</span></div></figcaption></figure>
+                    <figure class="battery-product-photo"><div class="battery-image"><img src="assets/battery-60.webp" alt="Bateria Moura na foto do catálogo" width="284" height="284" loading="lazy" decoding="async"></div></figure>
                   </article>
                   <article class="battery-specs" id="battery-70" aria-labelledby="battery-title-70">
                     <div class="battery-copy">
-                      <header>
-                        <h4 id="battery-title-70"><svg class="icon" aria-hidden="true"><use href="#icon-battery"/></svg><span class="battery-capacity">70 <span>Ah</span></span></h4>
+                      <header class="battery-spec-heading">
+                        <h4 id="battery-title-70"><span class="battery-capacity">70 <span>Ah</span></span></h4>
+                        <div class="battery-type"><svg class="icon" aria-hidden="true"><use href="#icon-car"/></svg><span>Carro</span></div>
                       </header>
                       <a class="button button-outline battery-quote" href="https://wa.me/5534999927815?text=Ol%C3%A1%2C%20gostaria%20de%20consultar%20a%20bateria%20de%2070%20Ah.">Consultar bateria de 70 Ah</a>
                       <div class="battery-detail"><h5>Aplicações por montadora</h5>
@@ -330,37 +332,39 @@
                         </dl>
                       </div>
                     </div>
-                    <figure class="battery-product-photo"><div class="battery-image"><img src="assets/battery-70.webp" alt="Bateria Heliar AGM na foto do catálogo" width="500" height="320" loading="lazy" decoding="async"></div><figcaption><div class="battery-type" aria-label="Carro" title="Carro"><svg class="icon" aria-hidden="true"><use href="#icon-car"/></svg><span>Carro</span></div></figcaption></figure>
+                    <figure class="battery-product-photo"><div class="battery-image"><img src="assets/battery-70.webp" alt="Bateria Heliar AGM na foto do catálogo" width="500" height="320" loading="lazy" decoding="async"></div></figure>
                   </article>
                   <article class="battery-specs" id="battery-100" aria-labelledby="battery-title-100">
                     <div class="battery-copy">
-                      <header>
-                        <h4 id="battery-title-100"><svg class="icon" aria-hidden="true"><use href="#icon-battery"/></svg><span class="battery-capacity">100 <span>Ah</span></span></h4>
+                      <header class="battery-spec-heading">
+                        <h4 id="battery-title-100"><span class="battery-capacity">100 <span>Ah</span></span></h4>
+                        <div class="battery-type"><svg class="icon" aria-hidden="true"><use href="#icon-car"/></svg><svg class="icon" aria-hidden="true"><use href="#icon-truck"/></svg><span>Linha leve e pesada</span></div>
                       </header>
                       <p>O catálogo indica uso na linha leve e pesada. Informe o modelo, o ano e o motor pelo WhatsApp para confirmar a compatibilidade.</p>
                       <a class="button button-outline battery-quote" href="https://wa.me/5534999927815?text=Ol%C3%A1%2C%20gostaria%20de%20confirmar%20se%20a%20bateria%20de%20100%20Ah%20serve%20no%20meu%20ve%C3%ADculo.%20Modelo%3A%20%20Ano%3A%20%20Motor%3A%20">Consultar bateria de 100 Ah</a>
                     </div>
-                    <figure class="battery-product-photo"><div class="battery-image"><img src="assets/battery-100.webp" alt="Bateria Moura na foto do catálogo" width="528" height="400" loading="lazy" decoding="async"></div><figcaption><div class="battery-type" aria-label="Linha leve e pesada" title="Linha leve e pesada"><svg class="icon" aria-hidden="true"><use href="#icon-car"/></svg><svg class="icon" aria-hidden="true"><use href="#icon-truck"/></svg><span>Linha leve e pesada</span></div></figcaption></figure>
+                    <figure class="battery-product-photo"><div class="battery-image"><img src="assets/battery-100.webp" alt="Bateria Moura na foto do catálogo" width="528" height="400" loading="lazy" decoding="async"></div></figure>
                   </article>
                   <article class="battery-specs" id="battery-150" aria-labelledby="battery-title-150">
                     <div class="battery-copy">
-                      <header>
-                        <h4 id="battery-title-150"><svg class="icon" aria-hidden="true"><use href="#icon-battery"/></svg><span class="battery-capacity">150 <span>Ah</span></span></h4>
+                      <header class="battery-spec-heading">
+                        <h4 id="battery-title-150"><span class="battery-capacity">150 <span>Ah</span></span></h4>
+                        <div class="battery-type"><svg class="icon" aria-hidden="true"><use href="#icon-car"/></svg><svg class="icon" aria-hidden="true"><use href="#icon-truck"/></svg><span>Linha leve e pesada</span></div>
                       </header>
                       <p>O catálogo indica uso na linha leve e pesada. Informe o modelo, o ano e o motor pelo WhatsApp para confirmar a compatibilidade.</p>
                       <a class="button button-outline battery-quote" href="https://wa.me/5534999927815?text=Ol%C3%A1%2C%20gostaria%20de%20confirmar%20se%20a%20bateria%20de%20150%20Ah%20serve%20no%20meu%20ve%C3%ADculo.%20Modelo%3A%20%20Ano%3A%20%20Motor%3A%20">Consultar bateria de 150 Ah</a>
                     </div>
-                    <figure class="battery-product-photo"><div class="battery-image"><img src="assets/battery-150.webp" alt="Bateria Moura na foto do catálogo" width="350" height="350" loading="lazy" decoding="async"></div><figcaption><div class="battery-type" aria-label="Linha leve e pesada" title="Linha leve e pesada"><svg class="icon" aria-hidden="true"><use href="#icon-car"/></svg><svg class="icon" aria-hidden="true"><use href="#icon-truck"/></svg><span>Linha leve e pesada</span></div></figcaption></figure>
+                    <figure class="battery-product-photo"><div class="battery-image"><img src="assets/battery-150.webp" alt="Bateria Moura na foto do catálogo" width="350" height="350" loading="lazy" decoding="async"></div></figure>
                   </article>
                   <article class="battery-specs" id="battery-12" aria-labelledby="battery-title-12">
                     <div class="battery-copy">
-                      <header>
-                        <h4 id="battery-title-12"><svg class="icon" aria-hidden="true"><use href="#icon-battery"/></svg><span class="battery-capacity">12 <span>Ah</span></span></h4>
+                      <header class="battery-spec-heading">
+                        <h4 id="battery-title-12"><span class="battery-capacity">12 <span>Ah</span></span></h4>
+                        <div class="battery-type"><svg class="icon" aria-hidden="true"><use href="#icon-motorcycle"/></svg><span>Moto</span></div>
                       </header>
                       <p>O catálogo lista 12 Ah para moto. A foto do Wix mostra um modelo de 6 Ah. Confirme a capacidade e o código da bateria para a sua moto.</p>
                       <a class="button button-outline battery-quote" href="https://wa.me/5534999927815?text=Ol%C3%A1%2C%20gostaria%20de%20consultar%20a%20bateria%20de%2012%20Ah.">Consultar bateria de 12 Ah</a>
                     </div>
-                    <div class="battery-type" aria-label="Moto" title="Moto"><svg class="icon" aria-hidden="true"><use href="#icon-motorcycle"/></svg><span>Moto</span></div>
                   </article>
                 </div>
               </div>
@@ -372,28 +376,32 @@
 
       <section class="section other-services" id="outros-servicos" tabindex="-1" aria-labelledby="other-title">
         <div class="wrap">
-          <div class="section-intro">
+          <div class="section-intro" data-scroll-reveal="up">
             <h2 id="other-title">Revisão e manutenção</h2>
           </div>
           <div class="other-grid">
-            <article class="other-card maintenance-card">
+            <article class="other-card maintenance-card" data-scroll-reveal="up">
               <header><span class="maintenance-icon"><svg class="icon" aria-hidden="true"><use href="#icon-car"/></svg></span><h3>Revisão de carros</h3></header>
               <p>Conte à equipe como você usa o carro e quando fez a última revisão para definir o que precisa ser conferido.</p>
               <a href="https://wa.me/5534999927815?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20revis%C3%A3o%20para%20o%20meu%20carro." aria-label="Entrar em contato sobre revisão de carros">Entrar em contato <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
             </article>
-            <article class="other-card maintenance-card">
+            <article class="other-card maintenance-card" data-scroll-reveal="up">
               <header><span class="maintenance-icon"><svg class="icon" aria-hidden="true"><use href="#icon-suspension"/></svg></span><h3>Manutenção preventiva</h3></header>
               <p>Planeje as trocas e verificações periódicas conforme a quilometragem e o plano de manutenção do seu veículo.</p>
               <a href="https://wa.me/5534999927815?text=Ol%C3%A1%2C%20gostaria%20de%20consultar%20a%20manuten%C3%A7%C3%A3o%20preventiva%20do%20meu%20carro." aria-label="Entrar em contato sobre manutenção preventiva">Entrar em contato <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
             </article>
-            <article class="other-card maintenance-card">
+            <article class="other-card maintenance-card" data-scroll-reveal="up">
               <header><span class="maintenance-icon"><svg class="icon" aria-hidden="true"><use href="#icon-inspection"/></svg></span><h3>Inspeção veicular</h3></header>
               <p>Peça uma avaliação das condições do veículo e dos pontos que precisam de atenção.</p>
               <a href="https://wa.me/5534999927815?text=Ol%C3%A1%2C%20gostaria%20de%20consultar%20o%20servi%C3%A7o%20de%20inspe%C3%A7%C3%A3o%20veicular." aria-label="Entrar em contato sobre inspeção veicular">Entrar em contato <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
             </article>
           </div>
           <section class="home-services" id="domicilio" aria-labelledby="home-services-title">
-            <h3 id="home-services-title">Atendimento em domicílio</h3>
+            <div class="home-motifs" aria-hidden="true">
+              <svg class="icon"><use href="#icon-car-side"/></svg>
+              <svg class="icon"><use href="#icon-wrench"/></svg>
+            </div>
+            <h3 id="home-services-title" data-scroll-reveal="up">Atendimento em domicílio</h3>
             <div class="home-timeline">
               <div class="timeline-track" aria-hidden="true">
                 <div class="timeline-progress"><span class="timeline-car"><svg class="icon"><use href="#icon-car-side"/></svg></span></div>
@@ -411,48 +419,48 @@
                 <article id="home-step-4" class="home-step-detail"><h4>Resolvemos para você</h4><p>Fazemos o serviço combinado. Quando for possível, instalamos a bateria no seu endereço.</p></article>
               </div>
             </div>
+            <p class="parts-contact">Precisa de peças em geral?</p>
             <a class="button button-primary other-contact" href="https://wa.me/5534999927815?text=Ol%C3%A1%2C%20gostaria%20de%20consultar%20o%20atendimento%20em%20domic%C3%ADlio.">Consultar horários <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
           </section>
-          <p class="parts-contact">Precisa de peças em geral? <a href="https://wa.me/5534999927815?text=Ol%C3%A1%2C%20gostaria%20de%20consultar%20uma%20pe%C3%A7a%20para%20o%20meu%20ve%C3%ADculo.">Consulte pelo WhatsApp</a>.</p>
         </div>
       </section>
 
       <section class="section why" id="por-que-nos" tabindex="-1" aria-labelledby="why-title">
         <div class="wrap why-layout grid">
-          <div class="section-intro">
+          <div class="section-intro" data-scroll-reveal="up">
             <h2 id="why-title">Por que nós</h2>
             <p>Atendimento em Uberlândia para quem precisa escolher uma bateria, revisar o carro ou resolver um imprevisto.</p>
             <a class="button button-outline" href="https://wa.me/5534999927815"><span>Falar com a <span class="toro-wordmark"><span class="sr-only">T</span><span class="toro-wheel">o</span>ro</span></span> <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
           </div>
           <dl class="benefit-grid">
-            <div><dt>Atendimento rápido</dt><dd>Fale direto com a oficina para explicar o que aconteceu e combinar o atendimento.</dd></div>
-            <div><dt>Peças compatíveis</dt><dd>A equipe orienta a escolha da peça pelo modelo, ano e motor do veículo.</dd></div>
-            <div><dt>Garantia esclarecida</dt><dd>Consulte a cobertura e o prazo de garantia da peça ou do serviço.</dd></div>
-            <div><dt>Orçamento claro</dt><dd>Peça um orçamento e confira o que está incluído antes de decidir.</dd></div>
+            <div data-scroll-reveal="fade"><dt>Atendimento rápido</dt><dd>Fale direto com a oficina para explicar o que aconteceu e combinar o atendimento.</dd></div>
+            <div data-scroll-reveal="fade"><dt>Peças compatíveis</dt><dd>A equipe orienta a escolha da peça pelo modelo, ano e motor do veículo.</dd></div>
+            <div data-scroll-reveal="fade"><dt>Garantia esclarecida</dt><dd>Consulte a cobertura e o prazo de garantia da peça ou do serviço.</dd></div>
+            <div data-scroll-reveal="fade"><dt>Orçamento claro</dt><dd>Peça um orçamento e confira o que está incluído antes de decidir.</dd></div>
           </dl>
         </div>
       </section>
 
       <section class="section faq" id="faq" tabindex="-1" aria-labelledby="faq-title">
         <div class="wrap faq-layout">
-          <div class="section-intro">
+          <div class="section-intro" data-scroll-reveal="up">
             <h2 id="faq-title">Dúvidas frequentes</h2>
             <a class="button button-outline" href="https://wa.me/5534999927815"><span>Ainda tem uma dúvida? Fale com a <span class="toro-wordmark"><span class="sr-only">T</span><span class="toro-wheel">o</span>ro</span></span></a>
           </div>
           <div class="faq-list">
-            <details class="faq-item"><summary><span>Meu carro ficou sem partida. Vocês vão até mim?</span><span class="faq-symbol" aria-hidden="true"></span></summary><p>Consulte a disponibilidade pelo WhatsApp. Informe o modelo do carro, sua localização e o que aconteceu.</p></details>
-            <details class="faq-item"><summary><span>Como sei qual bateria serve no meu carro?</span><span class="faq-symbol" aria-hidden="true"></span></summary><p>Informe o modelo, o ano e o motor. A equipe confirma a capacidade e a referência compatíveis.</p></details>
-            <details class="faq-item"><summary><span>Vocês testam a bateria antes da troca?</span><span class="faq-symbol" aria-hidden="true"></span></summary><p>A equipe verifica a bateria e o sistema de carga para orientar o próximo passo.</p></details>
-            <details class="faq-item"><summary><span>A <span class="toro-wordmark"><span class="sr-only">T</span><span class="toro-wheel">o</span>ro</span> busca meu carro para revisão?</span><span class="faq-symbol" aria-hidden="true"></span></summary><p>A oficina oferece retirada do veículo conforme o serviço e a disponibilidade. Combine o endereço e o horário com a equipe.</p></details>
-            <details class="faq-item"><summary><span>Como peço um orçamento?</span><span class="faq-symbol" aria-hidden="true"></span></summary><p>Envie pelo WhatsApp o modelo do veículo e descreva o serviço ou a peça de que precisa.</p></details>
-            <details class="faq-item"><summary><span>Qual é o horário da oficina?</span><span class="faq-symbol" aria-hidden="true"></span></summary><p>De segunda a sexta, das 7h às 17h. Aos sábados, das 7h às 12h.</p></details>
+            <details class="faq-item" data-scroll-reveal="fade"><summary><span>Meu carro ficou sem partida. Vocês vão até mim?</span><span class="faq-symbol" aria-hidden="true"></span></summary><p>Consulte a disponibilidade pelo WhatsApp. Informe o modelo do carro, sua localização e o que aconteceu.</p></details>
+            <details class="faq-item" data-scroll-reveal="fade"><summary><span>Como sei qual bateria serve no meu carro?</span><span class="faq-symbol" aria-hidden="true"></span></summary><p>Informe o modelo, o ano e o motor. A equipe confirma a capacidade e a referência compatíveis.</p></details>
+            <details class="faq-item" data-scroll-reveal="fade"><summary><span>Vocês testam a bateria antes da troca?</span><span class="faq-symbol" aria-hidden="true"></span></summary><p>A equipe verifica a bateria e o sistema de carga para orientar o próximo passo.</p></details>
+            <details class="faq-item" data-scroll-reveal="fade"><summary><span>A <span class="toro-wordmark"><span class="sr-only">T</span><span class="toro-wheel">o</span>ro</span> busca meu carro para revisão?</span><span class="faq-symbol" aria-hidden="true"></span></summary><p>A oficina oferece retirada do veículo conforme o serviço e a disponibilidade. Combine o endereço e o horário com a equipe.</p></details>
+            <details class="faq-item" data-scroll-reveal="fade"><summary><span>Como peço um orçamento?</span><span class="faq-symbol" aria-hidden="true"></span></summary><p>Envie pelo WhatsApp o modelo do veículo e descreva o serviço ou a peça de que precisa.</p></details>
+            <details class="faq-item" data-scroll-reveal="fade"><summary><span>Qual é o horário da oficina?</span><span class="faq-symbol" aria-hidden="true"></span></summary><p>De segunda a sexta, das 7h às 17h. Aos sábados, das 7h às 12h.</p></details>
           </div>
         </div>
       </section>
 
       <section class="section location" id="localizacao" tabindex="-1" aria-labelledby="location-title">
         <div class="wrap location-layout grid">
-          <div class="location-copy">
+          <div class="location-copy" data-scroll-reveal="left">
             <h2 id="location-title">Como chegar</h2>
             <div class="location-info">
               <address>
@@ -465,14 +473,14 @@
               </p>
             </div>
           </div>
-          <figure class="map-frame">
+          <figure class="map-frame" data-scroll-reveal="right">
             <iframe title="Mapa da Toro Auto Center na Av. Rio Branco, 1200, Uberlândia" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3774.3589502481914!2d-48.26686350000001!3d-18.9154995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94a44584dbc13e33%3A0x5923cc2edb4e0f2f!2sToro%20Auto%20Center!5e0!3m2!1spt-BR!2sbr!4v1794519919929!5m2!1spt-BR!2sbr" width="720" height="380" loading="lazy" referrerpolicy="no-referrer" tabindex="-1"></iframe>
             <a class="map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.%20Rio%20Branco%2C%201200%2C%20Uberl%C3%A2ndia%2C%20MG" target="_blank" rel="noopener noreferrer"><span>Traçar rota no Google Maps <svg class="icon" aria-hidden="true"><use href="#icon-external"/></svg></span></a>
           </figure>
         </div>
       </section>
     </main>
-    <footer class="site-footer wrap" id="rodape">
+    <footer class="site-footer wrap" data-scroll-reveal="fade" id="rodape">
       <a class="header-logo" href="#inicio" aria-label="Toro Auto Center, início">
         <span class="brand-mark" aria-hidden="true"></span>
         <span class="brand-name"><span class="brand-oro"><span class="toro-wheel">o</span>ro</span><span class="brand-descriptor">Auto Center</span></span>

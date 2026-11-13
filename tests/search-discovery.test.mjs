@@ -145,6 +145,9 @@ test('an indexable portfolio build keeps the Toro prototype isolated',async t=>{
   assert.ok(catalog.includes('Consultar bateria de '+capacity+' Ah'),capacity);
  }
  assert.match(catalog,/foto do Wix mostra um modelo de 6 Ah/);
+ assert.equal((html.match(/<canvas\b/g)||[]).length,1,'the opening and explorer share a single canvas');
+ assert.match(html, /class="hero-scroll-cue" href="#servicos"/);
+ assert.doesNotMatch(catalog, /<h4 id="battery-title-\d+"><svg/);
  const stage=await f.read(route+'vehicle-stage.js');
  for(const [file,nodes] of [['coupe.glb',['BodyHood','IllustrativeEngine','WheelFrontL','WheelRearL']],['moto.glb',[]]]){
   const bytes=await readFile(path.join(f.root,'dist',route,'assets',file));

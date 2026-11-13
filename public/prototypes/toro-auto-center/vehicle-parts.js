@@ -84,6 +84,39 @@ function battery(group) {
   };
 }
 
+function motorcycleBattery(group) {
+  box(group, black, [.48,.49,.36], [0,0,0]);
+  box(group, rubber, [.5,.042,.38], [0,.235,0]);
+  box(group, rubber, [.5,.028,.38], [0,-.24,0]);
+  box(group, alloy, [.36,.17,.013], [0,.04,.182]);
+  const connectors = [];
+  for (const side of [-1,1]) {
+    const terminal = side > 0 ? red : steel;
+    const x = side * .174;
+    box(group, terminal, [.088,.032,.074], [x,.263,.086]);
+    cylinder(group, steel, .018,.018, [x,.287,.086], 6);
+    const cable = new T.Group();
+    cable.position.set(x,.35,.086);
+    group.add(cable);
+    ring(cable, steel, .022,.006, [0,0,0]).rotation.x = Math.PI / 2;
+    pipe(cable, side > 0 ? red : rubber, .011, [[0,0,-.024],[0,.02,-.095],[side * .043,.065,-.19]]);
+    connectors.push(cable);
+    box(group, ceramic, [.047,.009,.008], [side * .108,.071,.193]);
+    if (side > 0) box(group, ceramic, [.009,.047,.008], [side * .108,.071,.193]);
+  }
+  const indicators = Array.from({ length: 4 }, (_, index) =>
+    box(group, amber, [.044,.025,.01], [-.09 + index * .06,.002,.193]));
+  return time => {
+    const phase = time % 4.8;
+    connectors.forEach((cable, index) => {
+      const connected = T.MathUtils.smoothstep(phase,.15 + index * .28,.95 + index * .28)
+        * (1 - T.MathUtils.smoothstep(phase,3.8,4.6));
+      cable.position.y = .39 - .101 * connected;
+    });
+    indicators.forEach((indicator, index) => { indicator.visible = phase > 1.3 + index * .33 && phase < 4.02; });
+  };
+}
+
 function belt(group) {
   const pulleys = [[-.25,.155,.15],[.24,.13,.115],[.055,-.245,.17]];
   const shape = new T.Shape();
@@ -494,7 +527,7 @@ function suspension(group) {
 
 const builders = {
   battery, belt, oil: oilFilter, wipers, exhaust, spark, alignment: axle, injection,
-  ac: compressor, lights: headlights, brakes, suspension, 'moto-battery': battery
+  ac: compressor, lights: headlights, brakes, suspension, 'moto-battery': motorcycleBattery
 };
 
 export function createPart(service) {

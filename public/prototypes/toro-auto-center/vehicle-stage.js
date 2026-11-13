@@ -19,12 +19,12 @@ const vehicles = {
       belt: { point: [0,.24,.778], size: .33, view: [.41,.37,1], engine: true },
       oil: { point: [-.165,.225,.68], size: .19, view: [-.71,.74,1], engine: true },
       wipers: { point: [.014,.472,.233], size: .67, view: [.50,.64,1], rotation: [-.85,0,0] },
-      exhaust: { point: [-.115,.095,-.29], size: 1.19, view: [1,.39,-.68], framing: 2.65, rotation: [0,Math.PI / 2,0] },
+      exhaust: { point: [-.115,.095,-.29], size: 1.19, view: [1,.39,-.68], framing: 1.62, rotation: [0,Math.PI / 2,0] },
       spark: { point: [.105,.295,.64], size: .24, view: [.63,.66,1], engine: true },
-      alignment: { point: [0,.15,-.545], size: .95, view: [.49,.44,-1], framing: 2.52 },
+      alignment: { point: [0,.15,-.545], size: .95, view: [.49,.44,-1], framing: 1.52 },
       injection: { point: [-.09,.31,.60], size: .33, view: [-.45,.65,1], engine: true },
       ac: { point: [.21,.19,.78], size: .23, view: [.65,.35,1], engine: true },
-      lights: { point: [.008,.259,.814], size: .765, view: [.48,.42,1], framing: 2.54 },
+      lights: { point: [.008,.259,.814], size: .765, view: [.48,.42,1], framing: 1.48 },
       brakes: { point: [.345,.155,.592], size: .257, view: [1,.26,.55], rotation: [0,Math.PI / 2,0], wheel: 'front' },
       suspension: { point: [.323,.211,-.544], size: .38, view: [1,.21,-.56], rotation: [0,1.75,0], wheel: 'rear' }
     }
@@ -186,6 +186,7 @@ export function createVehicleStage(stage, { xray = 0 } = {}) {
 
   function draw(now) {
     request = 0;
+    const firstFrame = last === 0;
     const seconds = Math.min((now - last) / 1000, .045);
     last = now;
     const animating = activePart?.animate && !paused && !reduced.matches;
@@ -194,10 +195,10 @@ export function createVehicleStage(stage, { xray = 0 } = {}) {
       activePart.animate(partTime);
     }
     const spinning = !focus && !paused && !reduced.matches;
-    const easing = reduced.matches ? 1 : 1 - Math.exp(-6.5 * seconds);
+    const easing = reduced.matches || firstFrame ? 1 : 1 - Math.exp(-6.5 * seconds);
     if (focus) {
       nextTarget.set(...focus.point);
-      const distance = focus.size * (focus.framing || 2.80);
+      const distance = focus.size * (focus.framing || 2.80) * Math.max(1, stage.clientHeight / 430);
       nextOffset.set(...focus.view).setLength(distance * Math.max(1, 1.05 / camera.aspect));
     } else {
       if (spinning) turn = (turn + .115 * seconds) % (Math.PI * 2);
@@ -266,9 +267,17 @@ export function createVehicleStage(stage, { xray = 0 } = {}) {
   function resize() {
     if (!stage.clientHeight) return;
     renderer.setPixelRatio(Math.min(devicePixelRatio, 1.3));
-    renderer.setSize(stage.clientWidth, stage.clientHeight, false);
-    camera.aspect = stage.clientWidth / stage.clientHeight;
-    camera.updateProjectionMatrix();
+    const width = stage.clientWidth, height = stage.clientHeight;
+    renderer.setSize(width, height, false);
+    camera.aspect = width / height;
+    if (focus) {
+      const wide = width >= 1360;
+      const centerX = wide ? .72 : width >= 768 ? .69 : .5;
+      const centerY = wide ? .46 : width >= 768 ? .40 : .43;
+      camera.setViewOffset(width, height, (.5 - centerX) * width, (.5 - centerY) * height, width, height);
+    } else {
+      camera.setViewOffset(width, height, 0, height * .045, width, height);
+    }
     invalidate();
   }
 
@@ -324,7 +333,7 @@ export function createVehicleStage(stage, { xray = 0 } = {}) {
     if (!next) activePart = undefined;
     focus = next;
     updateControls();
-    invalidate();
+    resize();
   }
   const visibility = new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;
