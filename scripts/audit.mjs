@@ -17,7 +17,7 @@ const fisiopoa=new Set([
 const toro=new Set([
  'index.html','privacidade.html','style.css','page.js','vehicle-stage.js','vehicle-parts.js','assets/toro.svg','assets/geist.woff2',
  'assets/geist-license.txt','assets/oficina.webp',
- ...['40','48','60','70','100','150'].map(capacity=>'assets/battery-'+capacity+'.webp'),
+ ...['40','48','60','70','100','150','12'].map(capacity=>'assets/battery-'+capacity+'.webp'),
  'assets/coupe.webp','assets/moto.webp','assets/coupe.glb','assets/moto.glb'
 ]);
 const prototypes=new Map([['prototypes/fisiopoa',fisiopoa],['prototypes/toro-auto-center',toro]]);

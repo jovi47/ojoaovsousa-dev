@@ -111,8 +111,6 @@ function softShadow(width, length, height, opacity) {
 }
 
 export function createVehicleStage(stage, { xray = 0 } = {}) {
-  const rotationButton = stage.querySelector('.rotation-button');
-  const playbackIcon = rotationButton.querySelector('use');
   const canvas = stage.querySelector('canvas');
   const renderer = new T.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' });
   renderer.toneMapping = T.ACESFilmicToneMapping;
@@ -152,7 +150,7 @@ export function createVehicleStage(stage, { xray = 0 } = {}) {
   let activePart, partTime = 0;
 
   let request = 0, last = 0, vehicle = '', desiredVehicle = '', model, parts;
-  let visible = false, lost = false, paused = reduced.matches, turn = -.18, focus = null;
+  let visible = false, lost = false, turn = -.18, focus = null;
   const target = new T.Vector3(0,.35,0), offset = new T.Vector3(-2.32,1.25,2.68);
   const nextTarget = new T.Vector3(), nextOffset = new T.Vector3();
   const orbit = new T.Spherical(), nextOrbit = new T.Spherical();
@@ -189,12 +187,12 @@ export function createVehicleStage(stage, { xray = 0 } = {}) {
     const firstFrame = last === 0;
     const seconds = Math.min((now - last) / 1000, .045);
     last = now;
-    const animating = activePart?.animate && !paused && !reduced.matches;
+    const animating = activePart?.animate && !reduced.matches;
     if (animating) {
       partTime += seconds;
       activePart.animate(partTime);
     }
-    const spinning = !focus && !paused && !reduced.matches;
+    const spinning = !focus && !reduced.matches;
     const easing = reduced.matches || firstFrame ? 1 : 1 - Math.exp(-6.5 * seconds);
     if (focus) {
       nextTarget.set(...focus.point);
@@ -281,18 +279,9 @@ export function createVehicleStage(stage, { xray = 0 } = {}) {
     invalidate();
   }
 
-  function updateControls() {
-    rotationButton.hidden = reduced.matches || !stage.hasAttribute('data-ready');
-    rotationButton.setAttribute('aria-label', focus
-      ? paused ? 'Retomar animação' : 'Pausar animação'
-      : paused ? 'Girar veículo' : 'Pausar rotação');
-    playbackIcon.setAttribute('href', paused ? '#icon-play' : '#icon-pause');
-  }
-
   async function showVehicle(name) {
     desiredVehicle = name;
     delete stage.dataset.ready;
-    rotationButton.hidden = true;
     if (!loaded.has(name)) {
       const load = loader.loadAsync(new URL('assets/' + vehicles[name].file, import.meta.url).href);
       loaded.set(name, load);
@@ -309,7 +298,6 @@ export function createVehicleStage(stage, { xray = 0 } = {}) {
     ({ instance: model, parts } = prepared.get(vehicleScene));
     holder.add(model);
     stage.dataset.ready = '';
-    updateControls();
     resize();
   }
 
@@ -332,7 +320,6 @@ export function createVehicleStage(stage, { xray = 0 } = {}) {
     }
     if (!next) activePart = undefined;
     focus = next;
-    updateControls();
     resize();
   }
   const visibility = new IntersectionObserver(([entry]) => {
@@ -347,26 +334,17 @@ export function createVehicleStage(stage, { xray = 0 } = {}) {
     else invalidate();
   });
   reduced.addEventListener('change', () => {
-    paused = reduced.matches;
     if (reduced.matches) activePart?.animate?.(0);
-    updateControls();
-    invalidate();
-  });
-  rotationButton.addEventListener('click', () => {
-    paused = !paused;
-    updateControls();
     invalidate();
   });
   canvas.addEventListener('webglcontextlost', event => {
     event.preventDefault();
     lost = true;
     delete stage.dataset.ready;
-    updateControls();
   });
   canvas.addEventListener('webglcontextrestored', () => {
     lost = false;
     if (model && vehicle === desiredVehicle) stage.dataset.ready = '';
-    updateControls();
     invalidate();
   });
   function setXray(amount) {

@@ -144,7 +144,7 @@ test('an indexable portfolio build keeps the Toro prototype isolated',async t=>{
   assert.ok(catalog.includes('id="battery-'+capacity+'"'),capacity);
   assert.ok(catalog.includes('Consultar bateria de '+capacity+' Ah'),capacity);
  }
- assert.match(catalog,/foto do Wix mostra um modelo de 6 Ah/);
+ assert.match(catalog, /assets\/battery-12\.webp/);
  assert.equal((html.match(/<canvas\b/g)||[]).length,1,'the opening and explorer share a single canvas');
  assert.match(html, /class="hero-scroll-cue" href="#servicos"/);
  assert.doesNotMatch(catalog, /<h4 id="battery-title-\d+"><svg/);
