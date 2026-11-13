@@ -1,6 +1,14 @@
 # Cloudflare Pages: manual release
 
-Updated 2026-11-13 UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). Current published source is `ca634ac2b3de5044ee0cf58db712c7965d9acf74`, deployed to Production/main. Earlier dated receipts describe historical releases; no custom domain was purchased.
+Updated 2026-11-13 UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). Current published source is `48e461c82a31b07c491cc33c42badec0c10a966b`, deployed to Production/main. Earlier dated receipts describe historical releases; no custom domain was purchased.
+
+## Dra. Janaína Lavall prototype release
+
+The [dental prototype](https://ojoaovsousa.pages.dev/prototypes/dra-janaina-lavall/) was verified at `2026-11-13T16:10:01Z`, deployment `b42ab65e-f538-4f7c-806e-74fa51159aa1`, source `48e461c82a31b07c491cc33c42badec0c10a966b`, [immutable alias](https://b42ab65e.ojoaovsousa.pages.dev/prototypes/dra-janaina-lavall/). [PR26](https://github.com/jovi47/ojoaovsousa-dev/pull/26) contains the standalone change. The deployment combines that change with the prior production revision, which already contained Toro.
+
+The Direct Upload artifact contained 187 files and 16,849,856 raw bytes. Artifact manifest SHA-256 `60d84d1ab9c90e566c6736ab279e1d893d184e1a7e2fe05dda5bd6f06f0d010d`. The 174 pre-existing content files are byte-identical to the previous build. The headers control adds noindex for the new prototype. Five exact reads confirmed previous deployment `4ab770ee-0273-449a-bb24-a49686b55a2d` as the recovery target.
+
+Local tests passed 152/152. Both builds and the allowlist audit passed. Both public addresses matched the 12 prototype files, the sitemap and both previously published prototypes. The portfolio passed 37 HTTP/artifact checks. Chromium and WebKit checks at 390 and 1440 px confirmed responsive navigation, keyboard focus, FAQ, privacy, and reduced motion and static fallbacks. The prototype remains outside the indexable sitemap. No Search Console submission was applicable and contracted hosting cost stayed at R$ 0.
 
 ## Toro Auto Center prototype release
 
