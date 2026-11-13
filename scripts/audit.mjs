@@ -17,8 +17,8 @@ const fisiopoa=new Set([
 const janaina=new Set([
  'index.html','privacidade.html','style.css','page.js',
  'assets/brand.webp','assets/janaina-lavall.webp','assets/janaina-lavall-small.webp',
- 'assets/instrument-serif.woff2','assets/instrument-serif-italic.woff2','assets/instrument-serif-license.txt',
- 'assets/urbanist.woff2','assets/urbanist-license.txt'
+ 'assets/inter.woff2','assets/inter-license.txt',
+ 'assets/limpeza.webp','assets/clareamento.webp','assets/implantes.webp','assets/lentes.webp','assets/clinica-geral.webp'
 ]);
 const prototypes=new Map([['prototypes/fisiopoa',fisiopoa],['prototypes/dra-janaina-lavall',janaina]]);
 const prototypeDirectories=[...prototypes.keys()].flatMap(name=>[name,name+'/assets']);

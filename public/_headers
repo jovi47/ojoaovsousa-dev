@@ -25,7 +25,6 @@ https://:deployment.:project.pages.dev/*
 /prototypes/fisiopoa/*
   X-Robots-Tag: noindex, nofollow
 
-# Only the standalone landing embeds Google Maps. Replace the inherited CSP.
 /prototypes/fisiopoa/
   ! Content-Security-Policy
   Content-Security-Policy: default-src 'self'; frame-src https://www.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'
@@ -35,6 +34,10 @@ https://:deployment.:project.pages.dev/*
 
 /prototypes/dra-janaina-lavall/*
   X-Robots-Tag: noindex, nofollow
+
+/prototypes/dra-janaina-lavall/
+  ! Content-Security-Policy
+  Content-Security-Policy: default-src 'self'; frame-src https://www.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'
 
 /404.html
   X-Robots-Tag: noindex, nofollow

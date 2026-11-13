@@ -29,13 +29,16 @@ test('Pages rules preserve real404 handling and allow only the required inline n
  assert.doesNotMatch(headers,/^\s+Cache-Control:.*(?:immutable|max-age=315)/m);
 });
 
-test('the standalone landing replaces the inherited CSP only on its slash URL',async()=>{
+test('only the standalone map pages replace the inherited CSP',async()=>{
  const headers=await readFile(new URL('public/_headers',root),'utf8');
+ const mapRoutes=['/prototypes/fisiopoa/','/prototypes/dra-janaina-lavall/'];
  const mapRules=headers.split(/\n\n/).filter(block=>block.includes('frame-src https://www.google.com'));
- assert.equal(mapRules.length,1);
- assert.match(mapRules[0],/^\/prototypes\/fisiopoa\/\n  ! Content-Security-Policy\n  Content-Security-Policy: default-src 'self';/m);
- for(const scope of ['/prototypes/fisiopoa','/prototypes/fisiopoa/*']){
-  assert.ok(headers.includes(scope+'\n  X-Robots-Tag: noindex, nofollow\n'));
+ assert.deepEqual(mapRules.map(block=>block.split('\n')[0]),mapRoutes);
+ for(const [index,route] of mapRoutes.entries()){
+  assert.ok(mapRules[index].startsWith(route+"\n  ! Content-Security-Policy\n  Content-Security-Policy: default-src 'self';"));
+  for(const scope of [route.slice(0,-1),route+'*']){
+   assert.ok(headers.includes(scope+'\n  X-Robots-Tag: noindex, nofollow\n'));
+  }
  }
  assert.doesNotMatch(csp,/frame-src|https:\/\/www\.google\.com/);
 });
