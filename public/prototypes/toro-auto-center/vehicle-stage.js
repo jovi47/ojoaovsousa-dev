@@ -5,7 +5,7 @@ import { createPart } from './vehicle-parts.js';
 const vehicles = {
   coupe: {
     file: 'coupe.glb',
-    overview: { point: [0,.24,0], offset: [1.65,.80,2.29] },
+    overview: { point: [0,.065,0], offset: [1.35,.66,1.91], aspect: 1.65 },
     hood: { node: 'BodyHood', angle: -1.14 },
     engine: { node: 'IllustrativeEngine', reveal: [0,.035,0] },
     xrayMaterial: 'Paint 1 Toro',
@@ -18,23 +18,24 @@ const vehicles = {
       battery: { point: [.255,.255,.66], size: .21, view: [.6,.72,1], engine: true },
       belt: { point: [0,.24,.778], size: .33, view: [.41,.37,1], engine: true },
       oil: { point: [-.165,.225,.68], size: .19, view: [-.71,.74,1], engine: true },
-      wipers: { point: [.014,.472,.233], size: .67, view: [.33,1,1], rotation: [-.85,0,0] },
-      exhaust: { point: [-.115,.095,-.29], size: 1.19, view: [-1,.36,-.62], framing: 2.4, rotation: [0,Math.PI / 2,0] },
+      wipers: { point: [.014,.472,.233], size: .67, view: [.50,.64,1], rotation: [-.85,0,0] },
+      exhaust: { point: [-.115,.095,-.29], size: 1.19, view: [1,.39,-.68], framing: 2.65, rotation: [0,Math.PI / 2,0] },
       spark: { point: [.105,.295,.64], size: .24, view: [.63,.66,1], engine: true },
-      alignment: { point: [0,.15,-.545], size: .95, view: [.25,.68,-1], framing: 2.37 },
+      alignment: { point: [0,.15,-.545], size: .95, view: [.49,.44,-1], framing: 2.52 },
       injection: { point: [-.09,.31,.60], size: .33, view: [-.45,.65,1], engine: true },
       ac: { point: [.21,.19,.78], size: .23, view: [.65,.35,1], engine: true },
-      lights: { point: [.008,.259,.814], size: .765, view: [.21,.40,1], framing: 2.43 },
+      lights: { point: [.008,.259,.814], size: .765, view: [.48,.42,1], framing: 2.54 },
       brakes: { point: [.345,.155,.592], size: .257, view: [1,.26,.55], rotation: [0,Math.PI / 2,0], wheel: 'front' },
       suspension: { point: [.323,.211,-.544], size: .38, view: [1,.21,-.56], rotation: [0,1.75,0], wheel: 'rear' }
     }
   },
   motorcycle: {
     file: 'moto.glb',
-    overview: { point: [0,.49,0], offset: [-2.03,.96,2.43] },
-    material: { color: 0x535a69, metalness: .17, roughness: .41, clearcoat: .28, side: T.DoubleSide },
+    overview: { point: [0,.32,0], offset: [1.96,.88,-2.66], aspect: 1.4 },
+    xrayMaterial: 'Paint',
+    traceAll: true,
     services: {
-      'moto-battery': { point: [.16,.58,.08], size: .27, view: [1,.5,.64], rotation: [0,.85,0] }
+      'moto-battery': { point: [.09,.79,-.39], size: .24, view: [1,.55,.67], rotation: [0,.85,0] }
     }
   }
 };
@@ -45,7 +46,6 @@ const hiddenSurface = new T.MeshBasicMaterial({ visible: false });
 function prepareModel(model, profile) {
   const bounds = new T.Box3().setFromObject(model);
   model.position.y = -bounds.min.y;
-  const finish = profile.material ? new T.MeshPhysicalMaterial(profile.material) : null;
   const panels = [];
   const traced = [];
   const outline = new T.LineBasicMaterial({ color: 0xd2d9e4, transparent: true, opacity: .13, depthWrite: false });
@@ -55,7 +55,6 @@ function prepareModel(model, profile) {
   model.traverse(part => {
     if (!part.isMesh) return;
     if (!part.geometry.attributes.normal) part.geometry.computeVertexNormals();
-    if (finish) part.material = finish;
     const material = part.material;
     const settings = profile.materials?.[material.name];
     if (settings && !materials.has(material)) {
@@ -68,8 +67,8 @@ function prepareModel(model, profile) {
     const painted = solid.name === profile.xrayMaterial;
     const wheel = /^(Wheel(Front|Rear)L_)?Object_28$/.test(part.name);
     let trace;
-    if (painted || wheel || profile.material) {
-      trace = new T.LineSegments(new T.EdgesGeometry(part.geometry, wheel ? 44 : 34), outline);
+    if (painted || wheel || profile.traceAll) {
+      trace = new T.LineSegments(new T.EdgesGeometry(part.geometry, wheel ? 44 : profile.traceAll ? 49 : 34), outline);
       trace.visible = false;
       part.add(trace);
     }
@@ -111,7 +110,7 @@ function softShadow(width, length, height, opacity) {
   return shadow;
 }
 
-export function createVehicleStage(stage, { xray = false } = {}) {
+export function createVehicleStage(stage, { xray = 0 } = {}) {
   const rotationButton = stage.querySelector('.rotation-button');
   const playbackIcon = rotationButton.querySelector('use');
   const canvas = stage.querySelector('canvas');
@@ -143,8 +142,8 @@ export function createVehicleStage(stage, { xray = false } = {}) {
   scene.add(rim);
   const holder = new T.Group();
   scene.add(holder);
-  const floorShadow = softShadow(2.75, 2.6, -.059, .62);
-  const contactShadow = softShadow(1.23, 2.19, -.003, .94);
+  const floorShadow = softShadow(2.62, 2.56, -.059, .19);
+  const contactShadow = softShadow(1.19, 2.1, -.003, .43);
   scene.add(floorShadow);
   holder.add(contactShadow);
   const detail = new T.Group();
@@ -196,15 +195,15 @@ export function createVehicleStage(stage, { xray = false } = {}) {
     }
     const spinning = !focus && !paused && !reduced.matches;
     const easing = reduced.matches ? 1 : 1 - Math.exp(-6.5 * seconds);
-    const frame = Math.max(1, 1.20 / camera.aspect);
     if (focus) {
       nextTarget.set(...focus.point);
-      const distance = focus.size * (focus.framing || 2.77);
+      const distance = focus.size * (focus.framing || 2.80);
       nextOffset.set(...focus.view).setLength(distance * Math.max(1, 1.05 / camera.aspect));
     } else {
       if (spinning) turn = (turn + .115 * seconds) % (Math.PI * 2);
       const overview = vehicles[vehicle].overview;
       nextTarget.set(...overview.point);
+      const frame = Math.max(1, (overview.aspect || 1.18) / camera.aspect);
       nextOffset.set(...overview.offset).multiplyScalar(frame);
     }
     const desiredTurn = focus ? 0 : turn;
@@ -233,8 +232,11 @@ export function createVehicleStage(stage, { xray = false } = {}) {
       part.material = focus && painted ? parts.ghostPaint : solid;
       if (focus && !painted && trace) part.material = hiddenSurface;
     }
-    if (xray && !focus) {
-      for (const { part, xray } of parts.panels) part.material = xray;
+    if (xray && !focus && vehicle === 'coupe') {
+      for (const { part, xray: translucent } of parts.panels) {
+        translucent.opacity = 1 - xray * .78;
+        part.material = translucent;
+      }
     }
     platform.visible = rim.visible = floorShadow.visible = contactShadow.visible = !focus;
     target.lerp(nextTarget, easing);
@@ -358,5 +360,10 @@ export function createVehicleStage(stage, { xray = false } = {}) {
     updateControls();
     invalidate();
   });
-  return { showVehicle, showService };
+  function setXray(amount) {
+    if (amount === xray) return;
+    xray = amount;
+    invalidate();
+  }
+  return { showVehicle, showService, setXray };
 }

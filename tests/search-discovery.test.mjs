@@ -113,27 +113,35 @@ test('an indexable portfolio build keeps the Toro prototype isolated',async t=>{
  const html=await f.read(route+'index.html');
  assert.match(html,/<meta name="robots" content="noindex, nofollow">/);
  assert.match(html,/<iframe\b[^>]*src="https:\/\/www\.google\.com\/maps[^>]*loading="lazy"/);
+ assert.match(html, /class="map-link"[^>]+target="_blank"/);
+ assert.match(html, /Horário de funcionamento.*7h às 17h.*7h às 12h/);
+ assert.match(html, /href="privacidade.html#privacidade"/);
+ assert.match(await f.read(route+'privacidade.html'), /name="robots" content="noindex, nofollow"/);
  const business=JSON.parse(html.match(/<script type="application\/ld\+json">([^<]+)<\/script>/)[1]);
  assert.equal(business['@type'],'AutoRepair');
  assert.equal(business.telephone,'+5534999927815');
  assert.equal(business.address.streetAddress,'Av. Rio Branco, 1200');
  assert.doesNotMatch(JSON.stringify(business),/review|rating|openingHours/i);
  const header=html.match(/<header\b[\s\S]*?<\/header>/)[0];
- assert.match(header,/<a class="header-logo"[^>]*>[\s\S]*?<span class="brand-mark"[^>]*><\/span>\s*<span class="brand-name">Toro <span>Auto Center<\/span><\/span>\s*<\/a>/);
+ assert.match(header,/<a class="header-logo"[^>]*>[\s\S]*?<span class="brand-mark"[^>]*><\/span>\s*<span class="brand-name"><span class="brand-oro"><span class="toro-wheel">o<\/span>ro<\/span><span class="brand-descriptor">Auto Center<\/span><\/span>\s*<\/a>/);
  assert.ok(header.indexOf('class="menu-toggle')<header.indexOf('class="button button-header"'));
  for(const item of ['Baterias','Correias','Óleo e filtro de óleo','Palhetas','Escapamentos','Velas e cabos','Alinhamento e balanceamento','Injeção eletrônica','Ar-condicionado','Faróis','Freios','Suspensão']) {
   assert.ok(html.includes('<span>'+item+'</span></button>'),item);
  }
- for(const item of ['Peças em geral','Instalação de bateria','Buscamos seu carro','Revisão'])assert.ok(html.includes('>'+item+'</h3>'),item);
+ for(const item of ['Entendemos o problema','Combinamos o horário','Buscamos seu carro','Resolvemos para você'])assert.ok(html.includes('>'+item+'</h4>'),item);
+ for(const item of ['Revisão de carros','Manutenção preventiva','Inspeção veicular'])assert.ok(html.includes('>'+item+'</h3>'),item);
  assert.ok(html.includes('<span>Bateria para moto</span></button>'));
  assert.doesNotMatch(html,/data-mode=|data-scene-step=|data-step=/);
- assert.ok(html.indexOf('id="baterias"')<html.indexOf('id="servicos"'));
+ assert.ok(html.indexOf('id="inicio"')<html.indexOf('id="servicos"'));
+ assert.ok(html.indexOf('id="servicos"')<html.indexOf('id="baterias"'));
+ for(const label of ['Carro','Moto'])assert.match(html,new RegExp('aria-label="'+label+'"[^>]*><svg '));
  assert.match(html,/<details class="vehicle-credit">/);
  assert.equal((html.match(/data-service="[^"]+"[^>]*><svg /g)||[]).length,13);
- const catalog=html.match(/<div class="battery-options">([\s\S]*?)<p class="battery-spec-note">/)[1];
- assert.equal((catalog.match(/<details name="batteries"/g)||[]).length,7);
+ const catalog=html.match(/<div class="battery-catalog">([\s\S]*?)<p class="battery-spec-note">/)[1];
+ assert.equal((catalog.match(/data-battery="/g)||[]).length,7);
  for(const capacity of [40,48,60,70,100,150,12]){
-  assert.ok(catalog.includes('<strong>'+capacity+' Ah</strong>'),capacity);
+  assert.ok(catalog.includes('aria-controls="battery-'+capacity+'"'),capacity);
+  assert.ok(catalog.includes('id="battery-'+capacity+'"'),capacity);
   assert.ok(catalog.includes('Consultar bateria de '+capacity+' Ah'),capacity);
  }
  assert.match(catalog,/foto do Wix mostra um modelo de 6 Ah/);
