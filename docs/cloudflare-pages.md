@@ -1,6 +1,14 @@
 # Cloudflare Pages: manual release
 
-Updated 2026-11-13 UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). Current published source is `48e461c82a31b07c491cc33c42badec0c10a966b`, deployed to Production/main. Earlier dated receipts describe historical releases; no custom domain was purchased.
+Updated 2026-11-13 UTC. Cloudflare Pages Free Direct Upload project **ojoaovsousa** serves [ojoaovsousa.pages.dev](https://ojoaovsousa.pages.dev/pt-br/). Current published source is `7988792b44090036d4e707ce632044b80c5fe90b`, deployed to Production/main. Earlier dated receipts describe historical releases; no custom domain was purchased.
+
+## Dra. Janaína Lavall visual review
+
+The [reviewed prototype](https://ojoaovsousa.pages.dev/prototypes/dra-janaina-lavall/) is live on Production/main as deployment `894be314-ebba-474a-819b-6606454eeb02`, source `7988792b44090036d4e707ce632044b80c5fe90b`, verified on 2026-11-13 at 18:55 UTC. The prototype and its documentation match the reviewed task revision `925521b`. [Deployment alias](https://894be314.ojoaovsousa.pages.dev/prototypes/dra-janaina-lavall/).
+
+The deployment used the existing production base. The Toro and Fisiopoa pages match their prior bytes. All 14 Janaína files match at the main hostname and deployment alias. The 152 local tests, 189-file artifact audit and 37 public HTTP checks passed. Chromium and WebKit confirmed the trace, portrait, icons, map button, contact and booking controls at five widths from 320 to 1440 px. The previous production alias `b42ab65e` was checked as the recovery target.
+
+The upload had 16,921,405 raw bytes and a file manifest SHA-256 of `53f21262df4dac2028914585ef5028fd0508d4f8dea31cc75601a04890b7b6df`. The Janaína route adds 71,328 raw bytes against its first release. Contracted hosting cost stayed at R$ 0. The prototype retains noindex and stays out of the unchanged nine-URL sitemap. No Search Console indexing request was applicable.
 
 ## Dra. Janaína Lavall prototype release
 
