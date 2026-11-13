@@ -32,8 +32,8 @@ test('Pages rules preserve real404 handling and allow only the required inline n
 test('standalone landings replace the inherited CSP only on their slash URLs',async()=>{
  const headers=await readFile(new URL('public/_headers',root),'utf8');
  const mapRules=headers.split(/\n\n/).filter(block=>block.includes('frame-src https://www.google.com'));
- assert.equal(mapRules.length,2);
- for(const route of ['/prototypes/fisiopoa','/prototypes/toro-auto-center']){
+ assert.equal(mapRules.length,3);
+ for(const route of ['/prototypes/fisiopoa','/prototypes/toro-auto-center','/prototypes/dra-janaina-lavall']){
   assert.ok(mapRules.some(block=>block.includes(route+"/\n  ! Content-Security-Policy\n  Content-Security-Policy: default-src 'self';")));
   for(const scope of [route,route+'/*'])assert.ok(headers.includes(scope+'\n  X-Robots-Tag: noindex, nofollow\n'));
  }
