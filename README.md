@@ -27,6 +27,8 @@ Technology artwork attribution remains available through the footer Licenses lin
 
 Requires Node22+. `scripts/build.mjs` generates static `dist/` from localized ES-module templates and regular public assets. Three.js and fonts are local. There is no framework runtime, database, production API, website-side mail service or Meshy request. Optional Microsoft Clarity starts only after analytics consent in the production build; ordinary local previews keep its SDK disabled. `scripts/dev.mjs` is a loopback file preview with SSE reload, not a contact backend.
 
+Use `localhost` or `127.0.0.1` at the configured preview port. The server admits up to 16 simultaneous reload streams, closes idle or blocked streams, and keeps serving ordinary preview requests when the reload limit is reached.
+
 - `src/viewer-page.mjs`, `black-page.mjs`, `direct-page.mjs`, `city-page.mjs`: shared home/reading, policies, contact and metadata.
 - `public/city.js`, `city-story.js`, `city-motion.js`: measured scroll chapters, model transforms and pure build/coast math. `viewer-overflow` supplies a decorative unread-content hint without changing card height.
 - `src/project-process.mjs`, `faq.mjs`, `career.mjs`, `skills.mjs` and their public styles/scripts: shared localized reading components.
