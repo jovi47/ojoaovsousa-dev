@@ -18,22 +18,37 @@ export function setupAnalytics(){
    return ref.origin===location.origin?/^\/(pt-br|en|es)\/(?:direct\/|privacy\/|terms\/)?$/.test(ref.pathname):ref.pathname==='/';
   }catch{return false;}
  };
- let enabled=false,choice='';
+ let enabled=false,choice='',expiresAt=0,expiryTimer;
  const events=new Set(['whatsapp_hero','projects_hero','case_horagora','case_andrea','projects_view']);
  function track(name){
-  if(!enabled||choice!=='granted'||protectedBrowser()||!home()||!events.has(name))return;
+  if(!enabled||!validGrant()||protectedBrowser()||!home()||!events.has(name))return;
   try{window.clarity('event',name);}catch{/* Metrics never block navigation or contact. */}
  }
  document.addEventListener('click',event=>track(event.target.closest?.('[data-conversion]')?.dataset.conversion));
  try{
   const stored=JSON.parse(localStorage.getItem(consentKey)||'null'),age=Date.now()-stored?.at;
-  if(stored&&typeof stored.at==='number'&&age>=0&&age<lifetime&&['granted','denied'].includes(stored.choice))choice=stored.choice;
+  if(stored&&typeof stored.at==='number'&&age>=0&&age<lifetime&&['granted','denied'].includes(stored.choice)){
+   choice=stored.choice;
+   expiresAt=stored.at+lifetime;
+  }
  }catch{/* Storage is optional; no remembered grant means no SDK. */}
 
  function clearCookies(){
   try{for(const name of ['_clck','_clsk'])for(const domain of production?['','; Domain=ojoaovsousa.pages.dev']:['']){
    document.cookie=`${name}=; Max-Age=0; Path=/; SameSite=Lax${location.protocol==='https:'?'; Secure':''}${domain}`;
   }}catch{/* A browser cookie restriction must not interrupt recovery. */}
+ }
+ function validGrant(){
+  if(choice!=='granted')return false;
+  if(Date.now()<expiresAt)return true;
+  choice='';
+  clearCookies();
+  if(enabled)window.location.reload();
+  return false;
+ }
+ function watchExpiry(){
+  window.clearTimeout(expiryTimer);
+  if(enabled&&validGrant())expiryTimer=window.setTimeout(watchExpiry,Math.min(expiresAt-Date.now(),2147483647));
  }
  function start(){
   if(enabled||(!production&&!preview)||protectedBrowser()||!home()||!safeReferrer())return;
@@ -66,8 +81,10 @@ export function setupAnalytics(){
  }
  for(const button of [deny,accept])button.addEventListener('click',()=>{
   const accepted=button===accept&&!protectedBrowser();
+  const at=Date.now();
   choice=accepted?'granted':'denied';
-  try{localStorage.setItem(consentKey,JSON.stringify({choice:accepted?'granted':'denied',at:Date.now()}));}
+  expiresAt=at+lifetime;
+  try{localStorage.setItem(consentKey,JSON.stringify({choice,at}));}
   catch{if(!accepted)try{localStorage.removeItem(consentKey);}catch{/* Browser storage controls remain available. */}}
   panel.hidden=true;
   if(accepted)start();
@@ -76,12 +93,16 @@ export function setupAnalytics(){
    // Reload ends an already loaded SDK; consent denied alone still collects without cookies.
    if(enabled)window.location.reload();
   }
+  watchExpiry();
  });
  // This is a static site, with no History API router. Fragment/history entry stops this page.
  for(const event of ['hashchange','popstate'])window.addEventListener(event,()=>{if(enabled&&!home())window.location.reload();});
  window.addEventListener('storage',event=>{if(enabled&&(event.key===consentKey||event.key===null)){choice='';window.location.reload();}});
  if(choice==='granted'&&!protectedBrowser())start();
  else clearCookies();
+ watchExpiry();
+ window.addEventListener('pageshow',watchExpiry);
+ document.addEventListener('visibilitychange',watchExpiry);
  accept.disabled=protectedBrowser();
  panel.querySelector('[data-privacy-signal]').hidden=!protectedBrowser();
  if(!choice&&home()&&!protectedBrowser())show();
