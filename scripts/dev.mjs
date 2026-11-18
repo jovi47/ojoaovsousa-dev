@@ -6,12 +6,16 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root=fileURLToPath(new URL('../',import.meta.url)),dist=path.join(root,'dist');
 const port=Number(process.env.PORT||3000),clients=new Set();
+const maxReloadClients=16;
 const fisiopoa='/prototypes/fisiopoa',toro='/prototypes/toro-auto-center',janaina='/prototypes/dra-janaina-lavall';
 const pagesHeaders=await readFile(path.join(root,'public/_headers'),'utf8');
 const toroCsp=pagesHeaders.split('\n\n').find(block=>block.startsWith(toro+'/\n'))
  .split('\n').find(line=>line.startsWith('  Content-Security-Policy: ')).slice('  Content-Security-Policy: '.length);
 const mime={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.svg':'image/svg+xml','.jpg':'image/jpeg','.png':'image/png','.txt':'text/plain; charset=utf-8','.md':'text/markdown; charset=utf-8','.xml':'application/xml; charset=utf-8','.woff2':'font/woff2','.webp':'image/webp','.webm':'video/webm','.mov':'video/quicktime','.glb':'model/gltf-binary'};
 const server=http.createServer(async(req,res)=>{
+ const {port: listeningPort}=server.address();
+ if(![`localhost:${listeningPort}`,`127.0.0.1:${listeningPort}`].includes(req.headers.host)){res.writeHead(403);res.end();return;}
+ if(req.url==='/__hmr.js'){res.writeHead(200,{'Content-Type':'text/javascript'});res.end("const events=new EventSource('/__reload');events.onmessage=()=>location.reload();");return;}
  let url,pathname;try{url=new URL(req.url,'http://localhost');pathname=decodeURIComponent(url.pathname);}catch{res.writeHead(400);res.end();return;}
  const legacy=pathname.match(/^\/(pt-br|en|es)\/black\/?$/);if(legacy){res.writeHead(308,{Location:`/${legacy[1]}/${url.search}`});res.end();return;}
  const prototype=[fisiopoa,toro,janaina].find(route=>pathname===route||pathname.startsWith(route+'/'));
@@ -24,7 +28,16 @@ const server=http.createServer(async(req,res)=>{
   if(prototype!==toro&&pathname===prototype+'/privacidade')pathname+='.html';
   if(pathname===toro+'/')res.setHeader('Content-Security-Policy',toroCsp);
  }
- if(pathname==='/__reload'){res.writeHead(200,{'Content-Type':'text/event-stream','Cache-Control':'no-cache','Connection':'keep-alive'});res.write(': connected\n\n');clients.add(res);req.on('close',()=>clients.delete(res));return;}
+ if(pathname==='/__reload'){
+  if(req.method!=='GET'){res.writeHead(405,{Allow:'GET'});res.end();return;}
+  if(clients.size>=maxReloadClients){res.writeHead(503);res.end();return;}
+  res.writeHead(200,{'Content-Type':'text/event-stream','Cache-Control':'no-cache','Connection':'keep-alive'});
+  clients.add(res);
+  res.once('close',()=>clients.delete(res));
+  res.setTimeout(15*60*1000,()=>res.destroy());
+  res.write(': connected\n\n');
+  return;
+ }
  let filename=path.resolve(dist,`.${pathname}`);
  if(filename!==dist&&!filename.startsWith(dist+path.sep)){res.writeHead(403);res.end();return;}
  let code=200;
@@ -35,16 +48,11 @@ const server=http.createServer(async(req,res)=>{
   res.writeHead(code,{'Content-Type':mime[extension]||'application/octet-stream','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(bytes);
  }catch{res.writeHead(503,{'Content-Type':'text/plain'});res.end('Preview rebuilding. Reload shortly.');}
 });
-const original=server.listeners('request')[0];server.removeAllListeners('request');
-server.on('request',(req,res)=>{
- if(req.url==='/__hmr.js'){res.writeHead(200,{'Content-Type':'text/javascript'});res.end("const events=new EventSource('/__reload');events.onmessage=()=>location.reload();");return;}
- original(req,res);
-});
 let child=null,queued=false,timer=null;
 function rebuild(){
  if(child){queued=true;return;}
  child=spawn(process.execPath,['scripts/build.mjs'],{cwd:root,stdio:['ignore','inherit','inherit']});
- child.once('exit',code=>{child=null;if(code===0)for(const client of clients)client.write('data: reload\n\n');if(queued){queued=false;rebuild();}});
+ child.once('exit',code=>{child=null;if(code===0)for(const client of clients)if(!client.write('data: reload\n\n'))client.destroy();if(queued){queued=false;rebuild();}});
 }
 const watchers=['src','public'].map(folder=>watch(path.join(root,folder),{recursive:true},()=>{clearTimeout(timer);timer=setTimeout(rebuild,90);}));
 server.listen(port,'127.0.0.1',()=>console.log(`Portfolio preview http://localhost:${port} (watch enabled)`));
