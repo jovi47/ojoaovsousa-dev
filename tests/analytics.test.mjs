@@ -21,11 +21,13 @@ function page(options={}){
  const projects={id:'projects'};
  const document={referrer:options.referrer||'',addEventListener:(event,fn)=>{documentEvents[event]=fn;},querySelector:selector=>selector==='#projects'?projects:panel,querySelectorAll:()=>[preferences],createElement:()=>({}),head:{append(script){if(options.appendFails)throw new Error('blocked');scripts.push(script);}}};
  Object.defineProperty(document,'cookie',{get:()=>options.cookies||'',set:value=>{if(options.cookieFails)throw new Error('blocked');cookies.push(value);}});
- const window={location,addEventListener:(name,fn)=>{events[name]=fn;}};
- const context={URL,window,document,IntersectionObserver:class{constructor(callback){this.callback=callback;observers.push(this);}observe(){}disconnect(){}},navigator:{doNotTrack:options.dnt?'1':'0',globalPrivacyControl:!!options.gpc},localStorage:{getItem:k=>{if(options.storageFails)throw new Error('blocked');return storage.get(k);},setItem:(k,v)=>{if(options.storageFails||options.writeFails)throw new Error('blocked');storage.set(k,v);},removeItem:k=>{if(options.storageFails)throw new Error('blocked');storage.delete(k);}},Date:class extends Date{static now(){return now;}}};
+ let currentTime=now,nextTimer=0;
+ const timers=new Map();
+ const window={location,addEventListener:(name,fn)=>{events[name]=fn;},setTimeout(fn,delay){timers.set(++nextTimer,{fn,delay});return nextTimer;},clearTimeout(id){timers.delete(id);}};
+ const context={URL,window,document,IntersectionObserver:class{constructor(callback){this.callback=callback;observers.push(this);}observe(){}disconnect(){}},navigator:{doNotTrack:options.dnt?'1':'0',globalPrivacyControl:!!options.gpc},localStorage:{getItem:k=>{if(options.storageFails)throw new Error('blocked');return storage.get(k);},setItem:(k,v)=>{if(options.storageFails||options.writeFails)throw new Error('blocked');storage.set(k,v);},removeItem:k=>{if(options.storageFails)throw new Error('blocked');storage.delete(k);}},Date:class extends Date{static now(){return currentTime;}}};
  assert.ok(source,'the real local consent loader must exist');
  vm.runInNewContext(source.replace(/^export /gm,''),context);
- return {deny,accept,signal,preferences,panel,scripts,events,location,storage,window,cookies,documentEvents,observers,projects};
+ return {deny,accept,signal,preferences,panel,scripts,events,location,storage,window,cookies,documentEvents,observers,projects,timers,advance(ms){currentTime+=ms;}};
 }
 
 test('Clarity is absent until an explicit choice and revocation reloads the page',()=>{
@@ -63,6 +65,25 @@ test('a fresh versioned choice expires after 90days and privacy signals override
  }
  const blocked=page({storageFails:true});blocked.accept.listeners.click();assert.equal(blocked.scripts.length,1);blocked.deny.listeners.click();assert.equal(blocked.location.reloaded,true);
  const writes=page({stored:{choice:'granted',at:now},writeFails:true});writes.deny.listeners.click();assert.equal(writes.storage.has(key),false,'revocation clears a stale grant when writing is blocked');
+});
+
+test('an open tab stops dispatching metrics when its grant expires before its timer runs',()=>{
+ const p=page({stored:{choice:'granted',at:now-90*day+10}});
+ assert.equal(p.scripts.length,1);
+ p.advance(10);
+ p.documentEvents.click({target:{closest:()=>({dataset:{conversion:'whatsapp_hero'}})}});
+ assert.equal(p.window.clarity.q.length,1,'only the initial consent command was queued');
+ assert.equal(p.location.reloaded,true);
+ assert.ok(p.cookies.some(value=>value.startsWith('_clck=;')));
+});
+
+test('an idle tab ends the loaded SDK at expiry without requiring a click',()=>{
+ const p=page({stored:{choice:'granted',at:now-90*day+10}});
+ const [timer]=p.timers.values();
+ assert.equal(timer?.delay,10);
+ p.advance(10);
+ timer.fn();
+ assert.equal(p.location.reloaded,true);
 });
 
 test('only clean canonical homes on the exact production origin or explicit local test preview may load',()=>{
